@@ -1,6 +1,7 @@
 import { Color } from "@/abstract/Color";
 import { EdgeInsets } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
+import { Padding } from "./Padding";
 
 export const Container = ({
   child,
@@ -15,9 +16,20 @@ export const Container = ({
 }) =>
   defineComponent({
     name: "Container",
+
     render() {
-      return h("div", { class: `container ${color?.backgroundCss}` }, [
-        h(child),
-      ]);
+      const containerClass = `container ${color?.backgroundCss}`;
+      if (padding) {
+        return h("div", { class: containerClass }, [
+          h(
+            Padding({
+              child,
+              padding,
+            })
+          ),
+        ]);
+      } else {
+        return h("div", { class: containerClass }, [h(child)]);
+      }
     },
   });

@@ -1,4 +1,5 @@
 import { Colors } from "@/abstract/Colors";
+import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { Column } from "@/components/Column";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
@@ -10,6 +11,7 @@ export const wrapperApp = () => {
 
   return Container({
     color: Colors.white,
+    padding: EdgeInsets.all(EdgeInsetsStep.s32),
     child: Column({
       children: [
         ElevatedButton({

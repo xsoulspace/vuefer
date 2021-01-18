@@ -14,6 +14,6 @@ export const Padding = ({
   defineComponent({
     name: "Padding",
     render() {
-      return h("div", {}, [h(child)]);
+      return h("div", { class: padding.css }, [h(child)]);
     },
   });
