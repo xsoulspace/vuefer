@@ -1,13 +1,28 @@
-import { Component, defineComponent, h } from "vue";
+import { Axis } from "@/abstract/Axis";
+import { defineComponent, h } from "vue";
+import { FlexHelper, RowI } from "./Flex";
 
-export const Row = ({ children }: { children: Component[] }) => {
+export const Row = ({
+  children,
+  mainAxisAlignment,
+  mainAxisSize,
+  verticalDirection,
+  crossAxisAlignment,
+}: RowI) => {
   return defineComponent({
-    name: "Row",
+    name: "Column",
     render() {
+      const classNames = FlexHelper.getClassNames({
+        crossAxisAlignment,
+        direction: Axis.horizontal,
+        mainAxisAlignment,
+        mainAxisSize,
+        verticalDirection,
+      });
       if (children.length) {
         return h(
           "div",
-          {},
+          { class: classNames },
           children.map((child) => h(child))
         );
       } else {

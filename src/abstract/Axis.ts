@@ -20,7 +20,7 @@ export class Axis {
   get css() {
     switch (this.axis) {
       case AxisName.vertical:
-        return "column";
+        return "col";
       case AxisName.horizontal:
       default:
         return "row";

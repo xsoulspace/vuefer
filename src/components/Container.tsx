@@ -1,9 +1,18 @@
+import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { Color } from "@/abstract/Color";
 import { EdgeInsets } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
 import { Margin } from "./Margin";
 import { Padding } from "./Padding";
-
+interface ContainerI {
+  child: Component;
+  padding?: EdgeInsets;
+  margin?: EdgeInsets;
+  color?: Color;
+  width?: number;
+  height?: number;
+  decoration?: BoxDecoration;
+}
 export const Container = ({
   child,
   padding,
@@ -11,19 +20,11 @@ export const Container = ({
   color,
   height,
   width,
-}: {
-  child: Component;
-  padding?: EdgeInsets;
-  margin?: EdgeInsets;
-  color?: Color;
-  width?: number;
-  height?: number;
-}) => {
+}: ContainerI) => {
   const component = defineComponent({
     name: "Container",
-
     render() {
-      const containerClass = `container ${color?.backgroundCss}`;
+      const containerClass = `container ${color?.backgroundCss ?? ""}`;
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);
 
