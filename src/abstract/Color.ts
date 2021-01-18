@@ -9,6 +9,7 @@ export class Color {
     this.name = name;
   }
   get backgroundCss() {
-    return this.name ? `bg-${this.name}` : "";
+    const name = this.name;
+    return name ? `bg-${name}` : "";
   }
 }

@@ -79,9 +79,14 @@ export class EdgeInsets {
     });
   }
 
-  get css(): string {
+  get paddingCss(): string {
     return (
       `pl-${this.left} pt-${this.top} ` + `pr-${this.right} pb-${this.bottom}`
+    );
+  }
+  get marginCss(): string {
+    return (
+      `ml-${this.left} mt-${this.top} ` + `mr-${this.right} mb-${this.bottom}`
     );
   }
 }

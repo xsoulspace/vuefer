@@ -1,34 +1,14 @@
-# vue_flutter_tailwind
+Roadmap
 
-## Project setup
-```
-yarn install
-```
+Tilewind - Flutter:
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[] Object Position - Alignment?, Align?, FittedBox
+[] Object Fit - FitBox, FittedBox
+[x] Padding - Padding
+[x] Margin - Margin
+[] ? - Text
+[] Container - Container
+[] Flex - Flex
+[] ? - Row (Flex - row)
+[] ? - Column (Flex - column)
+[] ? - Elevated Button

@@ -2,18 +2,18 @@ import { EdgeInsets } from "@/abstract/EdgeInsets";
 import { Key } from "@/abstract/Key";
 import { Component, defineComponent, h } from "vue";
 
-export const Padding = ({
+export const Margin = ({
   child,
-  padding,
+  margin,
   key,
 }: {
   child: Component;
-  padding: EdgeInsets;
+  margin: EdgeInsets;
   key?: Key;
 }) =>
   defineComponent({
-    name: "Padding",
+    name: "Margin",
     render() {
-      return h("div", { class: padding.paddingCss }, [h(child)]);
+      return h("div", { class: margin.marginCss }, [h(child)]);
     },
   });
