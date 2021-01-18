@@ -9,7 +9,7 @@ export class BoxDecoration {
   color?: Color;
   border?: BoxBorder;
   borderRadius?: BorderRadius;
-  boxShadow?: BoxShadow[];
+  boxShadow?: BoxShadow;
   gradient?: Gradient;
   shape?: BoxShape;
 }

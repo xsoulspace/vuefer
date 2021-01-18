@@ -19,19 +19,18 @@ export const wrapperApp = () => {
             text.value = !text.value;
           },
         }),
-        Container({
-          child: Column({
-            children: [
-              ElevatedButton({
-                child: Text({ text: text1 }),
-                onPressed: null,
-              }),
-              ElevatedButton({
-                child: Text({ text: text2 }),
-                onPressed: null,
-              }),
-            ],
-          }),
+
+        Column({
+          children: [
+            ElevatedButton({
+              child: Text({ text: text1 }),
+              onPressed: null,
+            }),
+            ElevatedButton({
+              child: Text({ text: text2 }),
+              onPressed: null,
+            }),
+          ],
         }),
       ],
     }),
