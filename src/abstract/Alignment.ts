@@ -12,6 +12,7 @@ enum AlignmentEdge {
 interface AlignmentI {
   alignment?: AlignmentEdge;
 }
+// FIXME: what is the nearest class in tailwind?
 export class Alignment {
   alignment?: AlignmentEdge;
   constructor({ alignment }: AlignmentI) {

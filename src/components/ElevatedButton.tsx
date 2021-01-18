@@ -1,12 +1,9 @@
 import { Component, defineComponent, h } from "vue";
-
-export const ElevatedButton = ({
-  child,
-  onPressed,
-}: {
+interface ElevatedButtonI {
   child: Component;
-  onPressed?: VoidFunction;
-}) =>
+  onPressed?: Maybe<VoidFunction>;
+}
+export const ElevatedButton = ({ child, onPressed }: ElevatedButtonI) =>
   defineComponent({
     name: "ElevatedButton",
     render() {
