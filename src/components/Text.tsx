@@ -1,9 +1,9 @@
-import { defineComponent, Ref } from "vue";
+import { defineComponent, h, Ref } from "vue";
 
 export const Text = ({ text }: { text: Ref<string | boolean> }) =>
   defineComponent({
     name: "Text",
-    setup() {
-      return () => <div>{`${text.value}`}</div>;
+    render() {
+      return h("div", {}, `${text.value}`);
     },
   });

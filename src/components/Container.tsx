@@ -1,16 +1,23 @@
-import { defineComponent } from "vue";
+import { Color } from "@/abstract/Color";
+import { EdgeInsets } from "@/abstract/EdgeInsets";
+import { Component, defineComponent, h } from "vue";
 
-export const Container = ({ child }: { child: any }) =>
+export const Container = ({
+  child,
+  padding,
+  margin,
+  color,
+}: {
+  child: Component;
+  padding?: EdgeInsets;
+  margin?: EdgeInsets;
+  color?: Color;
+}) =>
   defineComponent({
     name: "Container",
-    components: {
-      child,
-    },
-    setup() {
-      return () => (
-        <div>
-          <child />
-        </div>
-      );
+    render() {
+      return h("div", { class: `container ${color?.backgroundCss}` }, [
+        h(child),
+      ]);
     },
   });
