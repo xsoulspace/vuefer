@@ -18,7 +18,7 @@ Roadmap
 7. [x] Flex - Flex
 8. [x] ? - Row (Flex -> row)
 9. [x] ? - Column (Flex -> column)
-10. [x] Divide - Divider (partially)
+10. [x] Divide - Divider (only for Row, Column - need to remove after). TODO: ListView
 11. [] ? - Elevated Button
 12. [] ? - Drawer
 13. [] ? - AppBar
@@ -30,7 +30,7 @@ Roadmap
 - [] text
 - [] date
 
-17. [] ? - Select
-18. [] ? - AutoSelect
-19. [] ? - Progress
-20. [] ? - Card
+17. [] AutoSelect - DropdownButton, DropdownButtonItem
+18. [] ? - Progress
+19. [] ? - Card
+20. [] ? - ListView, ListView.builder, ListView.separeted
