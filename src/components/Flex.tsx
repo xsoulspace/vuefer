@@ -1,5 +1,6 @@
 import { Axis } from "@/abstract/Axis";
 import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
+import { DividerDecoration } from "@/abstract/DividerDecoration";
 import { MainAxisAlignment } from "@/abstract/MainAxisAlignment";
 import { MainAxisSize } from "@/abstract/MainAxisSize";
 import { VerticalDirection } from "@/abstract/VerticalDirection";
@@ -10,6 +11,7 @@ export interface FlexBaseI {
   crossAxisAlignment?: CrossAxisAlignment;
   mainAxisSize?: MainAxisSize;
   verticalDirection?: VerticalDirection;
+  dividerDecoration?: DividerDecoration;
 }
 export interface ColumnI extends FlexBaseI {
   children: Component[];
@@ -31,6 +33,7 @@ export class FlexHelper {
     mainAxisSize,
     direction,
     verticalDirection,
+    dividerDecoration,
   }: GetFlexClassNames): string {
     const finalDirection = direction ?? Axis.horizontal;
     const finalAxisSize = mainAxisSize ?? MainAxisSize.max;
@@ -44,6 +47,7 @@ export class FlexHelper {
       finalAxisSize.css,
       finalMainAxisAlignment.css,
       finalCrossAxisAlignment.css,
+      dividerDecoration?.css ?? "",
     ].join(" ");
   }
 }

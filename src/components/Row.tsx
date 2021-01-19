@@ -8,6 +8,7 @@ export const Row = ({
   mainAxisSize,
   verticalDirection,
   crossAxisAlignment,
+  dividerDecoration,
 }: RowI) => {
   return defineComponent({
     name: "Column",
@@ -18,6 +19,7 @@ export const Row = ({
         mainAxisAlignment,
         mainAxisSize,
         verticalDirection,
+        dividerDecoration,
       });
       if (children.length) {
         return h(

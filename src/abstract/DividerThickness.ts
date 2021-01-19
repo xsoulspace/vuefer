@@ -1,4 +1,4 @@
-enum DividerThicknessStep {
+export enum DividerThicknessStep {
   "none" = "none",
   "s0" = 0,
   "s2" = 2,
