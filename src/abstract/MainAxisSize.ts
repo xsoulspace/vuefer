@@ -4,9 +4,9 @@ enum MainAxisSizeName {
 }
 
 export class MainAxisSize {
-  size?: MainAxisSizeName;
+  size: MainAxisSizeName;
   constructor({ size }: { size: MainAxisSizeName }) {
-    this.size = size;
+    this.size = size ?? MainAxisSizeName.min;
   }
   static _factory(size: MainAxisSizeName) {
     return new MainAxisSize({ size });

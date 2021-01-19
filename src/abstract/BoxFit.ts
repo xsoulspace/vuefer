@@ -9,9 +9,9 @@ interface BoxFitI {
   boxFit?: BoxFitState;
 }
 export class BoxFit {
-  boxFit?: BoxFitState;
+  boxFit: BoxFitState;
   constructor({ boxFit }: BoxFitI) {
-    this.boxFit = boxFit;
+    this.boxFit = boxFit ?? BoxFitState.none;
   }
   static _factory(boxFit: BoxFitState) {
     return new BoxFit({ boxFit });

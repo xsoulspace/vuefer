@@ -8,9 +8,9 @@ enum MainAxisAlignmentName {
 }
 
 export class MainAxisAlignment {
-  alignment?: MainAxisAlignmentName;
+  alignment: MainAxisAlignmentName;
   constructor({ alignment }: { alignment: MainAxisAlignmentName }) {
-    this.alignment = alignment;
+    this.alignment = alignment ?? MainAxisAlignmentName.start;
   }
   static _factory(alignment: MainAxisAlignmentName) {
     return new MainAxisAlignment({ alignment });

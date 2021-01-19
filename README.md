@@ -9,11 +9,14 @@ Roadmap
 5. [] ? - Text
 6. [] Container - Container
 
-- [] border
-- [] color
-- [] shape
-- [] shadow
-- [] gradient
+- [] Border
+- [x] BorderRadius
+- [] Color
+- [] Shape
+- [x] Shadow
+- [] Gradient
+- [] Alignment
+- [] Image
 
 7. [x] Flex - Flex
 8. [x] ? - Row (Flex -> row)
@@ -24,11 +27,11 @@ Roadmap
 13. [] ? - AppBar
 14. [] ? - Dialog
 15. [] ? - Provider, MultiProvider
-16. [] ? - Input
+16. [] ? - Input?
 
-- [] number
-- [] text
-- [] date
+- [] number?
+- [] text?
+- [] date?
 
 17. [] AutoSelect - DropdownButton, DropdownButtonItem
 18. [] ? - Progress

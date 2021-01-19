@@ -23,9 +23,9 @@ interface AlignmentI {
 // }
 
 export class Alignment {
-  alignment?: AlignmentEdge;
+  alignment: AlignmentEdge;
   constructor({ alignment }: AlignmentI) {
-    this.alignment = alignment;
+    this.alignment = alignment ?? AlignmentEdge.topLeft;
   }
   static _factory(alignment: AlignmentEdge) {
     return new Alignment({ alignment });

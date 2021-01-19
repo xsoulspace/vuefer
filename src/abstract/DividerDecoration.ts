@@ -2,28 +2,6 @@ import { Axis } from "./Axis";
 import { Color } from "./Color";
 import { DividerThickness } from "./DividerThickness";
 import { Key } from "./Key";
-interface DividerDecorationI {
-  divider?: DividerI;
-  direction?: Axis;
-}
-export class DividerDecoration {
-  divider?: DividerI;
-  direction?: Axis;
-  constructor({ divider, direction }: DividerDecorationI) {
-    this.divider = divider;
-    this.direction = direction;
-  }
-  static vertical(divider?: DividerI) {
-    return new DividerDecoration({ direction: Axis.vertical, divider });
-  }
-  static horizontal(divider?: DividerI) {
-    return new DividerDecoration({ direction: Axis.horizontal, divider });
-  }
-  get css(): string {
-    const direction = this.direction ?? Axis.vertical;
-    return DividerHelper.getClassNames({ ...this.divider, direction });
-  }
-}
 
 export interface DividerI {
   color?: Color;
@@ -38,6 +16,11 @@ export interface DividerI {
 }
 interface GetClassNames extends DividerI {
   direction: Axis;
+}
+
+interface DividerDecorationI {
+  divider?: DividerI;
+  direction?: Axis;
 }
 
 export class DividerHelper {
@@ -57,5 +40,25 @@ export class DividerHelper {
       thickness ? `${divideClass}${thickness.css}` : divideClass,
       color ? `divide-${color.name}` : "",
     ].join(" ");
+  }
+}
+
+export class DividerDecoration {
+  divider?: DividerI;
+  direction: Axis;
+  constructor({ divider, direction }: DividerDecorationI) {
+    this.divider = divider;
+    this.direction = direction ?? Axis.horizontal;
+  }
+  static vertical(divider?: DividerI) {
+    return new DividerDecoration({ direction: Axis.vertical, divider });
+  }
+  static horizontal(divider?: DividerI) {
+    return new DividerDecoration({ direction: Axis.horizontal, divider });
+  }
+  get css(): string {
+    if (this.divider == null) throw Error("Divider is empty!");
+    const direction = this.direction;
+    return DividerHelper.getClassNames({ ...this.divider, direction });
   }
 }

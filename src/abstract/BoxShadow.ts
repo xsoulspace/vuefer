@@ -9,9 +9,9 @@ export enum BoxShadowSize {
 }
 // TODO: make it more customizable
 export class BoxShadow {
-  size?: BoxShadowSize;
+  size: BoxShadowSize;
   constructor({ size }: { size: BoxShadowSize }) {
-    this.size = size;
+    this.size = size ?? BoxShadowSize.none;
   }
   static _factory(size: BoxShadowSize) {
     return new BoxShadow({ size });

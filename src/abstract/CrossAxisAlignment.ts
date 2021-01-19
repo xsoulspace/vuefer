@@ -7,9 +7,9 @@ enum CrossAxisAlignmentName {
 }
 
 export class CrossAxisAlignment {
-  alignment?: CrossAxisAlignmentName;
+  alignment: CrossAxisAlignmentName;
   constructor({ alignment }: { alignment: CrossAxisAlignmentName }) {
-    this.alignment = alignment;
+    this.alignment = alignment ?? CrossAxisAlignmentName.start;
   }
   static _factory(alignment: CrossAxisAlignmentName) {
     return new CrossAxisAlignment({ alignment });

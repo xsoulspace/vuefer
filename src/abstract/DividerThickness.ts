@@ -6,7 +6,7 @@ export enum DividerThicknessStep {
 }
 
 export class DividerThickness {
-  thickness?: DividerThicknessStep;
+  thickness: DividerThicknessStep;
   constructor({
     // endIndent,
     thickness,
@@ -14,7 +14,7 @@ export class DividerThickness {
     // endIndent: DividerThicknessStep;
     thickness: DividerThicknessStep;
   }) {
-    this.thickness = thickness;
+    this.thickness = thickness ?? DividerThicknessStep.zero;
   }
   get css() {
     switch (this.thickness) {

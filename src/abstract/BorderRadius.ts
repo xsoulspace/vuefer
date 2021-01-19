@@ -17,10 +17,10 @@ interface BorderRadiusI {
 }
 
 export class BorderRadius {
-  topLeft?: BorderRadiusStep;
-  topRight?: BorderRadiusStep;
-  bottomLeft?: BorderRadiusStep;
-  bottomRight?: BorderRadiusStep;
+  topLeft: BorderRadiusStep;
+  topRight: BorderRadiusStep;
+  bottomLeft: BorderRadiusStep;
+  bottomRight: BorderRadiusStep;
 
   constructor({ bottomLeft, bottomRight, topLeft, topRight }: BorderRadiusI) {
     this.bottomLeft = bottomLeft ?? BorderRadiusStep.zero;

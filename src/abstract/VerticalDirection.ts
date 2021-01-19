@@ -4,9 +4,9 @@ enum VerticalDirectionName {
 }
 
 export class VerticalDirection {
-  direction?: VerticalDirectionName;
+  direction: VerticalDirectionName;
   constructor({ direction }: { direction: VerticalDirectionName }) {
-    this.direction = direction;
+    this.direction = direction ?? VerticalDirectionName.down;
   }
   static _factory(direction: VerticalDirectionName) {
     return new VerticalDirection({ direction });

@@ -4,9 +4,9 @@ enum AxisName {
 }
 
 export class Axis {
-  axis?: AxisName;
+  axis: AxisName;
   constructor({ axis }: { axis: AxisName }) {
-    this.axis = axis;
+    this.axis = axis ?? AxisName.horizontal;
   }
   static _factory(axis: AxisName) {
     return new Axis({ axis });
