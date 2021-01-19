@@ -12,6 +12,7 @@ Roadmap
 - [x] Border
 - [x] BorderRadius
 - [x] Color
+- [] Color Opacity ? Border Color Opacity
 - [] Shape
 - [x] Shadow
 - [] Gradient
