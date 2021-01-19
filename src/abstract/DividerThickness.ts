@@ -1,8 +1,8 @@
 export enum DividerThicknessStep {
-  zero = "zero",
-  "s2" = 2,
-  "s4" = 4,
-  "s8" = 8,
+  zero,
+  "s2",
+  "s4",
+  "s8",
 }
 
 export class DividerThickness {

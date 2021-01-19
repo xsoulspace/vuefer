@@ -41,7 +41,7 @@ export const wrapperApp = () => {
         padding,
         decoration: new BoxDecoration({
           boxShadow: BoxShadow.xl,
-          borderRadius: BorderRadius.all({ radius: BorderRadiusStep.xl }),
+          borderRadius: BorderRadius.vertical({ bottom: BorderRadiusStep.xxl }),
         }),
         child: Align({
           alignment: Alignment.top,

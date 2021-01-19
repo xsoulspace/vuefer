@@ -9,9 +9,9 @@ Roadmap
 5. [] ? - Text
 6. [] Container - Container
 
-- [] Border
+- [x] Border
 - [x] BorderRadius
-- [] Color
+- [x] Color
 - [] Shape
 - [x] Shadow
 - [] Gradient
@@ -27,7 +27,7 @@ Roadmap
 13. [] ? - AppBar
 14. [] ? - Dialog
 15. [] ? - Provider, MultiProvider
-16. [] ? - Input?
+16. [] ? - SizedBox
 
 - [] number?
 - [] text?

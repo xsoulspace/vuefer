@@ -37,6 +37,7 @@ export const Container = ({
         decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
         decoration?.boxShadow?.css ?? "",
         decoration?.borderRadius?.css ?? "",
+        decoration?.border?.css ?? "",
       ].join(" ");
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);

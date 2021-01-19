@@ -1,12 +1,12 @@
+import { Border } from "./Border";
 import { BorderRadius } from "./BorderRadius";
-import { BoxBorder } from "./BoxBorder";
 import { BoxShadow } from "./BoxShadow";
 import { BoxShape } from "./BoxShape";
 import { Color } from "./Color";
 import { Gradient } from "./Gradient";
 interface BoxDecorationI {
   color?: Color;
-  border?: BoxBorder;
+  border?: Border;
   borderRadius?: BorderRadius;
   boxShadow?: BoxShadow;
   gradient?: Gradient;
@@ -14,7 +14,7 @@ interface BoxDecorationI {
 }
 export class BoxDecoration {
   color?: Color;
-  border?: BoxBorder;
+  border?: Border;
   borderRadius?: BorderRadius;
   boxShadow?: BoxShadow;
   gradient?: Gradient;
