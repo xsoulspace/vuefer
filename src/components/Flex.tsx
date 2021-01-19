@@ -36,12 +36,13 @@ export class FlexHelper {
     dividerDecoration,
   }: GetFlexClassNames): string {
     const finalDirection = direction ?? Axis.horizontal;
-    const finalAxisSize = mainAxisSize ?? MainAxisSize.max;
+    const finalAxisSize = mainAxisSize ?? MainAxisSize.min;
     const finalMainAxisAlignment = mainAxisAlignment ?? MainAxisAlignment.start;
     const finalCrossAxisAlignment =
       crossAxisAlignment ?? CrossAxisAlignment.start;
     const finalVerticalDirection = verticalDirection ?? VerticalDirection.down;
     return [
+      "relative",
       "flex",
       `flex-${finalDirection.css}${finalVerticalDirection.css}`,
       finalAxisSize.css,

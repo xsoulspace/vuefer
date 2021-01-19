@@ -1,4 +1,4 @@
-enum BoxShadowSize {
+export enum BoxShadowSize {
   sm,
   md,
   m,

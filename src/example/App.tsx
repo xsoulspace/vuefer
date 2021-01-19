@@ -1,38 +1,52 @@
-import { Column } from "@/components/Column";
+import { Alignment } from "@/abstract/Alignment";
+import { BoxDecoration } from "@/abstract/BoxDecoration";
+import { BoxShadow } from "@/abstract/BoxShadow";
+import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
+import { Align } from "@/components/Align";
+import { Center } from "@/components/Center";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
+import { Padding } from "@/components/Padding";
 import { Row } from "@/components/Row";
+import { Scaffold } from "@/components/Scaffold";
 import { Text } from "@/components/Text";
 import { ref } from "vue";
 
 export const wrapperApp = () => {
-  const text = ref(true);
-  const text1 = ref(1);
+  const text = ref("Hello world!");
+  const textRow = ref("And this is a row!");
   const text2 = ref(2);
-
-  return Container({
-    child: Row({
-      children: [
-        ElevatedButton({
-          child: Text({ text }),
-          onPressed: () => {
-            text.value = !text.value;
-          },
-        }),
-
-        Column({
-          children: [
-            ElevatedButton({
-              child: Text({ text: text1 }),
-              onPressed: null,
+  const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+  const textCard = Padding({
+    child: Text({
+      text: text2,
+    }),
+    padding,
+  });
+  const btn = ElevatedButton({
+    child: Text({ text: ref("Hello Button") }),
+    onPressed: () => {
+      text2.value++;
+    },
+  });
+  const decoration = new BoxDecoration({
+    boxShadow: BoxShadow.xl,
+  });
+  return Scaffold({
+    body: Center({
+      child: Container({
+        padding,
+        decoration,
+        child: Align({
+          alignment: Alignment.top,
+          child: Container({
+            decoration,
+            child: Row({
+              children: [textCard, btn],
             }),
-            ElevatedButton({
-              child: Text({ text: text2 }),
-              onPressed: null,
-            }),
-          ],
+          }),
         }),
-      ],
+      }),
     }),
   });
 };

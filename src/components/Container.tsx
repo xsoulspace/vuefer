@@ -20,11 +20,18 @@ export const Container = ({
   color,
   height,
   width,
+  decoration,
 }: ContainerI) => {
   const component = defineComponent({
     name: "Container",
     render() {
-      const containerClass = `container ${color?.backgroundCss ?? ""}`;
+      const containerClass = [
+        "relative",
+        "container",
+        "min-h-full",
+        color?.backgroundCss ?? "",
+        decoration?.boxShadow?.css ?? "",
+      ].join(" ");
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);
 
