@@ -1,6 +1,8 @@
 import { Alignment } from "@/abstract/Alignment";
+import { BorderRadius, BorderRadiusStep } from "@/abstract/BorderRadius";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { BoxShadow } from "@/abstract/BoxShadow";
+import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
 import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { Align } from "@/components/Align";
 import { Center } from "@/components/Center";
@@ -30,19 +32,24 @@ export const wrapperApp = () => {
     },
   });
   const decoration = new BoxDecoration({
-    boxShadow: BoxShadow.xl,
+    boxShadow: BoxShadow.m,
+    borderRadius: BorderRadius.all({ radius: BorderRadiusStep.xl }),
   });
   return Scaffold({
     body: Center({
       child: Container({
         padding,
-        decoration,
+        decoration: new BoxDecoration({
+          boxShadow: BoxShadow.xl,
+          borderRadius: BorderRadius.all({ radius: BorderRadiusStep.xl }),
+        }),
         child: Align({
           alignment: Alignment.top,
           child: Container({
             decoration,
             child: Row({
-              children: [textCard, btn],
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [btn, textCard],
             }),
           }),
         }),

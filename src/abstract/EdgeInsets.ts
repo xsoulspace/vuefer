@@ -1,6 +1,6 @@
 export enum EdgeInsetsStep {
   "px" = "px",
-  "s0" = 0,
+  zero = 0,
   "s0.5" = 0.5,
   "s1" = 1,
   "s1.5" = 1.5,
@@ -49,10 +49,10 @@ export class EdgeInsets {
   right: EdgeInsetsStep;
   bottom: EdgeInsetsStep;
   constructor({ left, top, right, bottom }: ltrb) {
-    this.left = left ?? EdgeInsetsStep.s0;
-    this.top = top ?? EdgeInsetsStep.s0;
-    this.right = right ?? EdgeInsetsStep.s0;
-    this.bottom = bottom ?? EdgeInsetsStep.s0;
+    this.left = left ?? EdgeInsetsStep.zero;
+    this.top = top ?? EdgeInsetsStep.zero;
+    this.right = right ?? EdgeInsetsStep.zero;
+    this.bottom = bottom ?? EdgeInsetsStep.zero;
   }
   static symmetric({
     vertical,

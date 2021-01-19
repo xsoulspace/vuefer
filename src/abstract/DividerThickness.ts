@@ -1,6 +1,5 @@
 export enum DividerThicknessStep {
-  "none" = "none",
-  "s0" = 0,
+  zero = "zero",
   "s2" = 2,
   "s4" = 4,
   "s8" = 8,
@@ -19,15 +18,14 @@ export class DividerThickness {
   }
   get css() {
     switch (this.thickness) {
-      case DividerThicknessStep.s0:
-        return "-0";
       case DividerThicknessStep.s2:
         return "-2";
       case DividerThicknessStep.s4:
         return "-4";
       case DividerThicknessStep.s8:
         return "-8";
-      case DividerThicknessStep.none:
+      case DividerThicknessStep.zero:
+        return "-0";
       default:
         return "";
     }

@@ -25,12 +25,18 @@ export const Container = ({
   const component = defineComponent({
     name: "Container",
     render() {
+      const decorationColor = decoration?.color;
+      if (decorationColor && color)
+        throw Error(
+          "You cannot choose simultaniously both colors in decorator and in component! Prefer to use only one"
+        );
       const containerClass = [
         "relative",
         "container",
         "min-h-full",
-        color?.backgroundCss ?? "",
+        decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
         decoration?.boxShadow?.css ?? "",
+        decoration?.borderRadius?.css ?? "",
       ].join(" ");
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);
