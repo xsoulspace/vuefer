@@ -5,18 +5,23 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:js": "vue-cli-service build --target lib --name fsvtw 'src/index.ts'",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
+  "main": "./dist/fsvtw.common.js",
+  "files": [
+    "dist/*",
+    "src/abstract/*",
+    "src/components/*"
+  ],
+  "types": "./flutter_styled_vue3_with_tailwind.d.ts",
   "dependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.2",
-    "@vueuse/core": "^4.0.8",
-    "autoprefixer": "^9",
-    "core-js": "^3.6.5",
-    "postcss": "^7",
+    "vue": "^3.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue": "^3.0.0"
+    "postcss": "^7",
+    "@tailwindcss/postcss7-compat": "^2.0.2"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -33,13 +38,16 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
+    "@vueuse/core": "^4.0.8",
+    "autoprefixer": "^9",
     "chai": "^4.1.2",
+    "core-js": "^3.6.5",
     "eslint": "^7.18.0",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^7.0.0-0",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^10.1.1",
-    "typescript": "~4.1.3"
+    "typescript": "^4.1.3"
   }
 }
