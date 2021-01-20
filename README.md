@@ -43,11 +43,6 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 14. [] ? - Dialog
 15. [] ? - Provider, MultiProvider
 16. [] ? - SizedBox
-
-- [] number?
-- [] text?
-- [] date?
-
 17. [] AutoSelect - DropdownButton, DropdownButtonItem
 18. [] ? - Progress
 19. [] ? - Card
