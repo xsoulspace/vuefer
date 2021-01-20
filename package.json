@@ -1,7 +1,7 @@
 {
-  "name": "vue_flutter_tailwind",
+  "name": "flutter_styled_vue3_with_tailwind_css",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
