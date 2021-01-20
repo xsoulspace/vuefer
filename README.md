@@ -1,9 +1,9 @@
-### Flutter styled Vue3 with Tailwind CSS:
+# Flutter styled Vue3 with Tailwind CSS
 
 Flutter & Dart awesome!
 Vue3 & Typescript & Tailwind awesome too!
 
-The reason why this project have been started is a question:
+**The reason & motivation why this project have been started is a question:**
 
 Flutter is not working inside Excel:( and its kind of complicated to work with web libraries.
 
@@ -16,12 +16,14 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 - All is subject to change until release 1.
 - If you like this project - contributing &|| star is very welcome and appreciated and will keep development running Open Source and free:)
 
-1. [x] Position - Alignment, Align, Center
-2. [] Object Fit - FitBox?, FittedBox? (delayed)
-3. [x] Padding - Padding
-4. [x] Margin - Margin
+# Roadmap
+
+1. [x] Alignment, Align, Center
+2. [] Object Fit - FitBox?, FittedBox?
+3. [x] Padding
+4. [x] Margin
 5. [] ? - Text
-6. [] Container - Container
+6. [] Container
 
 - [x] Border
 - [x] BorderRadius
@@ -33,10 +35,10 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 - [] Alignment
 - [] Image
 
-7. [x] Flex - Flex
+7. [x] Flex
 8. [x] ? - Row (Flex -> row)
 9. [x] ? - Column (Flex -> column)
-10. [x] Divide - Divider (only for Row, Column)
+10. [x] DividerDecoration (only for Row, Column)
 11. [] ? - Elevated Button
 12. [] ? - Drawer
 13. [] ? - AppBar
