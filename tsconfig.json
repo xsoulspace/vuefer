@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "mocha", "chai", "src/abstract"],
+    "types": ["webpack-env", "mocha", "chai", "./src/abstract"],
     "paths": {
       "@/*": ["src/*"]
     },
