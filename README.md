@@ -1,9 +1,17 @@
-# Flutter styled Vue3 with Tailwind CSS
+# Vue3 styled like Flutter with Tailwind CSS
 
+**Tools:**
+
+- Main inspiration, ideas from Flutter
+- Vue3
+- Typescript
+- Tailwind
+
+**The reason & motivation why this project have been started is a question:**
 Flutter & Dart awesome!
 Vue3 & Typescript & Tailwind awesome too!
 
-**The reason & motivation why this project have been started is a question:**
+But...
 
 Flutter is not working inside Excel:( and its kind of complicated to work with web libraries.
 
@@ -50,3 +58,8 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 19. [] ? - Card
 20. [] ? - ListView, ListView.builder, ListView.separeted
 21. [] ? - Scaffold
+
+## Current Problems:
+
+- [] it has no proper build, so installs whole node_modules
+- [] Tailwind included as package, but needs to be included to main.ts(js) when this package added. Maybe it's a wrong way..

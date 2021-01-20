@@ -1,22 +1,23 @@
 {
-  "name": "flutter_styled_vue3_with_tailwind_css",
+  "name": "vue_flutter_tailwind",
   "version": "0.1.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:js": "vue-cli-service build --target lib --name fsvtw 'src/index.ts'",
+    "build:js": "vue-cli-service build --target lib --name fvt 'src/index.ts'",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
-  "main": "./dist/fsvtw.common.js",
+  "main": "./dist/fvt.common.js",
   "files": [
     "dist/*",
     "src/abstract/*",
     "src/components/*"
   ],
-  "types": "./flutter_styled_vue3_with_tailwind.d.ts",
+  "types": "./src/index.d.ts",
+  "license": "MIT",
   "dependencies": {
     "vue": "^3.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
