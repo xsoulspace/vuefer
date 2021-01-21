@@ -10,7 +10,7 @@ export interface InkWellI extends GestureDetectorI {
   focusColor?: Color;
   borderRadius?: BorderRadius;
   hoverColor?: Color;
-  overlayColor?: MaterialStateProperty<Color>;
+  overlayColor?: Color;
   highlightColor?: Color;
   // onHighlightChanged?: ValueChanged<bool>
   // onHover?: ValueChanged<bool>
