@@ -12,4 +12,8 @@ export class Color {
     const name = this.name;
     return name ? `bg-${name}` : "";
   }
+  get textColorCss() {
+    const name = this.name;
+    return name ? `text-${name}` : "";
+  }
 }
