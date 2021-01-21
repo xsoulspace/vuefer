@@ -30,7 +30,7 @@ Add this package to your package.json file:
 add styling to your main.ts
 
 ```typescript
-import "vue_flutter_tailwind/dist/vft.css";
+import "@xsoulspace/vue_flutter_tailwind/dist/vft.css";
 ```
 
 ### Usage
