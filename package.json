@@ -12,6 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/xsoulspace/vue_flutter_tailwind.git"
   },
+  "bugs": {
+    "url": "https://github.com/xsoulspace/vue_flutter_tailwind/issues"
+  },
+  "homepage": "https://github.com/xsoulspace/vue_flutter_tailwind#readme",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
