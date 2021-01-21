@@ -44,6 +44,7 @@ export class FlexHelper {
     return [
       "relative",
       "flex",
+      "flex-grow",
       `flex-${finalDirection.css}${finalVerticalDirection.css}`,
       finalAxisSize.css,
       finalMainAxisAlignment.css,

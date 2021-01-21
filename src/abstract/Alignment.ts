@@ -15,6 +15,7 @@ enum AlignmentEdge {
 }
 interface AlignmentI {
   alignment?: AlignmentEdge;
+  toOverlay?: boolean;
 }
 // export class AlignmentHelper {
 //   static getClassNames({ alignment, heightFactor, widthFactor }: AlignI) {
@@ -24,8 +25,10 @@ interface AlignmentI {
 
 export class Alignment {
   alignment: AlignmentEdge;
-  constructor({ alignment }: AlignmentI) {
+  toOverlay: boolean;
+  constructor({ alignment, toOverlay }: AlignmentI) {
     this.alignment = alignment ?? AlignmentEdge.topLeft;
+    this.toOverlay = toOverlay ?? false;
   }
   static _factory(alignment: AlignmentEdge) {
     return new Alignment({ alignment });
@@ -70,12 +73,36 @@ export class Alignment {
     return this._factory(AlignmentEdge.bottom);
   }
   get css() {
+    const relativeAlignment: string = (() => {
+      switch (this.alignment) {
+        case AlignmentEdge.bottomCenter:
+        case AlignmentEdge.bottom:
+          return "flex flex-grow flex-row place-content-center items-center content-center justify-center justify-items-center";
+        case AlignmentEdge.center:
+          return "flex flex-grow  flex-row place-content-center items-center content-center justify-center justify-items-center";
+        case AlignmentEdge.topCenter:
+        case AlignmentEdge.top:
+          return "flex flex-grow flex-row place-content-center items-center content-center justify-center justify-items-center";
+        case AlignmentEdge.topRight:
+        case AlignmentEdge.centerRight:
+        case AlignmentEdge.bottomRight:
+        case AlignmentEdge.right:
+          return "flex flex-grow flex-row place-content-end items-end content-end justify-end justify-items-end";
+        case AlignmentEdge.topLeft:
+        case AlignmentEdge.centerLeft:
+        case AlignmentEdge.bottomLeft:
+        case AlignmentEdge.left:
+          return "flex flex-grow flex-row place-content-start items-start content-start justify-start justify-items-start";
+        default:
+          return "";
+      }
+    })();
     const edge = (() => {
       switch (this.alignment) {
         case AlignmentEdge.bottom:
           return "inset-x-0 bottom-0 ";
         case AlignmentEdge.bottomCenter:
-          return "inset-x-1/4 bottom-0 flex justify-center items-center content-center";
+          return "inset-x-1/4 bottom-0";
         case AlignmentEdge.bottomLeft:
           return "bottom-0 left-0";
         case AlignmentEdge.bottomRight:
@@ -85,13 +112,13 @@ export class Alignment {
         case AlignmentEdge.left:
           return "inset-y-0 left-0";
         case AlignmentEdge.center:
-          return "flex items-center content-center justify-center inset-1/4";
+          return "top-0 left-0 right-0 bottom-0";
         case AlignmentEdge.centerLeft:
           return "inset-y-1/4";
         case AlignmentEdge.centerRight:
           return "inset-y-1/4 right-0";
         case AlignmentEdge.topCenter:
-          return "inset-x-1/4 top-0 flex justify-center items-center content-center";
+          return "inset-x-1/4 top-0 ";
         case AlignmentEdge.topRight:
           return "top-0 right-0";
         case AlignmentEdge.top:
@@ -102,6 +129,8 @@ export class Alignment {
           return "left-0 top-0";
       }
     })();
-    return `absolute ${edge}`;
+    return [this.toOverlay ? "absolute " + edge : "", relativeAlignment].join(
+      " "
+    );
   }
 }

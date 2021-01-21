@@ -1,12 +1,11 @@
-import { Alignment } from "@/abstract/Alignment";
+import { Alignment, MainAxisAlignment } from "@/abstract";
 import { BorderRadius, BorderRadiusStep } from "@/abstract/BorderRadius";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { BoxShadow } from "@/abstract/BoxShadow";
 import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
 import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
-import { Align } from "@/components/Align";
-import { Center } from "@/components/Center";
+import { Align } from "@/components";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
 import { MouseRegion } from "@/components/MouseRegion";
@@ -36,36 +35,46 @@ export const wrapperApp = () => {
     },
   });
 
-  const decoration = new BoxDecoration({
-    boxShadow: BoxShadow.m,
-    borderRadius: BorderRadius.all({ radius: BorderRadiusStep.xl }),
-  });
-
   return Scaffold({
-    body: Center({
+    body: Align({
+      toOverlay: true,
+      alignment: Alignment.bottom,
       child: Container({
         padding,
         decoration: new BoxDecoration({
           boxShadow: BoxShadow.xl,
           borderRadius: BorderRadius.vertical({ bottom: BorderRadiusStep.xxl }),
         }),
-        child: Align({
-          alignment: Alignment.top,
-          child: Container({
-            decoration,
-            child: Row({
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MouseRegion({
-                  child: btn,
-                  cursor: SystemMouseCursor.use({
-                    cursor: SystemMouseCursors.forbidden,
-                  }),
-                }),
-                textCard,
-              ],
+        child: Row({
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            MouseRegion({
+              child: btn,
+              cursor: SystemMouseCursor.use({
+                cursor: SystemMouseCursors.forbidden,
+              }),
             }),
-          }),
+            MouseRegion({
+              child: btn,
+              cursor: SystemMouseCursor.use({
+                cursor: SystemMouseCursors.forbidden,
+              }),
+            }),
+            MouseRegion({
+              child: btn,
+              cursor: SystemMouseCursor.use({
+                cursor: SystemMouseCursors.forbidden,
+              }),
+            }),
+            MouseRegion({
+              child: btn,
+              cursor: SystemMouseCursor.use({
+                cursor: SystemMouseCursors.forbidden,
+              }),
+            }),
+            textCard,
+          ],
         }),
       }),
     }),

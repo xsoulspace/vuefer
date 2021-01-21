@@ -4,8 +4,6 @@ import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { Color } from "@/abstract/Color";
 import { EdgeInsets } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
-import { Margin } from "./Margin";
-import { Padding } from "./Padding";
 interface ContainerI {
   child: Component;
   padding?: EdgeInsets;
@@ -30,6 +28,8 @@ export const Container = ({
   constraints,
   alignment,
 }: ContainerI) => {
+  const finalConstraints = constraints ?? new BoxConstraints({});
+  const finalAlignment = alignment ?? Alignment.left;
   const component = defineComponent({
     name: "Container",
     render() {
@@ -41,7 +41,11 @@ export const Container = ({
       const containerClass = [
         "relative",
         "container",
-        "min-h-full",
+        "flex",
+        padding?.marginCss,
+        padding?.paddingCss,
+        finalConstraints.css,
+        finalAlignment.css,
         decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
         decoration?.boxShadow?.css ?? "",
         decoration?.borderRadius?.css ?? "",
@@ -51,22 +55,11 @@ export const Container = ({
       const simple = h("div", params, [h(child)]);
 
       if (padding) {
-        return h("div", params, [
-          h(
-            Padding({
-              child,
-              padding,
-            })
-          ),
-        ]);
+        return h("div", params, [h(child)]);
       } else {
         return simple;
       }
     },
   });
-  if (margin) {
-    return Margin({ child: component, margin });
-  } else {
-    return component;
-  }
+  return component;
 };

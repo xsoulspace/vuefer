@@ -1,66 +1,86 @@
+import { EdgeInsetsStep } from "./EdgeInsets";
+
 // https://tailwindcss.com/docs/min-width
 export enum BoxConstraintsMaxWidth {
   zero,
-  none,
-  xs,
-  sm,
-  md,
-  lg,
-  xl,
-  xxl,
-  xxxl,
-  xxxxl,
-  xxxxxl,
-  xxxxxxl,
-  xxxxxxxl,
-  ownSize,
-  min,
-  max,
+  none = "none",
+  xs = "xs",
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+  xxl = "2xl",
+  xxxl = "3xl",
+  xxxxl = "4xl",
+  xxxxxl = "5xl",
+  xxxxxxl = "6xl",
+  xxxxxxxl = "7xl",
+  ownSize = "max",
+  min = "min",
+  max = "full",
 }
+export enum BoxConstraintsMinWidth {
+  zero,
+  ownSize = "max",
+  min = "min",
+  max = "full",
+}
+export enum BoxConstraintsMinHeight {
+  zero,
+  max = "full",
+  screen = "screen",
+}
+export enum BoxConstraintsMaxHeight {
+  zero,
+  max = "full",
+  screen = "screen",
+}
+
 interface BoxConstraintsI {
   minWidth?: BoxConstraintsMinWidth;
   maxWidth?: BoxConstraintsMaxWidth;
-  minHeight?: BoxConstraintsStep;
-  maxHeight?: BoxConstraintsStep;
+  minHeight?: BoxConstraintsMinHeight;
+  maxHeight?: BoxConstraintsMaxHeight | EdgeInsetsStep;
 }
 // TODO: expand class with static methods
 // as it made in Flutter
 export class BoxConstraints {
   minWidth: BoxConstraintsMinWidth;
   maxWidth: BoxConstraintsMaxWidth;
-  minHeight: BoxConstraintsStep;
-  maxHeight: BoxConstraintsStep;
+  minHeight: BoxConstraintsMinHeight;
+  maxHeight: BoxConstraintsMaxHeight | EdgeInsetsStep;
   constructor({ maxHeight, maxWidth, minHeight, minWidth }: BoxConstraintsI) {
-    this.maxHeight = maxHeight ?? BoxConstraintsStep.zero;
-    this.minHeight = minHeight ?? BoxConstraintsStep.zero;
-    this.maxWidth = maxWidth ?? BoxConstraintsStep.zero;
-    this.minWidth = minWidth ?? BoxConstraintsStep.zero;
+    this.maxHeight = maxHeight ?? BoxConstraintsMaxHeight.zero;
+    this.minHeight = minHeight ?? BoxConstraintsMinHeight.zero;
+    this.maxWidth = maxWidth ?? BoxConstraintsMaxWidth.zero;
+    this.minWidth = minWidth ?? BoxConstraintsMinWidth.zero;
   }
   get css(): string {
     const { minWidth, minHeight } = (() => {
-      let width: string = "flex-shrink-0 ";
+      let width = "flex-shrink ";
       switch (this.minWidth) {
         case BoxConstraintsMinWidth.zero:
-          width = "flex-shrink";
+          width = "";
           break;
         default:
           width += `min-w-${this.minWidth}`;
           break;
       }
-      let height: string = width.length <= 0 ? "flex-shrink-0 " : "";
+      const isWidthZero = this.minWidth == BoxConstraintsMinWidth.zero;
+      let height: string = isWidthZero ? "flex-shrink " : "";
       switch (this.minHeight) {
-        case BoxConstraintsStep.zero:
+        case BoxConstraintsMinHeight.zero:
           height = "";
           break;
         default:
-          height += `w-${this.minHeight}`;
+          height += `min-h-${this.minHeight}`;
           break;
       }
       return { minHeight: height, minWidth: width };
     })();
 
     const { maxHeight, maxWidth } = (() => {
-      let width: string = "flex-grow-0 ";
+      let width = "flex-grow ";
       switch (this.maxWidth) {
         case BoxConstraintsMaxWidth.zero:
           width = "";
@@ -69,13 +89,15 @@ export class BoxConstraints {
           width += `max-w-${this.maxWidth}`;
           break;
       }
-      let height: string = width.length <= 0 ? "flex-grow-0 " : "";
+      const isWidthZero = this.maxWidth == BoxConstraintsMaxWidth.zero;
+
+      let height: string = isWidthZero ? "flex-grow " : "";
       switch (this.maxHeight) {
-        case BoxConstraintsStep.zero:
+        case BoxConstraintsMaxHeight.zero:
           height = "";
           break;
         default:
-          height += `max-w-${this.maxHeight}`;
+          height += `max-h-${this.maxHeight}`;
           break;
       }
       return { maxHeight: height, maxWidth: width };

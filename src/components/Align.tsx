@@ -7,14 +7,17 @@ export interface AlignI {
   alignment: Alignment;
   // widthFactor?: EdgeInsetsStep;
   // heightFactor?: EdgeInsetsStep;
+  toOverlay?: boolean;
   key?: Key;
 }
 
-export const Align = ({ child, alignment, key }: AlignI) => {
+export const Align = ({ child, toOverlay, alignment, key }: AlignI) => {
+  const finalAlignment = alignment;
+  finalAlignment.toOverlay = toOverlay ?? false;
   return defineComponent({
     name: "Align",
     render() {
-      return h("div", { class: alignment.css }, [h(child)]);
+      return h("div", { class: finalAlignment.css }, [h(child)]);
     },
   });
 };
