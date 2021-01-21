@@ -1,5 +1,6 @@
 import { Color } from "./Color";
 import { Colors } from "./Colors";
+import { FontWeight } from "./FontWeight";
 import { TextDecoration } from "./TextDecoration";
 import { TextDecorationStyle } from "./TextDecorationStyle";
 interface TextStyleI {
@@ -8,10 +9,7 @@ interface TextStyleI {
   decoration?: TextDecoration;
   decorationColor?: Color;
   decorationStyle?: TextDecorationStyle;
-  decorationThickness?: TextDecorationThickness; // fontSize
-}
-export enum TextDecorationThickness {
-  zero,
+  fontWeight?: FontWeight; // fontSize
 }
 
 export class TextStyle {
@@ -20,8 +18,8 @@ export class TextStyle {
   decoration: TextDecoration;
   decorationColor: Color;
   decorationStyle: TextDecorationStyle;
-  decorationThickness: TextDecorationThickness; // fontSize
-  // fontWeight
+  // decorationThickness: TextDecorationThickness; // fontSize
+  fontWeight: FontWeight;
   // fontStyle
   // letterSpacing
   // wordSpacing
@@ -34,15 +32,14 @@ export class TextStyle {
     decoration,
     decorationColor,
     decorationStyle,
-    decorationThickness,
+    fontWeight,
   }: TextStyleI) {
     this.color = color ?? Colors.black;
     this.backgroundColor = backgroundColor ?? Colors.white;
     this.decoration = decoration ?? new TextDecoration({});
     this.decorationColor = decorationColor ?? Colors.transparent;
     this.decorationStyle = decorationStyle ?? new TextDecorationStyle({});
-    this.decorationThickness =
-      decorationThickness ?? TextDecorationThickness.zero;
+    this.fontWeight = fontWeight ?? FontWeight.default;
   }
   static get default() {
     return new TextStyle({});
@@ -53,6 +50,10 @@ export class TextStyle {
   }
   // TODO: add css classes
   get css(): string {
-    return "";
+    return [
+      this.decoration.css,
+      this.decorationStyle.css,
+      this.fontWeight.css,
+    ].join(" ");
   }
 }

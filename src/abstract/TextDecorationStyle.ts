@@ -1,8 +1,8 @@
 export enum TextDecorationStyles {
   solid,
-  double,
-  dotted,
-  dashed,
+  // double,
+  // dotted,
+  // dashed,
 }
 interface TextDecorationStyleI {
   decorationStyle?: TextDecorationStyles;
