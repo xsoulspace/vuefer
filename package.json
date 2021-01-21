@@ -1,7 +1,17 @@
 {
-  "name": "vue_flutter_tailwind",
+  "name": "@xsoulspace/vue_flutter_tailwind",
+  "description": "Vue3 styled like Flutter with Tailwind CSS",
   "version": "0.1.0",
   "private": false,
+  "author": {
+    "name": "Anton Malofeev",
+    "email": "anton@xsoulspace.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xsoulspace/vue_flutter_tailwind.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -17,7 +27,6 @@
     "src/components/*"
   ],
   "types": "./src/index.d.ts",
-  "license": "MIT",
   "dependencies": {
     "vue": "^3.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",

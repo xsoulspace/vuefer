@@ -7,6 +7,7 @@ export * from "./BoxBorder";
 export * from "./BoxFit";
 export * from "./BoxShadow";
 export * from "./BoxShape";
+export * from "./ButtonStyle";
 export * from "./Color";
 export * from "./ColorNames";
 export * from "./Colors";
@@ -18,7 +19,10 @@ export * from "./Gradient";
 export * from "./Key";
 export * from "./MainAxisAlignment";
 export * from "./MainAxisSize";
+export * from "./MouseCursor";
+export * from "./TextDecoration";
+export * from "./TextDecorationStyle";
+export * from "./TextStyle";
 export * from "./VerticalDirection";
-
 // export * from './Width'
 // export * from './Height'
