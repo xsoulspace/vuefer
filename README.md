@@ -107,28 +107,31 @@ export const wrapperApp = () => {
 - [x] ? - Row (Flex -> row)
 - [x] ? - Column (Flex -> column)
 - [x] DividerDecoration (only for Row, Column)
+- [x] MouseRegion
+- [] GestureDetecture
+  [x] click
+  [] tap
+
 - [] ? - Drawer
 - [] ? - Provider, MultiProvider
 - [] ? - SizedBox
 - [] AutoSelect - DropdownButton, DropdownButtonItem
 - [] ? - Progress
 - [] ? - Card
-- [] ? - ListView, ListView.builder, ListView.separeted
 - [] ? - Scaffold
 - [] AppBar
 - [] Dialog(?)
 - [] Icon
 - [] IconButton
-- [] Elevated Button
 - [] Bar
 - [] ButtonBar
 
 - [] WIP - Text, TextStyle, TextDecoration, TextDecorationStyle
 - [] WIP - ButtonStyleButton
 - [] WIP - TextButton
-- [x] MouseRegion
-- [x] GestureDetecture
-- [] WIP - ConstrainedBox
+- [] Elevated Button
+- [] ListView, ListView.builder, ListView.separeted
+- [] ConstrainedBox (need to test)
 - [] WIP - Material
 - [] WIP - InkWell
 
