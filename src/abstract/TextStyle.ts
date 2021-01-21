@@ -1,5 +1,6 @@
 import { Color } from "./Color";
 import { Colors } from "./Colors";
+import { FontSize } from "./FontSize";
 import { FontWeight } from "./FontWeight";
 import { TextDecoration } from "./TextDecoration";
 import { TextDecorationStyle } from "./TextDecorationStyle";
@@ -9,7 +10,8 @@ interface TextStyleI {
   decoration?: TextDecoration;
   // decorationColor?: Color;
   decorationStyle?: TextDecorationStyle;
-  fontWeight?: FontWeight; // fontSize
+  fontWeight?: FontWeight;
+  fontSize?: FontSize;
 }
 
 export class TextStyle {
@@ -18,7 +20,8 @@ export class TextStyle {
   decoration: TextDecoration;
   // decorationColor: Color;
   decorationStyle: TextDecorationStyle;
-  // decorationThickness: TextDecorationThickness; // fontSize
+  // decorationThickness: TextDecorationThickness;
+  fontSize: FontSize;
   fontWeight: FontWeight;
   // fontStyle
   // letterSpacing
@@ -32,6 +35,7 @@ export class TextStyle {
     decoration,
     decorationStyle,
     fontWeight,
+    fontSize,
   }: TextStyleI) {
     this.color = color ?? Colors.black;
     this.backgroundColor = backgroundColor ?? Colors.white;
@@ -39,6 +43,7 @@ export class TextStyle {
     // this.decorationColor = decorationColor ?? Colors.transparent;
     this.decorationStyle = decorationStyle ?? new TextDecorationStyle({});
     this.fontWeight = fontWeight ?? FontWeight.default;
+    this.fontSize = fontSize ?? FontSize.default;
   }
   static get default() {
     return new TextStyle({});
@@ -54,6 +59,7 @@ export class TextStyle {
       this.decoration.css,
       this.decorationStyle.css,
       this.fontWeight.css,
+      this.fontSize.css,
     ].join(" ");
   }
 }

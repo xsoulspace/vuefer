@@ -18,9 +18,9 @@ export class TextOverflow {
   get css() {
     switch (this.textOverflow) {
       case TextOverflows.clip:
-        return "center";
+        return "overflow-clip";
       case TextOverflows.ellipsis:
-        return "justify";
+        return "overflow-ellipsis";
 
       case TextOverflows.fade:
         return "truncate";

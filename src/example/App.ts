@@ -28,10 +28,12 @@ export const wrapperApp = () => {
   });
 
   const btn = ElevatedButton({
-    child: Text({ text: ref("Hello Button") }),
+    child: Text({
+      text: ref("Hello Button "),
+    }),
     onPressed: () => {
       text2.value++;
-      text.value = `Hello Wolrd! Counter: ${text2.value}`
+      text.value = `Hello Wolrd! Counter: ${text2.value}`;
     },
   });
 

@@ -12,7 +12,7 @@ interface TextI {
   // TODO: locale
   // locale,
   // softWrap;
-  overflow: TextOverflow;
+  overflow?: TextOverflow;
   // maxLines;
   // textWidthBasis;
 }
