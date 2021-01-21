@@ -15,13 +15,17 @@ export * from "./CrossAxisAlignment";
 export * from "./DividerDecoration";
 export * from "./DividerThickness";
 export * from "./EdgeInsets";
+export * from "./FontSize";
+export * from "./FontWeight";
 export * from "./Gradient";
 export * from "./Key";
 export * from "./MainAxisAlignment";
 export * from "./MainAxisSize";
 export * from "./MouseCursor";
+export * from "./TextAlign";
 export * from "./TextDecoration";
 export * from "./TextDecorationStyle";
+export * from "./TextOverflow";
 export * from "./TextStyle";
 export * from "./VerticalDirection";
 // export * from './Width'
