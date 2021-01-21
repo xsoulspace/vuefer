@@ -134,5 +134,4 @@ export const wrapperApp = () => {
 
 ## Current Problems:
 
-- [] it has no proper build, so installs whole node_modules
 - [] Tailwind included as package, but needs to be included to main.ts(js) when this package added. Maybe it's a wrong way..

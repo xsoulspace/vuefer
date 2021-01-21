@@ -17,14 +17,17 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "outDir": "dist",
+    "declarationDir": "dist",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/**/*.vue"
+    // "tests/**/*.ts",
+    // "tests/**/*.tsx"
   ],
   "exclude": ["node_modules", "dist"]
 }
