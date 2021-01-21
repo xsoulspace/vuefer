@@ -66,7 +66,7 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 - [] WIP - ButtonStyleButton
 - [] WIP - TextButton
 - [x] MouseRegion
-- [] WIP - GestureDetecture
+- [x] GestureDetecture
 - [] WIP - ConstrainedBox
 - [] WIP - Material
 - [] WIP - InkWell
