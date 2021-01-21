@@ -1,7 +1,7 @@
 export enum TextDecorations {
   none,
   underline,
-  overline,
+  // overline,
   lineThrough,
 }
 interface TextDecorationI {
@@ -13,6 +13,14 @@ export class TextDecoration {
     this.decoration = decoration ?? TextDecorations.none;
   }
   get css(): string {
-    return "";
+    switch (this.decoration) {
+      case TextDecorations.lineThrough:
+        return "line-through";
+      case TextDecorations.underline:
+        return "underline";
+      case TextDecorations.none:
+      default:
+        return "no-underline";
+    }
   }
 }
