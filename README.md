@@ -87,6 +87,7 @@ export const wrapperApp = () => {
 
 # Roadmap
 
+- [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
 - [x] Alignment, Align, Center
 - [] Object Fit - FitBox?, FittedBox?
 - [x] Padding
@@ -126,7 +127,6 @@ export const wrapperApp = () => {
 - [] Bar
 - [] ButtonBar
 
-- [] WIP - Text, TextStyle, TextDecoration, TextDecorationStyle
 - [] WIP - ButtonStyleButton
 - [] WIP - TextButton
 - [] Elevated Button
