@@ -19,22 +19,26 @@ export const wrapperApp = () => {
   const textRow = ref("And this is a row!");
   const text2 = ref(2);
   const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+
   const textCard = Padding({
     child: Text({
       text: text2,
     }),
     padding,
   });
+
   const btn = ElevatedButton({
     child: Text({ text: ref("Hello Button") }),
     onPressed: () => {
       text2.value++;
     },
   });
+
   const decoration = new BoxDecoration({
     boxShadow: BoxShadow.m,
     borderRadius: BorderRadius.all({ radius: BorderRadiusStep.xl }),
   });
+
   return Scaffold({
     body: Center({
       child: Container({

@@ -1,3 +1,5 @@
+import { Alignment } from "@/abstract";
+import { BoxConstraints } from "@/abstract/BoxConstraints";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { Color } from "@/abstract/Color";
 import { EdgeInsets } from "@/abstract/EdgeInsets";
@@ -12,6 +14,10 @@ interface ContainerI {
   width?: number;
   height?: number;
   decoration?: BoxDecoration;
+  // TODO: add ConstrainedBox
+  constraints?: BoxConstraints;
+  // TODO: add Align
+  alignment?: Alignment;
 }
 export const Container = ({
   child,
@@ -21,6 +27,8 @@ export const Container = ({
   height,
   width,
   decoration,
+  constraints,
+  alignment,
 }: ContainerI) => {
   const component = defineComponent({
     name: "Container",

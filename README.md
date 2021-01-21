@@ -26,12 +26,11 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 
 # Roadmap
 
-1. [x] Alignment, Align, Center
-2. [] Object Fit - FitBox?, FittedBox?
-3. [x] Padding
-4. [x] Margin
-5. [] ? - Text
-6. [] Container
+- [x] Alignment, Align, Center
+- [] Object Fit - FitBox?, FittedBox?
+- [x] Padding
+- [x] Margin
+- [] Container
 
 - [x] Border
 - [x] BorderRadius
@@ -43,21 +42,34 @@ So, what if we will write Vue3 TS in style of Flutter, because it's just simplie
 - [] Alignment
 - [] Image
 
-7. [x] Flex
-8. [x] ? - Row (Flex -> row)
-9. [x] ? - Column (Flex -> column)
-10. [x] DividerDecoration (only for Row, Column)
-11. [] ? - Elevated Button
-12. [] ? - Drawer
-13. [] ? - AppBar
-14. [] ? - Dialog
-15. [] ? - Provider, MultiProvider
-16. [] ? - SizedBox
-17. [] AutoSelect - DropdownButton, DropdownButtonItem
-18. [] ? - Progress
-19. [] ? - Card
-20. [] ? - ListView, ListView.builder, ListView.separeted
-21. [] ? - Scaffold
+- [x] Flex
+- [x] ? - Row (Flex -> row)
+- [x] ? - Column (Flex -> column)
+- [x] DividerDecoration (only for Row, Column)
+- [] ? - Drawer
+- [] ? - Provider, MultiProvider
+- [] ? - SizedBox
+- [] AutoSelect - DropdownButton, DropdownButtonItem
+- [] ? - Progress
+- [] ? - Card
+- [] ? - ListView, ListView.builder, ListView.separeted
+- [] ? - Scaffold
+- [] AppBar
+- [] Dialog(?)
+- [] Icon
+- [] IconButton
+- [] Elevated Button
+- [] Bar
+- [] ButtonBar
+
+- [] WIP - Text, TextStyle, TextDecoration, TextDecorationStyle
+- [] WIP - ButtonStyleButton
+- [] WIP - TextButton
+- [] WIP - MouseRegion
+- [] WIP - GestureDetecture
+- [] WIP - ConstrainedBox
+- [] WIP - Material
+- [] WIP - InkWell
 
 ## Current Problems:
 
