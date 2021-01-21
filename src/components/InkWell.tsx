@@ -1,4 +1,6 @@
-import { BorderRadius, Color, Key } from "@/abstract";
+import { BorderRadius } from "@/abstract/BorderRadius";
+import { Color } from "@/abstract/Color";
+import { Key } from "@/abstract/Key";
 import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { Component, defineComponent, h } from "vue";
 import { GestureDetector, GestureDetectorI } from "./GestureDetector";

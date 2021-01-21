@@ -31,7 +31,7 @@
     "src/components/*",
     "src/example/*"
   ],
-  "types": "./src/index.d.ts",
+  "types": "./src/index.ts",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
