@@ -4,10 +4,12 @@ import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { BoxShadow } from "@/abstract/BoxShadow";
 import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
 import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
+import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { Align } from "@/components/Align";
 import { Center } from "@/components/Center";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
+import { MouseRegion } from "@/components/MouseRegion";
 import { Padding } from "@/components/Padding";
 import { Row } from "@/components/Row";
 import { Scaffold } from "@/components/Scaffold";
@@ -53,7 +55,15 @@ export const wrapperApp = () => {
             decoration,
             child: Row({
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [btn, textCard],
+              children: [
+                MouseRegion({
+                  child: btn,
+                  cursor: SystemMouseCursor.use({
+                    cursor: SystemMouseCursors.forbidden,
+                  }),
+                }),
+                textCard,
+              ],
             }),
           }),
         }),

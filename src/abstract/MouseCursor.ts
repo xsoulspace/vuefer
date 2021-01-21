@@ -23,6 +23,26 @@ export class SystemMouseCursor {
   }
   // TODO: add css classes
   get css(): string {
-    return "";
+    const type = (() => {
+      switch (this.cursor) {
+        case SystemMouseCursors.basic:
+          return "default";
+        case SystemMouseCursors.click:
+          return "pointer";
+        case SystemMouseCursors.copy:
+        case SystemMouseCursors.forbidden:
+          return "not-allowed";
+        case SystemMouseCursors.none:
+        case SystemMouseCursors.progress:
+        case SystemMouseCursors.text:
+          return "text";
+        case SystemMouseCursors.wait:
+          return "wait";
+
+        default:
+          return "auto";
+      }
+    })();
+    return `cursor-${type}`;
   }
 }
