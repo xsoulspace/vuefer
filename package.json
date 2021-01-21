@@ -28,7 +28,8 @@
   "files": [
     "dist/*",
     "src/abstract/*",
-    "src/components/*"
+    "src/components/*",
+    "src/example/*"
   ],
   "types": "./src/index.d.ts",
   "publishConfig": {

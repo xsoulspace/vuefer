@@ -1,5 +1,7 @@
 # Vue3 styled like Flutter with Tailwind CSS
 
+**Please notice: this project is a work in progress!**
+
 **Tools:**
 
 - Main inspiration, ideas from Flutter

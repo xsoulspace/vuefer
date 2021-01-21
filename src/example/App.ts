@@ -17,13 +17,12 @@ import { ref } from "vue";
 
 export const wrapperApp = () => {
   const text = ref("Hello world!");
-  const textRow = ref("And this is a row!");
   const text2 = ref(2);
   const padding = EdgeInsets.all(EdgeInsetsStep.s3);
 
   const textCard = Padding({
     child: Text({
-      text: text2,
+      text,
     }),
     padding,
   });
@@ -32,6 +31,7 @@ export const wrapperApp = () => {
     child: Text({ text: ref("Hello Button") }),
     onPressed: () => {
       text2.value++;
+      text.value = `Hello Wolrd! Counter: ${text2.value}`
     },
   });
 
@@ -52,25 +52,7 @@ export const wrapperApp = () => {
             MouseRegion({
               child: btn,
               cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.forbidden,
-              }),
-            }),
-            MouseRegion({
-              child: btn,
-              cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.forbidden,
-              }),
-            }),
-            MouseRegion({
-              child: btn,
-              cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.forbidden,
-              }),
-            }),
-            MouseRegion({
-              child: btn,
-              cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.forbidden,
+                cursor: SystemMouseCursors.click,
               }),
             }),
             textCard,
