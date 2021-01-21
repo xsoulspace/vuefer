@@ -1,27 +1,28 @@
 import { Color } from "./Color";
 import { Colors } from "./Colors";
+import { FontSize } from "./FontSize";
+import { FontWeight } from "./FontWeight";
 import { TextDecoration } from "./TextDecoration";
 import { TextDecorationStyle } from "./TextDecorationStyle";
 interface TextStyleI {
   color?: Color;
   backgroundColor?: Color;
   decoration?: TextDecoration;
-  decorationColor?: Color;
+  // decorationColor?: Color;
   decorationStyle?: TextDecorationStyle;
-  decorationThickness?: TextDecorationThickness; // fontSize
-}
-export enum TextDecorationThickness {
-  zero,
+  fontWeight?: FontWeight;
+  fontSize?: FontSize;
 }
 
 export class TextStyle {
   color: Color;
   backgroundColor: Color;
   decoration: TextDecoration;
-  decorationColor: Color;
+  // decorationColor: Color;
   decorationStyle: TextDecorationStyle;
-  decorationThickness: TextDecorationThickness; // fontSize
-  // fontWeight
+  // decorationThickness: TextDecorationThickness;
+  fontSize: FontSize;
+  fontWeight: FontWeight;
   // fontStyle
   // letterSpacing
   // wordSpacing
@@ -32,17 +33,17 @@ export class TextStyle {
     color,
     backgroundColor,
     decoration,
-    decorationColor,
     decorationStyle,
-    decorationThickness,
+    fontWeight,
+    fontSize,
   }: TextStyleI) {
     this.color = color ?? Colors.black;
     this.backgroundColor = backgroundColor ?? Colors.white;
     this.decoration = decoration ?? new TextDecoration({});
-    this.decorationColor = decorationColor ?? Colors.transparent;
+    // this.decorationColor = decorationColor ?? Colors.transparent;
     this.decorationStyle = decorationStyle ?? new TextDecorationStyle({});
-    this.decorationThickness =
-      decorationThickness ?? TextDecorationThickness.zero;
+    this.fontWeight = fontWeight ?? FontWeight.default;
+    this.fontSize = fontSize ?? FontSize.default;
   }
   static get default() {
     return new TextStyle({});
@@ -51,8 +52,14 @@ export class TextStyle {
   static apply(arg: TextStyleI) {
     return new TextStyle(arg);
   }
-  // TODO: add css classes
   get css(): string {
-    return "";
+    return [
+      this.backgroundColor.backgroundCss,
+      this.color.textColorCss,
+      this.decoration.css,
+      this.decorationStyle.css,
+      this.fontWeight.css,
+      this.fontSize.css,
+    ].join(" ");
   }
 }

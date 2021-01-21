@@ -2,7 +2,6 @@
   <WrapperApp />
 </template>
 <script lang="ts">
-import Vue from "vue";
 import { wrapperApp } from "@/example/App";
 export default {
   components: {
@@ -15,6 +14,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 </style>
