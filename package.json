@@ -26,10 +26,7 @@
   },
   "main": "./dist/vft.common.js",
   "files": [
-    "dist/*",
-    "src/abstract/*",
-    "src/components/*",
-    "src/example/*"
+    "dist/*"
   ],
   "typings": "./dist/index.d.ts",
   "publishConfig": {
