@@ -4,6 +4,8 @@ export * from "./Border";
 export * from "./BorderRadius";
 export * from "./BorderSide";
 export * from "./BoxBorder";
+export * from "./BoxConstraints";
+export * from "./BoxDecoration";
 export * from "./BoxFit";
 export * from "./BoxShadow";
 export * from "./BoxShape";
