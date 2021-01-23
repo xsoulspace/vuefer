@@ -1,13 +1,14 @@
-import { BorderRadius, BoxShadowSize, Color } from "@/abstract";
+import { BorderRadius, BoxBorder, BoxShadow, Color } from "@/abstract";
 import { TextStyle } from "@/abstract/TextStyle";
 import { Component, defineComponent, h } from "vue";
 export interface MaterialI {
   child: Component;
-  elevation?: BoxShadowSize;
+  elevation?: BoxShadow;
   textStyle?: TextStyle;
   borderRadius?: BorderRadius;
   color?: Color;
-  shadowColor?: Color;
+  boxBorder?: BoxBorder;
+  // shadowColor?: Color;
   // animationDuration?: Duration
 }
 
@@ -16,13 +17,26 @@ export const Material = ({
   color,
   borderRadius,
   elevation,
-  shadowColor,
+  boxBorder,
+  // shadowColor,
   textStyle,
 }: MaterialI) => {
   return defineComponent({
     name: "Material",
     render() {
-      return h("div", { class: "" }, [h(child)]);
+      return h(
+        "div",
+        {
+          class: [
+            boxBorder?.css ?? "",
+            elevation?.css ?? "",
+            textStyle?.css ?? "",
+            borderRadius?.css ?? "",
+            color?.backgroundCss ?? "",
+          ].join(" "),
+        },
+        [h(child)]
+      );
     },
   });
 };

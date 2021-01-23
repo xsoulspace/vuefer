@@ -12,8 +12,8 @@ export interface InkWellI extends GestureDetectorI {
   focusColor?: Color;
   borderRadius?: BorderRadius;
   hoverColor?: Color;
-  overlayColor?: Color;
   highlightColor?: Color;
+  // overlayColor?: Color;
   // onHighlightChanged?: ValueChanged<bool>
   // onHover?: ValueChanged<bool>
   // TODO: add ripple effect
@@ -22,7 +22,16 @@ export interface InkWellI extends GestureDetectorI {
   // autofocus: boolean
   // customBorder: ShapeBorder
 }
-export const InkWell = ({ child, mouseCursor, onTap, key }: InkWellI) => {
+export const InkWell = ({
+  child,
+  mouseCursor,
+  onTap,
+  key,
+  borderRadius,
+  focusColor,
+  highlightColor,
+  hoverColor,
+}: InkWellI) => {
   const result = MouseRegion({
     child: GestureDetector({
       onTap,
@@ -32,11 +41,21 @@ export const InkWell = ({ child, mouseCursor, onTap, key }: InkWellI) => {
       mouseCursor ??
       SystemMouseCursor.use({ cursor: SystemMouseCursors.basic }),
   });
-
   return defineComponent({
     name: "InkWell",
     render() {
-      return h("div", { class: "" }, [h(result)]);
+      return h(
+        "div",
+        {
+          class: [
+            focusColor?.focusCss ?? "",
+            borderRadius?.css ?? "",
+            hoverColor?.hoverBackgroundCss ?? "",
+            highlightColor?.highlightCss ?? "",
+          ].join(" "),
+        },
+        [h(result)]
+      );
     },
   });
 };

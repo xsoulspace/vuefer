@@ -2,18 +2,25 @@ import { ColorNames } from "./ColorNames";
 
 export class Color {
   // TODO: replace to 32 bit
-  hex?: string;
-  name?: ColorNames;
-  constructor({ hex, name }: { hex: string; name: ColorNames }) {
-    this.hex = hex;
-    this.name = name;
+  hex: string;
+  name: ColorNames;
+  constructor({ hex, name }: { hex?: string; name?: ColorNames }) {
+    this.hex = hex ?? "#000";
+    this.name = name ?? ColorNames.black;
   }
   get backgroundCss() {
-    const name = this.name;
-    return name ? `bg-${name}` : "";
+    return `bg-${this.name}`;
   }
-  get textColorCss() {
-    const name = this.name;
-    return name ? `text-${name}` : "";
+  get hoverBackgroundCss() {
+    return `hover:${this.backgroundCss}`;
+  }
+  get focusCss() {
+    return `focus:ring-2 focus:ring-${this.name}`;
+  }
+  get textCss() {
+    return `text-${this.name}`;
+  }
+  get highlightCss() {
+    return `active:${this.backgroundCss}`;
   }
 }

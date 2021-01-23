@@ -1,5 +1,6 @@
 import { BorderRadius, BorderRadiusStep } from "./BorderRadius";
-import { BoxShadowSize } from "./BoxShadow";
+import { BoxBorder } from "./BoxBorder";
+import { BoxShadow } from "./BoxShadow";
 import { Color } from "./Color";
 import { Colors } from "./Colors";
 import { EdgeInsets, EdgeInsetsStep } from "./EdgeInsets";
@@ -9,29 +10,30 @@ import { TextStyle } from "./TextStyle";
 interface ButtonStyleI {
   textStyle?: TextStyle;
   backgroundColor?: Color;
-  foregroundColor?: Color;
-  overlayColor?: Color;
-  shadowColor?: Color;
-  elevation?: BoxShadowSize;
+  elevation?: BoxShadow;
   padding?: EdgeInsets;
   mouseCursor?: SystemMouseCursor;
   borderRadius?: BorderRadius;
+
   focusColor?: Color;
   highlightColor?: Color;
   hoverColor?: Color;
-  // minimumSize?: ?>
-  // side?: BorderSide;
-  // shape: OutlinedBorder?>
+  // shadowColor?: Color;
+  // overlayColor?: Color;
+  // foregroundColor?: Color;
+  // minimumSize?:
+  boxBorder?: BoxBorder;
+  // shape: OutlinedBorder
   // animationDuration?: Duration
 }
 
 export class ButtonStyle {
   textStyle: TextStyle;
   backgroundColor: Color;
-  foregroundColor: Color;
-  overlayColor: Color;
-  shadowColor: Color;
-  elevation: BoxShadowSize;
+  // foregroundColor: Color;
+  // overlayColor: Color;
+  // shadowColor: Color;
+  elevation: BoxShadow;
   padding: EdgeInsets;
   mouseCursor: SystemMouseCursor;
   borderRadius: BorderRadius;
@@ -39,45 +41,58 @@ export class ButtonStyle {
   highlightColor: Color;
   hoverColor: Color;
   // minimumSize?: ?>
-  // side?: BorderSide;
+  boxBorder: BoxBorder;
   // shape: OutlinedBorder?>
   // animationDuration?: Duration
   constructor({
     backgroundColor,
     elevation,
-    foregroundColor,
+    // foregroundColor,
     mouseCursor,
-    overlayColor,
+    // overlayColor,
     padding,
-    shadowColor,
+    // shadowColor,
     borderRadius,
     focusColor,
     highlightColor,
     hoverColor,
     textStyle,
+    boxBorder,
   }: ButtonStyleI) {
     this.textStyle = textStyle ?? TextStyle.default;
     this.backgroundColor = backgroundColor ?? Colors.transparent;
-    this.foregroundColor = foregroundColor ?? Colors.black;
-    this.overlayColor = overlayColor ?? Colors.transparent;
-    this.shadowColor = shadowColor ?? Colors.transparent;
-    this.elevation = elevation ?? BoxShadowSize.sm;
-    this.padding = padding ?? EdgeInsets.all(EdgeInsetsStep.s1);
+    // this.foregroundColor = foregroundColor ?? Colors.black;
+    // this.overlayColor = overlayColor ?? Colors.transparent;
+    // this.shadowColor = shadowColor ?? Colors.transparent;
+    this.elevation = elevation ?? BoxShadow.m;
+    this.padding = padding ?? EdgeInsets.all(EdgeInsetsStep["s2.5"]);
     this.mouseCursor =
       mouseCursor ??
       SystemMouseCursor.use({ cursor: SystemMouseCursors.click });
+    this.boxBorder = boxBorder ?? BoxBorder.default;
     this.borderRadius =
-      borderRadius ?? BorderRadius.all({ radius: BorderRadiusStep.sm });
-    this.focusColor = focusColor ?? Colors.transparent;
-    this.highlightColor = highlightColor ?? Colors.transparent;
+      borderRadius ?? BorderRadius.all({ radius: BorderRadiusStep.m });
+    this.focusColor = focusColor ?? Colors.black;
+    this.highlightColor = highlightColor ?? Colors.black;
     this.hoverColor = hoverColor ?? Colors.transparent;
   }
 
   static get default() {
     return new ButtonStyle({});
   }
-
   get css(): string {
-    return "";
+    console.log({ b: this.boxBorder });
+    return [
+      this.textStyle.css,
+      this.backgroundColor.backgroundCss,
+      this.elevation.css,
+      this.padding.paddingCss,
+      this.mouseCursor.css,
+      this.borderRadius.css,
+      this.hoverColor.hoverBackgroundCss,
+      this.focusColor.focusCss,
+      this.highlightColor.highlightCss,
+      this.boxBorder.css,
+    ].join(" ");
   }
 }

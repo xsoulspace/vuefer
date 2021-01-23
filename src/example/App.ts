@@ -1,16 +1,19 @@
-import { Alignment, MainAxisAlignment } from "@/abstract";
-import { BorderRadius, BorderRadiusStep } from "@/abstract/BorderRadius";
 import {
-  BoxConstraints,
-  BoxConstraintsMaxWidth,
-} from "@/abstract/BoxConstraints";
+  Alignment,
+  ButtonStyle,
+  Colors,
+  MainAxisAlignment,
+  TextDecoration,
+  TextDecorations,
+  TextStyle,
+} from "@/abstract";
+import { BorderRadius, BorderRadiusStep } from "@/abstract/BorderRadius";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { BoxShadow } from "@/abstract/BoxShadow";
 import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
 import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
-import { TextAlign, TextAligns } from "@/abstract/TextAlign";
-import { Align, ConstrainedBox } from "@/components";
+import { Align } from "@/components/Align";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
 import { MouseRegion } from "@/components/MouseRegion";
@@ -33,19 +36,19 @@ export const wrapperApp = () => {
   });
 
   const btn = ElevatedButton({
-    child: ConstrainedBox({
-      child: Text({
-        textAlign: new TextAlign({ textAlign: TextAligns.left }),
-        text: ref("Hello Button "),
-      }),
-      constraints: new BoxConstraints({
-        maxWidth: BoxConstraintsMaxWidth.min,
+    style: new ButtonStyle({
+      backgroundColor: Colors.grey,
+      textStyle: new TextStyle({
+        color: Colors.white,
+        decoration: new TextDecoration({
+          decoration: TextDecorations.lineThrough,
+        }),
       }),
     }),
-    onPressed: () => {
-      text2.value++;
-      text.value = `Hello Wolrd! Counter: ${text2.value}`;
-    },
+    child: Text({
+      text: ref("Hello Button "),
+    }),
+    onTap: () => "",
   });
 
   return Scaffold({
@@ -63,12 +66,12 @@ export const wrapperApp = () => {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             MouseRegion({
-              child: btn,
+              child: textCard,
               cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.click,
+                cursor: SystemMouseCursors.none,
               }),
             }),
-            textCard,
+            btn,
           ],
         }),
       }),

@@ -38,7 +38,7 @@ export class TextStyle {
     fontSize,
   }: TextStyleI) {
     this.color = color ?? Colors.black;
-    this.backgroundColor = backgroundColor ?? Colors.white;
+    this.backgroundColor = backgroundColor ?? Colors.transparent;
     this.decoration = decoration ?? new TextDecoration({});
     // this.decorationColor = decorationColor ?? Colors.transparent;
     this.decorationStyle = decorationStyle ?? new TextDecorationStyle({});
@@ -55,7 +55,7 @@ export class TextStyle {
   get css(): string {
     return [
       this.backgroundColor.backgroundCss,
-      this.color.textColorCss,
+      this.color.textCss,
       this.decoration.css,
       this.decorationStyle.css,
       this.fontWeight.css,

@@ -7,6 +7,8 @@ export class Colors {
   // TODO: replace to material color
   static white: Color = new Color({ hex: "#fff", name: ColorNames.white });
   // TODO: replace to material color
+  static grey: Color = new Color({ hex: "#", name: ColorNames.grey });
+  // TODO: replace to material color
   static transparent: Color = new Color({
     hex: "",
     name: ColorNames.transparent,

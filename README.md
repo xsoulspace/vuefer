@@ -89,31 +89,36 @@ export const wrapperApp = () => {
 
 - [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
 - [x] Alignment, Align, Center
-- [] Object Fit - FitBox?, FittedBox?
 - [x] Padding
 - [x] Margin
-- [] Container
-
-- [x] Border
-- [x] BorderRadius
-- [x] Color
-- [] Color Opacity ? Border Color Opacity
-- [] Shape
-- [x] Shadow
-- [] Gradient
-- [] Alignment
-- [] Image
-
+- [x] ButtonStyleButton
 - [x] Flex
-- [x] ? - Row (Flex -> row)
-- [x] ? - Column (Flex -> column)
+- [x] Row (Flex -> row)
+- [x] Column (Flex -> column)
 - [x] DividerDecoration (only for Row, Column)
 - [x] MouseRegion
+- [x] TextButton
+- [x] Elevated Button
 - [] GestureDetecture
   [x] click
   [] tap
 
+- [] Container
+  [x] Border
+  [x] BorderRadius
+  [x] Color
+  [x] Shadow
+  [] Color Opacity ? Border Color Opacity
+  [] Shape
+  [] Gradient
+  [] Alignment
+  [] Image
+
+- [] Opacity
+  [] widget
+  [] Text
 - [] ? - Drawer
+- [] Object Fit - FitBox?, FittedBox?
 - [] ? - Provider, MultiProvider
 - [] ? - SizedBox
 - [] AutoSelect - DropdownButton, DropdownButtonItem
@@ -124,12 +129,10 @@ export const wrapperApp = () => {
 - [] Dialog(?)
 - [] Icon
 - [] IconButton
+- [] OutlinedButton
 - [] Bar
 - [] ButtonBar
 
-- [] WIP - ButtonStyleButton
-- [] WIP - TextButton
-- [] Elevated Button
 - [] ListView, ListView.builder, ListView.separeted
 - [] ConstrainedBox (need to test)
 - [] WIP - Material
