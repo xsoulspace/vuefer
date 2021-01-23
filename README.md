@@ -42,8 +42,6 @@ import "@xsoulspace/vue_flutter_tailwind/dist/vft.css";
 
 ### Usage
 
-Please notice, that all sizes measured in rem, and unfortunately are not relative as its made in Flutter:(
-
 ```typescript
 export const wrapperApp = () => {
   const text = ref("Hello world!");
@@ -151,4 +149,4 @@ export const wrapperApp = () => {
 ## Current Problems:
 
 - [] Tailwind included as package, but needs to be included to main.ts(js) when this package added. Maybe it's a wrong way..
-- [] Sizes cannot be settled as numbers and has absolute only measure (in rem).
+- [] Sizes cannot be set as numbers.
