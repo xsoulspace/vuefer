@@ -77,7 +77,7 @@ export const ButtonStyleButton = ({
   return defineComponent({
     name: "ButtonStyleButton",
     render() {
-      return h("div", { class: "relative" }, [h(result)]);
+      return h("div", { class: "relative select-none" }, [h(result)]);
     },
   });
 };

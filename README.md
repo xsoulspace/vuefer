@@ -17,6 +17,13 @@ Please notice:
 - All is **subject to change** until release 1.
 - If you like this project - contributing &|| star is very welcome and appreciated and will keep development running Open Source and free:)
 
+### Awesome tools used
+
+- Typescript
+- Vue3
+- Tailwind
+- (vue3-virtual-scroller)[https://www.npmjs.com/package/vue3-virtual-scroller]
+
 ### Installation
 
 Add this package to your package.json file:
@@ -99,6 +106,7 @@ export const wrapperApp = () => {
 - [x] MouseRegion
 - [x] TextButton
 - [x] Elevated Button
+- [x] ListView.builder (made with (vue3-virtual-scroller)[https://www.npmjs.com/package/vue3-virtual-scroller]) - must be placed inside SizedBox to have defined size
 - [] GestureDetecture
   [x] click
   [] tap

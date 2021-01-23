@@ -10,6 +10,7 @@ export * from "./Flex";
 export * from "./GestureDetector";
 export * from "./Margin";
 export * from "./MouseRegion";
+export * from "./Opacity";
 export * from "./Padding";
 export * from "./Row";
 export * from "./Scaffold";

@@ -16,6 +16,7 @@ import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { Align } from "@/components/Align";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
+import { ListView } from "@/components/ListView";
 import { MouseRegion } from "@/components/MouseRegion";
 import { Padding } from "@/components/Padding";
 import { Row } from "@/components/Row";
@@ -50,7 +51,12 @@ export const wrapperApp = () => {
     }),
     onTap: () => "",
   });
-
+  const obj = ref<{ [prop: number]: string }>({
+    0: "maybe",
+    1: "test",
+    2: "test",
+  });
+  const itemCount = Object.keys(obj.value).length;
   return Scaffold({
     body: Align({
       toOverlay: true,
@@ -72,6 +78,26 @@ export const wrapperApp = () => {
               }),
             }),
             btn,
+            ListView.builder({
+              itemBuilder: ({ index }) => {
+                return ElevatedButton({
+                  style: new ButtonStyle({
+                    backgroundColor: Colors.grey,
+                    textStyle: new TextStyle({
+                      color: Colors.white,
+                      decoration: new TextDecoration({
+                        decoration: TextDecorations.lineThrough,
+                      }),
+                    }),
+                  }),
+                  child: Text({
+                    text: ref(obj.value[index]),
+                  }),
+                  onTap: () => alert("hello tap!"),
+                });
+              },
+              itemCount: itemCount,
+            }),
           ],
         }),
       }),

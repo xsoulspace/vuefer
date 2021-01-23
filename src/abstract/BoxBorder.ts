@@ -1,3 +1,4 @@
+import { reduceHtmlClasses } from "@/functions/reduceHtmlClasses";
 import { BorderSide, BorderSides } from "./BorderSide";
 export interface BoxBorderI {
   bottom?: BorderSide;
@@ -27,7 +28,7 @@ export class BoxBorder {
       right: this.right,
       top: this.top,
     };
-    const classes = [];
+    const classes: string[] = [];
     for (const [sideName, side] of Object.entries(sides)) {
       const fixedSideName = <BorderSides>sideName;
       const fixedSide = <BorderSide>side;
@@ -37,8 +38,7 @@ export class BoxBorder {
         fixedSide.widthCss({ sideName: fixedSideName })
       );
     }
-    console.log({ classes });
-    if (classes.length <= 0) return "";
-    return classes.join(" ");
+
+    return reduceHtmlClasses({ classes });
   }
 }
