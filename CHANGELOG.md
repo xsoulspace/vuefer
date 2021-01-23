@@ -1,8 +1,10 @@
 ## 0.3.0
 
-Add: ElevatedButton, TextButton, OpacityDecoration, Opacity Widget
+Add: ElevatedButton, TextButton, Opacity Widget, OpacityDecoration
 Add: SizedBox
-Add: ListView.builder with awesome (vue3-virtual-scroller!)[https://www.npmjs.com/package/vue3-virtual-scroller] which can be used in Flutter style now. ListView must be used inside SizedBox
+Add: ListView.builder with awesome [vue3-virtual-scroller!](https://www.npmjs.com/package/vue3-virtual-scroller)
+
+ListView must be used inside SizedBox, as in example below
 
 ```typescript
 SizedBox({
@@ -36,7 +38,7 @@ SizedBox({
 });
 ```
 
-## 0.2.0
+## 0.2.1
 
 Add: Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow, FontSize
 

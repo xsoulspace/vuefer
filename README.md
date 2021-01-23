@@ -22,7 +22,7 @@ Please notice:
 - Typescript
 - Vue3
 - Tailwind
-- (vue3-virtual-scroller)[https://www.npmjs.com/package/vue3-virtual-scroller]
+- [vue3-virtual-scroller](https://www.npmjs.com/package/vue3-virtual-scroller)
 
 ### Installation
 
@@ -30,7 +30,7 @@ Add this package to your package.json file:
 
 ```json
 "dependencies": {
-  "@xsoulspace/vue_flutter_tailwind": "^0.1.0"
+  "@xsoulspace/vue_flutter_tailwind": "next"
 }
 ```
 
@@ -94,6 +94,8 @@ export const wrapperApp = () => {
 
 # Roadmap
 
+## Ready to test and possible to use
+
 - [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
 - [x] Alignment, Align, Center
 - [x] Padding
@@ -106,11 +108,20 @@ export const wrapperApp = () => {
 - [x] MouseRegion
 - [x] TextButton
 - [x] Elevated Button
-- [x] ListView.builder (made with (vue3-virtual-scroller)[https://www.npmjs.com/package/vue3-virtual-scroller]) - must be placed inside SizedBox to have defined size
+- [x] ListView.builder made with [vue3-virtual-scroller](https://www.npmjs.com/package/vue3-virtual-scroller) - must be placed inside SizedBox to have defined size
+- [x] ConstrainedBox
+- [x] SizedBox
+- [x] Opacity
+      [x] widget
+      [x] Text
+
+## WIP
+
 - [] GestureDetecture
   [x] click
   [] tap
-
+  [] swipes
+  [] hover
 - [] Container
   [x] Border
   [x] BorderRadius
@@ -122,31 +133,34 @@ export const wrapperApp = () => {
   [] Alignment
   [] Image
 
-- [] Opacity
-  [] widget
-  [] Text
-- [] ? - Drawer
-- [] Object Fit - FitBox?, FittedBox?
-- [] ? - Provider, MultiProvider
-- [] ? - SizedBox
+- [] Material
+- [] InkWell
+- [] Colors
+- [] Scaffold
+
+## Next
+
+- [] OutlinedButton
+- [] Provider, MultiProvider
+- [] Ripple
+- [] Drawer
 - [] AutoSelect - DropdownButton, DropdownButtonItem
-- [] ? - Progress
-- [] ? - Card
-- [] ? - Scaffold
+- [] Progress
+- [] Card
 - [] AppBar
 - [] Dialog(?)
 - [] Icon
 - [] IconButton
-- [] OutlinedButton
 - [] Bar
 - [] ButtonBar
+- [] ListView, ListView.separeted
+- [] Object Fit - FitBox?, FittedBox?
 
-- [] ListView, ListView.builder, ListView.separeted
-- [] ConstrainedBox (need to test)
-- [] WIP - Material
-- [] WIP - InkWell
-
-## Current Problems:
+# Current Problems:
 
 - [] Tailwind included as package, but needs to be included to main.ts(js) when this package added. Maybe it's a wrong way..
 - [] Sizes cannot be set as numbers.
+
+# Changelog
+
+Changelog can be found in [CHANGELOG.md](https://github.com/xsoulspace/vue_flutter_tailwind/blob/master/CHANGELOG.md)
