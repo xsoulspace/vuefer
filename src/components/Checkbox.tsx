@@ -50,8 +50,6 @@ export const Checkbox = ({
             hoverColor?.hoverBackgroundCss ?? Colors.indigo.hoverBackgroundCss,
           ].join(" ")}
           type="checkbox"
-          id="scales"
-          name="scales"
           v-model={value.value}
         />
       );

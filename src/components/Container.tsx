@@ -1,16 +1,16 @@
-import { Alignment } from "@/abstract";
+import { Alignment, SizedBoxHeight, SizedBoxWidth } from "@/abstract";
 import { BoxConstraints } from "@/abstract/BoxConstraints";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { Color } from "@/abstract/Color";
-import { EdgeInsets } from "@/abstract/EdgeInsets";
+import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
 interface ContainerI {
   child: Component;
   padding?: Maybe<EdgeInsets>;
   // margin?: Maybe<EdgeInsets>;
   color?: Maybe<Color>;
-  // width?: Maybe<number>;
-  // height?: Maybe<number>;
+  width?: Maybe<EdgeInsetsStep>;
+  height?: Maybe<EdgeInsetsStep>;
   decoration?: Maybe<BoxDecoration>;
   // TODO: add ConstrainedBox
   constraints?: Maybe<BoxConstraints>;
@@ -22,14 +22,17 @@ export const Container = ({
   padding,
   // margin,
   color,
-  // height,
-  // width,
+  height,
+  width,
   decoration,
   constraints,
   alignment,
 }: ContainerI) => {
   const finalConstraints = constraints ?? new BoxConstraints({});
   const finalAlignment = alignment ?? Alignment.left;
+  const sizedBoxHeight = new SizedBoxHeight({ height: height ?? undefined });
+  const sizedBoxWidth = new SizedBoxWidth({ width: width ?? undefined });
+
   const component = defineComponent({
     name: "Container",
     render() {
@@ -48,6 +51,8 @@ export const Container = ({
         finalAlignment.css,
         decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
         decoration?.css ?? "",
+        sizedBoxHeight.css,
+        sizedBoxWidth.css,
       ].join(" ");
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);

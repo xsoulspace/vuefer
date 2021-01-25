@@ -16,4 +16,5 @@ export class Colors {
     hex: "",
     name: ColorNames.transparent,
   });
+  static color: Color;
 }

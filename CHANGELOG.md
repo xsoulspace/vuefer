@@ -4,6 +4,7 @@ Add: ElevatedButton, TextButton, Opacity Widget, OpacityDecoration
 Add: SizedBox
 Add: basic TextField
 Add: basic Checkbox
+Add: ColoredBox
 Add: basic ListTile, CheckboxListTile
 Add: ListView.builder with awesome [vue3-virtual-scroller!](https://www.npmjs.com/package/vue3-virtual-scroller)
 

@@ -114,6 +114,7 @@ export const wrapperApp = () => {
 - [x] Opacity
       [x] widget
       [x] Text
+- [x] ColoredBox
 
 ## WIP
 
@@ -128,7 +129,7 @@ export const wrapperApp = () => {
       [] Style
 
 - [] CheckboxListTile
-- [] ListTile
+- [x] ListTile
 
 - [] GestureDetecture
   [x] click
@@ -148,8 +149,8 @@ export const wrapperApp = () => {
   [] Gradient
   [] Alignment
   [] Image
-  [] Height
-  [] Width
+  [x] Height
+  [x] Width
 
 - [] Material
 - [] InkWell
