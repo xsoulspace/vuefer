@@ -46,6 +46,6 @@ export class CrossAxisAlignment {
           return "start";
       }
     })();
-    return `items-${alignment} content-${alignment}`;
+    return `content-${alignment}`;
   }
 }

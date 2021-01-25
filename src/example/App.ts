@@ -16,8 +16,10 @@ import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { SizedBoxHeight, SizedBoxWidth } from "@/abstract/SizedBox";
 import { TextEditingController } from "@/abstract/TextEditingController";
 import { Align } from "@/components/Align";
+import { Column } from "@/components/Column";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
+import { ListTile } from "@/components/ListTile";
 import { ListView } from "@/components/ListView";
 import { MouseRegion } from "@/components/MouseRegion";
 import { Padding } from "@/components/Padding";
@@ -31,11 +33,11 @@ import { ref } from "vue";
 export const wrapperApp = () => {
   const text = ref("Hello world!");
   const padding = EdgeInsets.all(EdgeInsetsStep.s3);
-
+  const rawText = Text({
+    text,
+  });
   const textCard = Padding({
-    child: Text({
-      text,
-    }),
+    child: rawText,
     padding,
   });
 
@@ -87,7 +89,7 @@ export const wrapperApp = () => {
       width: EdgeInsetsStep.s96,
     }),
   });
-
+  const isEnabled = ref(true);
   const temp = Container({
     padding,
     decoration: new BoxDecoration({
@@ -98,14 +100,25 @@ export const wrapperApp = () => {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        MouseRegion({
-          child: textCard,
-          cursor: SystemMouseCursor.use({
-            cursor: SystemMouseCursors.none,
-          }),
-        }),
-        TextField({
-          controller: controller,
+        Column({
+          children: [
+            MouseRegion({
+              child: textCard,
+              cursor: SystemMouseCursor.use({
+                cursor: SystemMouseCursors.progress,
+              }),
+            }),
+            TextField({
+              controller: controller,
+            }),
+            ListTile({
+              onTap: () => {
+                isEnabled.value = false;
+              },
+              enabled: isEnabled,
+              title: rawText,
+            }),
+          ],
         }),
         dynamicItems,
       ],

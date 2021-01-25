@@ -29,6 +29,8 @@ export * from "./SizedBox";
 export * from "./TextAlign";
 export * from "./TextDecoration";
 export * from "./TextDecorationStyle";
+export * from "./TextEditingController";
+export * from "./TextInputType";
 export * from "./TextOverflow";
 export * from "./TextStyle";
 export * from "./VerticalDirection";

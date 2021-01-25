@@ -1,5 +1,7 @@
 export * from "./Align";
 export * from "./Center";
+export * from "./Checkbox";
+export * from "./ColoredBox";
 export * from "./Column";
 export * from "./ConstrainedBox";
 export * from "./Container";
@@ -8,6 +10,7 @@ export * from "./ElevatedButton";
 export * from "./FittedBox";
 export * from "./Flex";
 export * from "./GestureDetector";
+export * from "./ListTile";
 export * from "./ListView";
 export * from "./Margin";
 export * from "./MouseRegion";

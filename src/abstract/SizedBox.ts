@@ -14,7 +14,7 @@ interface SizedBoxHeightI {
 export class SizedBoxHeight {
   height: EdgeInsetsStep | SizeStep;
   constructor({ height }: SizedBoxHeightI) {
-    this.height = height ?? SizeStep.auto;
+    this.height = height ?? SizeStep.max;
   }
   static get default(): SizedBoxHeight {
     return new SizedBoxHeight({});
@@ -30,7 +30,7 @@ interface SizedBoxWidthI {
 export class SizedBoxWidth {
   width: EdgeInsetsStep | SizeStep;
   constructor({ width }: SizedBoxWidthI) {
-    this.width = width ?? SizeStep.auto;
+    this.width = width ?? SizeStep.max;
   }
   static get default(): SizedBoxWidth {
     return new SizedBoxWidth({});

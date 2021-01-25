@@ -7,7 +7,7 @@ import { Component, defineComponent, h } from "vue";
 interface ContainerI {
   child: Component;
   padding?: Maybe<EdgeInsets>;
-  // margin?: Maybe<EdgeInsets>;
+  margin?: Maybe<EdgeInsets>;
   color?: Maybe<Color>;
   width?: Maybe<EdgeInsetsStep>;
   height?: Maybe<EdgeInsetsStep>;
@@ -20,7 +20,7 @@ interface ContainerI {
 export const Container = ({
   child,
   padding,
-  // margin,
+  margin,
   color,
   height,
   width,
@@ -45,7 +45,7 @@ export const Container = ({
         "relative",
         "container",
         "flex",
-        padding?.marginCss,
+        margin?.marginCss,
         padding?.paddingCss,
         finalConstraints.css,
         finalAlignment.css,
@@ -55,13 +55,7 @@ export const Container = ({
         sizedBoxWidth.css,
       ].join(" ");
       const params = { class: containerClass };
-      const simple = h("div", params, [h(child)]);
-
-      if (padding) {
-        return h("div", params, [h(child)]);
-      } else {
-        return simple;
-      }
+      return h("div", params, [h(child)]);
     },
   });
   return component;

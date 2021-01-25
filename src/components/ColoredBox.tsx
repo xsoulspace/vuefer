@@ -14,7 +14,7 @@ export const ColoredBox = ({ child, key, color }: ColoredBoxI) => {
       return h(
         "div",
         {
-          style: (color ?? Colors.transparent).backgroundCss,
+          class: (color ?? Colors.transparent).backgroundCss,
         },
         [h(child)]
       );

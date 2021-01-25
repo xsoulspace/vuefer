@@ -38,8 +38,7 @@ export const InkWell = ({
       child,
     }),
     cursor:
-      mouseCursor ??
-      SystemMouseCursor.use({ cursor: SystemMouseCursors.basic }),
+      mouseCursor ?? SystemMouseCursor.use({ cursor: SystemMouseCursors.none }),
   });
   return defineComponent({
     name: "InkWell",
