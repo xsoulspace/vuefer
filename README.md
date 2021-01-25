@@ -117,10 +117,18 @@ export const wrapperApp = () => {
 
 ## WIP
 
-- [x] TextField
-      [x] TextEditingController
-      [] InputDecoration
-      [] TextStyle
+- [] TextField
+  [x] Basic properties
+  [x] TextEditingController
+  [] InputDecoration (partially)
+  [] TextStyle
+
+- [x] Checkbox
+      [x] Basic
+      [] Style
+
+- [] CheckboxListTile
+- [] ListTile
 
 - [] GestureDetecture
   [x] click
@@ -133,19 +141,27 @@ export const wrapperApp = () => {
   [x] BorderRadius
   [x] Color
   [x] Shadow
+  [] Margin
+  [x] Padding
   [] Color Opacity ? Border Color Opacity
   [] Shape
   [] Gradient
   [] Alignment
   [] Image
+  [] Height
+  [] Width
 
 - [] Material
 - [] InkWell
 - [] Colors
+  [x] White, black
+  [] Color palette
+
 - [] Scaffold
 
 ## Next
 
+- [] Flexible
 - [] OutlinedButton
 - [] Provider, MultiProvider
 - [] Ripple
