@@ -4,7 +4,7 @@ import { Component, defineComponent, h } from "vue";
 
 interface OpacityI {
   child: Component;
-  key?: Key;
+  key?: Maybe<Key>;
   opacity: OpacityDecoration;
 }
 

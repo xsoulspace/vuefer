@@ -3,11 +3,11 @@ import { TextStyle } from "@/abstract/TextStyle";
 import { Component, defineComponent, h } from "vue";
 export interface MaterialI {
   child: Component;
-  elevation?: BoxShadow;
-  textStyle?: TextStyle;
-  borderRadius?: BorderRadius;
-  color?: Color;
-  boxBorder?: BoxBorder;
+  elevation?: Maybe<BoxShadow>;
+  textStyle?: Maybe<TextStyle>;
+  borderRadius?: Maybe<BorderRadius>;
+  color?: Maybe<Color>;
+  boxBorder?: Maybe<BoxBorder>;
   // shadowColor?: Color;
   // animationDuration?: Duration
 }

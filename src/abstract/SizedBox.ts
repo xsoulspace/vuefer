@@ -16,7 +16,7 @@ export class SizedBoxHeight {
   constructor({ height }: SizedBoxHeightI) {
     this.height = height ?? SizeStep.auto;
   }
-  static get default() {
+  static get default(): SizedBoxHeight {
     return new SizedBoxHeight({});
   }
 
@@ -32,7 +32,7 @@ export class SizedBoxWidth {
   constructor({ width }: SizedBoxWidthI) {
     this.width = width ?? SizeStep.auto;
   }
-  static get default() {
+  static get default(): SizedBoxWidth {
     return new SizedBoxWidth({});
   }
   get css(): string {

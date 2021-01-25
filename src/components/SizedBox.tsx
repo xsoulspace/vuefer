@@ -4,9 +4,9 @@ import { Component, defineComponent, h } from "vue";
 
 interface SizedBoxI {
   child: Component;
-  key?: Key;
-  height: SizedBoxHeight;
-  width: SizedBoxWidth;
+  key?: Maybe<Key>;
+  height?: Maybe<SizedBoxHeight>;
+  width?: Maybe<SizedBoxWidth>;
 }
 
 export const SizedBox = ({ child, key, width, height }: SizedBoxI) => {
@@ -16,7 +16,7 @@ export const SizedBox = ({ child, key, width, height }: SizedBoxI) => {
       return h(
         "div",
         {
-          class: [width.css, height.css].join(" "),
+          class: [width?.css ?? "", height?.css ?? ""].join(" "),
         },
         [h(child)]
       );

@@ -16,9 +16,9 @@ import { Opacity } from "./Opacity";
 import { Padding } from "./Padding";
 export interface ButtonStyleButtonI {
   child: Component;
-  key?: Key;
-  style?: ButtonStyle;
-  onTap?: GestureTapCallback;
+  key?: Maybe<Key>;
+  style?: Maybe<ButtonStyle>;
+  onTap?: Maybe<GestureTapCallback>;
 }
 export const ButtonStyleButton = ({
   child,

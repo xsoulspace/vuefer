@@ -14,6 +14,7 @@ import { CrossAxisAlignment } from "@/abstract/CrossAxisAlignment";
 import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { SizedBoxHeight, SizedBoxWidth } from "@/abstract/SizedBox";
+import { TextEditingController } from "@/abstract/TextEditingController";
 import { Align } from "@/components/Align";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
@@ -24,6 +25,7 @@ import { Row } from "@/components/Row";
 import { Scaffold } from "@/components/Scaffold";
 import { SizedBox } from "@/components/SizedBox";
 import { Text } from "@/components/Text";
+import { TextField } from "@/components/TextField";
 import { ref } from "vue";
 
 export const wrapperApp = () => {
@@ -36,6 +38,9 @@ export const wrapperApp = () => {
     }),
     padding,
   });
+
+  const controller = TextEditingController.default;
+  controller.text = text;
 
   const obj = ref<{ [prop: number]: string }>({
     0: "maybe",
@@ -51,61 +56,66 @@ export const wrapperApp = () => {
     10: "test",
   });
   const itemCount = Object.keys(obj.value).length;
+
+  const dynamicItems = SizedBox({
+    child: ListView.builder({
+      itemBuilder: ({ index }) => {
+        const value = obj.value[index];
+        return ElevatedButton({
+          style: new ButtonStyle({
+            backgroundColor: Colors.grey,
+            textStyle: new TextStyle({
+              color: Colors.white,
+              decoration: new TextDecoration({
+                decoration: TextDecorations.lineThrough,
+              }),
+            }),
+          }),
+          child: Text({
+            text: ref(value),
+          }),
+          onTap: () =>
+            alert(`hello tap with index ${index} and value ${value}!`),
+        });
+      },
+      itemCount: itemCount,
+    }),
+    height: new SizedBoxHeight({
+      height: EdgeInsetsStep.s60,
+    }),
+    width: new SizedBoxWidth({
+      width: EdgeInsetsStep.s96,
+    }),
+  });
+
+  const temp = Container({
+    padding,
+    decoration: new BoxDecoration({
+      boxShadow: BoxShadow.xl,
+      borderRadius: BorderRadius.vertical({ bottom: BorderRadiusStep.xxl }),
+    }),
+    child: Row({
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        MouseRegion({
+          child: textCard,
+          cursor: SystemMouseCursor.use({
+            cursor: SystemMouseCursors.none,
+          }),
+        }),
+        TextField({
+          controller: controller,
+        }),
+        dynamicItems,
+      ],
+    }),
+  });
   return Scaffold({
     body: Align({
       toOverlay: true,
       alignment: Alignment.bottom,
-      child: Container({
-        padding,
-        decoration: new BoxDecoration({
-          boxShadow: BoxShadow.xl,
-          borderRadius: BorderRadius.vertical({ bottom: BorderRadiusStep.xxl }),
-        }),
-        child: Row({
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            MouseRegion({
-              child: textCard,
-              cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.none,
-              }),
-            }),
-            SizedBox({
-              child: ListView.builder({
-                itemBuilder: ({ index }) => {
-                  const value = obj.value[index];
-                  return ElevatedButton({
-                    style: new ButtonStyle({
-                      backgroundColor: Colors.grey,
-                      textStyle: new TextStyle({
-                        color: Colors.white,
-                        decoration: new TextDecoration({
-                          decoration: TextDecorations.lineThrough,
-                        }),
-                      }),
-                    }),
-                    child: Text({
-                      text: ref(value),
-                    }),
-                    onTap: () =>
-                      alert(
-                        `hello tap with index ${index} and value ${value}!`
-                      ),
-                  });
-                },
-                itemCount: itemCount,
-              }),
-              height: new SizedBoxHeight({
-                height: EdgeInsetsStep.s60,
-              }),
-              width: new SizedBoxWidth({
-                width: EdgeInsetsStep.s96,
-              }),
-            }),
-          ],
-        }),
-      }),
+      child: temp,
     }),
   });
 };

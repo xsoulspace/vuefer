@@ -14,7 +14,6 @@ export const ListViewItem = defineComponent({
     },
   },
   render() {
-    console.log({ i: this.itemBuilder, in: this.index });
     const fixedItemBuilder = this.itemBuilder as ListItemBuilder;
     return h(fixedItemBuilder({ index: this.index }));
   },

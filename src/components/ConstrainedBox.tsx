@@ -8,7 +8,7 @@ export const ConstrainedBox = ({
 }: {
   child: Component;
   constraints: BoxConstraints;
-  key?: Key;
+  key?: Maybe<Key>;
 }) => {
   return defineComponent({
     name: "ConstrainedBox",

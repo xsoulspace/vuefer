@@ -6,24 +6,24 @@ import { EdgeInsets } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
 interface ContainerI {
   child: Component;
-  padding?: EdgeInsets;
-  margin?: EdgeInsets;
-  color?: Color;
-  width?: number;
-  height?: number;
-  decoration?: BoxDecoration;
+  padding?: Maybe<EdgeInsets>;
+  // margin?: Maybe<EdgeInsets>;
+  color?: Maybe<Color>;
+  // width?: Maybe<number>;
+  // height?: Maybe<number>;
+  decoration?: Maybe<BoxDecoration>;
   // TODO: add ConstrainedBox
-  constraints?: BoxConstraints;
+  constraints?: Maybe<BoxConstraints>;
   // TODO: add Align
-  alignment?: Alignment;
+  alignment?: Maybe<Alignment>;
 }
 export const Container = ({
   child,
   padding,
-  margin,
+  // margin,
   color,
-  height,
-  width,
+  // height,
+  // width,
   decoration,
   constraints,
   alignment,
@@ -47,9 +47,7 @@ export const Container = ({
         finalConstraints.css,
         finalAlignment.css,
         decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
-        decoration?.boxShadow?.css ?? "",
-        decoration?.borderRadius?.css ?? "",
-        decoration?.border?.css ?? "",
+        decoration?.css ?? "",
       ].join(" ");
       const params = { class: containerClass };
       const simple = h("div", params, [h(child)]);

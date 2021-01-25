@@ -7,12 +7,12 @@ import { GestureDetector, GestureDetectorI } from "./GestureDetector";
 import { MouseRegion } from "./MouseRegion";
 export interface InkWellI extends GestureDetectorI {
   child: Component;
-  key?: Key;
-  mouseCursor?: SystemMouseCursor;
-  focusColor?: Color;
-  borderRadius?: BorderRadius;
-  hoverColor?: Color;
-  highlightColor?: Color;
+  key?: Maybe<Key>;
+  mouseCursor?: Maybe<SystemMouseCursor>;
+  focusColor?: Maybe<Color>;
+  borderRadius?: Maybe<BorderRadius>;
+  hoverColor?: Maybe<Color>;
+  highlightColor?: Maybe<Color>;
   // overlayColor?: Color;
   // onHighlightChanged?: ValueChanged<bool>
   // onHover?: ValueChanged<bool>

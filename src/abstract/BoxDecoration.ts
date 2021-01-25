@@ -1,37 +1,43 @@
 import { Border } from "./Border";
 import { BorderRadius } from "./BorderRadius";
 import { BoxShadow } from "./BoxShadow";
-import { BoxShape } from "./BoxShape";
 import { Color } from "./Color";
-import { Gradient } from "./Gradient";
 interface BoxDecorationI {
-  color?: Color;
-  border?: Border;
-  borderRadius?: BorderRadius;
-  boxShadow?: BoxShadow;
-  gradient?: Gradient;
-  shape?: BoxShape;
+  color?: Maybe<Color>;
+  border?: Maybe<Border>;
+  borderRadius?: Maybe<BorderRadius>;
+  boxShadow?: Maybe<BoxShadow>;
+  // gradient?: Gradient;
+  // shape?: BoxShape;
 }
 export class BoxDecoration {
-  color?: Color;
-  border?: Border;
-  borderRadius?: BorderRadius;
-  boxShadow?: BoxShadow;
-  gradient?: Gradient;
-  shape?: BoxShape;
+  color?: Maybe<Color>;
+  border?: Maybe<Border>;
+  borderRadius?: Maybe<BorderRadius>;
+  boxShadow?: Maybe<BoxShadow>;
+  // gradient?: Gradient;
+  // shape?: BoxShape;
   constructor({
     border,
     color,
     borderRadius,
     boxShadow,
-    gradient,
-    shape,
-  }: BoxDecorationI) {
+  }: // gradient,
+  // shape,
+  BoxDecorationI) {
     this.border = border;
     this.color = color;
     this.borderRadius = borderRadius;
     this.boxShadow = boxShadow;
-    this.gradient = gradient;
-    this.shape = shape;
+    // this.gradient = gradient;
+    // this.shape = shape;
+  }
+
+  get css(): string {
+    return [
+      this.boxShadow?.css ?? "",
+      this.borderRadius?.css ?? "",
+      this.border?.css ?? "",
+    ].join(" ");
   }
 }

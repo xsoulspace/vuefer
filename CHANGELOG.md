@@ -2,6 +2,7 @@
 
 Add: ElevatedButton, TextButton, Opacity Widget, OpacityDecoration
 Add: SizedBox
+Add: basic TextField
 Add: ListView.builder with awesome [vue3-virtual-scroller!](https://www.npmjs.com/package/vue3-virtual-scroller)
 
 ListView must be used inside SizedBox, as in example below

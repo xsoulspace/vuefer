@@ -74,7 +74,7 @@ export class ButtonStyle {
       borderRadius ?? BorderRadius.all({ radius: BorderRadiusStep.m });
     this.focusColor = focusColor ?? Colors.black;
     this.highlightColor = highlightColor ?? Colors.black;
-    this.hoverColor = hoverColor ?? Colors.transparent;
+    this.hoverColor = hoverColor ?? Colors.indigo;
   }
 
   static get default() {

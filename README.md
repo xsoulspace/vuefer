@@ -117,11 +117,17 @@ export const wrapperApp = () => {
 
 ## WIP
 
+- [x] TextField
+      [x] TextEditingController
+      [] InputDecoration
+      [] TextStyle
+
 - [] GestureDetecture
   [x] click
   [] tap
   [] swipes
   [] hover
+
 - [] Container
   [x] Border
   [x] BorderRadius

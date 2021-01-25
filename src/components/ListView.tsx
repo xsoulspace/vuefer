@@ -8,7 +8,7 @@ export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component;
 interface ListViewBuilderI {
   itemBuilder: ListItemBuilder;
   itemCount: number;
-  minItemHeight?: number;
+  minItemHeight?: Maybe<number>;
 }
 
 export class ListView {

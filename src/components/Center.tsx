@@ -5,7 +5,7 @@ import { Align } from "./Align";
 
 export interface CenterI {
   child: Component;
-  key?: Key;
+  key?: Maybe<Key>;
 }
 
 export const Center = ({ child, key }: CenterI) => {

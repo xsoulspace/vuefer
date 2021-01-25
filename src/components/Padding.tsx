@@ -9,7 +9,7 @@ export const Padding = ({
 }: {
   child: Component;
   padding: EdgeInsets;
-  key?: Key;
+  key?: Maybe<Key>;
 }) =>
   defineComponent({
     name: "Padding",
