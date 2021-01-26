@@ -18,12 +18,15 @@ export class ListView {
       components: {
         ListViewBuilder,
       },
+      setup() {
+        return { itemCount, minItemHeight };
+      },
       render() {
         return h(
           <list-view-builder
-            itemCount={itemCount.value}
+            itemCount={this.itemCount}
             itemBuilder={itemBuilder}
-            minItemHeight={minItemHeight?.value}
+            minItemHeight={this.minItemHeight}
           />
         );
       },

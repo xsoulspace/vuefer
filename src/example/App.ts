@@ -44,25 +44,17 @@ export const wrapperApp = () => {
   const controller = TextEditingController.default;
   controller.text = text;
 
-  const obj = reactive<{ [prop: number]: string }>({
-    0: "maybe",
-    1: "test",
-    2: "test",
-    3: "test",
-    4: "test",
-    5: "test",
-    6: "test",
-    7: "test",
-    8: "test",
-    9: "test",
-    10: "test",
-  });
-  const itemCount = computed(() => Object.keys(obj).length);
+  const obj = reactive<Map<any, any>>(new Map());
+  obj.set(0, "test");
+  obj.set(1, "test1");
+  const items = computed(() => Array.from(obj.values()));
+  const itemCount = computed(() => obj.size);
 
   const dynamicItems = SizedBox({
     child: ListView.builder({
       itemBuilder: ({ index }) => {
-        const value = obj[index];
+        const value = items.value[index];
+        console.log({ value, items, index });
         return ElevatedButton({
           style: new ButtonStyle({
             backgroundColor: Colors.grey,
@@ -77,9 +69,10 @@ export const wrapperApp = () => {
             text: ref(value),
           }),
           onTap: () => {
+            obj.clear();
             alert(`hello tap with index ${index} and value ${value}!`);
             const newItemId = itemCount.value;
-            obj[newItemId] = `new value ${newItemId}`;
+            obj.set(newItemId, `new value ${newItemId}`);
             alert(`new value with id ${newItemId} add in the end of list!`);
           },
         });
