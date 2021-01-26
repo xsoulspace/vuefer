@@ -16,10 +16,10 @@ import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
 import { SizedBoxHeight, SizedBoxWidth } from "@/abstract/SizedBox";
 import { TextEditingController } from "@/abstract/TextEditingController";
 import { Align } from "@/components/Align";
+import { CheckboxListTile } from "@/components/CheckboxListTile";
 import { Column } from "@/components/Column";
 import { Container } from "@/components/Container";
 import { ElevatedButton } from "@/components/ElevatedButton";
-import { ListTile } from "@/components/ListTile";
 import { ListView } from "@/components/ListView";
 import { MouseRegion } from "@/components/MouseRegion";
 import { Padding } from "@/components/Padding";
@@ -111,11 +111,11 @@ export const wrapperApp = () => {
             TextField({
               controller: controller,
             }),
-            ListTile({
-              onTap: () => {
-                isEnabled.value = false;
+            CheckboxListTile({
+              onChanged: () => {
+                // isEnabled.value = !isEnabled.value;
               },
-              enabled: isEnabled,
+              value: isEnabled,
               title: rawText,
             }),
           ],

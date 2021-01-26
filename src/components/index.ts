@@ -1,6 +1,7 @@
 export * from "./Align";
 export * from "./Center";
 export * from "./Checkbox";
+export * from "./CheckboxListTile";
 export * from "./ColoredBox";
 export * from "./Column";
 export * from "./ConstrainedBox";

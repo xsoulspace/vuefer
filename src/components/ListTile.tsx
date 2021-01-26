@@ -1,4 +1,5 @@
 import {
+  Alignment,
   Color,
   Colors,
   EdgeInsets,
@@ -10,6 +11,7 @@ import {
 } from "@/abstract";
 import { Key } from "@/abstract/Key";
 import { Component, defineComponent, h, Ref } from "vue";
+import { Align } from "./Align";
 import { Column } from "./Column";
 import { Container } from "./Container";
 import { InkWell } from "./InkWell";
@@ -74,18 +76,21 @@ export const ListTile = ({
   const resolvedLeading = leading ?? <div />;
   const hasSubtitle = subtitle != null;
   const resolvedHeight = hasSubtitle ? EdgeInsetsStep.s20 : EdgeInsetsStep.s14;
-  const resolvedTrailing = () => {
+  const resolvedTrailing = (() => {
     if (trailing != null) {
-      return Padding({
-        padding: EdgeInsets.symmetric({
-          horizontal: EdgeInsetsStep.s2,
+      return Align({
+        alignment: Alignment.centerRight,
+        child: Padding({
+          padding: EdgeInsets.symmetric({
+            horizontal: EdgeInsetsStep.s2,
+          }),
+          child: trailing,
         }),
-        child: trailing,
       });
     } else {
       return <div />;
     }
-  };
+  })();
   const resolvedSubtitle = subtitle ?? <div />;
   const resolvedTitleWidget = (() => {
     if (hasSubtitle) {

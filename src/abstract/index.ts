@@ -21,6 +21,7 @@ export * from "./FontSize";
 export * from "./FontWeight";
 export * from "./Gradient";
 export * from "./Key";
+export * from "./ListTile";
 export * from "./MainAxisAlignment";
 export * from "./MainAxisSize";
 export * from "./MouseCursor";

@@ -14,6 +14,7 @@ Please notice:
 
 - It is **not** a Flutter **at all** and even close, but hopefully will be use its style of components & methods writing.
 - It is **not** properly written **at all** and cannot be used in production until release 1.
+- It is not aligned to any standard yet and do not have any styling at all and it looks bad:) as primary focus now is to write basic widgets.
 - All is **subject to change** until release 1.
 - If you like this project - contributing &|| star is very welcome and appreciated and will keep development running Open Source and free:)
 
@@ -115,6 +116,8 @@ export const wrapperApp = () => {
       [x] widget
       [x] Text
 - [x] ColoredBox
+- [x] CheckboxListTile
+- [x] ListTile
 
 ## WIP
 
@@ -127,9 +130,6 @@ export const wrapperApp = () => {
 - [x] Checkbox
       [x] Basic
       [] Style
-
-- [] CheckboxListTile
-- [x] ListTile
 
 - [] GestureDetecture
   [x] click
