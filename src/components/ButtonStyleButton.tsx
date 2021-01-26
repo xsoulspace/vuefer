@@ -1,27 +1,32 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
+import { SystemMouseCursor, SystemMouseCursors } from "@/abstract";
 import { BoxConstraints } from "@/abstract/BoxConstraints";
 import { ButtonStyle } from "@/abstract/ButtonStyle";
 import { Key } from "@/abstract/Key";
+import {
+  OpacityDecoration,
+  OpacityDecorationSteps,
+} from "@/abstract/OpacityDecoration";
 import { Component, defineComponent, h } from "vue";
-import { Center } from "./Center";
 import { ConstrainedBox } from "./ConstrainedBox";
 import { InkWell } from "./InkWell";
 import { Material } from "./Material";
+import { Opacity } from "./Opacity";
 import { Padding } from "./Padding";
 export interface ButtonStyleButtonI {
   child: Component;
-  key?: Key;
-  style?: ButtonStyle;
-  onPressed?: Maybe<GestureTapCallback>;
+  key?: Maybe<Key>;
+  style?: Maybe<ButtonStyle>;
+  onTap?: Maybe<GestureTapCallback>;
 }
 export const ButtonStyleButton = ({
   child,
   key,
-  onPressed,
+  onTap,
   style,
 }: ButtonStyleButtonI) => {
-  const isEnabled = onPressed != null;
+  const isDisabled = onTap == null;
   const constraints = new BoxConstraints({});
   const finalStyle = style ?? ButtonStyle.default;
   const {
@@ -29,44 +34,50 @@ export const ButtonStyleButton = ({
     backgroundColor,
     elevation,
     mouseCursor,
-    overlayColor,
-    shadowColor,
     borderRadius,
+    boxBorder,
     focusColor,
     highlightColor,
     hoverColor,
     textStyle,
   } = finalStyle;
 
-  const result = ConstrainedBox({
-    constraints,
-    child: Material({
-      borderRadius,
-      color: backgroundColor,
-      elevation,
-      textStyle,
-      shadowColor,
-      child: InkWell({
-        focusColor,
-        highlightColor,
-        hoverColor,
-        mouseCursor,
-        overlayColor,
-        onTap: onPressed ?? undefined,
-        child: Padding({
-          padding,
-          child: Center({
-            child: child,
-          }),
-        }),
+  const materialWidget = Material({
+    borderRadius,
+    color: backgroundColor,
+    elevation: elevation,
+    textStyle,
+    boxBorder,
+    child: InkWell({
+      focusColor,
+      highlightColor,
+      hoverColor,
+      mouseCursor: isDisabled
+        ? SystemMouseCursor.use({ cursor: SystemMouseCursors.basic })
+        : mouseCursor,
+      onTap,
+      child: Padding({
+        padding,
+        child: child,
       }),
     }),
   });
 
+  const result = ConstrainedBox({
+    constraints,
+    child: isDisabled
+      ? Opacity({
+          child: materialWidget,
+          opacity: OpacityDecoration.use({
+            opacity: OpacityDecorationSteps.s50,
+          }),
+        })
+      : materialWidget,
+  });
   return defineComponent({
     name: "ButtonStyleButton",
     render() {
-      return h("div", { class: "" }, [h(result)]);
+      return h("div", { class: "relative select-none" }, [h(result)]);
     },
   });
 };

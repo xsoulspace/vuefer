@@ -4,7 +4,7 @@ import { Component, defineComponent, h } from "vue";
 
 interface MouseRegionI {
   child: Component;
-  key?: Key;
+  key?: Maybe<Key>;
   cursor: SystemMouseCursor;
 }
 

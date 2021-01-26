@@ -2,8 +2,8 @@ import { Key } from "@/abstract";
 import { Component, defineComponent, h } from "vue";
 export interface GestureDetectorI {
   child: Component;
-  key?: Key;
-  onTap?: GestureTapCallback;
+  key?: Maybe<Key>;
+  onTap?: Maybe<GestureTapCallback>;
 }
 
 export const GestureDetector = ({ child, onTap, key }: GestureDetectorI) => {

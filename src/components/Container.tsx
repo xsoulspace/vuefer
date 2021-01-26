@@ -1,21 +1,21 @@
-import { Alignment } from "@/abstract";
+import { Alignment, SizedBoxHeight, SizedBoxWidth } from "@/abstract";
 import { BoxConstraints } from "@/abstract/BoxConstraints";
 import { BoxDecoration } from "@/abstract/BoxDecoration";
 import { Color } from "@/abstract/Color";
-import { EdgeInsets } from "@/abstract/EdgeInsets";
+import { EdgeInsets, EdgeInsetsStep } from "@/abstract/EdgeInsets";
 import { Component, defineComponent, h } from "vue";
 interface ContainerI {
   child: Component;
-  padding?: EdgeInsets;
-  margin?: EdgeInsets;
-  color?: Color;
-  width?: number;
-  height?: number;
-  decoration?: BoxDecoration;
+  padding?: Maybe<EdgeInsets>;
+  margin?: Maybe<EdgeInsets>;
+  color?: Maybe<Color>;
+  width?: Maybe<EdgeInsetsStep>;
+  height?: Maybe<EdgeInsetsStep>;
+  decoration?: Maybe<BoxDecoration>;
   // TODO: add ConstrainedBox
-  constraints?: BoxConstraints;
+  constraints?: Maybe<BoxConstraints>;
   // TODO: add Align
-  alignment?: Alignment;
+  alignment?: Maybe<Alignment>;
 }
 export const Container = ({
   child,
@@ -30,6 +30,9 @@ export const Container = ({
 }: ContainerI) => {
   const finalConstraints = constraints ?? new BoxConstraints({});
   const finalAlignment = alignment ?? Alignment.left;
+  const sizedBoxHeight = new SizedBoxHeight({ height: height ?? undefined });
+  const sizedBoxWidth = new SizedBoxWidth({ width: width ?? undefined });
+
   const component = defineComponent({
     name: "Container",
     render() {
@@ -42,23 +45,17 @@ export const Container = ({
         "relative",
         "container",
         "flex",
-        padding?.marginCss,
+        margin?.marginCss,
         padding?.paddingCss,
         finalConstraints.css,
         finalAlignment.css,
         decorationColor?.backgroundCss ?? color?.backgroundCss ?? "",
-        decoration?.boxShadow?.css ?? "",
-        decoration?.borderRadius?.css ?? "",
-        decoration?.border?.css ?? "",
+        decoration?.css ?? "",
+        sizedBoxHeight.css,
+        sizedBoxWidth.css,
       ].join(" ");
       const params = { class: containerClass };
-      const simple = h("div", params, [h(child)]);
-
-      if (padding) {
-        return h("div", params, [h(child)]);
-      } else {
-        return simple;
-      }
+      return h("div", params, [h(child)]);
     },
   });
   return component;

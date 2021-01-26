@@ -1,16 +1,17 @@
-import { Component, defineComponent, h } from "vue";
-interface ElevatedButtonI {
-  child: Component;
-  onPressed?: Maybe<VoidFunction>;
-}
-export const ElevatedButton = ({ child, onPressed }: ElevatedButtonI) =>
-  defineComponent({
+import { defineComponent, h } from "vue";
+import { ButtonStyleButton, ButtonStyleButtonI } from "./ButtonStyleButton";
+// interface ElevatedButtonI extends ButtonStyleButtonI {}
+export const ElevatedButton = ({ child, onTap, style }: ButtonStyleButtonI) => {
+  return defineComponent({
     name: "ElevatedButton",
     render() {
       return h(
-        "div",
-        { onClick: onPressed ? async () => await onPressed() : undefined },
-        [h(child)]
+        ButtonStyleButton({
+          child,
+          onTap,
+          style,
+        })
       );
     },
   });
+};

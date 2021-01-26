@@ -21,14 +21,17 @@ export * from "./FontSize";
 export * from "./FontWeight";
 export * from "./Gradient";
 export * from "./Key";
+export * from "./ListTile";
 export * from "./MainAxisAlignment";
 export * from "./MainAxisSize";
 export * from "./MouseCursor";
+export * from "./OpacityDecoration";
+export * from "./SizedBox";
 export * from "./TextAlign";
 export * from "./TextDecoration";
 export * from "./TextDecorationStyle";
+export * from "./TextEditingController";
+export * from "./TextInputType";
 export * from "./TextOverflow";
 export * from "./TextStyle";
 export * from "./VerticalDirection";
-// export * from './Width'
-// export * from './Height'

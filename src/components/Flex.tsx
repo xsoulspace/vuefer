@@ -7,11 +7,11 @@ import { VerticalDirection } from "@/abstract/VerticalDirection";
 import { Component, defineComponent, h } from "vue";
 
 export interface FlexBaseI {
-  mainAxisAlignment?: MainAxisAlignment;
-  crossAxisAlignment?: CrossAxisAlignment;
-  mainAxisSize?: MainAxisSize;
-  verticalDirection?: VerticalDirection;
-  dividerDecoration?: DividerDecoration;
+  mainAxisAlignment?: Maybe<MainAxisAlignment>;
+  crossAxisAlignment?: Maybe<CrossAxisAlignment>;
+  mainAxisSize?: Maybe<MainAxisSize>;
+  verticalDirection?: Maybe<VerticalDirection>;
+  dividerDecoration?: Maybe<DividerDecoration>;
 }
 export interface ColumnI extends FlexBaseI {
   children: Component[];

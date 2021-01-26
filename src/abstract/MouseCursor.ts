@@ -33,7 +33,9 @@ export class SystemMouseCursor {
         case SystemMouseCursors.forbidden:
           return "not-allowed";
         case SystemMouseCursors.none:
+          return "auto";
         case SystemMouseCursors.progress:
+          return "wait";
         case SystemMouseCursors.text:
           return "text";
         case SystemMouseCursors.wait:

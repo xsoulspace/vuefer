@@ -5,14 +5,14 @@ import { defineComponent, h, Ref } from "vue";
 
 interface TextI {
   text: Ref<string | boolean | number>;
-  style?: TextStyle;
+  style?: Maybe<TextStyle>;
   // strutStyle,
-  textAlign?: TextAlign;
+  textAlign?: Maybe<TextAlign>;
   // textDirection;
   // TODO: locale
   // locale,
   // softWrap;
-  overflow?: TextOverflow;
+  overflow?: Maybe<TextOverflow>;
   // maxLines;
   // textWidthBasis;
 }

@@ -7,8 +7,8 @@ export interface AlignI {
   alignment: Alignment;
   // widthFactor?: EdgeInsetsStep;
   // heightFactor?: EdgeInsetsStep;
-  toOverlay?: boolean;
-  key?: Key;
+  toOverlay?: Maybe<boolean>;
+  key?: Maybe<Key>;
 }
 
 export const Align = ({ child, toOverlay, alignment, key }: AlignI) => {
