@@ -14,6 +14,7 @@ export * from "./GestureDetector";
 export * from "./ListTile";
 export * from "./ListView";
 export * from "./Margin";
+export * from "./Material";
 export * from "./MouseRegion";
 export * from "./Opacity";
 export * from "./Padding";
@@ -22,6 +23,7 @@ export * from "./Scaffold";
 export * from "./SizedBox";
 export * from "./Text";
 export * from "./TextButton";
+export * from "./TextField";
 export * from "./VerticalDivider";
 
 // export * from "./AppBar";
