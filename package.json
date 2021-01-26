@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue_flutter_tailwind",
   "description": "Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -29,9 +29,6 @@
     "dist/*"
   ],
   "typings": "./dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "postcss": "^7",
