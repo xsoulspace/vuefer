@@ -41,8 +41,9 @@ export default {
   },
   setup(props) {
     const items = computed(() => {
-      const arr = [];
+      const arr: string[] = [];
       arr.length = props.itemCount;
+      arr.fill(" ");
       return arr;
     });
     return { items };
