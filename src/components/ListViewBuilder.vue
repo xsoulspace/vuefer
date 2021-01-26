@@ -16,12 +16,13 @@
 import { DynamicScroller, DynamicScrollerItem } from "vue3-virtual-scroller";
 // import { ListItemBuilder } from "./ListView";
 import { ListViewItem } from "./ListViewItem";
+import { computed, ref } from "vue";
 export default {
   props: {
-    items: {
-      type: Array,
+    itemCount: {
+      type: Number,
       required: true,
-      default: () => [],
+      default: 0,
     },
     itemBuilder: {
       type: Function,
@@ -37,6 +38,14 @@ export default {
     DynamicScroller: DynamicScroller,
     DynamicScrollerItem: DynamicScrollerItem,
     ListViewItem,
+  },
+  setup(props) {
+    const items = computed(() => {
+      const arr = [];
+      arr.length = props.itemCount;
+      return arr;
+    });
+    return { items };
   },
 };
 </script>

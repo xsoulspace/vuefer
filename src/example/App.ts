@@ -28,7 +28,7 @@ import { Scaffold } from "@/components/Scaffold";
 import { SizedBox } from "@/components/SizedBox";
 import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
-import { ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 export const wrapperApp = () => {
   const text = ref("Hello world!");
@@ -44,7 +44,7 @@ export const wrapperApp = () => {
   const controller = TextEditingController.default;
   controller.text = text;
 
-  const obj = ref<{ [prop: number]: string }>({
+  const obj = reactive<{ [prop: number]: string }>({
     0: "maybe",
     1: "test",
     2: "test",
@@ -57,12 +57,12 @@ export const wrapperApp = () => {
     9: "test",
     10: "test",
   });
-  const itemCount = Object.keys(obj.value).length;
+  const itemCount = computed(() => Object.keys(obj).length);
 
   const dynamicItems = SizedBox({
     child: ListView.builder({
       itemBuilder: ({ index }) => {
-        const value = obj.value[index];
+        const value = obj[index];
         return ElevatedButton({
           style: new ButtonStyle({
             backgroundColor: Colors.grey,
@@ -76,8 +76,12 @@ export const wrapperApp = () => {
           child: Text({
             text: ref(value),
           }),
-          onTap: () =>
-            alert(`hello tap with index ${index} and value ${value}!`),
+          onTap: () => {
+            alert(`hello tap with index ${index} and value ${value}!`);
+            const newItemId = itemCount.value;
+            obj[newItemId] = `new value ${newItemId}`;
+            alert(`new value with id ${newItemId} add in the end of list!`);
+          },
         });
       },
       itemCount: itemCount,

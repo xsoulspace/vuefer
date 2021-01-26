@@ -1,4 +1,4 @@
-import { Component, defineComponent } from "vue";
+import { Component, defineComponent, h, Ref } from "vue";
 import ListViewBuilder from "./ListViewBuilder.vue";
 
 interface ItemBuilderContext {
@@ -7,27 +7,24 @@ interface ItemBuilderContext {
 export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component;
 interface ListViewBuilderI {
   itemBuilder: ListItemBuilder;
-  itemCount: number;
-  minItemHeight?: Maybe<number>;
+  itemCount: Ref<number>;
+  minItemHeight?: Maybe<Ref<number>>;
 }
 
 export class ListView {
   static builder({ itemBuilder, itemCount, minItemHeight }: ListViewBuilderI) {
-    const arr: string[] = [];
-    arr.length = itemCount;
-    arr.fill("");
     return defineComponent({
       name: "ListView",
       components: {
         ListViewBuilder,
       },
-      setup() {
-        return () => (
+      render() {
+        return h(
           <list-view-builder
-            items={arr}
+            itemCount={itemCount.value}
             itemBuilder={itemBuilder}
-            minItemHeight={minItemHeight}
-          ></list-view-builder>
+            minItemHeight={minItemHeight?.value}
+          />
         );
       },
     });
