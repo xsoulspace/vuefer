@@ -66,9 +66,8 @@ export const ListTile = ({
   const resolvedSelectedTileColor = selectedTileColor ?? Colors.indigo;
   // const resolvedTileColor = tileColor ?? Colors.white;
   // FIXME: hover is not working with bg-color
-  const tileBackgroundColor = selected
-    ? resolvedSelectedTileColor
-    : Colors.transparent;
+  const tileBackgroundColor =
+    selected?.value == true ? resolvedSelectedTileColor : Colors.transparent;
   // const tileBackgroundColor = selected
   //   ? resolvedSelectedTileColor
   //   : resolvedTileColor
@@ -117,9 +116,23 @@ export const ListTile = ({
 
   return defineComponent({
     name: "ListTile",
+    setup() {
+      return {
+        mouseCursor,
+        hoverColor,
+        resolvedHoverColor,
+        focusColor,
+        contentPadding,
+        enabled,
+        selected,
+        tileColor,
+        tileBackgroundColor,
+        selectedTileColor,
+      };
+    },
     render() {
       const resolvedMouseCursor = (() => {
-        if ((enabled?.value == true || enabled == null) && onTap) {
+        if ((enabled?.value == true || enabled == null) && onTap != null) {
           return mouseCursor?.cursor ?? SystemMouseCursors.click;
         } else {
           return SystemMouseCursors.basic;

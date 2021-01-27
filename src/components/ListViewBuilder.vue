@@ -1,5 +1,6 @@
 <template>
   <DynamicScroller
+    v-if="isItemsExists"
     :items="items"
     :min-item-size="minItemHeight"
     class="scroller"
@@ -10,6 +11,7 @@
       </DynamicScrollerItem>
     </template>
   </DynamicScroller>
+  <div v-else></div>
 </template>
 <script lang="ts">
 // https://www.npmjs.com/package/vue3-virtual-scroller
@@ -40,13 +42,16 @@ export default {
     ListViewItem,
   },
   setup(props) {
+    const isItemsExists = props.itemCount > 0;
     const items = computed(() => {
       const arr: string[] = [];
       arr.length = props.itemCount;
-      arr.fill(" ");
+      if (isItemsExists) {
+        arr.fill(" ");
+      }
       return arr;
     });
-    return { items };
+    return { items, isItemsExists };
   },
 };
 </script>
