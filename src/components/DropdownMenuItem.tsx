@@ -1,25 +1,45 @@
 import { Alignment } from '@/abstract'
-import { Key } from '@/abstract/Key'
 import { Component, defineComponent, h } from 'vue'
 import { Container } from './Container'
+import { GestureDetector } from './GestureDetector'
 
 interface DropdownMenuItemI<I> {
   child: Component
-  key?: Maybe<Key>
-  onTap?: ValueChanged<I>
-  value?: I
+  key: string
+  onTap?: Maybe<GestureTapCallback>
+  value?: Maybe<I>
+  title: string
 }
 
-export type DropdownMenuItem<I = any> = (arg: DropdownMenuItemI<I>) => Component
+// The key must be assigned to let compare items automatically
+export type DropdownMenuItemConstructor<I> = {
+  widget: Component
+  value?: Maybe<I>
+  key: string
+  title: string
+}
 
-export const DropdownMenuItem: DropdownMenuItem = <I extends any>({
+export const DropdownMenuItem = <I extends unknown>({
   child,
   key,
-}: DropdownMenuItemI<I>) => {
-  return defineComponent({
-    name: 'DropdownMenuItem',
-    render() {
-      return h(Container({ alignment: Alignment.center, child }))
-    },
-  })
+  value,
+  onTap,
+  title,
+}: DropdownMenuItemI<I>): DropdownMenuItemConstructor<I> => {
+  return {
+    widget: defineComponent({
+      name: 'DropdownMenuItem',
+      render() {
+        return h(
+          GestureDetector({
+            onTap: () => (onTap ? onTap() : ''),
+            child: Container({ alignment: Alignment.left, child }),
+          })
+        )
+      },
+    }),
+    value,
+    key,
+    title,
+  }
 }

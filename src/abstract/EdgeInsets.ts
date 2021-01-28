@@ -44,15 +44,15 @@ interface ltrb {
 }
 
 export class EdgeInsets {
-  left: EdgeInsetsStep
-  top: EdgeInsetsStep
-  right: EdgeInsetsStep
-  bottom: EdgeInsetsStep
+  left?: Maybe<EdgeInsetsStep>
+  top?: Maybe<EdgeInsetsStep>
+  right?: Maybe<EdgeInsetsStep>
+  bottom?: Maybe<EdgeInsetsStep>
   constructor({ left, top, right, bottom }: ltrb) {
     this.left = left ?? EdgeInsetsStep.zero
     this.top = top ?? EdgeInsetsStep.zero
-    this.right = right ?? EdgeInsetsStep.zero
-    this.bottom = bottom ?? EdgeInsetsStep.zero
+    this.right = right
+    this.bottom = bottom
   }
   static symmetric({
     vertical,

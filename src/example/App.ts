@@ -11,9 +11,11 @@ import { BorderRadius, BorderRadiusStep } from '@/abstract/BorderRadius'
 import { BoxDecoration } from '@/abstract/BoxDecoration'
 import { BoxShadow } from '@/abstract/BoxShadow'
 import { CrossAxisAlignment } from '@/abstract/CrossAxisAlignment'
+import { DropdownFieldController } from '@/abstract/DropdownFieldController'
 import { EdgeInsets, EdgeInsetsStep } from '@/abstract/EdgeInsets'
 import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
 import { TextEditingController } from '@/abstract/TextEditingController'
+import { DropdownButton, DropdownMenuItem } from '@/components'
 import { Align } from '@/components/Align'
 import { CheckboxListTile } from '@/components/CheckboxListTile'
 import { Column } from '@/components/Column'
@@ -28,6 +30,11 @@ import { SizedBox } from '@/components/SizedBox'
 import { Text } from '@/components/Text'
 import { TextField } from '@/components/TextField'
 import { computed, reactive, ref } from 'vue'
+
+type IndexedText = {
+  id: number
+  text: string
+}
 
 export const wrapperApp = () => {
   const text = ref('Hello world!')
@@ -53,7 +60,6 @@ export const wrapperApp = () => {
     child: ListView.builder({
       itemBuilder: ({ index }) => {
         const value = items.value[index]
-        console.log({ value, items, index })
         return ElevatedButton({
           style: new ButtonStyle({
             backgroundColor: Colors.grey,
@@ -82,6 +88,10 @@ export const wrapperApp = () => {
     width: EdgeInsetsStep.s96,
   })
   const isEnabled = ref(true)
+  const dropdownFieldController = new DropdownFieldController<IndexedText>({
+    value: { id: 1, text: 'Hola!' },
+    key: '1',
+  })
   const temp = Container({
     padding,
     decoration: new BoxDecoration({
@@ -94,6 +104,27 @@ export const wrapperApp = () => {
       children: [
         Column({
           children: [
+            DropdownButton({
+              items: [
+                { id: 1, text: 'Hola!' },
+                { id: 2, text: 'Hola 2!' },
+                { id: 3, text: 'Hola 3!' },
+                { id: 4, text: 'maybe 4!' },
+                { id: 5, text: 'trello 5!' },
+                { id: 6, text: 'Hola 6!' },
+                { id: 7, text: 'home 7!' },
+              ].map((el) =>
+                DropdownMenuItem({
+                  child: Text({
+                    text: ref(el.text),
+                  }),
+                  value: el,
+                  key: el.id.toString(),
+                  title: el.text,
+                })
+              ),
+              controller: dropdownFieldController,
+            }),
             MouseRegion({
               child: textCard,
               cursor: SystemMouseCursor.use({
@@ -119,7 +150,7 @@ export const wrapperApp = () => {
   return Scaffold({
     body: Align({
       toOverlay: true,
-      alignment: Alignment.bottom,
+      alignment: Alignment.center,
       child: temp,
     }),
   })

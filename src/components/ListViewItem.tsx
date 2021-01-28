@@ -1,4 +1,5 @@
 import { defineComponent, h } from 'vue'
+import { GestureDetector } from './GestureDetector'
 import { ListItemBuilder } from './ListView'
 
 export const ListViewItem = defineComponent({
@@ -15,6 +16,13 @@ export const ListViewItem = defineComponent({
   },
   render() {
     const fixedItemBuilder = this.itemBuilder as ListItemBuilder
-    return h(fixedItemBuilder({ index: this.index }))
+    return h(
+      GestureDetector({
+        child: fixedItemBuilder({ index: this.index }),
+        onTap: () => {
+          this.$emit('click')
+        },
+      })
+    )
   },
 })

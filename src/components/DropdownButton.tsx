@@ -1,88 +1,113 @@
 import {
   BoxDecoration,
   BoxShadow,
+  Colors,
   EdgeInsetsStep,
   MainAxisAlignment,
   MainAxisSize,
+  TextEditingController,
 } from '@/abstract'
-import { Key } from '@/abstract/Key'
+import { DropdownFieldController } from '@/abstract/DropdownFieldController'
+import { unifyValue } from '@/functions/unifyValue'
 import { Component, computed, defineComponent, h, Ref } from 'vue'
 import { Container } from './Container'
-import { DropdownMenuItem } from './DropdownMenuItem'
+import { DropdownMenuItemConstructor } from './DropdownMenuItem'
 import { GestureDetector } from './GestureDetector'
 import { Icon, Icons } from './Icon'
 import { ListItemBuilder } from './ListView'
 import ListViewBuilder from './ListViewBuilder.vue'
-import { Material } from './Material'
 import { Positioned } from './Positioned'
 import { Row } from './Row'
 import { SizedBox } from './SizedBox'
 import { Stack } from './Stack'
-import { Text } from './Text'
+import { TextField } from './TextField'
+
 interface DropdownButtonI<I> {
-  items?: DropdownMenuItem<I>[]
+  items: DropdownMenuItemConstructor<I>[]
   minItemHeight?: Maybe<Ref<number>>
-  key?: Maybe<Key>
-  onChanged?: Maybe<ValueChanged<I>>
-  onTap?: Maybe<GestureTapCallback>
-  value?: Maybe<Ref<Maybe<I>>>
+  // onChanged?: Maybe<ValueChanged<I>>
   elevation?: Maybe<BoxShadow>
   icon?: Maybe<Component>
+  controller: DropdownFieldController<I>
 }
 
-export const DropdownButton = <I extends string | number | boolean>({
+export const DropdownButton = <
+  I extends
+    | string
+    | number
+    | boolean
+    | { [prop: string]: any }
+    | { [prop: number]: any }
+>({
   items,
   elevation,
   icon,
-  onChanged,
-  onTap,
-  value,
-  key,
   minItemHeight,
+  controller,
 }: DropdownButtonI<I>) => {
   const resolvedIcon =
     icon ?? Icon(Icons.arrow_drop_down, { size: EdgeInsetsStep.s12 })
-  const resolvedValue = computed(() => {
-    if (value == null) return ''
-    const refValue = value.value
-    if (refValue == null) return ''
-    return refValue
-  })
-  const resolvedItems = items ?? []
-  const listItemBuilder: ListItemBuilder = ({ index }) => {
-    return resolvedItems[index]
-  }
+  const textFieldController = new TextEditingController({})
+
   const itemsDropdown = defineComponent({
     name: 'items',
     components: {
       ListViewBuilder,
     },
-    render() {
-      return h(
-        Positioned({
-          top: EdgeInsetsStep.s11,
-          child: SizedBox({
-            child: Material({
-              elevation,
-              child: h(
-                <list-view-builder
-                  itemCount={resolvedItems.length}
-                  itemBuilder={listItemBuilder}
-                  minItemHeight={minItemHeight}
-                  on-item-click={(index: number) => {
-                    if (onChanged) {
-                      const item = resolvedItems[index]
-                      item
-                      onChanged()
-                    }
-                  }}
-                />
-              ),
-            }),
-            width: EdgeInsetsStep.s10,
-          }),
+    setup() {
+      const selectedItem = computed(() =>
+        items.find((el) => el.key == controller.key.value)
+      )
+      // init
+      textFieldController.text.value = selectedItem.value?.title ?? ''
+
+      const effectiveItems = computed(() =>
+        items.filter((el) => {
+          const isFound = unifyValue({ str: el?.value }).includes(
+            unifyValue({ str: textFieldController.text.value })
+          )
+          return isFound
         })
       )
+
+      const listItemBuilder: ListItemBuilder = ({ index }) => {
+        const item = effectiveItems.value[index]
+        if (item) return item.widget
+        return Container({})
+      }
+      return () =>
+        h(
+          Positioned({
+            top: EdgeInsetsStep.s11,
+            child: SizedBox({
+              child: Container({
+                decoration: new BoxDecoration({
+                  boxShadow: elevation ?? BoxShadow.md,
+                  color: Colors.white,
+                }),
+                child: h(
+                  <list-view-builder
+                    itemCount={effectiveItems.value.length}
+                    itemBuilder={listItemBuilder}
+                    minItemHeight={minItemHeight}
+                    onItemClick={(index: number) => {
+                      const item = effectiveItems.value[index]
+                      if (item == null) return Container({})
+                      controller.value.value = item.value
+                      controller.key.value = item.key
+                      textFieldController.text.value = item.title
+                      // if (onChanged && newValue) {
+                      //   onChanged(newValue)
+                      // }
+                    }}
+                  />
+                ),
+              }),
+              width: EdgeInsetsStep.s36,
+              height: EdgeInsetsStep.s56,
+            }),
+          })
+        )
     },
   })
 
@@ -94,7 +119,10 @@ export const DropdownButton = <I extends string | number | boolean>({
           child: Row({
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
-            children: [Text({ text: resolvedValue }), resolvedIcon],
+            children: [
+              TextField({ controller: textFieldController }),
+              resolvedIcon,
+            ],
           }),
         }),
         height: EdgeInsetsStep.s5,
@@ -102,6 +130,7 @@ export const DropdownButton = <I extends string | number | boolean>({
       itemsDropdown,
     ],
   })
+
   return defineComponent({
     name: 'DropdownButton',
     render() {

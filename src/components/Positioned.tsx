@@ -28,7 +28,7 @@ export const Positioned = ({
       return h(
         'div',
         {
-          class: `absolutec ${edgeInsets.positionedCss}`,
+          class: `absolute z-10 ${edgeInsets.positionedCss}`,
         },
         [h(child)]
       )

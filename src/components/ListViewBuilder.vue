@@ -6,13 +6,12 @@
     class="scroller"
   >
     <template v-slot="{ item, index, active }">
-      <DynamicScrollerItem
-        :item="item"
-        :active="active"
-        :data-index="index"
-        @click="$emit('item-click', index)"
-      >
-        <ListViewItem :index="index" :itemBuilder="itemBuilder" />
+      <DynamicScrollerItem :item="item" :active="active" :data-index="index">
+        <ListViewItem
+          @click="() => $emit('item-click', index)"
+          :index="index"
+          :itemBuilder="itemBuilder"
+        />
       </DynamicScrollerItem>
     </template>
   </DynamicScroller>
