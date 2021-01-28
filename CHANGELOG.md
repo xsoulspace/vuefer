@@ -1,3 +1,9 @@
+## 0.4.0
+
+Add: Stack, Positioned
+Add: DropdownButton with virtual list
+Update: simplified api for SizedBox
+
 ## 0.3.0
 
 Add: ElevatedButton, TextButton, Opacity Widget, OpacityDecoration

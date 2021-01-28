@@ -7,45 +7,45 @@ enum CrossAxisAlignmentName {
 }
 
 export class CrossAxisAlignment {
-  alignment: CrossAxisAlignmentName;
+  alignment: CrossAxisAlignmentName
   constructor({ alignment }: { alignment: CrossAxisAlignmentName }) {
-    this.alignment = alignment ?? CrossAxisAlignmentName.start;
+    this.alignment = alignment ?? CrossAxisAlignmentName.start
   }
   static _factory(alignment: CrossAxisAlignmentName) {
-    return new CrossAxisAlignment({ alignment });
+    return new CrossAxisAlignment({ alignment })
   }
   static get start() {
-    return this._factory(CrossAxisAlignmentName.start);
+    return this._factory(CrossAxisAlignmentName.start)
   }
   static get end() {
-    return this._factory(CrossAxisAlignmentName.end);
+    return this._factory(CrossAxisAlignmentName.end)
   }
   static get center() {
-    return this._factory(CrossAxisAlignmentName.center);
+    return this._factory(CrossAxisAlignmentName.center)
   }
   static get baseline() {
-    return this._factory(CrossAxisAlignmentName.baseline);
+    return this._factory(CrossAxisAlignmentName.baseline)
   }
   static get stretch() {
-    return this._factory(CrossAxisAlignmentName.stretch);
+    return this._factory(CrossAxisAlignmentName.stretch)
   }
   get css() {
     const alignment = (() => {
       switch (this.alignment) {
         case CrossAxisAlignmentName.start:
-          return "start";
+          return 'start'
         case CrossAxisAlignmentName.end:
-          return "end";
+          return 'end'
         case CrossAxisAlignmentName.center:
-          return "center";
+          return 'center'
         case CrossAxisAlignmentName.baseline:
-          return "baseline";
+          return 'baseline'
         case CrossAxisAlignmentName.stretch:
-          return "stretch";
+          return 'stretch'
         default:
-          return "start";
+          return 'start'
       }
-    })();
-    return `content-${alignment}`;
+    })()
+    return `content-${alignment}`
   }
 }

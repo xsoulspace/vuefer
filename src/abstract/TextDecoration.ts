@@ -5,22 +5,22 @@ export enum TextDecorations {
   lineThrough,
 }
 interface TextDecorationI {
-  decoration?: TextDecorations;
+  decoration?: TextDecorations
 }
 export class TextDecoration {
-  decoration: TextDecorations;
+  decoration: TextDecorations
   constructor({ decoration }: TextDecorationI) {
-    this.decoration = decoration ?? TextDecorations.none;
+    this.decoration = decoration ?? TextDecorations.none
   }
   get css(): string {
     switch (this.decoration) {
       case TextDecorations.lineThrough:
-        return "line-through";
+        return 'line-through'
       case TextDecorations.underline:
-        return "underline";
+        return 'underline'
       case TextDecorations.none:
       default:
-        return "no-underline";
+        return 'no-underline'
     }
   }
 }

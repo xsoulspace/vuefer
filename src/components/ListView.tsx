@@ -1,25 +1,25 @@
-import { Component, defineComponent, h, Ref } from "vue";
-import ListViewBuilder from "./ListViewBuilder.vue";
+import { Component, defineComponent, h, Ref } from 'vue'
+import ListViewBuilder from './ListViewBuilder.vue'
 
 interface ItemBuilderContext {
-  index: number;
+  index: number
 }
-export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component;
+export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component
 interface ListViewBuilderI {
-  itemBuilder: ListItemBuilder;
-  itemCount: Ref<number>;
-  minItemHeight?: Maybe<Ref<number>>;
+  itemBuilder: ListItemBuilder
+  itemCount: Ref<number>
+  minItemHeight?: Maybe<Ref<number>>
 }
 
 export class ListView {
   static builder({ itemBuilder, itemCount, minItemHeight }: ListViewBuilderI) {
     return defineComponent({
-      name: "ListView",
+      name: 'ListView',
       components: {
         ListViewBuilder,
       },
       setup() {
-        return { itemCount, minItemHeight };
+        return { itemCount, minItemHeight }
       },
       render() {
         return h(
@@ -28,8 +28,8 @@ export class ListView {
             itemBuilder={itemBuilder}
             minItemHeight={this.minItemHeight}
           />
-        );
+        )
       },
-    });
+    })
   }
 }

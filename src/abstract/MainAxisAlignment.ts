@@ -8,50 +8,50 @@ enum MainAxisAlignmentName {
 }
 
 export class MainAxisAlignment {
-  alignment: MainAxisAlignmentName;
+  alignment: MainAxisAlignmentName
   constructor({ alignment }: { alignment: MainAxisAlignmentName }) {
-    this.alignment = alignment ?? MainAxisAlignmentName.start;
+    this.alignment = alignment ?? MainAxisAlignmentName.start
   }
   static _factory(alignment: MainAxisAlignmentName) {
-    return new MainAxisAlignment({ alignment });
+    return new MainAxisAlignment({ alignment })
   }
   static get start() {
-    return this._factory(MainAxisAlignmentName.start);
+    return this._factory(MainAxisAlignmentName.start)
   }
   static get end() {
-    return this._factory(MainAxisAlignmentName.end);
+    return this._factory(MainAxisAlignmentName.end)
   }
   static get center() {
-    return this._factory(MainAxisAlignmentName.center);
+    return this._factory(MainAxisAlignmentName.center)
   }
   static get spaceAround() {
-    return this._factory(MainAxisAlignmentName.spaceAround);
+    return this._factory(MainAxisAlignmentName.spaceAround)
   }
   static get spaceBetween() {
-    return this._factory(MainAxisAlignmentName.spaceBetween);
+    return this._factory(MainAxisAlignmentName.spaceBetween)
   }
   static get spaceEvenly() {
-    return this._factory(MainAxisAlignmentName.spaceEvenly);
+    return this._factory(MainAxisAlignmentName.spaceEvenly)
   }
   get css() {
     const alignment = (() => {
       switch (this.alignment) {
         case MainAxisAlignmentName.start:
-          return "start";
+          return 'start'
         case MainAxisAlignmentName.end:
-          return "end";
+          return 'end'
         case MainAxisAlignmentName.center:
-          return "center";
+          return 'center'
         case MainAxisAlignmentName.spaceAround:
-          return "around";
+          return 'around'
         case MainAxisAlignmentName.spaceBetween:
-          return "between";
+          return 'between'
         case MainAxisAlignmentName.spaceEvenly:
-          return "evenly";
+          return 'evenly'
         default:
-          return "start";
+          return 'start'
       }
-    })();
-    return `justify-${alignment}`;
+    })()
+    return `justify-${alignment}`
   }
 }

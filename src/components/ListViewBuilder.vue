@@ -6,7 +6,12 @@
     class="scroller"
   >
     <template v-slot="{ item, index, active }">
-      <DynamicScrollerItem :item="item" :active="active" :data-index="index">
+      <DynamicScrollerItem
+        :item="item"
+        :active="active"
+        :data-index="index"
+        @click="$emit('item-click', index)"
+      >
         <ListViewItem :index="index" :itemBuilder="itemBuilder" />
       </DynamicScrollerItem>
     </template>
@@ -15,10 +20,10 @@
 </template>
 <script lang="ts">
 // https://www.npmjs.com/package/vue3-virtual-scroller
-import { DynamicScroller, DynamicScrollerItem } from "vue3-virtual-scroller";
+import { DynamicScroller, DynamicScrollerItem } from 'vue3-virtual-scroller'
 // import { ListItemBuilder } from "./ListView";
-import { ListViewItem } from "./ListViewItem";
-import { computed, ref } from "vue";
+import { ListViewItem } from './ListViewItem'
+import { computed, ref } from 'vue'
 export default {
   props: {
     itemCount: {
@@ -42,18 +47,18 @@ export default {
     ListViewItem,
   },
   setup(props) {
-    const isItemsExists = props.itemCount > 0;
+    const isItemsExists = props.itemCount > 0
     const items = computed(() => {
-      const arr: string[] = [];
-      arr.length = props.itemCount;
+      const arr: string[] = []
+      arr.length = props.itemCount
       if (isItemsExists) {
-        arr.fill(" ");
+        arr.fill(' ')
       }
-      return arr;
-    });
-    return { items, isItemsExists };
+      return arr
+    })
+    return { items, isItemsExists }
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .scroller {

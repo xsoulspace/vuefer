@@ -2,12 +2,12 @@
   <WrapperApp />
 </template>
 <script lang="ts">
-import { wrapperApp } from "@/example/App";
+import { wrapperApp } from '@/example/App'
 export default {
   components: {
     WrapperApp: wrapperApp(),
   },
-};
+}
 </script>
 <style lang="scss">
 #app {

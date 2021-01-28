@@ -4,26 +4,26 @@ enum AxisName {
 }
 
 export class Axis {
-  axis: AxisName;
+  axis: AxisName
   constructor({ axis }: { axis: AxisName }) {
-    this.axis = axis ?? AxisName.horizontal;
+    this.axis = axis ?? AxisName.horizontal
   }
   static _factory(axis: AxisName) {
-    return new Axis({ axis });
+    return new Axis({ axis })
   }
   static get vertical() {
-    return this._factory(AxisName.vertical);
+    return this._factory(AxisName.vertical)
   }
   static get horizontal() {
-    return this._factory(AxisName.horizontal);
+    return this._factory(AxisName.horizontal)
   }
   get css() {
     switch (this.axis) {
       case AxisName.vertical:
-        return "col";
+        return 'col'
       case AxisName.horizontal:
       default:
-        return "row";
+        return 'row'
     }
   }
 }

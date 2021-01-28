@@ -1,23 +1,23 @@
-import { Color, Colors, Key } from "@/abstract";
-import { Component, defineComponent, h } from "vue";
+import { Color, Colors, Key } from '@/abstract'
+import { Component, defineComponent, h } from 'vue'
 
 interface ColoredBoxI {
-  child: Component;
-  key?: Maybe<Key>;
-  color: Color;
+  child: Component
+  key?: Maybe<Key>
+  color: Color
 }
 
 export const ColoredBox = ({ child, key, color }: ColoredBoxI) => {
   return defineComponent({
-    name: "ColoredBox",
+    name: 'ColoredBox',
     render() {
       return h(
-        "div",
+        'div',
         {
           class: (color ?? Colors.transparent).backgroundCss,
         },
         [h(child)]
-      );
+      )
     },
-  });
-};
+  })
+}

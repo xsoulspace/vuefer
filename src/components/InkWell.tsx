@@ -1,18 +1,18 @@
-import { BorderRadius } from "@/abstract/BorderRadius";
-import { Color } from "@/abstract/Color";
-import { Key } from "@/abstract/Key";
-import { SystemMouseCursor, SystemMouseCursors } from "@/abstract/MouseCursor";
-import { Component, defineComponent, h } from "vue";
-import { GestureDetector, GestureDetectorI } from "./GestureDetector";
-import { MouseRegion } from "./MouseRegion";
+import { BorderRadius } from '@/abstract/BorderRadius'
+import { Color } from '@/abstract/Color'
+import { Key } from '@/abstract/Key'
+import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
+import { Component, defineComponent, h } from 'vue'
+import { GestureDetector, GestureDetectorI } from './GestureDetector'
+import { MouseRegion } from './MouseRegion'
 export interface InkWellI extends GestureDetectorI {
-  child: Component;
-  key?: Maybe<Key>;
-  mouseCursor?: Maybe<SystemMouseCursor>;
-  focusColor?: Maybe<Color>;
-  borderRadius?: Maybe<BorderRadius>;
-  hoverColor?: Maybe<Color>;
-  highlightColor?: Maybe<Color>;
+  child: Component
+  key?: Maybe<Key>
+  mouseCursor?: Maybe<SystemMouseCursor>
+  focusColor?: Maybe<Color>
+  borderRadius?: Maybe<BorderRadius>
+  hoverColor?: Maybe<Color>
+  highlightColor?: Maybe<Color>
   // overlayColor?: Color;
   // onHighlightChanged?: ValueChanged<bool>
   // onHover?: ValueChanged<bool>
@@ -39,22 +39,22 @@ export const InkWell = ({
     }),
     cursor:
       mouseCursor ?? SystemMouseCursor.use({ cursor: SystemMouseCursors.none }),
-  });
+  })
   return defineComponent({
-    name: "InkWell",
+    name: 'InkWell',
     render() {
       return h(
-        "div",
+        'div',
         {
           class: [
-            focusColor?.focusCss ?? "",
-            borderRadius?.css ?? "",
-            hoverColor?.hoverBackgroundCss ?? "",
-            highlightColor?.highlightCss ?? "",
-          ].join(" "),
+            focusColor?.focusCss ?? '',
+            borderRadius?.css ?? '',
+            hoverColor?.hoverBackgroundCss ?? '',
+            highlightColor?.highlightCss ?? '',
+          ].join(' '),
         },
         [h(result)]
-      );
+      )
     },
-  });
-};
+  })
+}

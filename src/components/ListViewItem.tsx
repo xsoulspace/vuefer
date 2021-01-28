@@ -1,8 +1,8 @@
-import { defineComponent, h } from "vue";
-import { ListItemBuilder } from "./ListView";
+import { defineComponent, h } from 'vue'
+import { ListItemBuilder } from './ListView'
 
 export const ListViewItem = defineComponent({
-  name: "ListViewItem",
+  name: 'ListViewItem',
   props: {
     itemBuilder: {
       type: Function,
@@ -14,7 +14,7 @@ export const ListViewItem = defineComponent({
     },
   },
   render() {
-    const fixedItemBuilder = this.itemBuilder as ListItemBuilder;
-    return h(fixedItemBuilder({ index: this.index }));
+    const fixedItemBuilder = this.itemBuilder as ListItemBuilder
+    return h(fixedItemBuilder({ index: this.index }))
   },
-});
+})

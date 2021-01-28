@@ -1,19 +1,19 @@
-import { ref, Ref } from "vue";
+import { ref, Ref } from 'vue'
 
 interface TextEditingControllerI {
-  text?: Maybe<string>;
-  obscureText?: Maybe<boolean>;
-  readOnly?: Maybe<boolean>;
-  maxLength?: Maybe<number>;
-  maxLines?: Maybe<number>;
+  text?: Maybe<string>
+  obscureText?: Maybe<boolean>
+  readOnly?: Maybe<boolean>
+  maxLength?: Maybe<number>
+  maxLines?: Maybe<number>
 }
 //  TODO: add properties
 export class TextEditingController {
-  text: Ref<string> = ref("");
-  obscureText: boolean;
-  readOnly: boolean;
-  maxLength?: Maybe<number>;
-  maxLines?: Maybe<number>;
+  text: Ref<string> = ref('')
+  obscureText: boolean
+  readOnly: boolean
+  maxLength?: Maybe<number>
+  maxLines?: Maybe<number>
   constructor({
     text,
     obscureText,
@@ -21,18 +21,18 @@ export class TextEditingController {
     maxLines,
     maxLength,
   }: TextEditingControllerI) {
-    this.text.value = text ?? "";
-    this.obscureText = obscureText ?? false;
-    this.readOnly = readOnly ?? false;
-    this.maxLength = maxLength;
-    this.maxLines = maxLines ?? 1;
+    this.text.value = text ?? ''
+    this.obscureText = obscureText ?? false
+    this.readOnly = readOnly ?? false
+    this.maxLength = maxLength
+    this.maxLines = maxLines ?? 1
   }
 
   static get default(): TextEditingController {
-    return new TextEditingController({});
+    return new TextEditingController({})
   }
 
   get css(): string {
-    return "";
+    return ''
   }
 }

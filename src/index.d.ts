@@ -1,2 +1,2 @@
-export * from "./abstract/BasicTypes";
-export * from "./index";
+export * from './abstract/BasicTypes'
+export * from './index'

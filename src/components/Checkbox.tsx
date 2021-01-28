@@ -3,20 +3,20 @@ import {
   Colors,
   SystemMouseCursor,
   SystemMouseCursors,
-} from "@/abstract";
-import { Key } from "@/abstract/Key";
-import { defineComponent, h, Ref, watch } from "vue";
+} from '@/abstract'
+import { Key } from '@/abstract/Key'
+import { defineComponent, h, Ref, watch } from 'vue'
 
 interface CheckboxI {
-  key?: Maybe<Key>;
-  value: Ref<boolean>;
-  onChanged: ValueChanged<boolean>;
-  mouseCursor?: Maybe<SystemMouseCursor>;
+  key?: Maybe<Key>
+  value: Ref<boolean>
+  onChanged: ValueChanged<boolean>
+  mouseCursor?: Maybe<SystemMouseCursor>
   // activeColor?: Maybe<Color>;
   // fillColor?: Maybe<Color>;
   // checkColor?: Maybe<Color>;
   // focusColor?: Maybe<Color>;
-  hoverColor?: Maybe<Color>;
+  hoverColor?: Maybe<Color>
   // overlayColor?:Maybe<Color>
   // splashRadius,
   // materialTapTargetSize,
@@ -35,12 +35,12 @@ export const Checkbox = ({
   mouseCursor,
 }: CheckboxI) => {
   return defineComponent({
-    name: "Checkbox",
+    name: 'Checkbox',
     setup() {
       watch(
         value,
         async (newValue, oldValue) => await onChanged(newValue, oldValue)
-      );
+      )
     },
     render() {
       return h(
@@ -48,11 +48,11 @@ export const Checkbox = ({
           class={[
             mouseCursor?.css ?? SystemMouseCursors.click,
             hoverColor?.hoverBackgroundCss ?? Colors.indigo.hoverBackgroundCss,
-          ].join(" ")}
+          ].join(' ')}
           type="checkbox"
           v-model={value.value}
         />
-      );
+      )
     },
-  });
-};
+  })
+}
