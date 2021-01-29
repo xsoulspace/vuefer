@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue_flutter_tailwind",
   "description": "Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "private": false,
   "author": {
     "name": "Anton Malofeev",

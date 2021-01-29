@@ -46,11 +46,11 @@ export default {
     ListViewItem,
   },
   setup(props) {
-    const isItemsExists = props.itemCount > 0
+    const isItemsExists = computed(() => props.itemCount > 0)
     const items = computed(() => {
       const arr: string[] = []
       arr.length = props.itemCount
-      if (isItemsExists) {
+      if (isItemsExists.value) {
         arr.fill(' ')
       }
       return arr
