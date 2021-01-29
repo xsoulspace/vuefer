@@ -38,31 +38,31 @@ Add this package to your package.json file:
 add styling to your main.ts
 
 ```typescript
-import "@xsoulspace/vue_flutter_tailwind/dist/vft.css";
+import '@xsoulspace/vue_flutter_tailwind/dist/vft.css'
 ```
 
 ### Usage
 
 ```typescript
 export const wrapperApp = () => {
-  const text = ref("Hello world!");
-  const text2 = ref(2);
-  const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+  const text = ref('Hello world!')
+  const text2 = ref(2)
+  const padding = EdgeInsets.all(EdgeInsetsStep.s3)
 
   const textCard = Padding({
     child: Text({
       text,
     }),
     padding,
-  });
+  })
 
   const btn = ElevatedButton({
-    child: Text({ text: ref("Hello Button") }),
+    child: Text({ text: ref('Hello Button') }),
     onPressed: () => {
-      text2.value++;
-      text.value = `Hello Wolrd! Counter: ${text2.value}`;
+      text2.value++
+      text.value = `Hello Wolrd! Counter: ${text2.value}`
     },
-  });
+  })
 
   return Scaffold({
     body: Align({
@@ -89,8 +89,8 @@ export const wrapperApp = () => {
         }),
       }),
     }),
-  });
-};
+  })
+}
 ```
 
 # Roadmap
@@ -120,6 +120,14 @@ export const wrapperApp = () => {
 - [x] ListTile
 
 ## WIP
+
+- [] DropdownButton, DropdownButtonItem
+  [x] functionality
+  [] decoration
+
+- [] Visibility
+  [x] functionality
+  [] animation
 
 - [] TextField
   [x] Basic properties
@@ -167,7 +175,6 @@ export const wrapperApp = () => {
 - [] Provider, MultiProvider
 - [] Ripple
 - [] Drawer
-- [] AutoSelect - DropdownButton, DropdownButtonItem
 - [] Progress
 - [] Card
 - [] AppBar
