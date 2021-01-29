@@ -2,7 +2,8 @@
 
 Add: Stack, Positioned
 Add: DropdownButton with virtual list
-Update: simplified api for SizedBox
+Add: basic Visibility
+Update: simplified api for SizedBox, cursor
 
 ## 0.3.0
 
@@ -20,7 +21,7 @@ ListView must be used inside SizedBox, as in example below
 SizedBox({
   child: ListView.builder({
     itemBuilder: ({ index }) => {
-      const value = obj.value[index];
+      const value = obj.value[index]
       return ElevatedButton({
         style: new ButtonStyle({
           backgroundColor: Colors.grey,
@@ -35,7 +36,7 @@ SizedBox({
           text: ref(value),
         }),
         onTap: () => alert(`hello tap with index ${index} and value ${value}!`),
-      });
+      })
     },
     itemCount: itemCount,
   }),
@@ -45,7 +46,7 @@ SizedBox({
   width: new SizedBoxWidth({
     width: EdgeInsetsStep.s96,
   }),
-});
+})
 ```
 
 ## 0.2.1

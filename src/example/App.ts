@@ -13,9 +13,9 @@ import { BoxShadow } from '@/abstract/BoxShadow'
 import { CrossAxisAlignment } from '@/abstract/CrossAxisAlignment'
 import { DropdownFieldController } from '@/abstract/DropdownFieldController'
 import { EdgeInsets, EdgeInsetsStep } from '@/abstract/EdgeInsets'
-import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
+import { SystemMouseCursors } from '@/abstract/MouseCursor'
 import { TextEditingController } from '@/abstract/TextEditingController'
-import { DropdownButton, DropdownMenuItem } from '@/components'
+import { DropdownButton, DropdownMenuItem, TextButton } from '@/components'
 import { Align } from '@/components/Align'
 import { CheckboxListTile } from '@/components/CheckboxListTile'
 import { Column } from '@/components/Column'
@@ -110,13 +110,19 @@ export const wrapperApp = () => {
                 { id: 2, text: 'Hola 2!' },
                 { id: 3, text: 'Hola 3!' },
                 { id: 4, text: 'maybe 4!' },
-                { id: 5, text: 'trello 5!' },
+                {
+                  id: 5,
+                  text: 'trello 5!',
+                },
                 { id: 6, text: 'Hola 6!' },
                 { id: 7, text: 'home 7!' },
               ].map((el) =>
                 DropdownMenuItem({
-                  child: Text({
-                    text: ref(el.text),
+                  child: TextButton({
+                    child: Text({
+                      text: ref(el.text),
+                    }),
+                    onTap: () => '',
                   }),
                   value: el,
                   key: el.id.toString(),
@@ -127,9 +133,7 @@ export const wrapperApp = () => {
             }),
             MouseRegion({
               child: textCard,
-              cursor: SystemMouseCursor.use({
-                cursor: SystemMouseCursors.progress,
-              }),
+              cursor: SystemMouseCursors.progress,
             }),
             TextField({
               controller: controller,

@@ -37,7 +37,7 @@ export default {
     minItemHeight: {
       type: Number,
       required: false,
-      default: 54,
+      default: 45,
     },
   },
   components: {

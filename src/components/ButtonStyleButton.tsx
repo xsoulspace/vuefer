@@ -1,6 +1,6 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
-import { SystemMouseCursor, SystemMouseCursors } from '@/abstract'
+import { SystemMouseCursors } from '@/abstract'
 import { BoxConstraints } from '@/abstract/BoxConstraints'
 import { ButtonStyle } from '@/abstract/ButtonStyle'
 import { Key } from '@/abstract/Key'
@@ -52,9 +52,7 @@ export const ButtonStyleButton = ({
       focusColor,
       highlightColor,
       hoverColor,
-      mouseCursor: isDisabled
-        ? SystemMouseCursor.use({ cursor: SystemMouseCursors.basic })
-        : mouseCursor,
+      mouseCursor: isDisabled ? SystemMouseCursors.basic : mouseCursor.cursor,
       onTap,
       child: Padding({
         padding,
@@ -77,7 +75,7 @@ export const ButtonStyleButton = ({
   return defineComponent({
     name: 'ButtonStyleButton',
     render() {
-      return h('div', { class: 'relative select-none' }, [h(result)])
+      return h('div', { class: 'relative select-none w-full' }, [h(result)])
     },
   })
 }

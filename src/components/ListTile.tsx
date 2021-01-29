@@ -6,7 +6,6 @@ import {
   EdgeInsetsStep,
   OpacityDecoration,
   OpacityDecorationSteps,
-  SystemMouseCursor,
   SystemMouseCursors,
 } from '@/abstract'
 import { Key } from '@/abstract/Key'
@@ -33,7 +32,7 @@ interface ListTileI {
   enabled?: Maybe<Ref<boolean>>
   onTap?: Maybe<GestureTapCallback>
   // onLongPress,
-  mouseCursor?: Maybe<SystemMouseCursor>
+  mouseCursor?: Maybe<SystemMouseCursors>
   selected?: Maybe<Ref<boolean>>
   focusColor?: Maybe<Color>
   hoverColor?: Maybe<Color>
@@ -133,13 +132,13 @@ export const ListTile = ({
     render() {
       const resolvedMouseCursor = (() => {
         if ((enabled?.value == true || enabled == null) && onTap != null) {
-          return mouseCursor?.cursor ?? SystemMouseCursors.click
+          return mouseCursor ?? SystemMouseCursors.click
         } else {
           return SystemMouseCursors.basic
         }
       })()
       const result = InkWell({
-        mouseCursor: SystemMouseCursor.use({ cursor: resolvedMouseCursor }),
+        mouseCursor: resolvedMouseCursor,
         onTap: enabled == null || enabled?.value == true ? onTap : null,
         focusColor,
         hoverColor:

@@ -1,4 +1,4 @@
-import { Color, EdgeInsets, SystemMouseCursor } from '@/abstract'
+import { Color, EdgeInsets, SystemMouseCursors } from '@/abstract'
 import { Key } from '@/abstract/Key'
 import { ListTileControlAffinity } from '@/abstract/ListTile'
 import { Component, defineComponent, h, ref, Ref } from 'vue'
@@ -14,7 +14,7 @@ interface CheckboxListTileI {
   contentPadding?: Maybe<EdgeInsets>
   focusColor?: Maybe<Color>
   hoverColor?: Maybe<Color>
-  mouseCursor?: Maybe<SystemMouseCursor>
+  mouseCursor?: Maybe<SystemMouseCursors>
   selected?: Maybe<Ref<boolean>>
   tileColor?: Maybe<Color>
   selectedTileColor?: Maybe<Color>

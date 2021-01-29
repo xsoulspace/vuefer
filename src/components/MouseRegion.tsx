@@ -1,19 +1,20 @@
 import { Key } from '@/abstract'
-import { SystemMouseCursor } from '@/abstract/MouseCursor'
+import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
 import { Component, defineComponent, h } from 'vue'
 
 interface MouseRegionI {
   child: Component
   key?: Maybe<Key>
-  cursor: SystemMouseCursor
+  cursor: SystemMouseCursors
 }
 
 // Defines cursor image
 export const MouseRegion = ({ child, key, cursor }: MouseRegionI) => {
+  const resolvedCursor = SystemMouseCursor.use({ cursor })
   return defineComponent({
     name: 'InkWell',
     render() {
-      return h('div', { class: cursor.css }, [h(child)])
+      return h('div', { class: resolvedCursor.css }, [h(child)])
     },
   })
 }

@@ -1,14 +1,14 @@
 import { BorderRadius } from '@/abstract/BorderRadius'
 import { Color } from '@/abstract/Color'
 import { Key } from '@/abstract/Key'
-import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
+import { SystemMouseCursors } from '@/abstract/MouseCursor'
 import { Component, defineComponent, h } from 'vue'
 import { GestureDetector, GestureDetectorI } from './GestureDetector'
 import { MouseRegion } from './MouseRegion'
 export interface InkWellI extends GestureDetectorI {
   child: Component
   key?: Maybe<Key>
-  mouseCursor?: Maybe<SystemMouseCursor>
+  mouseCursor?: Maybe<SystemMouseCursors>
   focusColor?: Maybe<Color>
   borderRadius?: Maybe<BorderRadius>
   hoverColor?: Maybe<Color>
@@ -37,8 +37,7 @@ export const InkWell = ({
       onTap,
       child,
     }),
-    cursor:
-      mouseCursor ?? SystemMouseCursor.use({ cursor: SystemMouseCursors.none }),
+    cursor: mouseCursor ?? SystemMouseCursors.none,
   })
   return defineComponent({
     name: 'InkWell',

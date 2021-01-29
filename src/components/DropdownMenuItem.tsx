@@ -1,7 +1,8 @@
-import { Alignment } from '@/abstract'
+import { Alignment, SystemMouseCursors } from '@/abstract'
 import { Component, defineComponent, h } from 'vue'
 import { Container } from './Container'
 import { GestureDetector } from './GestureDetector'
+import { MouseRegion } from './MouseRegion'
 
 interface DropdownMenuItemI<I> {
   child: Component
@@ -31,9 +32,12 @@ export const DropdownMenuItem = <I extends unknown>({
       name: 'DropdownMenuItem',
       render() {
         return h(
-          GestureDetector({
-            onTap: () => (onTap ? onTap() : ''),
-            child: Container({ alignment: Alignment.left, child }),
+          MouseRegion({
+            child: GestureDetector({
+              onTap: () => (onTap ? onTap() : ''),
+              child: Container({ alignment: Alignment.left, child }),
+            }),
+            cursor: SystemMouseCursors.click,
           })
         )
       },

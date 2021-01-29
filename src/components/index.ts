@@ -30,6 +30,7 @@ export * from './Text'
 export * from './TextButton'
 export * from './TextField'
 export * from './VerticalDivider'
+export * from './Visibility'
 
 // export * from "./AppBar";
 // export * from "./Card";

@@ -17,15 +17,13 @@ export const TextButton = ({
   return defineComponent({
     name: 'TextButton',
     render() {
-      return h('div', { class: '' }, [
-        h(
-          ButtonStyleButton({
-            child,
-            onTap,
-            style: finalStyle,
-          })
-        ),
-      ])
+      return h(
+        ButtonStyleButton({
+          child,
+          onTap,
+          style: finalStyle,
+        })
+      )
     },
   })
 }
