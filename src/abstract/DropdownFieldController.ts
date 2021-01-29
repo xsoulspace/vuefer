@@ -1,11 +1,11 @@
 import { Ref, ref } from 'vue'
 
 interface DropdownFieldControllerI<I> {
-  value: Maybe<I>
+  value?: Maybe<I>
   readOnly?: Maybe<boolean>
   maxLength?: Maybe<number>
   maxLines?: Maybe<number>
-  key: Maybe<string>
+  key?: Maybe<string>
 }
 //  TODO: add properties
 export class DropdownFieldController<I> {
