@@ -1,4 +1,4 @@
-import { reduceHtmlClasses } from '@/functions/reduceHtmlClasses'
+import { reduceHtmlClasses } from '../functions/reduceHtmlClasses'
 import { BorderSide, BorderSides } from './BorderSide'
 export interface BoxBorderI {
   bottom?: BorderSide

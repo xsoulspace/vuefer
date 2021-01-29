@@ -1,7 +1,7 @@
-import { TextStyle } from '@/abstract'
-import { TextAlign } from '@/abstract/TextAlign'
-import { TextOverflow } from '@/abstract/TextOverflow'
 import { defineComponent, h, Ref } from 'vue'
+import { TextStyle } from '../abstract'
+import { TextAlign } from '../abstract/TextAlign'
+import { TextOverflow } from '../abstract/TextOverflow'
 
 interface TextI {
   text: Ref<string | boolean | number>

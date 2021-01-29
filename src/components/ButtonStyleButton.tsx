@@ -1,5 +1,7 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
+import { Component, defineComponent, h } from 'vue'
+import { ConstrainedBox, InkWell, Material, Opacity, Padding } from '.'
 import {
   BoxConstraints,
   ButtonStyle,
@@ -7,9 +9,7 @@ import {
   OpacityDecoration,
   OpacityDecorationSteps,
   SystemMouseCursors,
-} from '@/abstract'
-import { Component, defineComponent, h } from 'vue'
-import { ConstrainedBox, InkWell, Material, Opacity, Padding } from '.'
+} from '../abstract'
 
 export interface ButtonStyleButtonI {
   child: Component

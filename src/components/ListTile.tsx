@@ -1,3 +1,4 @@
+import { Component, defineComponent, h, Ref } from 'vue'
 import {
   Alignment,
   Color,
@@ -7,9 +8,8 @@ import {
   OpacityDecoration,
   OpacityDecorationSteps,
   SystemMouseCursors,
-} from '@/abstract'
-import { Key } from '@/abstract/Key'
-import { Component, defineComponent, h, Ref } from 'vue'
+} from '../abstract'
+import { Key } from '../abstract/Key'
 import { Align } from './Align'
 import { Column } from './Column'
 import { Container } from './Container'

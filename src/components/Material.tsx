@@ -1,6 +1,6 @@
-import { BorderRadius, BoxBorder, BoxShadow, Color } from '@/abstract'
-import { TextStyle } from '@/abstract/TextStyle'
 import { Component, defineComponent, h } from 'vue'
+import { BorderRadius, BoxBorder, BoxShadow, Color } from '../abstract'
+import { TextStyle } from '../abstract/TextStyle'
 export interface MaterialI {
   child: Component
   elevation?: Maybe<BoxShadow>

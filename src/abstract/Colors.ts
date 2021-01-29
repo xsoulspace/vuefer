@@ -1,4 +1,4 @@
-import { Color } from '@/abstract/Color'
+import { Color } from '../abstract/Color'
 import { ColorNames } from './ColorNames'
 
 export class Colors {

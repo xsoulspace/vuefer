@@ -1,5 +1,5 @@
-import { Key } from '@/abstract/Key'
 import { Component, defineComponent, h } from 'vue'
+import { Key } from '../abstract/Key'
 
 interface StackI {
   children: Component[]

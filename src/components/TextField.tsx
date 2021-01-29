@@ -1,8 +1,8 @@
-import { InputDecoration } from '@/abstract/InputDecoration'
-import { Key } from '@/abstract/Key'
-import { TextEditingController } from '@/abstract/TextEditingController'
-import { TextInputType, TextInputTypes } from '@/abstract/TextInputType'
 import { defineComponent, h, watch } from 'vue'
+import { InputDecoration } from '../abstract/InputDecoration'
+import { Key } from '../abstract/Key'
+import { TextEditingController } from '../abstract/TextEditingController'
+import { TextInputType, TextInputTypes } from '../abstract/TextInputType'
 
 interface TextFieldI {
   key?: Maybe<Key>

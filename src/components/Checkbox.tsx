@@ -1,11 +1,11 @@
+import { defineComponent, h, Ref, watch } from 'vue'
 import {
   Color,
   Colors,
   SystemMouseCursor,
   SystemMouseCursors,
-} from '@/abstract'
-import { Key } from '@/abstract/Key'
-import { defineComponent, h, Ref, watch } from 'vue'
+} from '../abstract'
+import { Key } from '../abstract/Key'
 
 interface CheckboxI {
   key?: Maybe<Key>

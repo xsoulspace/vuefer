@@ -1,6 +1,6 @@
-import { EdgeInsets, EdgeInsetsStep } from '@/abstract'
-import { Key } from '@/abstract/Key'
 import { Component, defineComponent, h } from 'vue'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract'
+import { Key } from '../abstract/Key'
 
 interface PositionedI {
   child: Component

@@ -1,3 +1,5 @@
+import { onClickOutside } from '@vueuse/core'
+import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
 import {
   BoxDecoration,
   BoxShadow,
@@ -7,11 +9,9 @@ import {
   MainAxisAlignment,
   MainAxisSize,
   TextEditingController,
-} from '@/abstract'
-import { DropdownFieldController } from '@/abstract/DropdownFieldController'
-import { unifyValue } from '@/functions/unifyValue'
-import { onClickOutside } from '@vueuse/core'
-import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
+} from '../abstract'
+import { DropdownFieldController } from '../abstract/DropdownFieldController'
+import { unifyValue } from '../functions/unifyValue'
 import { Container } from './Container'
 import { DropdownMenuItemConstructor } from './DropdownMenuItem'
 import { GestureDetector } from './GestureDetector'

@@ -1,5 +1,5 @@
-import { Key } from '@/abstract'
 import { Component, defineComponent, h } from 'vue'
+import { Key } from '../abstract'
 export interface GestureDetectorI {
   child: Component
   key?: Maybe<Key>

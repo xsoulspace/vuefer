@@ -1,6 +1,6 @@
-import { Alignment } from '@/abstract/Alignment'
-import { Key } from '@/abstract/Key'
 import { Component, defineComponent, h } from 'vue'
+import { Alignment } from '../abstract/Alignment'
+import { Key } from '../abstract/Key'
 
 export interface AlignI {
   child: Component

@@ -1,6 +1,6 @@
-import { Alignment } from '@/abstract/Alignment'
-import { BoxFit } from '@/abstract/BoxFit'
 import { Component, defineComponent, h } from 'vue'
+import { Alignment } from '../abstract/Alignment'
+import { BoxFit } from '../abstract/BoxFit'
 
 export const FittedBox = ({
   child,

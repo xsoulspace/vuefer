@@ -1,5 +1,5 @@
-import { Alignment, SystemMouseCursors } from '@/abstract'
 import { Component, defineComponent, h } from 'vue'
+import { Alignment, SystemMouseCursors } from '../abstract'
 import { Container } from './Container'
 import { GestureDetector } from './GestureDetector'
 import { MouseRegion } from './MouseRegion'

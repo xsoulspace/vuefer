@@ -1,6 +1,6 @@
-import { Key } from '@/abstract'
-import { SystemMouseCursor, SystemMouseCursors } from '@/abstract/MouseCursor'
 import { Component, defineComponent, h } from 'vue'
+import { Key } from '../abstract'
+import { SystemMouseCursor, SystemMouseCursors } from '../abstract/MouseCursor'
 
 interface MouseRegionI {
   child: Component
