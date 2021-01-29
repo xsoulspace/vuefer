@@ -34,7 +34,8 @@
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue": "^3.0.0",
-    "vue3-virtual-scroller": "^0.2.1"
+    "vue3-virtual-scroller": "^0.2.1",
+    "@vueuse/core": "^4.0.8"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -51,7 +52,6 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
-    "@vueuse/core": "^4.0.8",
     "autoprefixer": "^9",
     "chai": "^4.1.2",
     "core-js": "^3.6.5",
