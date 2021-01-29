@@ -1,6 +1,6 @@
-import { Axis } from "@/abstract/Axis";
-import { defineComponent, h } from "vue";
-import { FlexHelper, RowI } from "./Flex";
+import { Axis } from '@/abstract/Axis'
+import { defineComponent, h } from 'vue'
+import { FlexHelper, RowI } from './Flex'
 
 export const Row = ({
   children,
@@ -11,7 +11,7 @@ export const Row = ({
   dividerDecoration,
 }: RowI) => {
   return defineComponent({
-    name: "Column",
+    name: 'Column',
     render() {
       const classNames = FlexHelper.getClassNames({
         crossAxisAlignment,
@@ -20,16 +20,16 @@ export const Row = ({
         mainAxisSize,
         verticalDirection,
         dividerDecoration,
-      });
+      })
       if (children.length) {
         return h(
-          "div",
+          'div',
           { class: classNames },
           children.map((child) => h(child))
-        );
+        )
       } else {
-        return h("div");
+        return h('div')
       }
     },
-  });
-};
+  })
+}

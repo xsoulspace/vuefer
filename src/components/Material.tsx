@@ -1,13 +1,13 @@
-import { BorderRadius, BoxBorder, BoxShadow, Color } from "@/abstract";
-import { TextStyle } from "@/abstract/TextStyle";
-import { Component, defineComponent, h } from "vue";
+import { BorderRadius, BoxBorder, BoxShadow, Color } from '@/abstract'
+import { TextStyle } from '@/abstract/TextStyle'
+import { Component, defineComponent, h } from 'vue'
 export interface MaterialI {
-  child: Component;
-  elevation?: Maybe<BoxShadow>;
-  textStyle?: Maybe<TextStyle>;
-  borderRadius?: Maybe<BorderRadius>;
-  color?: Maybe<Color>;
-  boxBorder?: Maybe<BoxBorder>;
+  child: Component
+  elevation?: Maybe<BoxShadow>
+  textStyle?: Maybe<TextStyle>
+  borderRadius?: Maybe<BorderRadius>
+  color?: Maybe<Color>
+  boxBorder?: Maybe<BoxBorder>
   // shadowColor?: Color;
   // animationDuration?: Duration
 }
@@ -21,22 +21,23 @@ export const Material = ({
   // shadowColor,
   textStyle,
 }: MaterialI) => {
+  const resolvedElevation = elevation ?? BoxShadow.m
   return defineComponent({
-    name: "Material",
+    name: 'Material',
     render() {
       return h(
-        "div",
+        'div',
         {
           class: [
-            boxBorder?.css ?? "",
-            elevation?.css ?? "",
-            textStyle?.css ?? "",
-            borderRadius?.css ?? "",
-            color?.backgroundCss ?? "",
-          ].join(" "),
+            boxBorder?.css ?? '',
+            resolvedElevation?.css ?? '',
+            textStyle?.css ?? '',
+            borderRadius?.css ?? '',
+            color?.backgroundCss ?? '',
+          ].join(' '),
         },
         [h(child)]
-      );
+      )
     },
-  });
-};
+  })
+}

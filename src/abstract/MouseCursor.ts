@@ -9,42 +9,42 @@ export enum SystemMouseCursors {
   copy,
 }
 interface SystemMouseCursorI {
-  cursor?: SystemMouseCursors;
+  cursor?: SystemMouseCursors
 }
 
 export class SystemMouseCursor {
-  cursor: SystemMouseCursors;
+  cursor: SystemMouseCursors
 
   constructor({ cursor }: SystemMouseCursorI) {
-    this.cursor = cursor ?? SystemMouseCursors.basic;
+    this.cursor = cursor ?? SystemMouseCursors.basic
   }
   static use(arg: SystemMouseCursorI) {
-    return new SystemMouseCursor(arg);
+    return new SystemMouseCursor(arg)
   }
   // TODO: add css classes
   get css(): string {
     const type = (() => {
       switch (this.cursor) {
         case SystemMouseCursors.basic:
-          return "default";
+          return 'default'
         case SystemMouseCursors.click:
-          return "pointer";
+          return 'pointer'
         case SystemMouseCursors.copy:
         case SystemMouseCursors.forbidden:
-          return "not-allowed";
+          return 'not-allowed'
         case SystemMouseCursors.none:
-          return "auto";
+          return 'auto'
         case SystemMouseCursors.progress:
-          return "wait";
+          return 'wait'
         case SystemMouseCursors.text:
-          return "text";
+          return 'text'
         case SystemMouseCursors.wait:
-          return "wait";
+          return 'wait'
 
         default:
-          return "auto";
+          return 'auto'
       }
-    })();
-    return `cursor-${type}`;
+    })()
+    return `cursor-${type}`
   }
 }

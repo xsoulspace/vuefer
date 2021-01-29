@@ -1,19 +1,19 @@
-import { EdgeInsets } from "@/abstract/EdgeInsets";
-import { Key } from "@/abstract/Key";
-import { Component, defineComponent, h } from "vue";
+import { EdgeInsets } from '@/abstract/EdgeInsets'
+import { Key } from '@/abstract/Key'
+import { Component, defineComponent, h } from 'vue'
 
 export const Margin = ({
   child,
   margin,
   key,
 }: {
-  child: Component;
-  margin: EdgeInsets;
-  key?: Key;
+  child: Component
+  margin: EdgeInsets
+  key?: Key
 }) =>
   defineComponent({
-    name: "Margin",
+    name: 'Margin',
     render() {
-      return h("div", { class: margin.marginCss }, [h(child)]);
+      return h('div', { class: margin.marginCss }, [h(child)])
     },
-  });
+  })

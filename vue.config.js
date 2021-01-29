@@ -6,11 +6,11 @@
  */
 const fixEmitDeclarationFilesForTypeScript = {
   chainWebpack: (config) => {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === 'production') {
       config.module
-        .rule("ts")
-        .use("ts-loader")
-        .loader("ts-loader")
+        .rule('ts')
+        .use('ts-loader')
+        .loader('ts-loader')
         .tap((options) => ({
           ...options,
           transpileOnly: false,
@@ -18,13 +18,13 @@ const fixEmitDeclarationFilesForTypeScript = {
           compilerOptions: {
             declaration: true,
           },
-        }));
+        }))
     }
   },
   parallel: false,
-};
+}
 
 module.exports = {
   ...fixEmitDeclarationFilesForTypeScript,
   // some other configuration
-};
+}

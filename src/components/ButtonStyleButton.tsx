@@ -1,24 +1,24 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
-import { SystemMouseCursor, SystemMouseCursors } from "@/abstract";
-import { BoxConstraints } from "@/abstract/BoxConstraints";
-import { ButtonStyle } from "@/abstract/ButtonStyle";
-import { Key } from "@/abstract/Key";
+import { SystemMouseCursors } from '@/abstract'
+import { BoxConstraints } from '@/abstract/BoxConstraints'
+import { ButtonStyle } from '@/abstract/ButtonStyle'
+import { Key } from '@/abstract/Key'
 import {
   OpacityDecoration,
   OpacityDecorationSteps,
-} from "@/abstract/OpacityDecoration";
-import { Component, defineComponent, h } from "vue";
-import { ConstrainedBox } from "./ConstrainedBox";
-import { InkWell } from "./InkWell";
-import { Material } from "./Material";
-import { Opacity } from "./Opacity";
-import { Padding } from "./Padding";
+} from '@/abstract/OpacityDecoration'
+import { Component, defineComponent, h } from 'vue'
+import { ConstrainedBox } from './ConstrainedBox'
+import { InkWell } from './InkWell'
+import { Material } from './Material'
+import { Opacity } from './Opacity'
+import { Padding } from './Padding'
 export interface ButtonStyleButtonI {
-  child: Component;
-  key?: Maybe<Key>;
-  style?: Maybe<ButtonStyle>;
-  onTap?: Maybe<GestureTapCallback>;
+  child: Component
+  key?: Maybe<Key>
+  style?: Maybe<ButtonStyle>
+  onTap?: Maybe<GestureTapCallback>
 }
 export const ButtonStyleButton = ({
   child,
@@ -26,9 +26,9 @@ export const ButtonStyleButton = ({
   onTap,
   style,
 }: ButtonStyleButtonI) => {
-  const isDisabled = onTap == null;
-  const constraints = new BoxConstraints({});
-  const finalStyle = style ?? ButtonStyle.default;
+  const isDisabled = onTap == null
+  const constraints = new BoxConstraints({})
+  const finalStyle = style ?? ButtonStyle.default
   const {
     padding,
     backgroundColor,
@@ -40,7 +40,7 @@ export const ButtonStyleButton = ({
     highlightColor,
     hoverColor,
     textStyle,
-  } = finalStyle;
+  } = finalStyle
 
   const materialWidget = Material({
     borderRadius,
@@ -52,16 +52,14 @@ export const ButtonStyleButton = ({
       focusColor,
       highlightColor,
       hoverColor,
-      mouseCursor: isDisabled
-        ? SystemMouseCursor.use({ cursor: SystemMouseCursors.basic })
-        : mouseCursor,
+      mouseCursor: isDisabled ? SystemMouseCursors.basic : mouseCursor.cursor,
       onTap,
       child: Padding({
         padding,
         child: child,
       }),
     }),
-  });
+  })
 
   const result = ConstrainedBox({
     constraints,
@@ -73,11 +71,11 @@ export const ButtonStyleButton = ({
           }),
         })
       : materialWidget,
-  });
+  })
   return defineComponent({
-    name: "ButtonStyleButton",
+    name: 'ButtonStyleButton',
     render() {
-      return h("div", { class: "relative select-none" }, [h(result)]);
+      return h('div', { class: 'relative select-none w-full' }, [h(result)])
     },
-  });
-};
+  })
+}

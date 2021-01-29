@@ -7,32 +7,32 @@ export enum TextAligns {
   // end
 }
 interface TextAlignI {
-  textAlign?: TextAligns;
+  textAlign?: TextAligns
 }
 export class TextAlign {
-  textAlign: TextAligns;
+  textAlign: TextAligns
   constructor({ textAlign }: TextAlignI) {
-    this.textAlign = textAlign ?? TextAligns.left;
+    this.textAlign = textAlign ?? TextAligns.left
   }
   static get default() {
-    return new TextAlign({});
+    return new TextAlign({})
   }
   get css() {
     const style = (() => {
       switch (this.textAlign) {
         case TextAligns.center:
-          return "center";
+          return 'center'
         case TextAligns.justify:
-          return "justify";
+          return 'justify'
 
         case TextAligns.right:
-          return "right";
+          return 'right'
 
         case TextAligns.left:
         default:
-          return "left";
+          return 'left'
       }
-    })();
-    return `text-${style}`;
+    })()
+    return `text-${style}`
   }
 }

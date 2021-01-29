@@ -1,16 +1,16 @@
-import { Alignment } from "@/abstract/Alignment";
-import { Key } from "@/abstract/Key";
-import { Component, defineComponent, h } from "vue";
-import { Align } from "./Align";
+import { Alignment } from '@/abstract/Alignment'
+import { Key } from '@/abstract/Key'
+import { Component, defineComponent, h } from 'vue'
+import { Align } from './Align'
 
 export interface CenterI {
-  child: Component;
-  key?: Maybe<Key>;
+  child: Component
+  key?: Maybe<Key>
 }
 
 export const Center = ({ child, key }: CenterI) => {
   return defineComponent({
-    name: "Center",
+    name: 'Center',
     render() {
       return h(
         Align({
@@ -18,7 +18,7 @@ export const Center = ({ child, key }: CenterI) => {
           alignment: Alignment.center,
           child,
         })
-      );
+      )
     },
-  });
-};
+  })
+}

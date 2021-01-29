@@ -1,28 +1,28 @@
-import { Color } from "./Color";
-import { Colors } from "./Colors";
-import { FontSize } from "./FontSize";
-import { FontWeight } from "./FontWeight";
-import { TextDecoration } from "./TextDecoration";
-import { TextDecorationStyle } from "./TextDecorationStyle";
+import { Color } from './Color'
+import { Colors } from './Colors'
+import { FontSize } from './FontSize'
+import { FontWeight } from './FontWeight'
+import { TextDecoration } from './TextDecoration'
+import { TextDecorationStyle } from './TextDecorationStyle'
 interface TextStyleI {
-  color?: Color;
-  backgroundColor?: Color;
-  decoration?: TextDecoration;
+  color?: Color
+  backgroundColor?: Color
+  decoration?: TextDecoration
   // decorationColor?: Color;
-  decorationStyle?: TextDecorationStyle;
-  fontWeight?: FontWeight;
-  fontSize?: FontSize;
+  decorationStyle?: TextDecorationStyle
+  fontWeight?: FontWeight
+  fontSize?: FontSize
 }
 
 export class TextStyle {
-  color: Color;
-  backgroundColor: Color;
-  decoration: TextDecoration;
+  color: Color
+  backgroundColor: Color
+  decoration: TextDecoration
   // decorationColor: Color;
-  decorationStyle: TextDecorationStyle;
+  decorationStyle: TextDecorationStyle
   // decorationThickness: TextDecorationThickness;
-  fontSize: FontSize;
-  fontWeight: FontWeight;
+  fontSize: FontSize
+  fontWeight: FontWeight
   // fontStyle
   // letterSpacing
   // wordSpacing
@@ -37,20 +37,20 @@ export class TextStyle {
     fontWeight,
     fontSize,
   }: TextStyleI) {
-    this.color = color ?? Colors.black;
-    this.backgroundColor = backgroundColor ?? Colors.transparent;
-    this.decoration = decoration ?? new TextDecoration({});
+    this.color = color ?? Colors.black
+    this.backgroundColor = backgroundColor ?? Colors.transparent
+    this.decoration = decoration ?? new TextDecoration({})
     // this.decorationColor = decorationColor ?? Colors.transparent;
-    this.decorationStyle = decorationStyle ?? new TextDecorationStyle({});
-    this.fontWeight = fontWeight ?? FontWeight.default;
-    this.fontSize = fontSize ?? FontSize.default;
+    this.decorationStyle = decorationStyle ?? new TextDecorationStyle({})
+    this.fontWeight = fontWeight ?? FontWeight.default
+    this.fontSize = fontSize ?? FontSize.default
   }
   static get default() {
-    return new TextStyle({});
+    return new TextStyle({})
   }
 
   static apply(arg: TextStyleI) {
-    return new TextStyle(arg);
+    return new TextStyle(arg)
   }
   get css(): string {
     return [
@@ -60,6 +60,6 @@ export class TextStyle {
       this.decorationStyle.css,
       this.fontWeight.css,
       this.fontSize.css,
-    ].join(" ");
+    ].join(' ')
   }
 }

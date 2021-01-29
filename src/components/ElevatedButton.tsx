@@ -1,9 +1,9 @@
-import { defineComponent, h } from "vue";
-import { ButtonStyleButton, ButtonStyleButtonI } from "./ButtonStyleButton";
+import { defineComponent, h } from 'vue'
+import { ButtonStyleButton, ButtonStyleButtonI } from './ButtonStyleButton'
 // interface ElevatedButtonI extends ButtonStyleButtonI {}
 export const ElevatedButton = ({ child, onTap, style }: ButtonStyleButtonI) => {
   return defineComponent({
-    name: "ElevatedButton",
+    name: 'ElevatedButton',
     render() {
       return h(
         ButtonStyleButton({
@@ -11,7 +11,7 @@ export const ElevatedButton = ({ child, onTap, style }: ButtonStyleButtonI) => {
           onTap,
           style,
         })
-      );
+      )
     },
-  });
-};
+  })
+}

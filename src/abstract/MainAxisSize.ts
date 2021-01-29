@@ -4,26 +4,26 @@ enum MainAxisSizeName {
 }
 
 export class MainAxisSize {
-  size: MainAxisSizeName;
+  size: MainAxisSizeName
   constructor({ size }: { size: MainAxisSizeName }) {
-    this.size = size ?? MainAxisSizeName.min;
+    this.size = size ?? MainAxisSizeName.min
   }
   static _factory(size: MainAxisSizeName) {
-    return new MainAxisSize({ size });
+    return new MainAxisSize({ size })
   }
   static get max() {
-    return this._factory(MainAxisSizeName.max);
+    return this._factory(MainAxisSizeName.max)
   }
   static get min() {
-    return this._factory(MainAxisSizeName.min);
+    return this._factory(MainAxisSizeName.min)
   }
   get css() {
     switch (this.size) {
       case MainAxisSizeName.max:
-        return "flex-grow";
+        return 'flex-grow'
       case MainAxisSizeName.min:
       default:
-        return "flex-grow-0";
+        return 'flex-grow-0'
     }
   }
 }

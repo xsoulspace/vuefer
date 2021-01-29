@@ -6,41 +6,40 @@ import {
   EdgeInsetsStep,
   OpacityDecoration,
   OpacityDecorationSteps,
-  SystemMouseCursor,
   SystemMouseCursors,
-} from "@/abstract";
-import { Key } from "@/abstract/Key";
-import { Component, defineComponent, h, Ref } from "vue";
-import { Align } from "./Align";
-import { Column } from "./Column";
-import { Container } from "./Container";
-import { InkWell } from "./InkWell";
-import { Opacity } from "./Opacity";
-import { Padding } from "./Padding";
-import { Row } from "./Row";
+} from '@/abstract'
+import { Key } from '@/abstract/Key'
+import { Component, defineComponent, h, Ref } from 'vue'
+import { Align } from './Align'
+import { Column } from './Column'
+import { Container } from './Container'
+import { InkWell } from './InkWell'
+import { Opacity } from './Opacity'
+import { Padding } from './Padding'
+import { Row } from './Row'
 
 interface ListTileI {
-  key?: Maybe<Key>;
-  leading?: Maybe<Component>;
-  title: Component;
-  subtitle?: Maybe<Component>;
-  trailing?: Maybe<Component>;
+  key?: Maybe<Key>
+  leading?: Maybe<Component>
+  title: Component
+  subtitle?: Maybe<Component>
+  trailing?: Maybe<Component>
   // isThreeLine
   // dense,
   // visualDensity,
   // shape,
-  contentPadding?: Maybe<EdgeInsets>;
-  enabled?: Maybe<Ref<boolean>>;
-  onTap?: Maybe<GestureTapCallback>;
+  contentPadding?: Maybe<EdgeInsets>
+  enabled?: Maybe<Ref<boolean>>
+  onTap?: Maybe<GestureTapCallback>
   // onLongPress,
-  mouseCursor?: Maybe<SystemMouseCursor>;
-  selected?: Maybe<Ref<boolean>>;
-  focusColor?: Maybe<Color>;
-  hoverColor?: Maybe<Color>;
+  mouseCursor?: Maybe<SystemMouseCursors>
+  selected?: Maybe<Ref<boolean>>
+  focusColor?: Maybe<Color>
+  hoverColor?: Maybe<Color>
   // focusNode,
   // autofocus = false,
-  tileColor?: Maybe<Color>;
-  selectedTileColor?: Maybe<Color>;
+  tileColor?: Maybe<Color>
+  selectedTileColor?: Maybe<Color>
   // enableFeedback,
   // horizontalTitleGap,
   // minVerticalPadding,
@@ -63,19 +62,18 @@ export const ListTile = ({
   selectedTileColor,
   trailing,
 }: ListTileI) => {
-  const resolvedSelectedTileColor = selectedTileColor ?? Colors.indigo;
+  const resolvedSelectedTileColor = selectedTileColor ?? Colors.indigo
   // const resolvedTileColor = tileColor ?? Colors.white;
   // FIXME: hover is not working with bg-color
-  const tileBackgroundColor = selected
-    ? resolvedSelectedTileColor
-    : Colors.transparent;
+  const tileBackgroundColor =
+    selected?.value == true ? resolvedSelectedTileColor : Colors.transparent
   // const tileBackgroundColor = selected
   //   ? resolvedSelectedTileColor
   //   : resolvedTileColor
-  const hasLeading = leading != null;
-  const resolvedLeading = leading ?? <div />;
-  const hasSubtitle = subtitle != null;
-  const resolvedHeight = hasSubtitle ? EdgeInsetsStep.s20 : EdgeInsetsStep.s14;
+  const hasLeading = leading != null
+  const resolvedLeading = leading ?? <div />
+  const hasSubtitle = subtitle != null
+  const resolvedHeight = hasSubtitle ? EdgeInsetsStep.s20 : EdgeInsetsStep.s14
   const resolvedTrailing = (() => {
     if (trailing != null) {
       return Align({
@@ -86,47 +84,61 @@ export const ListTile = ({
           }),
           child: trailing,
         }),
-      });
+      })
     } else {
-      return <div />;
+      return <div />
     }
-  })();
-  const resolvedSubtitle = subtitle ?? <div />;
+  })()
+  const resolvedSubtitle = subtitle ?? <div />
   const resolvedTitleWidget = (() => {
     if (hasSubtitle) {
       return Column({
         children: [title, resolvedSubtitle],
-      });
+      })
     } else {
-      return title;
+      return title
     }
-  })();
+  })()
 
   const resolvedContentWidget = (() => {
     if (hasLeading) {
       return Padding({
         padding: EdgeInsets.only({ left: EdgeInsetsStep.s2 }),
         child: resolvedTitleWidget,
-      });
+      })
     } else {
-      return resolvedTitleWidget;
+      return resolvedTitleWidget
     }
-  })();
+  })()
 
-  const resolvedHoverColor = hoverColor ?? Colors.indigo;
+  const resolvedHoverColor = hoverColor ?? Colors.indigo
 
   return defineComponent({
-    name: "ListTile",
+    name: 'ListTile',
+    setup() {
+      return {
+        mouseCursor,
+        hoverColor,
+        resolvedHoverColor,
+        focusColor,
+        contentPadding,
+        enabled,
+        selected,
+        tileColor,
+        tileBackgroundColor,
+        selectedTileColor,
+      }
+    },
     render() {
       const resolvedMouseCursor = (() => {
-        if ((enabled?.value == true || enabled == null) && onTap) {
-          return mouseCursor?.cursor ?? SystemMouseCursors.click;
+        if ((enabled?.value == true || enabled == null) && onTap != null) {
+          return mouseCursor ?? SystemMouseCursors.click
         } else {
-          return SystemMouseCursors.basic;
+          return SystemMouseCursors.basic
         }
-      })();
+      })()
       const result = InkWell({
-        mouseCursor: SystemMouseCursor.use({ cursor: resolvedMouseCursor }),
+        mouseCursor: resolvedMouseCursor,
         onTap: enabled == null || enabled?.value == true ? onTap : null,
         focusColor,
         hoverColor:
@@ -143,7 +155,7 @@ export const ListTile = ({
             ],
           }),
         }),
-      });
+      })
       return h(
         enabled?.value == false
           ? Opacity({
@@ -153,7 +165,7 @@ export const ListTile = ({
               }),
             })
           : result
-      );
+      )
     },
-  });
-};
+  })
+}

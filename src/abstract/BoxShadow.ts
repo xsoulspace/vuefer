@@ -9,55 +9,60 @@ export enum BoxShadowSize {
 }
 // TODO: make it more customizable
 export class BoxShadow {
-  size: BoxShadowSize;
-  constructor({ size }: { size: BoxShadowSize }) {
-    this.size = size ?? BoxShadowSize.none;
+  size: BoxShadowSize
+  constructor({ size }: { size?: BoxShadowSize }) {
+    this.size = size ?? BoxShadowSize.none
   }
+
+  static get default() {
+    return new BoxShadow({})
+  }
+
   static _factory(size: BoxShadowSize) {
-    return new BoxShadow({ size });
+    return new BoxShadow({ size })
   }
   static get sm() {
-    return this._factory(BoxShadowSize.sm);
+    return this._factory(BoxShadowSize.sm)
   }
   static get md() {
-    return this._factory(BoxShadowSize.md);
+    return this._factory(BoxShadowSize.md)
   }
   static get m() {
-    return this._factory(BoxShadowSize.m);
+    return this._factory(BoxShadowSize.m)
   }
   static get lg() {
-    return this._factory(BoxShadowSize.lg);
+    return this._factory(BoxShadowSize.lg)
   }
   static get xl() {
-    return this._factory(BoxShadowSize.xl);
+    return this._factory(BoxShadowSize.xl)
   }
   static get xxl() {
-    return this._factory(BoxShadowSize.xxl);
+    return this._factory(BoxShadowSize.xxl)
   }
 
   static get none() {
-    return this._factory(BoxShadowSize.none);
+    return this._factory(BoxShadowSize.none)
   }
   get css(): string {
-    if (this.size == BoxShadowSize.none) return "";
+    if (this.size == BoxShadowSize.none) return ''
     const size = (() => {
       switch (this.size) {
         case BoxShadowSize.lg:
-          return "-lg";
+          return '-lg'
         case BoxShadowSize.m:
-          return "";
+          return ''
         case BoxShadowSize.md:
-          return "-md";
+          return '-md'
         case BoxShadowSize.sm:
-          return "-sm";
+          return '-sm'
         case BoxShadowSize.xl:
-          return "-xl";
+          return '-xl'
         case BoxShadowSize.xxl:
-          return "-2xl";
+          return '-2xl'
         default:
-          return "";
+          return ''
       }
-    })();
-    return `shadow${size}`;
+    })()
+    return `shadow${size}`
   }
 }

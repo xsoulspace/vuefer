@@ -5,15 +5,15 @@ export enum TextDecorationStyles {
   // dashed,
 }
 interface TextDecorationStyleI {
-  decorationStyle?: TextDecorationStyles;
+  decorationStyle?: TextDecorationStyles
 }
 export class TextDecorationStyle {
-  decorationStyle: TextDecorationStyles;
+  decorationStyle: TextDecorationStyles
   constructor({ decorationStyle }: TextDecorationStyleI) {
-    this.decorationStyle = decorationStyle ?? TextDecorationStyles.solid;
+    this.decorationStyle = decorationStyle ?? TextDecorationStyles.solid
   }
 
   get css(): string {
-    return "";
+    return ''
   }
 }
