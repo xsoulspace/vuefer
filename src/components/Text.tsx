@@ -20,6 +20,9 @@ interface TextI {
 export const Text = ({ text, style, overflow, textAlign }: TextI) =>
   defineComponent({
     name: 'Text',
+    setup() {
+      return { text }
+    },
     render() {
       return h(
         'div',
@@ -30,7 +33,7 @@ export const Text = ({ text, style, overflow, textAlign }: TextI) =>
             textAlign?.css ?? '',
           ].join(' '),
         },
-        `${text.value ?? ''}`
+        `${this.text}`
       )
     },
   })

@@ -16,12 +16,14 @@ export interface ButtonStyleButtonI {
   key?: Maybe<Key>
   style?: Maybe<ButtonStyle>
   onTap?: Maybe<GestureTapCallback>
+  expand?: boolean
 }
 export const ButtonStyleButton = ({
   child,
   key,
   onTap,
   style,
+  expand,
 }: ButtonStyleButtonI) => {
   const isDisabled = onTap == null
   const constraints = new BoxConstraints({})
@@ -72,7 +74,11 @@ export const ButtonStyleButton = ({
   return defineComponent({
     name: 'ButtonStyleButton',
     render() {
-      return h('div', { class: 'relative select-none w-full' }, [h(result)])
+      return h(
+        'div',
+        { class: ['relative select-none', expand ? 'w-full' : ''].join(' ') },
+        [h(result)]
+      )
     },
   })
 }

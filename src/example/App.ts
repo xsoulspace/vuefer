@@ -23,18 +23,13 @@ import {
   BorderRadiusStep,
   BoxDecoration,
   BoxShadow,
-  ButtonStyle,
-  Colors,
   CrossAxisAlignment,
   DropdownFieldController,
   EdgeInsets,
   EdgeInsetsStep,
   MainAxisAlignment,
   SystemMouseCursors,
-  TextDecoration,
-  TextDecorations,
   TextEditingController,
-  TextStyle,
 } from '../abstract'
 
 type IndexedText = {
@@ -59,28 +54,68 @@ export const wrapperApp = () => {
   const obj = reactive<Map<any, any>>(new Map())
   obj.set(0, 'test')
   obj.set(1, 'test1')
-  const items = computed(() => Array.from(obj.values()))
+  obj.set(2, 'test1')
+  obj.set(3, 'test1')
+  obj.set(4, 'test1')
+  obj.set(5, 'test1')
+  obj.set(6, 'test1')
+  obj.set(7, 'test1')
+  obj.set(8, 'test1')
+  obj.set(9, 'test1')
+  obj.set(10, 'test1')
+  obj.set(11, 'test1')
+  obj.set(12, 'test1')
+  obj.set(13, 'test1')
+  obj.set(14, 'test1')
+  obj.set(15, 'test1')
+  obj.set(16, 'test1')
+  obj.set(17, 'test1')
+  obj.set(18, 'test1')
+  obj.set(19, 'test1')
+  obj.set(20, 'test1')
+  const items = computed<string[]>(() => Array.from(obj.values()))
   const itemCount = computed(() => obj.size)
-
+  const dropdownFieldController = new DropdownFieldController<IndexedText>({
+    value: { id: 1, text: 'Hola!' },
+    key: '1',
+  })
+  const dropdown = DropdownButton({
+    items: [
+      { id: 1, text: 'Hola!' },
+      { id: 2, text: 'Hola 2!' },
+      { id: 3, text: 'Hola 3!' },
+      { id: 4, text: 'maybe 4!' },
+      {
+        id: 5,
+        text: 'trello 5!',
+      },
+      { id: 6, text: 'Hola 6!' },
+      { id: 7, text: 'home 7!' },
+    ].map((el) =>
+      DropdownMenuItem({
+        child: TextButton({
+          expand: true,
+          child: Text({
+            text: ref(el.text),
+          }),
+          onTap: () => '',
+        }),
+        value: el,
+        key: el.id.toString(),
+        title: el.text,
+      })
+    ),
+    controller: dropdownFieldController,
+  })
   const dynamicItems = SizedBox({
     child: ListView.builder({
       itemBuilder: ({ index }) => {
         const value = items.value[index]
-        return ElevatedButton({
-          style: new ButtonStyle({
-            backgroundColor: Colors.grey,
-            textStyle: new TextStyle({
-              color: Colors.white,
-              decoration: new TextDecoration({
-                decoration: TextDecorations.lineThrough,
-              }),
-            }),
-          }),
-          child: Text({
-            text: ref(value),
-          }),
+        return TextButton({
+          expand: true,
+          child: Text({ text: ref(value) }),
           onTap: () => {
-            obj.clear()
+            // obj.clear()
             alert(`hello tap with index ${index} and value ${value}!`)
             const newItemId = itemCount.value
             obj.set(newItemId, `new value ${newItemId}`)
@@ -94,10 +129,6 @@ export const wrapperApp = () => {
     width: EdgeInsetsStep.s96,
   })
   const isEnabled = ref(true)
-  const dropdownFieldController = new DropdownFieldController<IndexedText>({
-    value: { id: 1, text: 'Hola!' },
-    key: '1',
-  })
   const temp = Container({
     padding,
     decoration: new BoxDecoration({
@@ -110,33 +141,6 @@ export const wrapperApp = () => {
       children: [
         Column({
           children: [
-            DropdownButton({
-              items: [
-                { id: 1, text: 'Hola!' },
-                { id: 2, text: 'Hola 2!' },
-                { id: 3, text: 'Hola 3!' },
-                { id: 4, text: 'maybe 4!' },
-                {
-                  id: 5,
-                  text: 'trello 5!',
-                },
-                { id: 6, text: 'Hola 6!' },
-                { id: 7, text: 'home 7!' },
-              ].map((el) =>
-                DropdownMenuItem({
-                  child: TextButton({
-                    child: Text({
-                      text: ref(el.text),
-                    }),
-                    onTap: () => '',
-                  }),
-                  value: el,
-                  key: el.id.toString(),
-                  title: el.text,
-                })
-              ),
-              controller: dropdownFieldController,
-            }),
             MouseRegion({
               child: textCard,
               cursor: SystemMouseCursors.progress,
@@ -150,6 +154,7 @@ export const wrapperApp = () => {
             TextField({
               controller: controller,
             }),
+            dropdown,
             CheckboxListTile({
               onChanged: () => {
                 // isEnabled.value = !isEnabled.value;

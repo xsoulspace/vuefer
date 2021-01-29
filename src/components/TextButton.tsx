@@ -6,6 +6,7 @@ export const TextButton = ({
   onTap,
   style,
   key,
+  expand,
 }: ButtonStyleButtonI) => {
   const defaultStyle = new ButtonStyle({
     elevation: BoxShadow.none,
@@ -20,6 +21,7 @@ export const TextButton = ({
       return h(
         ButtonStyleButton({
           child,
+          expand,
           onTap,
           style: finalStyle,
         })

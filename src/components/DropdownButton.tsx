@@ -58,6 +58,7 @@ export const DropdownButton = <
   // init
   textFieldController.text.value = selectedItem.value?.title ?? ''
   const isMenuOpened = ref(false)
+
   const itemsDropdown = defineComponent({
     name: 'items',
     components: {
@@ -120,37 +121,6 @@ export const DropdownButton = <
     },
   })
 
-  const result = Stack({
-    children: [
-      GestureDetector({
-        child: SizedBox({
-          child: Container({
-            decoration: new BoxDecoration({ boxShadow: elevation }),
-            child: Row({
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField({ controller: textFieldController }),
-
-                resolvedIcon,
-              ],
-            }),
-          }),
-          height: EdgeInsetsStep.s10,
-        }),
-        onTap: () => {
-          if (!isMenuOpened.value) {
-            isMenuOpened.value = true
-          }
-        },
-      }),
-      Visibility({
-        child: itemsDropdown,
-        visible: isMenuOpened,
-      }),
-    ],
-  })
-
   return defineComponent({
     name: 'DropdownButton',
     setup() {
@@ -161,7 +131,37 @@ export const DropdownButton = <
           <div ref={target}>
             {h(
               GestureDetector({
-                child: result,
+                child: Stack({
+                  children: [
+                    GestureDetector({
+                      child: SizedBox({
+                        child: Container({
+                          decoration: new BoxDecoration({
+                            boxShadow: elevation,
+                          }),
+                          child: Row({
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField({ controller: textFieldController }),
+                              resolvedIcon,
+                            ],
+                          }),
+                        }),
+                        height: EdgeInsetsStep.s10,
+                      }),
+                      onTap: () => {
+                        if (!isMenuOpened.value) {
+                          isMenuOpened.value = true
+                        }
+                      },
+                    }),
+                    Visibility({
+                      child: itemsDropdown,
+                      visible: isMenuOpened,
+                    }),
+                  ],
+                }),
               })
             )}
           </div>

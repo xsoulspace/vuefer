@@ -5,6 +5,7 @@ interface ItemBuilderContext {
   index: number
 }
 export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component
+
 interface ListViewBuilderI {
   itemBuilder: ListItemBuilder
   itemCount: Ref<number>
