@@ -98,10 +98,10 @@ export const DropdownButton = <
                     itemBuilder={listItemBuilder}
                     minItemHeight={minItemHeight}
                     onItemClick={(index: number) => {
-                      const oldValue = controller.value.value
+                      const oldValue = controller.value
                       const item = effectiveItems.value[index]
                       if (item == null) return Container({})
-                      controller.value.value = item.value
+                      controller.value = item.value
                       controller.key.value = item.key
                       textFieldController.text.value = item.title
                       isMenuOpened.value = false

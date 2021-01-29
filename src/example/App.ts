@@ -141,6 +141,12 @@ export const wrapperApp = () => {
               child: textCard,
               cursor: SystemMouseCursors.progress,
             }),
+            ElevatedButton({
+              child: Text({ text: ref('') }),
+              onTap: () => {
+                console.log({ dropdownFieldController })
+              },
+            }),
             TextField({
               controller: controller,
             }),

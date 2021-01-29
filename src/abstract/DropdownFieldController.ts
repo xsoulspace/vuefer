@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { reactive, Ref, ref } from 'vue'
 
 interface DropdownFieldControllerI<I> {
   value?: Maybe<I>
@@ -9,7 +9,9 @@ interface DropdownFieldControllerI<I> {
 }
 //  TODO: add properties
 export class DropdownFieldController<I> {
-  value: Ref<Maybe<I>> = ref()
+  private _reactVal: { val: Maybe<I> | Record<string, unknown> } = reactive({
+    val: {},
+  })
   key: Ref<Maybe<string>> = ref()
   readOnly: boolean
   maxLength?: Maybe<number>
@@ -21,11 +23,17 @@ export class DropdownFieldController<I> {
     maxLength,
     key,
   }: DropdownFieldControllerI<I>) {
-    this.value.value = value
+    this.value = value
     this.key.value = key
     this.readOnly = readOnly ?? false
     this.maxLength = maxLength
     this.maxLines = maxLines ?? 1
+  }
+  set value(val: Maybe<I>) {
+    this._reactVal.val = val
+  }
+  get value() {
+    return this._reactVal.val as Maybe<I>
   }
 
   get css(): string {

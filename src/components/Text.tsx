@@ -4,7 +4,7 @@ import { TextAlign } from '../abstract/TextAlign'
 import { TextOverflow } from '../abstract/TextOverflow'
 
 interface TextI {
-  text: Ref<string | boolean | number>
+  text: Ref<Maybe<string | boolean | number>>
   style?: Maybe<TextStyle>
   // strutStyle,
   textAlign?: Maybe<TextAlign>
@@ -30,7 +30,7 @@ export const Text = ({ text, style, overflow, textAlign }: TextI) =>
             textAlign?.css ?? '',
           ].join(' '),
         },
-        `${text.value}`
+        `${text.value ?? ''}`
       )
     },
   })
