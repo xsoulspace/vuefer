@@ -4,7 +4,7 @@ import { Key } from '../abstract/Key'
 import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
 
 interface SizedBoxI {
-  child: Component
+  child?: Component
   key?: Maybe<Key>
   height?: Maybe<EdgeInsetsStep>
   width?: Maybe<EdgeInsetsStep>
@@ -21,7 +21,7 @@ export const SizedBox = ({ child, key, width, height }: SizedBoxI) => {
         {
           class: [widthBox?.css ?? '', heightBox?.css ?? ''].join(' '),
         },
-        [h(child)]
+        [h(child ?? <div />)]
       )
     },
   })
