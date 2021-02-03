@@ -130,8 +130,10 @@ export const ListTile = ({
       }
     },
     render() {
+      const isEnabled = enabled?.value == true || enabled == null
+      const isNotEnabled = enabled?.value == false
       const resolvedMouseCursor = (() => {
-        if ((enabled?.value == true || enabled == null) && onTap != null) {
+        if (isEnabled || onTap != null) {
           return mouseCursor ?? SystemMouseCursors.click
         } else {
           return SystemMouseCursors.basic
@@ -139,13 +141,12 @@ export const ListTile = ({
       })()
       const result = InkWell({
         mouseCursor: resolvedMouseCursor,
-        onTap: enabled == null || enabled?.value == true ? onTap : null,
+        onTap: isEnabled ? onTap : null,
         focusColor,
-        hoverColor:
-          enabled?.value == false ? Colors.transparent : resolvedHoverColor,
+        hoverColor: isNotEnabled ? Colors.transparent : resolvedHoverColor,
         child: Container({
           padding: contentPadding ?? EdgeInsets.all(EdgeInsetsStep.s4),
-          color: enabled?.value == false ? Colors.grey : tileBackgroundColor,
+          color: isNotEnabled ? Colors.grey : tileBackgroundColor,
           height: resolvedHeight,
           child: Row({
             children: [
@@ -157,7 +158,7 @@ export const ListTile = ({
         }),
       })
       return h(
-        enabled?.value == false
+        isNotEnabled
           ? Opacity({
               child: result,
               opacity: OpacityDecoration.use({
