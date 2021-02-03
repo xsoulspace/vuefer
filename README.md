@@ -1,5 +1,7 @@
 # Vue3 styled like Flutter with Tailwind CSS
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vft)
+
 **Please notice: this project is a work in progress!**
 
 The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript & Tailwind awesome too!
