@@ -39,4 +39,7 @@ export class DropdownFieldController<I> {
   get css(): string {
     return ''
   }
+  get reactive() {
+    return this._reactVal
+  }
 }
