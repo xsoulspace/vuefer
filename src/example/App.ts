@@ -1,3 +1,5 @@
+import { Key } from '@/abstract'
+import { GridView, GridViewItem } from '@/components'
 import {
   Align,
   Alignment,
@@ -143,6 +145,18 @@ export const wrapperApp = () => {
               text: ref(el),
             })
           ),
+        }),
+        GridView.count({
+          children: [
+            GridViewItem({
+              child: Text({ text: ref('') }),
+              key: Key(''),
+              x: 0,
+              y: 0,
+              heightPx: 2,
+              widthPx: 2,
+            }),
+          ],
         }),
         Column({
           children: [
