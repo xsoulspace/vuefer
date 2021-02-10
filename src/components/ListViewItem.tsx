@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue'
-import { GestureDetector } from './GestureDetector'
-import { ListItemBuilder } from './ListView'
+import { GestureDetector } from '.'
+import { ItemBuilder } from '..'
 
 export const ListViewItem = defineComponent({
   name: 'ListViewItem',
@@ -15,7 +15,7 @@ export const ListViewItem = defineComponent({
     },
   },
   render() {
-    const fixedItemBuilder = this.itemBuilder as ListItemBuilder
+    const fixedItemBuilder = this.itemBuilder as ItemBuilder
     return h(
       GestureDetector({
         child: fixedItemBuilder({ index: this.index }),

@@ -1,13 +1,9 @@
-import { Component, defineComponent, h, Ref } from 'vue'
+import { defineComponent, h, Ref } from 'vue'
+import { ItemBuilder, Maybe } from '..'
 import ListViewBuilder from './ListViewBuilder.vue'
 
-interface ItemBuilderContext {
-  index: number
-}
-export type ListItemBuilder = ({ index }: ItemBuilderContext) => Component
-
 interface ListViewBuilderI {
-  itemBuilder: ListItemBuilder
+  itemBuilder: ItemBuilder
   itemCount: Ref<number>
   minItemHeight?: Maybe<Ref<number>>
 }

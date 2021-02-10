@@ -5,11 +5,13 @@ import { ConstrainedBox, InkWell, Material, Opacity, Padding } from '.'
 import {
   BoxConstraints,
   ButtonStyle,
+  GestureTapCallback,
   Key,
+  Maybe,
   OpacityDecoration,
   OpacityDecorationSteps,
   SystemMouseCursors,
-} from '../abstract'
+} from '..'
 
 export interface ButtonStyleButtonI {
   child: Component

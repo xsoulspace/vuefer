@@ -1,29 +1,34 @@
+import { unifyValue } from '@/utils'
 import { onClickOutside } from '@vueuse/core'
 import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
+import {
+  Container,
+  DropdownMenuItemConstructor,
+  GestureDetector,
+  Icon,
+  Icons,
+  Positioned,
+  Row,
+  SizedBox,
+  Stack,
+  TextField,
+  Visibility,
+} from '.'
 import {
   BoxDecoration,
   BoxShadow,
   Colors,
+  DropdownFieldController,
   EdgeInsets,
   EdgeInsetsStep,
+  ItemBuilder,
   MainAxisAlignment,
   MainAxisSize,
+  Maybe,
   TextEditingController,
-} from '../abstract'
-import { DropdownFieldController } from '../abstract/DropdownFieldController'
-import { unifyValue } from '../functions/unifyValue'
-import { Container } from './Container'
-import { DropdownMenuItemConstructor } from './DropdownMenuItem'
-import { GestureDetector } from './GestureDetector'
-import { Icon, Icons } from './Icon'
-import { ListItemBuilder } from './ListView'
+  ValueChanged,
+} from '..'
 import ListViewBuilder from './ListViewBuilder.vue'
-import { Positioned } from './Positioned'
-import { Row } from './Row'
-import { SizedBox } from './SizedBox'
-import { Stack } from './Stack'
-import { TextField } from './TextField'
-import { Visibility } from './Visibility'
 
 interface DropdownButtonI<I> {
   items: DropdownMenuItemConstructor<I>[]
@@ -74,7 +79,7 @@ export const DropdownButton = <
         })
       )
 
-      const listItemBuilder: ListItemBuilder = ({ index }) => {
+      const itemBuilder: ItemBuilder = ({ index }) => {
         const item = effectiveItems.value[index]
         if (item) return item.widget
         return Container({})
@@ -96,7 +101,7 @@ export const DropdownButton = <
                 child: h(
                   <list-view-builder
                     itemCount={effectiveItems.value.length}
-                    itemBuilder={listItemBuilder}
+                    itemBuilder={itemBuilder}
                     minItemHeight={minItemHeight}
                     onItemClick={(index: number) => {
                       const oldValue = controller.value

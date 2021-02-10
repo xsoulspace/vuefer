@@ -26,6 +26,7 @@ Please notice:
 - Vue3
 - Tailwind
 - [vue3-virtual-scroller](https://www.npmjs.com/package/vue3-virtual-scroller)
+- [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 
 ### Installation
 
@@ -169,6 +170,7 @@ export const wrapperApp = () => {
   [] Color palette
 
 - [] Scaffold
+- [] Grid, GridTile with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 
 ## Next
 

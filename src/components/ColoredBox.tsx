@@ -1,5 +1,5 @@
 import { Component, defineComponent, h } from 'vue'
-import { Color, Colors, Key } from '../abstract'
+import { Color, Colors, Key, Maybe } from '..'
 
 interface ColoredBoxI {
   child: Component

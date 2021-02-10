@@ -1,4 +1,4 @@
-import { ColorNames } from './ColorNames'
+import { ColorNames } from '.'
 
 export class Color {
   // TODO: replace to 32 bit

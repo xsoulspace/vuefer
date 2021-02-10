@@ -1,9 +1,15 @@
 import { Component, defineComponent, h } from 'vue'
-import { Alignment, SizedBoxHeight, SizedBoxWidth } from '../abstract'
-import { BoxConstraints } from '../abstract/BoxConstraints'
-import { BoxDecoration } from '../abstract/BoxDecoration'
-import { Color } from '../abstract/Color'
-import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import {
+  Alignment,
+  BoxConstraints,
+  BoxDecoration,
+  Color,
+  EdgeInsets,
+  EdgeInsetsStep,
+  Maybe,
+  SizedBoxHeight,
+  SizedBoxWidth,
+} from '..'
 interface ContainerI {
   child?: Component
   padding?: Maybe<EdgeInsets>

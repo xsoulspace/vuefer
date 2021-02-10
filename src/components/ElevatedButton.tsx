@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { ButtonStyleButton, ButtonStyleButtonI } from './ButtonStyleButton'
+import { ButtonStyleButton, ButtonStyleButtonI } from '.'
 // interface ElevatedButtonI extends ButtonStyleButtonI {}
 export const ElevatedButton = ({
   child,

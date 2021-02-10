@@ -1,5 +1,5 @@
 import { Component, defineComponent, h } from 'vue'
-import { Key } from '../abstract'
+import { GestureTapCallback, Key, Maybe } from '..'
 export interface GestureDetectorI {
   child: Component
   key?: Maybe<Key>

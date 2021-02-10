@@ -1,21 +1,22 @@
-import { defineComponent, h } from 'vue'
-import { FlexHelper, RowI } from '.'
-import { Axis } from '..'
+import { h } from 'vue'
+import { defineComponent } from 'vue-demi'
+import { FlexHelper, WrapI } from '..'
 
-export const Row = ({
+export const Wrap = ({
   children,
   mainAxisAlignment,
   mainAxisSize,
-  verticalDirection,
   crossAxisAlignment,
+  direction,
   dividerDecoration,
-}: RowI) => {
+  verticalDirection,
+}: WrapI) => {
   return defineComponent({
-    name: 'Column',
+    name: 'Wrap',
     render() {
       const classNames = FlexHelper.getClassNames({
         crossAxisAlignment,
-        direction: Axis.horizontal,
+        direction,
         mainAxisAlignment,
         mainAxisSize,
         verticalDirection,
@@ -24,7 +25,7 @@ export const Row = ({
       if (children.length) {
         return h(
           'div',
-          { class: classNames },
+          { class: [classNames, 'flex-wrap'].join(' ') },
           children.map((child) => h(child))
         )
       } else {

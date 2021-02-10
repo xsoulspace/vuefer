@@ -1,8 +1,5 @@
-import { Border } from './Border'
-import { BorderRadius } from './BorderRadius'
-import { BoxShadow } from './BoxShadow'
-import { Color } from './Color'
-import { Colors } from './Colors'
+import { Border, BorderRadius, BoxShadow, Color, Colors, Maybe } from '.'
+
 interface BoxDecorationI {
   color?: Maybe<Color>
   border?: Maybe<Border>

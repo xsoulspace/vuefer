@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue'
-import { BoxShadow, ButtonStyle } from '../abstract'
-import { ButtonStyleButton, ButtonStyleButtonI } from './ButtonStyleButton'
+import { ButtonStyleButton, ButtonStyleButtonI } from '.'
+import { BoxShadow, ButtonStyle } from '..'
 export const TextButton = ({
   child,
   onTap,

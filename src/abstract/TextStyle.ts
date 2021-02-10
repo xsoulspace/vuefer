@@ -1,9 +1,11 @@
-import { Color } from './Color'
-import { Colors } from './Colors'
-import { FontSize } from './FontSize'
-import { FontWeight } from './FontWeight'
-import { TextDecoration } from './TextDecoration'
-import { TextDecorationStyle } from './TextDecorationStyle'
+import {
+  Color,
+  Colors,
+  FontSize,
+  FontWeight,
+  TextDecoration,
+  TextDecorationStyle,
+} from '.'
 interface TextStyleI {
   color?: Color
   backgroundColor?: Color

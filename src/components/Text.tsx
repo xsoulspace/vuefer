@@ -1,7 +1,5 @@
 import { defineComponent, h, Ref } from 'vue'
-import { TextStyle } from '../abstract'
-import { TextAlign } from '../abstract/TextAlign'
-import { TextOverflow } from '../abstract/TextOverflow'
+import { Maybe, TextAlign, TextOverflow, TextStyle } from '..'
 
 interface TextI {
   text: Ref<Maybe<string | boolean | number>>

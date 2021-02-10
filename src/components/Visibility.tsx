@@ -1,5 +1,5 @@
 import { Component, defineComponent, h, Ref } from 'vue'
-import { Key } from '../abstract/Key'
+import { Key, Maybe } from '..'
 
 interface VisibilityI {
   child: Component

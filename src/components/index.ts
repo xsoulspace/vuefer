@@ -14,6 +14,8 @@ export * from './ElevatedButton'
 export * from './FittedBox'
 export * from './Flex'
 export * from './GestureDetector'
+export * from './GridView'
+export * from './GridViewItem'
 export * from './Icon'
 export * from './InkWell'
 export * from './ListTile'
@@ -35,7 +37,7 @@ export * from './TextButton'
 export * from './TextField'
 export * from './VerticalDivider'
 export * from './Visibility'
-
+export * from './Wrap'
 // export * from "./AppBar";
 // export * from "./Card";
 // export * from "./Drawer";

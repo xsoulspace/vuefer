@@ -1,8 +1,13 @@
 import { defineComponent, h, watch } from 'vue'
-import { InputDecoration } from '../abstract/InputDecoration'
-import { Key } from '../abstract/Key'
-import { TextEditingController } from '../abstract/TextEditingController'
-import { TextInputType, TextInputTypes } from '../abstract/TextInputType'
+import {
+  InputDecoration,
+  Key,
+  Maybe,
+  TextEditingController,
+  TextInputType,
+  TextInputTypes,
+  ValueChanged,
+} from '..'
 
 interface TextFieldI {
   key?: Maybe<Key>

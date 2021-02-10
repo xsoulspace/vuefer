@@ -1,6 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { Color, EdgeInsetsStep } from '../abstract'
-import { Key } from '../abstract/Key'
+import { Color, EdgeInsetsStep, Key, Maybe } from '..'
 
 export enum Icons {
   arrow_drop_down = '',

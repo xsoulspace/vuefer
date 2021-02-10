@@ -20,8 +20,8 @@
 <script lang="ts">
 // https://www.npmjs.com/package/vue3-virtual-scroller
 import { DynamicScroller, DynamicScrollerItem } from 'vue3-virtual-scroller'
-// import { ListItemBuilder } from "./ListView";
-import { ListViewItem } from './ListViewItem'
+// import { ItemBuilder } from "./ListView";
+import { ListViewItem } from '.'
 import { computed, ref } from 'vue'
 export default {
   props: {

@@ -1,5 +1,4 @@
-import { Color } from './Color'
-import { Colors } from './Colors'
+import { Color, Colors } from '.'
 
 export enum BorderSideWidth {
   zero,

@@ -1,3 +1,10 @@
+## 0.5.0
+
+Add: GridView.builder, GridViewItem with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
+Add: Wrap
+Refactor: a little bit more orginized structure of imports
+Refactor: ListItemBuilder now is ItemBuilder
+
 ## 0.4.0
 
 Add: Stack, Positioned

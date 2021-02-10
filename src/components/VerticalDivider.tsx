@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { DividerDecoration, DividerI } from '../abstract/DividerDecoration'
+import { DividerDecoration, DividerI } from '..'
 
 // FIXME: it is not working because in tail wind
 // there is no such class

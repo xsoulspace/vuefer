@@ -1,5 +1,4 @@
-import { Color } from '../abstract/Color'
-import { ColorNames } from './ColorNames'
+import { Color, ColorNames } from '.'
 
 export class Colors {
   // TODO: replace to material color

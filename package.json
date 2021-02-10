@@ -35,7 +35,8 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue": "^3.0.0",
     "vue3-virtual-scroller": "^0.2.1",
-    "@vueuse/core": "^4.0.8"
+    "@vueuse/core": "^4.0.8",
+    "vue-grid-layout": "3.0.0-beta1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",

@@ -1,37 +1,35 @@
 import {
   Align,
-  CheckboxListTile,
-  Column,
-  Container,
-  DropdownButton,
-  DropdownMenuItem,
-  ElevatedButton,
-  ListView,
-  MouseRegion,
-  Padding,
-  Row,
-  Scaffold,
-  SizedBox,
-  Text,
-  TextButton,
-  TextField,
-} from '@/components'
-import { computed, reactive, ref } from 'vue'
-import {
   Alignment,
   BorderRadius,
   BorderRadiusStep,
   BoxDecoration,
   BoxShadow,
+  CheckboxListTile,
+  Column,
+  Container,
   CrossAxisAlignment,
+  DropdownButton,
   DropdownFieldController,
+  DropdownMenuItem,
   EdgeInsets,
   EdgeInsetsStep,
+  ElevatedButton,
+  ListView,
   MainAxisAlignment,
+  MouseRegion,
+  Padding,
+  Row,
+  Scaffold,
+  SizedBox,
   SystemMouseCursors,
+  Text,
+  TextButton,
   TextEditingController,
-} from '../abstract'
-
+  TextField,
+  Wrap,
+} from '@/index'
+import { computed, reactive, ref } from 'vue'
 type IndexedText = {
   id: number
   text: string
@@ -139,6 +137,13 @@ export const wrapperApp = () => {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        Wrap({
+          children: items.value.map((el) =>
+            Text({
+              text: ref(el),
+            })
+          ),
+        }),
         Column({
           children: [
             MouseRegion({

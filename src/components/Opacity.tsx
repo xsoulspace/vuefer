@@ -1,6 +1,5 @@
 import { Component, defineComponent, h } from 'vue'
-import { Key } from '../abstract/Key'
-import { OpacityDecoration } from '../abstract/OpacityDecoration'
+import { Key, Maybe, OpacityDecoration } from '..'
 
 interface OpacityI {
   child: Component

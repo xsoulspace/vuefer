@@ -1,9 +1,13 @@
 import { Ref } from 'vue'
-import { BorderSide } from './BorderSide'
-import { BoxBorder } from './BoxBorder'
-import { Color } from './Color'
-import { Colors } from './Colors'
-import { EdgeInsets, EdgeInsetsStep } from './EdgeInsets'
+import {
+  BorderSide,
+  BoxBorder,
+  Color,
+  Colors,
+  EdgeInsets,
+  EdgeInsetsStep,
+  Maybe,
+} from '.'
 interface InputDecorationI {
   labelText?: Maybe<Ref<string>>
   // icon?:

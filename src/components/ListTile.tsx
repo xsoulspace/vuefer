@@ -1,22 +1,18 @@
 import { Component, defineComponent, h, Ref } from 'vue'
+import { Align, Column, Container, InkWell, Opacity, Padding, Row } from '.'
 import {
   Alignment,
   Color,
   Colors,
   EdgeInsets,
   EdgeInsetsStep,
+  GestureTapCallback,
+  Key,
+  Maybe,
   OpacityDecoration,
   OpacityDecorationSteps,
   SystemMouseCursors,
-} from '../abstract'
-import { Key } from '../abstract/Key'
-import { Align } from './Align'
-import { Column } from './Column'
-import { Container } from './Container'
-import { InkWell } from './InkWell'
-import { Opacity } from './Opacity'
-import { Padding } from './Padding'
-import { Row } from './Row'
+} from '..'
 
 interface ListTileI {
   key?: Maybe<Key>
