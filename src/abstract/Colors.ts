@@ -1,5 +1,5 @@
-import { Color, ColorNames } from '.'
-
+import { Color } from './Color'
+import { ColorNames } from './ColorNames'
 export class Colors {
   // TODO: replace to material color
   static black: Color = new Color({ hex: '#000', name: ColorNames.black })

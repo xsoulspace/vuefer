@@ -1,5 +1,5 @@
-import { BorderSide, BorderSideI, BoxBorder, BoxBorderI } from '.'
-
+import { BorderSide, BorderSideI, BoxBorderI } from '..'
+import { BoxBorder } from './BoxBorder'
 export class Border extends BoxBorder {
   constructor(arg: BoxBorderI) {
     super(arg)

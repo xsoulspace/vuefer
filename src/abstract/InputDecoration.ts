@@ -7,7 +7,7 @@ import {
   EdgeInsets,
   EdgeInsetsStep,
   Maybe,
-} from '.'
+} from '..'
 interface InputDecorationI {
   labelText?: Maybe<Ref<string>>
   // icon?:

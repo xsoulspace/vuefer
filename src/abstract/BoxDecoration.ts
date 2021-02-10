@@ -1,4 +1,4 @@
-import { Border, BorderRadius, BoxShadow, Color, Colors, Maybe } from '.'
+import { Border, BorderRadius, BoxShadow, Color, Colors, Maybe } from '..'
 
 interface BoxDecorationI {
   color?: Maybe<Color>

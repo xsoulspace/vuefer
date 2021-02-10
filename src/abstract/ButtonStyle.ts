@@ -10,7 +10,7 @@ import {
   SystemMouseCursor,
   SystemMouseCursors,
   TextStyle,
-} from '.'
+} from '..'
 
 interface ButtonStyleI {
   textStyle?: TextStyle

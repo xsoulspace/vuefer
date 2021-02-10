@@ -1,6 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { GestureDetector } from '.'
-import { ItemBuilder } from '..'
+import { GestureDetector, ItemBuilder } from '..'
 
 export const ListViewItem = defineComponent({
   name: 'ListViewItem',

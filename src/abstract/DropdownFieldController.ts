@@ -1,5 +1,5 @@
 import { reactive, Ref, ref } from 'vue'
-import { Maybe } from '.'
+import { Maybe } from '..'
 
 interface DropdownFieldControllerI<I> {
   value?: Maybe<I>

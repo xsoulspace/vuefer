@@ -2,7 +2,7 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vft)
 
-**Please notice: this project is a work in progress!**
+**Please notice: this project is a work in progress and completely experimental!**
 
 The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript & Tailwind awesome too!
 
