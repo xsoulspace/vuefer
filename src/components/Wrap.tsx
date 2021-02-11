@@ -1,5 +1,4 @@
-import { h } from 'vue'
-import { defineComponent } from 'vue-demi'
+import { defineComponent, h } from 'vue'
 import { FlexHelper, WrapI } from './Flex'
 
 export const Wrap = ({
