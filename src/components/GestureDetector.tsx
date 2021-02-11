@@ -14,9 +14,11 @@ export const GestureDetector = ({ child, onTap, key }: GestureDetectorI) => {
       return { onTap }
     },
     render() {
-      return h('div', { onClick: () => (this.onTap ? this.onTap() : '') }, [
-        h(child),
-      ])
+      return h(
+        'div',
+        { onClick: async () => await (this.onTap ? this.onTap() : '') },
+        [h(child)]
+      )
     },
   })
 }
