@@ -114,7 +114,7 @@ export const wrapperApp = () => {
         return TextButton({
           expand: true,
           child: Text({ text: ref(value) }),
-          onTap: () => {
+          onTap: async () => {
             // obj.clear()
             alert(`hello tap with index ${index} and value ${value}!`)
             const newItemId = itemCount.value
