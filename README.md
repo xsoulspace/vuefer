@@ -121,6 +121,8 @@ export const wrapperApp = () => {
 - [x] ColoredBox
 - [x] CheckboxListTile
 - [x] ListTile
+- [x] Grid, GridTile with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
+- [x] Wrap (Flex - flex-wrap)
 
 ## WIP
 
@@ -170,7 +172,6 @@ export const wrapperApp = () => {
   [] Color palette
 
 - [] Scaffold
-- [] Grid, GridTile with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 
 ## Next
 
