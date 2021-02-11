@@ -1,7 +1,7 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
 import { Component, defineComponent, h } from 'vue'
-import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { Maybe } from '../abstract/BasicTypes'
 import { BoxConstraints } from '../abstract/BoxConstraints'
 import { ButtonStyle } from '../abstract/ButtonStyle'
 import { Key } from '../abstract/Key'
@@ -20,7 +20,7 @@ export interface ButtonStyleButtonI {
   child: Component
   key?: Maybe<Key>
   style?: Maybe<ButtonStyle>
-  onTap?: Maybe<GestureTapCallback>
+  onTap?: Maybe<CallableFunction>
   expand?: boolean
 }
 export const ButtonStyleButton = ({

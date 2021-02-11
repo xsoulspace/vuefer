@@ -1,6 +1,6 @@
 import { Component, defineComponent, h } from 'vue'
 import { Alignment } from '../abstract/Alignment'
-import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { Maybe } from '../abstract/BasicTypes'
 import { SystemMouseCursors } from '../abstract/MouseCursor'
 import { Container } from './Container'
 import { GestureDetector } from './GestureDetector'
@@ -8,7 +8,7 @@ import { MouseRegion } from './MouseRegion'
 interface DropdownMenuItemI<I> {
   child: Component
   key: string
-  onTap?: Maybe<GestureTapCallback>
+  onTap?: Maybe<CallableFunction>
   value?: Maybe<I>
   title: string
 }

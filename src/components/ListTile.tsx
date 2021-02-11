@@ -1,6 +1,6 @@
 import { Component, defineComponent, h, Ref } from 'vue'
 import { Alignment } from '../abstract/Alignment'
-import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { Maybe } from '../abstract/BasicTypes'
 import { Color } from '../abstract/Color'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
@@ -30,7 +30,7 @@ interface ListTileI {
   // shape,
   contentPadding?: Maybe<EdgeInsets>
   enabled?: Maybe<Ref<boolean>>
-  onTap?: Maybe<GestureTapCallback>
+  onTap?: Maybe<CallableFunction>
   // onLongPress,
   mouseCursor?: Maybe<SystemMouseCursors>
   selected?: Maybe<Ref<boolean>>
