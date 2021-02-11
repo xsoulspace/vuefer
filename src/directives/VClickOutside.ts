@@ -1,7 +1,7 @@
 import { DirectiveBinding } from '@vue/runtime-core'
-// https://github.com/ndelvalle/v-click-outside/issues/238
 /**
  * Modified for Vue 3 from https://github.com/ndelvalle/v-click-outside
+ * By https://gist.github.com/jgerigmeyer/87d16753c93762132943a26ea40cc665
  * Cf. https://github.com/ndelvalle/v-click-outside/issues/238
  */
 import { ObjectDirective } from 'vue'
