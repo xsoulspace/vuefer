@@ -169,6 +169,8 @@ export const wrapperApp = () => {
           ),
         }),
         GridView.count({
+          isDraggable: ref(true),
+          isResizable: ref(true),
           onPositionUpdate: (newPosition) => {
             const i = layoutMatrix.value.findIndex(
               (el) => el.index == newPosition.index
@@ -178,7 +180,11 @@ export const wrapperApp = () => {
           delegate: GridViewDelegate.use({
             gridViewItems: layoutMatrix.value.map((el) =>
               GridViewItem({
-                child: Text({ text: ref(`text key:${el.index}`) }),
+                child: TextButton({
+                  child: Text({ text: ref(`text key:${el.index}`) }),
+                  expand: true,
+                  onTap: () => alert(`Hola ${el.index}!`),
+                }),
                 position: el,
               })
             ),
