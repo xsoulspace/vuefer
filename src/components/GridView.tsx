@@ -1,59 +1,63 @@
-import { computed, defineComponent, h, ref, Ref, watch } from 'vue'
-import { GridLayout } from 'vue-grid-layout'
-import { GridViewController, GridViewItemPosition, Maybe } from '..'
-
+import { computed, defineComponent, h, Ref } from 'vue'
+import { GridViewDelegate, GridViewItemPosition, Maybe, ValueChanged } from '..'
+import GridViewBuilder from './GridViewBuilder.vue'
 interface GridViewBuilderI {
-  crossAxisCount: Ref<number>
+  crossAxisCount?: Ref<number>
   itemHeight?: Ref<Maybe<number>>
   isDraggable?: Ref<boolean>
   isResizable?: Ref<boolean>
-  controller: GridViewController
+  placeAnywhere?: Ref<boolean>
+  delegate: GridViewDelegate
+  onPositionUpdate?: Maybe<ValueChanged<GridViewItemPosition>>
 }
+
 export class GridView {
   static count({
     crossAxisCount,
     isDraggable,
     isResizable,
     itemHeight,
-    controller,
+    delegate,
+    onPositionUpdate,
+    placeAnywhere,
   }: GridViewBuilderI) {
-    const resolvedIsDraggable = computed(() =>
-      isDraggable?.value == false ? false : true
-    )
-    const resolvedIsResizable = computed(() =>
-      isResizable?.value == false ? false : true
-    )
-    const resolvedItemHeight = computed(() => itemHeight?.value ?? 30)
-    const internalLayoutMatrix = ref<Maybe<GridViewItemPosition>[]>([])
-    watch(
-      controller.reactive,
-      () => {
-        internalLayoutMatrix.value = controller.layoutMatrix
-      },
-      { deep: true, immediate: true }
-    )
     return defineComponent({
       name: 'GridView',
-      setup() {
-        return { crossAxisCount }
+      components: {
+        GridViewBuilder,
       },
-      render() {
-        return h(
-          GridLayout,
-          {
-            'col-num': crossAxisCount.value,
-            'row-height': resolvedItemHeight.value,
-            'is-draggable': resolvedIsDraggable.value,
-            'is-resizable': resolvedIsResizable.value,
-            'vertical-compact': true,
-            'use-css-transforms': true,
-            // FIXME: maybe there needed to fix null values...
-            layoutValue: internalLayoutMatrix.value,
-            'onUpdate:layoutValue': (matrix) =>
-              (internalLayoutMatrix.value = matrix),
-          },
-          controller.widgets.map((el) => h(el ?? <div />))
+      setup() {
+        const resolvedIsDraggable = computed(() =>
+          isDraggable?.value == false ? false : true
         )
+        const resolvedIsResizable = computed(() =>
+          isResizable?.value == false ? false : true
+        )
+        const resolvedItemHeight = computed(() => itemHeight?.value ?? 30)
+        const resolvedCrossAxisCount = computed(
+          () => crossAxisCount?.value ?? 12
+        )
+        const resolvedPlaceAnywhere = computed(() =>
+          placeAnywhere?.value == false ? false : true
+        )
+        const widgets = computed(() =>
+          delegate.widgets.map((el) => h(el ?? <div />))
+        )
+
+        return () =>
+          h(
+            <grid-view-builder
+              crossAxisCount={resolvedCrossAxisCount.value}
+              isDraggable={resolvedIsDraggable.value}
+              isResizable={resolvedIsResizable.value}
+              itemHeight={resolvedItemHeight.value}
+              placeAnywhere={resolvedPlaceAnywhere.value}
+              delegate={delegate}
+              onPositionUpdate={onPositionUpdate}
+            >
+              {...widgets.value}
+            </grid-view-builder>
+          )
       },
     })
   }
