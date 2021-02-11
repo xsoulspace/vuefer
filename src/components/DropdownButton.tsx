@@ -1,3 +1,4 @@
+import { onClickOutside } from '@vueuse/core'
 import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
 import { BoxDecoration } from '../abstract/BoxDecoration'
@@ -122,7 +123,11 @@ export const DropdownButton = <
     name: 'DropdownButton',
     setup() {
       const target = ref(null)
-      // onClickOutside(target, (event) => (isMenuOpened.value = false))
+      try {
+        onClickOutside(target, () => (isMenuOpened.value = false))
+      } catch (error) {
+        console.warn(`v-click-outside warning: ${error}`)
+      }
       return () =>
         h(
           <div ref={target}>
