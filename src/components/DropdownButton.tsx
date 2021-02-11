@@ -1,4 +1,3 @@
-import { onClickOutside } from '@vueuse/core'
 import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
 import { BoxDecoration } from '../abstract/BoxDecoration'
@@ -10,6 +9,7 @@ import { ItemBuilder } from '../abstract/ItemBuilder'
 import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
 import { MainAxisSize } from '../abstract/MainAxisSize'
 import { TextEditingController } from '../abstract/TextEditingController'
+import clickOutside from '../directives/VClickOutside'
 import { unifyValue } from '../functions'
 import { Container } from './Container'
 import { DropdownMenuItemConstructor } from './DropdownMenuItem'
@@ -121,16 +121,16 @@ export const DropdownButton = <
 
   return defineComponent({
     name: 'DropdownButton',
+    directives: {
+      clickOutside,
+    },
     setup() {
-      const target = ref(null)
-      try {
-        onClickOutside(target, () => (isMenuOpened.value = false))
-      } catch (error) {
-        console.warn(`v-click-outside warning: ${error}`)
+      const closeMenu = () => {
+        isMenuOpened.value = false
       }
       return () =>
         h(
-          <div ref={target}>
+          <div v-click-outside={closeMenu}>
             {h(
               Stack({
                 children: [
