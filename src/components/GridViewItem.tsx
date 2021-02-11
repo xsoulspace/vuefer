@@ -1,6 +1,6 @@
 import { defineComponent, markRaw } from '@vue/runtime-core'
 import { Component, h } from 'vue'
-import { GridViewItemPosition, GridViewItemPreBuidler } from '..'
+import { GridViewItemPosition, GridViewItemPreBuidler } from '../abstract/Grid'
 
 interface GridViewItemI {
   child: Component

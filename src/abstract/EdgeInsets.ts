@@ -1,4 +1,4 @@
-import { Maybe } from '..'
+import { Maybe } from './BasicTypes'
 
 export enum EdgeInsetsStep {
   'px' = 'px',

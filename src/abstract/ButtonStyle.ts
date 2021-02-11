@@ -1,16 +1,11 @@
-import {
-  BorderRadius,
-  BorderRadiusStep,
-  BoxBorder,
-  BoxShadow,
-  Color,
-  Colors,
-  EdgeInsets,
-  EdgeInsetsStep,
-  SystemMouseCursor,
-  SystemMouseCursors,
-  TextStyle,
-} from '..'
+import { BorderRadius, BorderRadiusStep } from './BorderRadius'
+import { BoxBorder } from './BoxBorder'
+import { BoxShadow } from './BoxShadow'
+import { Color } from './Color'
+import { Colors } from './Colors'
+import { EdgeInsets, EdgeInsetsStep } from './EdgeInsets'
+import { SystemMouseCursor, SystemMouseCursors } from './MouseCursor'
+import { TextStyle } from './TextStyle'
 
 interface ButtonStyleI {
   textStyle?: TextStyle

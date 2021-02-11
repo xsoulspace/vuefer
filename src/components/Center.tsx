@@ -1,6 +1,8 @@
 import { Component, defineComponent, h } from 'vue'
-import { Align } from '.'
-import { Alignment, Key, Maybe } from '..'
+import { Alignment } from '../abstract/Alignment'
+import { Maybe } from '../abstract/BasicTypes'
+import { Key } from '../abstract/Key'
+import { Align } from './Align'
 
 export interface CenterI {
   child: Component

@@ -26,14 +26,14 @@
 </template>
 <script lang="ts">
 import { reactive, watch } from 'vue'
+
+import { GridViewItemBuilder } from './GridViewItemBuilder'
 import {
   GridViewDelegate,
   GridViewItemPosition,
-  Maybe,
   PackageGridItemPosition,
-} from '..'
-import { GridViewItemBuilder } from './GridViewItemBuilder'
-import { ValueChanged } from '@/abstract'
+} from '../abstract/Grid'
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
 export default {
   name: 'GridViewBuilder',
   props: {

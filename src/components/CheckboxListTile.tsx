@@ -1,16 +1,12 @@
 import { Component, defineComponent, h, ref, Ref } from 'vue'
-import {
-  Checkbox,
-  Color,
-  EdgeInsets,
-  Key,
-  ListTile,
-  ListTileControlAffinity,
-  Maybe,
-  SystemMouseCursors,
-  ValueChanged,
-} from '..'
-
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { Color } from '../abstract/Color'
+import { EdgeInsets } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
+import { ListTileControlAffinity } from '../abstract/ListTile'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
+import { Checkbox } from './Checkbox'
+import { ListTile } from './ListTile'
 interface CheckboxListTileI {
   title: Component
   key?: Maybe<Key>

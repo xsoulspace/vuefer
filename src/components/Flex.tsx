@@ -1,13 +1,11 @@
 import { Component, defineComponent, h } from 'vue'
-import {
-  Axis,
-  CrossAxisAlignment,
-  DividerDecoration,
-  MainAxisAlignment,
-  MainAxisSize,
-  Maybe,
-  VerticalDirection,
-} from '..'
+import { Axis } from '../abstract/Axis'
+import { Maybe } from '../abstract/BasicTypes'
+import { CrossAxisAlignment } from '../abstract/CrossAxisAlignment'
+import { DividerDecoration } from '../abstract/DividerDecoration'
+import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
+import { MainAxisSize } from '../abstract/MainAxisSize'
+import { VerticalDirection } from '../abstract/VerticalDirection'
 
 export interface FlexBaseI {
   mainAxisAlignment?: Maybe<MainAxisAlignment>

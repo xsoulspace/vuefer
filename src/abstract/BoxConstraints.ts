@@ -1,4 +1,4 @@
-import { EdgeInsetsStep } from '..'
+import { EdgeInsetsStep } from './EdgeInsets'
 
 // https://tailwindcss.com/docs/min-width
 export enum BoxConstraintsMaxWidth {

@@ -1,4 +1,5 @@
-import { EdgeInsetsStep, Maybe } from '.'
+import { Maybe } from './BasicTypes'
+import { EdgeInsetsStep } from './EdgeInsets'
 
 enum SizeStep {
   max = 'full',

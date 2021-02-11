@@ -1,4 +1,4 @@
-import { Maybe } from '..'
+import { Maybe } from '../abstract/BasicTypes'
 
 export const unifyValue = ({
   str,

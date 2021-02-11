@@ -1,6 +1,11 @@
 import { Component, defineComponent, h } from 'vue'
-import { GestureDetector, GestureDetectorI, MouseRegion } from '.'
-import { BorderRadius, Color, Key, Maybe, SystemMouseCursors } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { BorderRadius } from '../abstract/BorderRadius'
+import { Color } from '../abstract/Color'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
+import { GestureDetector, GestureDetectorI } from './GestureDetector'
+import { MouseRegion } from './MouseRegion'
 export interface InkWellI extends GestureDetectorI {
   child: Component
   key?: Maybe<Key>

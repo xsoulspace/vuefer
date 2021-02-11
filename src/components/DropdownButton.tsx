@@ -1,34 +1,27 @@
-import { unifyValue } from '@/utils'
 import { onClickOutside } from '@vueuse/core'
 import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
-import {
-  Container,
-  DropdownMenuItemConstructor,
-  GestureDetector,
-  Icon,
-  Icons,
-  Positioned,
-  Row,
-  SizedBox,
-  Stack,
-  TextField,
-  Visibility,
-} from '.'
-import {
-  BoxDecoration,
-  BoxShadow,
-  Colors,
-  DropdownFieldController,
-  EdgeInsets,
-  EdgeInsetsStep,
-  ItemBuilder,
-  MainAxisAlignment,
-  MainAxisSize,
-  Maybe,
-  TextEditingController,
-  ValueChanged,
-} from '..'
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { BoxDecoration } from '../abstract/BoxDecoration'
+import { BoxShadow } from '../abstract/BoxShadow'
+import { Colors } from '../abstract/Colors'
+import { DropdownFieldController } from '../abstract/DropdownFieldController'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { ItemBuilder } from '../abstract/ItemBuilder'
+import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
+import { MainAxisSize } from '../abstract/MainAxisSize'
+import { TextEditingController } from '../abstract/TextEditingController'
+import { unifyValue } from '../functions'
+import { Container } from './Container'
+import { DropdownMenuItemConstructor } from './DropdownMenuItem'
+import { GestureDetector } from './GestureDetector'
+import { Icon, Icons } from './Icon'
 import ListViewBuilder from './ListViewBuilder.vue'
+import { Positioned } from './Positioned'
+import { Row } from './Row'
+import { SizedBox } from './SizedBox'
+import { Stack } from './Stack'
+import { TextField } from './TextField'
+import { Visibility } from './Visibility'
 
 interface DropdownButtonI<I> {
   items: DropdownMenuItemConstructor<I>[]

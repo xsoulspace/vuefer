@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { ItemBuilder } from '..'
+import { ItemBuilder } from '../abstract/ItemBuilder'
 
 export const GridViewItemBuilder = defineComponent({
   name: 'GridViewItemBuilder',

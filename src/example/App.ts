@@ -1,4 +1,3 @@
-import { GridViewDelegate } from '@/abstract'
 import { GridView, GridViewItem } from '@/components'
 import {
   Align,
@@ -32,6 +31,7 @@ import {
   Wrap,
 } from '@/index'
 import { computed, reactive, ref } from 'vue'
+import { GridViewDelegate } from '../abstract'
 type IndexedText = {
   id: number
   text: string

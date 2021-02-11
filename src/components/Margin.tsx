@@ -1,5 +1,6 @@
 import { Component, defineComponent, h } from 'vue'
-import { EdgeInsets, Key } from '..'
+import { EdgeInsets } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
 
 export const Margin = ({
   child,

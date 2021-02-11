@@ -1,5 +1,7 @@
 import { Component, defineComponent, h } from 'vue'
-import { Key, Maybe, SystemMouseCursor, SystemMouseCursors } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursor, SystemMouseCursors } from '../abstract/MouseCursor'
 
 interface MouseRegionI {
   child: Component

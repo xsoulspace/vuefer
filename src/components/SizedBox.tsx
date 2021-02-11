@@ -1,5 +1,8 @@
 import { Component, defineComponent, h } from 'vue'
-import { EdgeInsetsStep, Key, Maybe, SizedBoxHeight, SizedBoxWidth } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
+import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
 
 interface SizedBoxI {
   child?: Component

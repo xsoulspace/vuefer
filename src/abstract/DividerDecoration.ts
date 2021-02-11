@@ -1,4 +1,7 @@
-import { Axis, Color, DividerThickness, Key } from '..'
+import { Axis } from './Axis'
+import { Color } from './Color'
+import { DividerThickness } from './DividerThickness'
+import { Key } from './Key'
 
 export interface DividerI {
   color?: Color

@@ -1,7 +1,10 @@
 import { Component, defineComponent, h } from 'vue'
-import { Container, GestureDetector, MouseRegion } from '.'
-import { Alignment, GestureTapCallback, Maybe, SystemMouseCursors } from '..'
-
+import { Alignment } from '../abstract/Alignment'
+import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
+import { Container } from './Container'
+import { GestureDetector } from './GestureDetector'
+import { MouseRegion } from './MouseRegion'
 interface DropdownMenuItemI<I> {
   child: Component
   key: string

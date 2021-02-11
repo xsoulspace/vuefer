@@ -1,18 +1,22 @@
 import { Component, defineComponent, h, Ref } from 'vue'
-import { Align, Column, Container, InkWell, Opacity, Padding, Row } from '.'
+import { Alignment } from '../abstract/Alignment'
+import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { Color } from '../abstract/Color'
+import { Colors } from '../abstract/Colors'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import {
-  Alignment,
-  Color,
-  Colors,
-  EdgeInsets,
-  EdgeInsetsStep,
-  GestureTapCallback,
-  Key,
-  Maybe,
   OpacityDecoration,
   OpacityDecorationSteps,
-  SystemMouseCursors,
-} from '..'
+} from '../abstract/OpacityDecoration'
+import { Align } from './Align'
+import { Column } from './Column'
+import { Container } from './Container'
+import { InkWell } from './InkWell'
+import { Opacity } from './Opacity'
+import { Padding } from './Padding'
+import { Row } from './Row'
 
 interface ListTileI {
   key?: Maybe<Key>

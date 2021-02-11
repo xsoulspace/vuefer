@@ -1,5 +1,6 @@
 import { defineComponent, h, Ref } from 'vue'
-import { ItemBuilder, Maybe } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { ItemBuilder } from '../abstract/ItemBuilder'
 import ListViewBuilder from './ListViewBuilder.vue'
 
 interface ListViewBuilderI {

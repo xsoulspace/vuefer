@@ -1,17 +1,20 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
 import { Component, defineComponent, h } from 'vue'
-import { ConstrainedBox, InkWell, Material, Opacity, Padding } from '.'
+import { GestureTapCallback, Maybe } from '../abstract/BasicTypes'
+import { BoxConstraints } from '../abstract/BoxConstraints'
+import { ButtonStyle } from '../abstract/ButtonStyle'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import {
-  BoxConstraints,
-  ButtonStyle,
-  GestureTapCallback,
-  Key,
-  Maybe,
   OpacityDecoration,
   OpacityDecorationSteps,
-  SystemMouseCursors,
-} from '..'
+} from '../abstract/OpacityDecoration'
+import { ConstrainedBox } from './ConstrainedBox'
+import { InkWell } from './InkWell'
+import { Material } from './Material'
+import { Opacity } from './Opacity'
+import { Padding } from './Padding'
 
 export interface ButtonStyleButtonI {
   child: Component

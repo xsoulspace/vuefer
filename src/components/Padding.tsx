@@ -1,5 +1,7 @@
 import { Component, defineComponent, h } from 'vue'
-import { EdgeInsets, Key, Maybe } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { EdgeInsets } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
 
 export const Padding = ({
   child,

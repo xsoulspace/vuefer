@@ -1,5 +1,7 @@
 import { Component, defineComponent, h } from 'vue'
-import { BoxConstraints, Key, Maybe } from '..'
+import { Maybe } from '../abstract/BasicTypes'
+import { BoxConstraints } from '../abstract/BoxConstraints'
+import { Key } from '../abstract/Key'
 export const ConstrainedBox = ({
   child,
   key,

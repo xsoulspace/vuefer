@@ -1,5 +1,6 @@
 import { computed, defineComponent, h, Ref } from 'vue'
-import { GridViewDelegate, GridViewItemPosition, Maybe, ValueChanged } from '..'
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { GridViewDelegate, GridViewItemPosition } from '../abstract/Grid'
 import GridViewBuilder from './GridViewBuilder.vue'
 interface GridViewBuilderI {
   crossAxisCount?: Ref<number>
