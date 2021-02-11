@@ -132,38 +132,36 @@ export const DropdownButton = <
         h(
           <div ref={target}>
             {h(
-              GestureDetector({
-                child: Stack({
-                  children: [
-                    GestureDetector({
-                      child: SizedBox({
-                        child: Container({
-                          decoration: new BoxDecoration({
-                            boxShadow: elevation,
-                          }),
-                          child: Row({
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField({ controller: textFieldController }),
-                              resolvedIcon,
-                            ],
-                          }),
+              Stack({
+                children: [
+                  GestureDetector({
+                    child: SizedBox({
+                      child: Container({
+                        decoration: new BoxDecoration({
+                          boxShadow: elevation,
                         }),
-                        height: EdgeInsetsStep.s10,
+                        child: Row({
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField({ controller: textFieldController }),
+                            resolvedIcon,
+                          ],
+                        }),
                       }),
-                      onTap: () => {
-                        if (!isMenuOpened.value) {
-                          isMenuOpened.value = true
-                        }
-                      },
+                      height: EdgeInsetsStep.s10,
                     }),
-                    Visibility({
-                      child: itemsDropdown,
-                      visible: isMenuOpened,
-                    }),
-                  ],
-                }),
+                    onTap: () => {
+                      if (!isMenuOpened.value) {
+                        isMenuOpened.value = true
+                      }
+                    },
+                  }),
+                  Visibility({
+                    child: itemsDropdown,
+                    visible: isMenuOpened,
+                  }),
+                ],
               })
             )}
           </div>
