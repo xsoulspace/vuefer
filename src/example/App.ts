@@ -190,7 +190,33 @@ export const WrapperApp = () => {
                           onTap: () => {
                             showDialog({
                               dialog: Dialog({
-                                child: Text({ text: ref('Hello World') }),
+                                child: ElevatedButton({
+                                  child: Text({
+                                    text: ref('Open dialog'),
+                                  }),
+                                  onTap: () => {
+                                    showDialog({
+                                      dialog: Dialog({
+                                        child: Column({
+                                          children: [
+                                            Text({
+                                              text: ref('Second Dialog'),
+                                            }),
+                                            ElevatedButton({
+                                              child: Text({
+                                                text: ref('close 2 dialogs'),
+                                              }),
+                                              onTap: () => {
+                                                navigationController.pop(2)
+                                              },
+                                            }),
+                                          ],
+                                        }),
+                                      }),
+                                      navigationController,
+                                    })
+                                  },
+                                }),
                               }),
                               navigationController,
                             })

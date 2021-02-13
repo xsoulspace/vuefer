@@ -8,8 +8,11 @@ export class NavigationController {
     Maybe<{ routeName: string; widget: Component; fullscreen: boolean }>[]
   >([])
 
-  pop() {
-    this.routes.shift()
+  pop(counter = 1) {
+    for (let i = 0; i < counter; i++) {
+      if (this.count == 0) return
+      this.routes.shift()
+    }
   }
   push<T extends Component>({
     widget,
