@@ -49,7 +49,7 @@ export class GridViewDelegate {
     this._reactVal.value = val
   }
   get value() {
-    return this._reactVal.value as GridViewItemPreBuidler[]
+    return this._reactVal.value
   }
 
   get css(): string {

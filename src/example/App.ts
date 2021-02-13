@@ -129,7 +129,7 @@ export const wrapperApp = () => {
     width: EdgeInsetsStep.s96,
   })
   const isEnabled = ref(true)
-  const layoutMatrix = ref([
+  const layoutMatrix = reactive([
     { x: 0, y: 0, width: 2, height: 2, index: 0 },
     { x: 2, y: 0, width: 2, height: 4, index: 1 },
     { x: 4, y: 0, width: 6, height: 8, index: 2 },
@@ -172,13 +172,14 @@ export const wrapperApp = () => {
           isDraggable: ref(true),
           isResizable: ref(true),
           onPositionUpdate: (newPosition) => {
-            const i = layoutMatrix.value.findIndex(
+            const i = layoutMatrix.findIndex(
               (el) => el.index == newPosition.index
             )
-            layoutMatrix.value.splice(i, 1, newPosition)
+            console.log({ i })
+            layoutMatrix.splice(i, 1, newPosition)
           },
           delegate: GridViewDelegate.use({
-            gridViewItems: layoutMatrix.value.map((el) =>
+            gridViewItems: layoutMatrix.map((el) =>
               GridViewItem({
                 child: TextButton({
                   child: Text({ text: ref(`text key:${el.index}`) }),

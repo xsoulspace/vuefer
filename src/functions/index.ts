@@ -1,3 +1,5 @@
 export * from './deepCopyObj'
+export * from './findUnshiftSplice'
+export * from './isNotNull'
 export * from './reduceHtmlClasses'
 export * from './unifyValue'

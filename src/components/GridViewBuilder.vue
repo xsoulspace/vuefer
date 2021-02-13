@@ -70,7 +70,7 @@ export default {
     GridViewItemBuilder,
   },
   setup(props) {
-    const internalLayoutMatrix = reactive<Maybe<PackageGridItemPosition>[]>([])
+    const internalLayoutMatrix = reactive<PackageGridItemPosition[]>([])
     const fixedTypeOnPositionUpdate = props.onPositionUpdate as Maybe<
       ValueChanged<GridViewItemPosition>
     >
@@ -106,16 +106,16 @@ export default {
     watch(
       props.delegate.reactive,
       () => {
+        console.log('chaging')
+        const positionsToUpdate = props.delegate.layoutMatrix.map((el) => ({
+          x: el.x,
+          y: el.y,
+          w: el.width,
+          h: el.height,
+          i: el.index,
+        }))
         internalLayoutMatrix.length = 0
-        internalLayoutMatrix.push(
-          ...props.delegate.layoutMatrix.map((el) => ({
-            x: el.x,
-            y: el.y,
-            w: el.width,
-            h: el.width,
-            i: el.index,
-          }))
-        )
+        internalLayoutMatrix.push(...positionsToUpdate)
       },
       { deep: true, immediate: true }
     )
