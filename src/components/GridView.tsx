@@ -16,6 +16,13 @@ interface GridViewBuilderI {
  *
  * Based on awesome: [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
  *
+ * To use this widget you need to add the following in you main.ts file
+ *
+ * ```typescript
+ * import vueGridLayout from 'vue-grid-layout'
+ * createApp(App).use(vueGridLayout).mount('#app')
+ * ```
+ *
  * Usage example:
  *
  * ```typescript
