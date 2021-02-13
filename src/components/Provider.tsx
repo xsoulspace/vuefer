@@ -1,22 +1,25 @@
-import { Component, defineComponent, h, onMounted } from '@vue/runtime-core'
-import { inject, provide, reactive } from 'vue'
+import { Component, defineComponent, h } from '@vue/runtime-core'
+import { inject, onBeforeMount, provide, reactive } from 'vue'
 import { Constructor, Maybe } from '../abstract/BasicTypes'
 interface MultiProviderI {
   models: Maybe<CallableFunction | Constructor<unknown>>[]
   child: Component
 }
 export class MultiProvider {
-  private static _allProvidersSymbols = new Map<
-    CallableFunction | NewableFunction,
+  static allProvidersSymbols = new Map<
+    CallableFunction | Constructor<unknown>,
     symbol
   >()
 
   static create({ models, child }: MultiProviderI) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const providerThis = this
     return defineComponent({
       name: 'MultiProvider',
       setup() {
         const initModels = reactive({})
-        onMounted(() => {
+
+        onBeforeMount(() => {
           for (const model of models) {
             if (model == null) throw Error(`${model} cannot be null!`)
             const newProviderSymbol = Symbol()
@@ -34,7 +37,7 @@ export class MultiProvider {
               }
             })()
             provide(newProviderSymbol, finalModel)
-            MultiProvider._allProvidersSymbols.set(model, newProviderSymbol)
+            providerThis.allProvidersSymbols.set(model, newProviderSymbol)
             initModels[model.name] = finalModel
           }
         })
@@ -45,8 +48,10 @@ export class MultiProvider {
       },
     })
   }
-  static get<T extends CallableFunction | Constructor<unknown>>(modelName: T) {
-    const symbol = MultiProvider._allProvidersSymbols.get(modelName)
+  static get<T, P extends CallableFunction | Constructor<T> = Constructor<T>>(
+    modelName: P
+  ) {
+    const symbol = this.allProvidersSymbols.get(modelName)
     if (symbol == null) throw Error(`${modelName} doen't have a provider!`)
     const model: Maybe<T> = inject(symbol)
     if (model == null)

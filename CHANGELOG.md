@@ -1,3 +1,44 @@
+## 0.6.0
+
+feat: Provider - use provide/inject under the hood
+
+### Usage:
+
+Let's suppose we have a model:
+
+```typescript
+export class Hero {
+  constructor(public name: string) {}
+}
+export class HeroesModel {
+  heroes = reactive<Maybe<Hero>[]>([])
+  add(hero: Hero) {
+    this.heroes.push(hero)
+  }
+  get count() {
+    return this.heroes.length
+  }
+}
+```
+
+Create Provider on top of tree
+
+```typescript
+MultiProvider.create({
+  models: [HeroesModel],
+  child: wrapperApp(),
+})
+```
+
+And somewhere in tree just call
+
+```typescript
+const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+```
+
+feat: Dialog - use Navigator
+feat: Navigator - to manage Dialoges
+
 ## 0.5.0
 
 Add: GridView.builder, GridViewItem with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)

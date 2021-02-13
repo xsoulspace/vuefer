@@ -28,10 +28,10 @@ import {
   TextButton,
   TextEditingController,
   TextField,
-  Wrap,
 } from '@/index'
 import { computed, reactive, ref } from 'vue'
 import { GridViewDelegate } from '../abstract'
+import { HeroButton } from './HeroButton'
 type IndexedText = {
   id: number
   text: string
@@ -161,12 +161,32 @@ export const wrapperApp = () => {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Wrap({
-          children: items.value.map((el) =>
-            Text({
-              text: ref(el),
-            })
-          ),
+        Column({
+          children: [
+            HeroButton(),
+            MouseRegion({
+              child: textCard,
+              cursor: SystemMouseCursors.progress,
+            }),
+            ElevatedButton({
+              child: Text({ text: ref('') }),
+              onTap: () => {
+                console.log({ dropdownFieldController })
+              },
+            }),
+            TextField({
+              controller: controller,
+            }),
+            dropdown,
+            CheckboxListTile({
+              onChanged: () => {
+                // isEnabled.value = !isEnabled.value;
+              },
+              value: isEnabled,
+              title: rawText,
+            }),
+            dynamicItems,
+          ],
         }),
         GridView.count({
           isDraggable: ref(true),
@@ -191,32 +211,6 @@ export const wrapperApp = () => {
             ),
           }),
         }),
-        Column({
-          children: [
-            MouseRegion({
-              child: textCard,
-              cursor: SystemMouseCursors.progress,
-            }),
-            ElevatedButton({
-              child: Text({ text: ref('') }),
-              onTap: () => {
-                console.log({ dropdownFieldController })
-              },
-            }),
-            TextField({
-              controller: controller,
-            }),
-            dropdown,
-            CheckboxListTile({
-              onChanged: () => {
-                // isEnabled.value = !isEnabled.value;
-              },
-              value: isEnabled,
-              title: rawText,
-            }),
-          ],
-        }),
-        dynamicItems,
       ],
     }),
   })

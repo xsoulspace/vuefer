@@ -100,6 +100,42 @@ export const wrapperApp = () => {
 
 ## Ready to test and possible to use
 
+- [] Provider
+
+### Usage:
+
+Let's suppose we have a model:
+
+```typescript
+export class Hero {
+  constructor(public name: string) {}
+}
+export class HeroesModel {
+  heroes = reactive<Maybe<Hero>[]>([])
+  add(hero: Hero) {
+    this.heroes.push(hero)
+  }
+  get count() {
+    return this.heroes.length
+  }
+}
+```
+
+Create Provider on top of tree
+
+```typescript
+MultiProvider.create({
+  models: [HeroesModel],
+  child: wrapperApp(),
+})
+```
+
+And somewhere in tree just call
+
+```typescript
+const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+```
+
 - [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
 - [x] Alignment, Align, Center
 - [x] Padding
@@ -125,6 +161,9 @@ export const wrapperApp = () => {
 - [x] Wrap (Flex - flex-wrap)
 
 ## WIP
+
+- [] Dialog
+- [] Navigator
 
 - [] DropdownButton, DropdownButtonItem
   [x] functionality
@@ -177,13 +216,11 @@ export const wrapperApp = () => {
 
 - [] Flexible
 - [] OutlinedButton
-- [] Provider, MultiProvider
 - [] Ripple
 - [] Drawer
 - [] Progress
 - [] Card
 - [] AppBar
-- [] Dialog(?)
 - [] Icon
 - [] IconButton
 - [] Bar

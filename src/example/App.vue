@@ -1,11 +1,17 @@
-<template>
-  <WrapperApp />
-</template>
 <script lang="ts">
+import { h } from 'vue'
 import { wrapperApp } from '../example/App'
+import { MultiProvider } from '@/components'
+import { HeroesModel } from './HeroesModel'
 export default {
-  components: {
-    WrapperApp: wrapperApp(),
+  setup() {
+    return () =>
+      h(
+        MultiProvider.create({
+          models: [HeroesModel],
+          child: wrapperApp(),
+        })
+      )
   },
 }
 </script>
