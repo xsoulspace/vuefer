@@ -12,6 +12,7 @@ interface PositionedI {
   bottom?: Maybe<EdgeInsetsStep>
   // width?:
   // height?:
+  _zIndex?: Maybe<number>
 }
 
 export const Positioned = ({
@@ -21,6 +22,7 @@ export const Positioned = ({
   left,
   right,
   top,
+  _zIndex,
 }: PositionedI) => {
   const edgeInsets = new EdgeInsets({ bottom, left, right, top })
   return defineComponent({
@@ -29,7 +31,8 @@ export const Positioned = ({
       return h(
         'div',
         {
-          class: `absolute z-50 ${edgeInsets.positionedCss}`,
+          style: `z-index: ${_zIndex ?? 50};`,
+          class: `absolute ${edgeInsets.positionedCss}`,
         },
         [h(child)]
       )

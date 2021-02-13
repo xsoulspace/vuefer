@@ -2,13 +2,17 @@ import { Component, defineComponent, h } from 'vue'
 import { Maybe } from '../abstract/BasicTypes'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { Key } from '../abstract/Key'
-import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
+import {
+  SizeBoxStep,
+  SizedBoxHeight,
+  SizedBoxWidth,
+} from '../abstract/SizedBox'
 
 interface SizedBoxI {
   child?: Component
   key?: Maybe<Key>
-  height?: Maybe<EdgeInsetsStep>
-  width?: Maybe<EdgeInsetsStep>
+  height?: Maybe<EdgeInsetsStep | SizeBoxStep>
+  width?: Maybe<EdgeInsetsStep | SizeBoxStep>
 }
 
 export const SizedBox = ({ child, key, width, height }: SizedBoxI) => {

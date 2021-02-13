@@ -1,4 +1,10 @@
-import { GridView, GridViewItem } from '@/components'
+import {
+  Dialog,
+  GridView,
+  GridViewItem,
+  MultiProvider,
+  showDialog,
+} from '@/components'
 import {
   Align,
   Alignment,
@@ -29,15 +35,15 @@ import {
   TextEditingController,
   TextField,
 } from '@/index'
-import { computed, reactive, ref } from 'vue'
-import { GridViewDelegate } from '../abstract'
+import { computed, defineComponent, h, reactive, ref } from 'vue'
+import { GridViewDelegate, NavigationController } from '../abstract'
 import { HeroButton } from './HeroButton'
 type IndexedText = {
   id: number
   text: string
 }
 
-export const wrapperApp = () => {
+export const WrapperApp = () => {
   const text = ref('Hello world!')
   const padding = EdgeInsets.all(EdgeInsetsStep.s3)
   const rawText = Text({
@@ -151,74 +157,101 @@ export const wrapperApp = () => {
     { x: 0, y: 9, width: 2, height: 3, index: 18 },
     { x: 2, y: 6, width: 2, height: 2, index: 19 },
   ])
-  const temp = Container({
-    padding,
-    decoration: new BoxDecoration({
-      boxShadow: BoxShadow.xl,
-      borderRadius: BorderRadius.vertical({ bottom: BorderRadiusStep.xxl }),
-    }),
-    child: Row({
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Column({
-          children: [
-            HeroButton(),
-            MouseRegion({
-              child: textCard,
-              cursor: SystemMouseCursors.progress,
-            }),
-            ElevatedButton({
-              child: Text({ text: ref('') }),
-              onTap: () => {
-                console.log({ dropdownFieldController })
-              },
-            }),
-            TextField({
-              controller: controller,
-            }),
-            dropdown,
-            CheckboxListTile({
-              onChanged: () => {
-                // isEnabled.value = !isEnabled.value;
-              },
-              value: isEnabled,
-              title: rawText,
-            }),
-            dynamicItems,
-          ],
-        }),
-        GridView.count({
-          isDraggable: ref(true),
-          isResizable: ref(true),
-          onPositionUpdate: (newPosition) => {
-            const i = layoutMatrix.findIndex(
-              (el) => el.index == newPosition.index
-            )
-            console.log({ i })
-            layoutMatrix.splice(i, 1, newPosition)
-          },
-          delegate: GridViewDelegate.use({
-            gridViewItems: layoutMatrix.map((el) =>
-              GridViewItem({
-                child: TextButton({
-                  child: Text({ text: ref(`text key:${el.index}`) }),
-                  expand: true,
-                  onTap: () => alert(`Hola ${el.index}!`),
+  return defineComponent({
+    name: 'App',
+    setup() {
+      const navigationController = MultiProvider.get<NavigationController>(
+        NavigationController
+      )
+      return () =>
+        h(
+          Scaffold({
+            body: Align({
+              toOverlay: true,
+              alignment: Alignment.center,
+              child: Container({
+                padding,
+                decoration: new BoxDecoration({
+                  boxShadow: BoxShadow.xl,
+                  borderRadius: BorderRadius.vertical({
+                    bottom: BorderRadiusStep.xxl,
+                  }),
                 }),
-                position: el,
-              })
-            ),
-          }),
-        }),
-      ],
-    }),
-  })
-  return Scaffold({
-    body: Align({
-      toOverlay: true,
-      alignment: Alignment.center,
-      child: temp,
-    }),
+                child: Row({
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column({
+                      children: [
+                        ElevatedButton({
+                          child: Text({
+                            text: ref('Show dialog'),
+                          }),
+                          onTap: () => {
+                            showDialog({
+                              dialog: Dialog({
+                                child: Text({ text: ref('Hello World') }),
+                              }),
+                              navigationController,
+                            })
+                          },
+                        }),
+                        HeroButton(),
+                        MouseRegion({
+                          child: textCard,
+                          cursor: SystemMouseCursors.progress,
+                        }),
+                        ElevatedButton({
+                          child: Text({ text: ref('') }),
+                          onTap: () => {
+                            console.log({ dropdownFieldController })
+                          },
+                        }),
+                        TextField({
+                          controller: controller,
+                        }),
+                        dropdown,
+                        CheckboxListTile({
+                          onChanged: () => {
+                            // isEnabled.value = !isEnabled.value;
+                          },
+                          value: isEnabled,
+                          title: rawText,
+                        }),
+                        dynamicItems,
+                      ],
+                    }),
+                    GridView.count({
+                      isDraggable: ref(true),
+                      isResizable: ref(true),
+                      onPositionUpdate: (newPosition) => {
+                        const i = layoutMatrix.findIndex(
+                          (el) => el.index == newPosition.index
+                        )
+                        console.log({ i })
+                        layoutMatrix.splice(i, 1, newPosition)
+                      },
+                      delegate: GridViewDelegate.use({
+                        gridViewItems: layoutMatrix.map((el) =>
+                          GridViewItem({
+                            child: TextButton({
+                              child: Text({
+                                text: ref(`text key:${el.index}`),
+                              }),
+                              expand: true,
+                              onTap: () => alert(`Hola ${el.index}!`),
+                            }),
+                            position: el,
+                          })
+                        ),
+                      }),
+                    }),
+                  ],
+                }),
+              }),
+            }),
+          })
+        )
+    },
   })
 }

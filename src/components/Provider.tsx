@@ -5,6 +5,41 @@ interface MultiProviderI {
   models: Maybe<CallableFunction | Constructor<unknown>>[]
   child: Component
 }
+/**
+ *
+ * Let's suppose we have a model:
+ *
+ *  ```typescript
+ *  export class Hero {
+ *    constructor(public name: string) {}
+ *  }
+ *  export class HeroesModel {
+ *    heroes = reactive<Maybe<Hero>[]>([])
+ *    add(hero: Hero) {
+ *      this.heroes.push(hero)
+ *    }
+ *    get count() {
+ *      return this.heroes.length
+ *    }
+ *  }
+ *  ```
+ *
+ *  Create Provider on top of tree
+ *
+ *  ```typescript
+ *  MultiProvider.create({
+ *    models: [HeroesModel],
+ *    child: wrapperApp(),
+ *  })
+ *  ```
+ *
+ *  And somewhere in tree just call
+ *
+ *  ```typescript
+ *  const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+ *  ```
+ *
+ */
 export class MultiProvider {
   static allProvidersSymbols = new Map<
     CallableFunction | Constructor<unknown>,

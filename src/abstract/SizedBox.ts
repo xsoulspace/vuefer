@@ -1,7 +1,7 @@
 import { Maybe } from './BasicTypes'
 import { EdgeInsetsStep } from './EdgeInsets'
 
-enum SizeStep {
+export enum SizeBoxStep {
   max = 'full',
   min = 'min',
   auto = 'auto',
@@ -9,13 +9,13 @@ enum SizeStep {
 }
 
 interface SizedBoxHeightI {
-  height?: Maybe<EdgeInsetsStep>
+  height?: Maybe<EdgeInsetsStep | SizeBoxStep>
 }
 
 export class SizedBoxHeight {
-  height: EdgeInsetsStep | SizeStep
+  height: EdgeInsetsStep | SizeBoxStep
   constructor({ height }: SizedBoxHeightI) {
-    this.height = height ?? SizeStep.max
+    this.height = height ?? SizeBoxStep.max
   }
   static get default(): SizedBoxHeight {
     return new SizedBoxHeight({})
@@ -26,12 +26,12 @@ export class SizedBoxHeight {
   }
 }
 interface SizedBoxWidthI {
-  width?: Maybe<EdgeInsetsStep>
+  width?: Maybe<EdgeInsetsStep | SizeBoxStep>
 }
 export class SizedBoxWidth {
-  width: EdgeInsetsStep | SizeStep
+  width: EdgeInsetsStep | SizeBoxStep
   constructor({ width }: SizedBoxWidthI) {
-    this.width = width ?? SizeStep.max
+    this.width = width ?? SizeBoxStep.max
   }
   static get default(): SizedBoxWidth {
     return new SizedBoxWidth({})

@@ -159,11 +159,45 @@ const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
 - [x] ListTile
 - [x] Grid, GridTile with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 - [x] Wrap (Flex - flex-wrap)
+- [x] Dialog
+
+### Usage
+
+First - get NavigationController in setup
+
+Be sure that you have Navigation widget on top of tree
+
+```typescript
+const navigationController = MultiProvider.get<NavigationController>(
+  NavigationController
+)
+```
+
+Second call a function from for example Button.onTap:
+
+```typescript
+ElevatedButton({
+  child: Text({
+    text: ref('Show dialog'),
+  }),
+  onTap: () => {
+    showDialog({
+      builder: Dialog({
+        child: Text({ text: ref('Hello World') }),
+      }),
+      navigationController,
+    })
+  },
+}),
+```
+
+To close, just use `navigationController.pop()`
+
+- [x] Navigation & NavigationController
+  - [x] Popup (with background) functionality
+  - [x] Fullscreen functionality
 
 ## WIP
-
-- [] Dialog
-- [] Navigator
 
 - [] DropdownButton, DropdownButtonItem
   [x] functionality

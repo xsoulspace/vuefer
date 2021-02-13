@@ -11,7 +11,38 @@ interface GridViewBuilderI {
   delegate: GridViewDelegate
   onPositionUpdate?: Maybe<ValueChanged<GridViewItemPosition>>
 }
-
+/**
+ * GridView provide a way to manage resized and draggable items
+ *
+ * Based on awesome: [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
+ *
+ * Usage example:
+ *
+ * ```typescript
+ * GridView.count({
+ *    isDraggable: ref(true),
+ *    isResizable: ref(true),
+ *    onPositionUpdate: (newPosition) => {
+ *      const i = layoutMatrix.findIndex(
+ *        (el) => el.index == newPosition.index
+ *      )
+ *      layoutMatrix.splice(i, 1, newPosition)
+ *    },
+ *    delegate: GridViewDelegate.use({
+ *      gridViewItems: layoutMatrix.map((el) =>
+ *        GridViewItem({
+ *          child: TextButton({
+ *            child: Text({ text: ref(`text key:${el.index}`) }),
+ *            expand: true,
+ *            onTap: () => alert(`Hola ${el.index}!`),
+ *          }),
+ *          position: el,
+ *        })
+ *      ),
+ *    }),
+ *  })
+ * ```
+ */
 export class GridView {
   static count({
     crossAxisCount,

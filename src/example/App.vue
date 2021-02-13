@@ -1,15 +1,18 @@
 <script lang="ts">
 import { h } from 'vue'
-import { wrapperApp } from '../example/App'
-import { MultiProvider } from '@/components'
+import { WrapperApp } from '../example/App'
+import { MultiProvider, Navigation } from '@/components'
 import { HeroesModel } from './HeroesModel'
+import { NavigationController } from '@/abstract'
 export default {
   setup() {
     return () =>
       h(
         MultiProvider.create({
-          models: [HeroesModel],
-          child: wrapperApp(),
+          models: [HeroesModel, NavigationController],
+          child: Navigation({
+            child: WrapperApp(),
+          }),
         })
       )
   },

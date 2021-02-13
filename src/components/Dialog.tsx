@@ -1,50 +1,111 @@
-import { DialogController } from '@/abstract/Dialog'
-import { Component, defineComponent, h } from 'vue'
+import {
+  BorderRadius,
+  BorderRadiusStep,
+  BoxDecoration,
+  Colors,
+  NavigationController,
+} from '@/abstract'
+import { Component, computed, defineComponent, h } from 'vue'
 import { Maybe } from '../abstract/BasicTypes'
-import { Border } from '../abstract/Border'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Color } from '../abstract/Color'
-import { EdgeInsets } from '../abstract/EdgeInsets'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { Key } from '../abstract/Key'
 
 interface DialogI {
-  key: Key
+  key?: Key
   backgroundColor?: Maybe<Color>
   elevation?: Maybe<BoxShadow>
   //  insetAnimationDuration
   //  insetAnimationCurve,
   insetPadding?: Maybe<EdgeInsets>
-  border?: Maybe<Border>
+  decoration?: Maybe<BoxDecoration>
   child: Component
-  controller: DialogController
+}
+/**
+ * First, be sure that you've placed Navigation widget above
+ * the widget what makes a call
+ *
+ * To open dialog you need to provide controller inside render or setup function
+ *
+ * ```typescript
+ *  const controller = MultiProvider.get<NavigationController>(
+ *     NavigationController
+ *  )
+ * ```
+ */
+export const showDialog = ({
+  navigationController,
+  dialog,
+}: {
+  dialog: Component
+  navigationController: NavigationController
+}) => {
+  navigationController.push({ widget: dialog, fullscreen: false })
 }
 
+/**
+ * Popup functionality with support via Navigation
+ *
+ *
+ * Correct way to use Dialog via showDialog function
+ *
+ *  First - get NavigationController in setup
+ *
+ *  Be sure that you have Navigation widget on top of tree
+ *
+ *  ```typescript
+ *  const navigationController = MultiProvider.get<NavigationController>(
+ *    NavigationController
+ *  )
+ *  ```
+ *
+ *  Second - call a function inside for example Button.onTap:
+ *
+ *  ```typescript
+ *  ElevatedButton({
+ *    child: Text({
+ *      text: ref('Show dialog'),
+ *    }),
+ *    onTap: () => {
+ *      showDialog({
+ *        builder: Dialog({
+ *          child: Text({ text: ref('Hello World') }),
+ *        }),
+ *        navigationController,
+ *      })
+ *    },
+ *  }),
+ *  ```
+ *
+ * To close Dialog, just use `navigationController.pop()`
+ */
 export const Dialog = ({
   child,
   key,
   backgroundColor,
-  border,
+  decoration,
   elevation,
   insetPadding,
 }: DialogI) => {
   return defineComponent({
     name: 'Dialog',
     setup() {
-      return () =>
-        h(
-          <teleport to="body">
-            <div
-              class={[
-                backgroundColor?.backgroundCss,
-                border?.css,
-                elevation?.css,
-                insetPadding?.paddingCss,
-              ].join(' ')}
-            >
-              {h(child)}
-            </div>
-          </teleport>
-        )
+      const classes = computed(() => {
+        return [
+          backgroundColor?.backgroundCss ?? Colors.white.backgroundCss,
+          decoration?.css ??
+            new BoxDecoration({
+              borderRadius: BorderRadius.all({
+                radius: BorderRadiusStep.md,
+              }),
+            }).css,
+          elevation?.css ?? BoxShadow.lg.css,
+          insetPadding?.paddingCss ??
+            EdgeInsets.all(EdgeInsetsStep.s10).paddingCss,
+        ]
+      })
+      return () => h(<div class={classes.value}>{h(child)}</div>)
     },
   })
 }

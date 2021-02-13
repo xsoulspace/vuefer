@@ -106,7 +106,6 @@ export default {
     watch(
       props.delegate.reactive,
       () => {
-        console.log('chaging')
         const positionsToUpdate = props.delegate.layoutMatrix.map((el) => ({
           x: el.x,
           y: el.y,

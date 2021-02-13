@@ -1,8 +1,10 @@
 ## 0.6.0
 
-feat: Provider - use provide/inject under the hood
+### feat: Provider
 
-### Usage:
+Uses provide/inject under the hood
+
+#### Usage
 
 Let's suppose we have a model:
 
@@ -36,8 +38,50 @@ And somewhere in tree just call
 const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
 ```
 
-feat: Dialog - use Navigator
-feat: Navigator - to manage Dialoges
+### feat: Dialog
+
+Popup functionality with support via Navigation
+
+#### Usage
+
+First - get NavigationController in setup
+
+Be sure that you have Navigation widget on top of tree
+
+```typescript
+const navigationController = MultiProvider.get<NavigationController>(
+  NavigationController
+)
+```
+
+Second call a function from for example Button.onTap:
+
+```typescript
+ElevatedButton({
+  child: Text({
+    text: ref('Show dialog'),
+  }),
+  onTap: () => {
+    showDialog({
+      builder: Dialog({
+        child: Text({ text: ref('Hello World') }),
+      }),
+      navigationController,
+    })
+  },
+}),
+```
+
+To close, just use `navigationController.pop()`
+
+### feat: Navigator
+
+Used to manage:
+
+- Popup (with background) functionality
+- Fullscreen functionality routes (not tested yet)
+
+### feat: a little explanation for GridView
 
 ## 0.5.0
 
