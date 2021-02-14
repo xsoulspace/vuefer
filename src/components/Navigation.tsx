@@ -1,4 +1,3 @@
-import { SizedBoxHeight, SizedBoxWidth } from '@/abstract/SizedBox'
 import {
   Component,
   computed,
@@ -13,6 +12,7 @@ import {
   OpacityDecoration,
   OpacityDecorationSteps,
 } from '../abstract/OpacityDecoration'
+import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
 import { Center } from './Center'
 import { Positioned } from './Positioned'
 import { MultiProvider } from './Provider'

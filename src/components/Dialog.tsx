@@ -1,16 +1,13 @@
-import {
-  BorderRadius,
-  BorderRadiusStep,
-  BoxDecoration,
-  Colors,
-  NavigationController,
-} from '@/abstract'
 import { Component, computed, defineComponent, h } from 'vue'
 import { Maybe } from '../abstract/BasicTypes'
+import { BorderRadius, BorderRadiusStep } from '../abstract/BorderRadius'
+import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Color } from '../abstract/Color'
+import { Colors } from '../abstract/Colors'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { Key } from '../abstract/Key'
+import { NavigationController } from '../abstract/Navigation'
 
 interface DialogI {
   key?: Key
