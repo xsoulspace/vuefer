@@ -28,6 +28,17 @@ interface NavigationI {
  *
  * To use this widget place NavigationController in MultiProvider
  * in widgets tree as high as possible
+ *
+ * Add controller into MultiPorvider and Navigation widget below:
+ *
+ *  ```typescript
+ *  MultiProvider.create({
+ *    models: [NavigationController, ...],
+ *    child: Navigation({
+ *      child: ...,
+ *    }),
+ *  })
+ *  ```
  */
 export const Navigation = ({ child }: NavigationI) => {
   return defineComponent({

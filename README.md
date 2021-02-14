@@ -197,6 +197,19 @@ To close, just use `navigationController.pop()`
   - [x] Popup (with background) functionality
   - [x] Fullscreen functionality
 
+### Usage:
+
+Add controller into MultiPorvider and Navigation widget below:
+
+```typescript
+MultiProvider.create({
+  models: [NavigationController, ...],
+  child: Navigation({
+    child: ...,
+  }),
+})
+```
+
 ## WIP
 
 - [] DropdownButton, DropdownButtonItem
