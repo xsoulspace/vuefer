@@ -4,6 +4,7 @@ import {
   defineComponent,
   h,
   Teleport,
+  watch,
 } from '@vue/runtime-core'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
@@ -38,7 +39,13 @@ export const Navigation = ({ child }: NavigationI) => {
       )
 
       const isRoutesExists = computed(() => routeController.count > 0)
+      watch(isRoutesExists, () => {
+        console.log({ isRoutesExists })
+      })
       const isFullscreen = computed(() => routeController._isFullscreen)
+      watch(isRoutesExists, () => {
+        console.log({ isFullscreen })
+      })
       const isNotFullscreen = computed(() => routeController._isNotFullscreen)
       return () =>
         h('div', {}, [
@@ -47,7 +54,7 @@ export const Navigation = ({ child }: NavigationI) => {
             Visibility({
               visible: isRoutesExists,
               child: h(
-                <Teleport to="body">
+                <Teleport to="#app">
                   {h(
                     Positioned({
                       _zIndex: routeController._backgroundZIndex.value,

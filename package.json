@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue_flutter_tailwind",
   "description": "Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -33,7 +33,7 @@
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue": "^3.0.0",
+    "vue": "^3.0.5",
     "vue3-virtual-scroller": "^0.2.1",
     "vue-grid-layout": "3.0.0-beta1"
   },
