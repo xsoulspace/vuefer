@@ -44,13 +44,24 @@ export const Navigation = ({ child }: NavigationI) => {
       const routeController = MultiProvider.get<NavigationController>(
         NavigationController
       )
+      const currentRoute = computed(() => routeController.currentRoute())
+      const currentWidget = computed(() => currentRoute.value.widget)
 
-      const isRoutesExists = computed(() => routeController.count > 0)
+      const isRoutesExists = computed(() => routeController.routes.length > 0)
 
-      const isFullscreen = computed(() => routeController.isFullscreen)
-      const isNotFullscreen = computed(() => routeController.isNotFullscreen)
+      const isFullscreen = computed(() => {
+        const maybeFullscreen = currentRoute.value.fullscreen
+        return maybeFullscreen == null || maybeFullscreen == true
+      })
+      const isNotFullscreen = computed(() => !isFullscreen.value)
 
-      return { isFullscreen, isNotFullscreen, isRoutesExists, routeController }
+      return {
+        isFullscreen,
+        currentWidget,
+        isNotFullscreen,
+        isRoutesExists,
+        routeController,
+      }
     },
     render() {
       return h('div', {}, [
@@ -103,7 +114,7 @@ export const Navigation = ({ child }: NavigationI) => {
                                           event.stopPropagation()
                                         }
                                       >
-                                        {h(this.routeController.currentWidget)}
+                                        {h(this.currentWidget)}
                                       </div>
                                     ),
                                   })
@@ -123,7 +134,7 @@ export const Navigation = ({ child }: NavigationI) => {
                                   new SizedBoxHeight({}).css,
                                 ]}
                               >
-                                {h(this.routeController.currentWidget)}
+                                {h(this.currentWidget)}
                               </div>
                             ),
                             visible: ref(this.isFullscreen),
