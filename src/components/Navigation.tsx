@@ -3,9 +3,10 @@ import {
   computed,
   defineComponent,
   h,
-  Teleport,
+  Ref,
   watch,
 } from '@vue/runtime-core'
+import { Maybe } from '../abstract/BasicTypes'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { NavigationController } from '../abstract/Navigation'
@@ -18,9 +19,10 @@ import { Center } from './Center'
 import { Positioned } from './Positioned'
 import { MultiProvider } from './Provider'
 import { Visibility } from './Visibility'
-
+import VueTeleport from './VueTeleport.vue'
 interface NavigationI {
   child: Component
+  debug?: Ref<Maybe<boolean>>
 }
 /**
  * This class provides a way to render and manage routes
@@ -40,23 +42,33 @@ interface NavigationI {
  *  })
  *  ```
  */
-export const Navigation = ({ child }: NavigationI) => {
+export const Navigation = ({ child, debug }: NavigationI) => {
   return defineComponent({
     name: 'Navigation',
-
+    components: {
+      VueTeleport,
+    },
     setup() {
       const routeController = MultiProvider.get<NavigationController>(
         NavigationController
       )
 
       const isRoutesExists = computed(() => routeController.count > 0)
-      watch(isRoutesExists, () => {
-        console.log({ isRoutesExists })
-      })
+      watch(
+        isRoutesExists,
+        () => {
+          if (debug?.value) console.log({ isRoutesExists })
+        },
+        { deep: true, immediate: true }
+      )
       const isFullscreen = computed(() => routeController._isFullscreen)
-      watch(isRoutesExists, () => {
-        console.log({ isFullscreen })
-      })
+      watch(
+        isRoutesExists,
+        () => {
+          if (debug?.value) console.log({ isFullscreen })
+        },
+        { deep: true, immediate: true }
+      )
       const isNotFullscreen = computed(() => routeController._isNotFullscreen)
       return () =>
         h('div', {}, [
@@ -65,7 +77,7 @@ export const Navigation = ({ child }: NavigationI) => {
             Visibility({
               visible: isRoutesExists,
               child: h(
-                <Teleport to="#app">
+                <vue-teleport to="#app">
                   {h(
                     Positioned({
                       _zIndex: routeController._backgroundZIndex.value,
@@ -147,7 +159,7 @@ export const Navigation = ({ child }: NavigationI) => {
                       ),
                     })
                   )}
-                </Teleport>
+                </vue-teleport>
               ),
             })
           ),

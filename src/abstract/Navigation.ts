@@ -34,7 +34,8 @@ export class NavigationController {
     return this._currentRoute?.widget
   }
   get _isFullscreen() {
-    return this._currentRoute?.fullscreen
+    const maybeFullscreen = this._currentRoute?.fullscreen
+    return maybeFullscreen == null || maybeFullscreen == true
   }
   get _isNotFullscreen() {
     return !this._isFullscreen
