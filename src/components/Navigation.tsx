@@ -44,7 +44,7 @@ export const Navigation = ({ child }: NavigationI) => {
       const routeController = MultiProvider.get<NavigationController>(
         NavigationController
       )
-      const currentRoute = computed(() => routeController.currentRoute())
+      const currentRoute = computed(() => routeController.currentRoute)
       const currentWidget = computed(() => currentRoute.value.widget)
 
       const isRoutesExists = computed(() => routeController.routes.length > 0)

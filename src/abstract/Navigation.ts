@@ -1,5 +1,5 @@
-import { Container } from '@/components'
 import { Component, markRaw, reactive, ref } from 'vue'
+import { Container } from '../components/Container'
 import { Maybe } from './BasicTypes'
 
 interface NavigationControllerRoute {
@@ -15,7 +15,7 @@ export class NavigationController {
 
   pop(counter = 1) {
     for (let i = 0; i < counter; i++) {
-      if (this.routes.length == 0) return
+      if (this.count == 0) return
       this.routes.shift()
     }
   }
@@ -32,7 +32,7 @@ export class NavigationController {
       fullscreen: fullscreen ?? true,
     })
   }
-  currentRoute(): NavigationControllerRoute {
+  get currentRoute(): NavigationControllerRoute {
     const maybeWidget = this.routes[0]
     return (
       maybeWidget ?? {
@@ -41,5 +41,18 @@ export class NavigationController {
         routeName: '',
       }
     )
+  }
+  get currentWidget(): Component {
+    return this.currentRoute.widget
+  }
+  get isFullscreen() {
+    const maybeFullscreen = this.currentRoute?.fullscreen
+    return maybeFullscreen == null || maybeFullscreen == true
+  }
+  get isNotFullscreen() {
+    return !this.isFullscreen
+  }
+  get count() {
+    return this.routes.length
   }
 }
