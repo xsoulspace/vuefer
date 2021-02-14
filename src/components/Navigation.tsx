@@ -47,7 +47,7 @@ export const Navigation = ({ child }: NavigationI) => {
             Visibility({
               visible: isRoutesExists,
               child: h(
-                <Teleport to="#app">
+                <Teleport to="body">
                   {h(
                     Positioned({
                       _zIndex: routeController._backgroundZIndex.value,
