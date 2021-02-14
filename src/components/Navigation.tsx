@@ -1,12 +1,5 @@
-import {
-  Component,
-  computed,
-  defineComponent,
-  h,
-  Ref,
-  watch,
-} from '@vue/runtime-core'
-import { Maybe } from '../abstract/BasicTypes'
+import { Component, computed, defineComponent, h } from '@vue/runtime-core'
+import { ref } from 'vue'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { NavigationController } from '../abstract/Navigation'
@@ -22,7 +15,6 @@ import { Visibility } from './Visibility'
 import VueTeleport from './VueTeleport.vue'
 interface NavigationI {
   child: Component
-  debug?: Ref<Maybe<boolean>>
 }
 /**
  * This class provides a way to render and manage routes
@@ -42,7 +34,7 @@ interface NavigationI {
  *  })
  *  ```
  */
-export const Navigation = ({ child, debug }: NavigationI) => {
+export const Navigation = ({ child }: NavigationI) => {
   return defineComponent({
     name: 'Navigation',
     components: {
@@ -54,116 +46,98 @@ export const Navigation = ({ child, debug }: NavigationI) => {
       )
 
       const isRoutesExists = computed(() => routeController.count > 0)
-      watch(
-        isRoutesExists,
-        () => {
-          if (debug?.value) console.log({ isRoutesExists })
-        },
-        { deep: true, immediate: true }
-      )
-      const isFullscreen = computed(() => routeController._isFullscreen)
-      watch(
-        isRoutesExists,
-        () => {
-          if (debug?.value) console.log({ isFullscreen })
-        },
-        { deep: true, immediate: true }
-      )
-      const isNotFullscreen = computed(() => routeController._isNotFullscreen)
-      return () =>
-        h('div', {}, [
-          h(child),
-          h(
-            Visibility({
-              visible: isRoutesExists,
-              child: h(
-                <vue-teleport to="#app">
-                  {h(
-                    Positioned({
-                      _zIndex: routeController._backgroundZIndex.value,
-                      bottom: EdgeInsetsStep.zero,
-                      left: EdgeInsetsStep.zero,
-                      right: EdgeInsetsStep.zero,
-                      top: EdgeInsetsStep.zero,
-                      child: h(
-                        <>
-                          {h(
-                            Visibility({
-                              child: h(
-                                <div
-                                  class={[
-                                    Colors.black.backgroundCss,
-                                    OpacityDecoration.use({
-                                      opacity: OpacityDecorationSteps.s50,
-                                    }).css,
-                                    new SizedBoxWidth({}).css,
-                                    new SizedBoxHeight({}).css,
-                                  ]}
-                                ></div>
-                              ),
-                              visible: isNotFullscreen,
-                            })
-                          )}
-                          {h(
-                            Visibility({
-                              child: (
-                                <div
-                                  style={`z-index: ${routeController._routeZIndex.value};`}
-                                  onClick={() => {
-                                    routeController.pop()
-                                  }}
-                                >
-                                  {routeController._currentWidget ? (
-                                    h(
-                                      Center({
-                                        child: h(
-                                          <div
-                                            onClick={(event) =>
-                                              event.stopPropagation()
-                                            }
-                                          >
-                                            {h(routeController._currentWidget)}
-                                          </div>
-                                        ),
-                                      })
-                                    )
-                                  ) : (
-                                    <div />
-                                  )}
-                                </div>
-                              ),
-                              visible: isNotFullscreen,
-                            })
-                          )}
-                          {h(
-                            Visibility({
-                              child: (
-                                <div
-                                  style={`z-index: ${routeController._routeZIndex.value};`}
-                                  class={[
-                                    new SizedBoxWidth({}).css,
-                                    new SizedBoxHeight({}).css,
-                                  ]}
-                                >
-                                  {routeController._currentWidget ? (
-                                    h(routeController._currentWidget)
-                                  ) : (
-                                    <div />
-                                  )}
-                                </div>
-                              ),
-                              visible: isFullscreen,
-                            })
-                          )}
-                        </>
-                      ),
-                    })
-                  )}
-                </vue-teleport>
-              ),
-            })
-          ),
-        ])
+
+      const isFullscreen = computed(() => routeController.isFullscreen)
+      const isNotFullscreen = computed(() => routeController.isNotFullscreen)
+
+      return { isFullscreen, isNotFullscreen, isRoutesExists, routeController }
+    },
+    render() {
+      return h('div', {}, [
+        h(child),
+        h(
+          Visibility({
+            visible: ref(this.isRoutesExists),
+            child: h(
+              <vue-teleport to="#app">
+                {h(
+                  Positioned({
+                    _zIndex: this.routeController._backgroundZIndex.value,
+                    bottom: EdgeInsetsStep.zero,
+                    left: EdgeInsetsStep.zero,
+                    right: EdgeInsetsStep.zero,
+                    top: EdgeInsetsStep.zero,
+                    child: h(
+                      <>
+                        {h(
+                          Visibility({
+                            child: h(
+                              <div
+                                class={[
+                                  Colors.black.backgroundCss,
+                                  OpacityDecoration.use({
+                                    opacity: OpacityDecorationSteps.s50,
+                                  }).css,
+                                  new SizedBoxWidth({}).css,
+                                  new SizedBoxHeight({}).css,
+                                ]}
+                              ></div>
+                            ),
+                            visible: ref(this.isNotFullscreen),
+                          })
+                        )}
+                        {h(
+                          Visibility({
+                            child: (
+                              <div
+                                style={`z-index: ${this.routeController._routeZIndex.value};`}
+                                onClick={() => {
+                                  this.routeController.pop()
+                                }}
+                              >
+                                {h(
+                                  Center({
+                                    child: h(
+                                      <div
+                                        onClick={(event) =>
+                                          event.stopPropagation()
+                                        }
+                                      >
+                                        {h(this.routeController.currentWidget)}
+                                      </div>
+                                    ),
+                                  })
+                                )}
+                              </div>
+                            ),
+                            visible: ref(this.isNotFullscreen),
+                          })
+                        )}
+                        {h(
+                          Visibility({
+                            child: (
+                              <div
+                                style={`z-index: ${this.routeController._routeZIndex.value};`}
+                                class={[
+                                  new SizedBoxWidth({}).css,
+                                  new SizedBoxHeight({}).css,
+                                ]}
+                              >
+                                {h(this.routeController.currentWidget)}
+                              </div>
+                            ),
+                            visible: ref(this.isFullscreen),
+                          })
+                        )}
+                      </>
+                    ),
+                  })
+                )}
+              </vue-teleport>
+            ),
+          })
+        ),
+      ])
     },
   })
 }
