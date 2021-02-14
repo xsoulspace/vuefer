@@ -269,4 +269,4 @@ To close, just use `navigationController.pop()`
 
 # Changelog
 
-Changelog can be found in [CHANGELOG.md](https://github.com/xsoulspace/vue_flutter_tailwind/blob/master/CHANGELOG.md)
+Changelog can be found in [Releases](https://github.com/xsoulspace/vue_flutter_tailwind/releases)
