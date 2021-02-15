@@ -6,8 +6,7 @@ import {
   SizedBox,
   Text,
 } from '@/components'
-import { defineComponent, h, ref } from '@vue/runtime-core'
-import { computed } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { HeroesModel } from './HeroesModel'
 
 export const HeroButton = () => {

@@ -1,11 +1,4 @@
-import {
-  Component,
-  defineComponent,
-  h,
-  reactive,
-  watch,
-} from '@vue/runtime-core'
-import { ref } from 'vue'
+import { Component, defineComponent, h, reactive, ref, watch } from 'vue'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import {

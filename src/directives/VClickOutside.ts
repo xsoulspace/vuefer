@@ -1,10 +1,4 @@
-import { DirectiveBinding } from '@vue/runtime-core'
-/**
- * Modified for Vue 3 from https://github.com/ndelvalle/v-click-outside
- * By https://gist.github.com/jgerigmeyer/87d16753c93762132943a26ea40cc665
- * Cf. https://github.com/ndelvalle/v-click-outside/issues/238
- */
-import { ObjectDirective } from 'vue'
+import { DirectiveBinding, ObjectDirective } from 'vue'
 
 const HANDLERS_PROPERTY = '__v-click-outside'
 const HAS_WINDOWS = typeof window !== 'undefined'

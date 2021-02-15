@@ -1,5 +1,12 @@
-import { Component, defineComponent, h } from '@vue/runtime-core'
-import { inject, onBeforeMount, provide, reactive } from 'vue'
+import {
+  Component,
+  defineComponent,
+  h,
+  inject,
+  onBeforeMount,
+  provide,
+  reactive,
+} from 'vue'
 import { Constructor, Maybe } from '../abstract/BasicTypes'
 interface MultiProviderI {
   models: Maybe<CallableFunction | Constructor<unknown>>[]
@@ -42,7 +49,7 @@ interface MultiProviderI {
  */
 export class MultiProvider {
   static allProvidersSymbols = new Map<
-    CallableFunction | Constructor<unknown>,
+    CallableFunction['name'] | Constructor<unknown>['name'],
     symbol
   >()
 
@@ -72,7 +79,7 @@ export class MultiProvider {
               }
             })()
             provide(newProviderSymbol, finalModel)
-            providerThis.allProvidersSymbols.set(model, newProviderSymbol)
+            providerThis.allProvidersSymbols.set(model.name, newProviderSymbol)
             initModels[model.name] = finalModel
           }
         })
@@ -86,7 +93,7 @@ export class MultiProvider {
   static get<T, P extends CallableFunction | Constructor<T> = Constructor<T>>(
     modelName: P
   ) {
-    const symbol = this.allProvidersSymbols.get(modelName)
+    const symbol = this.allProvidersSymbols.get(modelName.name)
     if (symbol == null) throw Error(`${modelName} doen't have a provider!`)
     const model: Maybe<T> = inject(symbol)
     if (model == null)
