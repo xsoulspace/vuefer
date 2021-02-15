@@ -25,7 +25,7 @@
   </grid-layout>
 </template>
 <script lang="ts">
-import { reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 import { GridViewItemBuilder } from './GridViewItemBuilder'
 import {
@@ -34,6 +34,7 @@ import {
   PackageGridItemPosition,
 } from '../abstract/Grid'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { getChangesFromOldAndNewArrays } from '@/functions'
 export default {
   name: 'GridViewBuilder',
   props: {
@@ -70,7 +71,31 @@ export default {
     GridViewItemBuilder,
   },
   setup(props) {
-    const internalLayoutMatrix = reactive<PackageGridItemPosition[]>([])
+    const internalLayoutMatrixMap = reactive<
+      Map<PackageGridItemPosition['i'], PackageGridItemPosition>
+    >(new Map())
+    const changeIndexedMap = ({
+      positionsToUpdate,
+    }: {
+      positionsToUpdate: PackageGridItemPosition[]
+    }) => {
+      const { created, updated, removed } = getChangesFromOldAndNewArrays({
+        newArr: positionsToUpdate,
+        oldArr: internalLayoutMatrix.value,
+        idPropertyName: 'i',
+      })
+      for (const removedPosition of removed) {
+        internalLayoutMatrixMap.delete(removedPosition.i)
+      }
+      for (const createdPosition of created.concat(updated)) {
+        internalLayoutMatrixMap.set(createdPosition.i, createdPosition)
+      }
+    }
+
+    const internalLayoutMatrix = computed({
+      set: (positionsToUpdate) => changeIndexedMap({ positionsToUpdate }),
+      get: () => [...internalLayoutMatrixMap.values()],
+    })
     const fixedTypeOnPositionUpdate = props.onPositionUpdate as Maybe<
       ValueChanged<GridViewItemPosition>
     >
@@ -113,8 +138,7 @@ export default {
           h: el.height,
           i: el.index,
         }))
-        internalLayoutMatrix.length = 0
-        internalLayoutMatrix.push(...positionsToUpdate)
+        changeIndexedMap({ positionsToUpdate })
       },
       { deep: true, immediate: true }
     )
