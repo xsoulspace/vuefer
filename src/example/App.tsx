@@ -135,34 +135,50 @@ export const WrapperApp = () => {
     width: EdgeInsetsStep.s96,
   })
   const isEnabled = ref(true)
-  const layoutMatrix = reactive([
-    { x: 0, y: 0, width: 2, height: 2, index: 0 },
-    { x: 2, y: 0, width: 2, height: 4, index: 1 },
-    { x: 4, y: 0, width: 6, height: 8, index: 2 },
-    { x: 6, y: 0, width: 2, height: 3, index: 3 },
-    { x: 8, y: 0, width: 2, height: 3, index: 4 },
-    { x: 10, y: 0, width: 2, height: 3, index: 5 },
-    { x: 0, y: 5, width: 2, height: 5, index: 6 },
-    { x: 2, y: 5, width: 2, height: 5, index: 7 },
-    { x: 4, y: 5, width: 2, height: 5, index: 8 },
-    { x: 6, y: 3, width: 2, height: 4, index: 9 },
-    { x: 8, y: 4, width: 2, height: 4, index: 10 },
-    { x: 10, y: 4, width: 2, height: 4, index: 11 },
-    { x: 0, y: 10, width: 2, height: 5, index: 12 },
-    { x: 2, y: 10, width: 2, height: 5, index: 13 },
-    { x: 4, y: 8, width: 2, height: 4, index: 14 },
-    { x: 6, y: 8, width: 2, height: 4, index: 15 },
-    { x: 8, y: 10, width: 2, height: 5, index: 16 },
-    { x: 10, y: 4, width: 2, height: 2, index: 17 },
-    { x: 0, y: 9, width: 2, height: 3, index: 18 },
-    { x: 2, y: 6, width: 2, height: 2, index: 19 },
-  ])
+
   return defineComponent({
     name: 'App',
     setup() {
+      const layoutMatrix = reactive([
+        { x: 0, y: 0, width: 2, height: 2, index: 0 },
+        { x: 2, y: 0, width: 2, height: 4, index: 1 },
+        { x: 4, y: 0, width: 6, height: 8, index: 2 },
+        { x: 6, y: 0, width: 2, height: 3, index: 3 },
+        { x: 8, y: 0, width: 2, height: 3, index: 4 },
+        { x: 10, y: 0, width: 2, height: 3, index: 5 },
+        { x: 0, y: 5, width: 2, height: 5, index: 6 },
+        { x: 2, y: 5, width: 2, height: 5, index: 7 },
+        { x: 4, y: 5, width: 2, height: 5, index: 8 },
+        { x: 6, y: 3, width: 2, height: 4, index: 9 },
+        { x: 8, y: 4, width: 2, height: 4, index: 10 },
+        { x: 10, y: 4, width: 2, height: 4, index: 11 },
+        { x: 0, y: 10, width: 2, height: 5, index: 12 },
+        { x: 2, y: 10, width: 2, height: 5, index: 13 },
+        { x: 4, y: 8, width: 2, height: 4, index: 14 },
+        { x: 6, y: 8, width: 2, height: 4, index: 15 },
+        { x: 8, y: 10, width: 2, height: 5, index: 16 },
+        { x: 10, y: 4, width: 2, height: 2, index: 17 },
+        { x: 0, y: 9, width: 2, height: 3, index: 18 },
+        { x: 2, y: 6, width: 2, height: 2, index: 19 },
+      ])
       const navigationController = MultiProvider.get<NavigationController>(
         NavigationController
       )
+      const gridViewDelegate = GridViewDelegate.use({
+        gridViewItems: layoutMatrix.map((el) =>
+          GridViewItem({
+            child: TextButton({
+              child: Text({
+                text: ref(`text key:${el.index}`),
+              }),
+              expand: true,
+              onTap: () => alert(`Hola ${el.index}!`),
+            }),
+            position: el,
+          })
+        ),
+      })
+
       return () =>
         h(
           Scaffold({
@@ -257,20 +273,7 @@ export const WrapperApp = () => {
                         console.log({ i })
                         layoutMatrix.splice(i, 1, newPosition)
                       },
-                      delegate: GridViewDelegate.use({
-                        gridViewItems: layoutMatrix.map((el) =>
-                          GridViewItem({
-                            child: TextButton({
-                              child: Text({
-                                text: ref(`text key:${el.index}`),
-                              }),
-                              expand: true,
-                              onTap: () => alert(`Hola ${el.index}!`),
-                            }),
-                            position: el,
-                          })
-                        ),
-                      }),
+                      delegate: gridViewDelegate,
                     }),
                   ],
                 }),

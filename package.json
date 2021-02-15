@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue_flutter_tailwind",
   "description": "Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -59,7 +59,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
-    "sass-loader": "^11.0.1",
+    "sass-loader": "^10.1.1",
     "typescript": "^4.1.5",
     "vue-jest": "^5.0.0-0"
   },

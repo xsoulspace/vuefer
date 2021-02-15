@@ -25,7 +25,7 @@
   </grid-layout>
 </template>
 <script lang="ts">
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 import { GridViewItemBuilder } from './GridViewItemBuilder'
 import {
@@ -35,6 +35,9 @@ import {
 } from '../abstract/Grid'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
 import { getChangesFromOldAndNewArrays } from '@/functions'
+
+type PackageGridItemPositionIndex = number
+
 export default {
   name: 'GridViewBuilder',
   props: {
@@ -71,31 +74,15 @@ export default {
     GridViewItemBuilder,
   },
   setup(props) {
-    const internalLayoutMatrixMap = reactive<
-      Map<PackageGridItemPosition['i'], PackageGridItemPosition>
-    >(new Map())
-    const changeIndexedMap = ({
-      positionsToUpdate,
-    }: {
-      positionsToUpdate: PackageGridItemPosition[]
-    }) => {
-      const { created, updated, removed } = getChangesFromOldAndNewArrays({
-        newArr: positionsToUpdate,
-        oldArr: internalLayoutMatrix.value,
-        idPropertyName: 'i',
-      })
-      for (const removedPosition of removed) {
-        internalLayoutMatrixMap.delete(removedPosition.i)
-      }
-      for (const createdPosition of created.concat(updated)) {
-        internalLayoutMatrixMap.set(createdPosition.i, createdPosition)
-      }
-    }
-
-    const internalLayoutMatrix = computed({
-      set: (positionsToUpdate) => changeIndexedMap({ positionsToUpdate }),
-      get: () => [...internalLayoutMatrixMap.values()],
-    })
+    /**
+     * This an persistent matrix which always up to date and synced
+     * with vue-grid. AllChanges must go on from it or be written to it.
+     */
+    const internalLayoutMatrix = reactive<PackageGridItemPosition[]>([])
+    console.log('init')
+    /**
+     * Sending changes up
+     */
     const fixedTypeOnPositionUpdate = props.onPositionUpdate as Maybe<
       ValueChanged<GridViewItemPosition>
     >
@@ -127,21 +114,74 @@ export default {
       if (fixedTypeOnPositionUpdate)
         await fixedTypeOnPositionUpdate(newPosition)
     }
-    const itemBuilder = ({ index }) => props.delegate.itemBuilder({ index })
+
+    /**
+     * Getting changes down
+     * 1. Watch for changes in delegate.
+     * If its changes, run items check.
+     * 2. If items is changed, then change interfnal matrix
+     */
+
+    const internalLayoutMapOfIndexes = computed(() => {
+      const map = new Map<
+        PackageGridItemPosition['i'],
+        PackageGridItemPositionIndex
+      >()
+      for (let i = 0; i < internalLayoutMatrix.length; i++) {
+        const position = internalLayoutMatrix[i]
+        map.set(position.i, i)
+      }
+      return map
+    })
+    const isInit = ref(false)
+    const changeIndexedMap = ({
+      newArr,
+    }: {
+      newArr: PackageGridItemPosition[]
+    }) => {
+      const { created, updated, removed } = getChangesFromOldAndNewArrays({
+        newArr,
+        oldArr: internalLayoutMatrix,
+        idPropertyName: 'i',
+      })
+      console.log({ created, updated, removed })
+      for (const removedPosition of removed) {
+        const index = internalLayoutMapOfIndexes.value.get(removedPosition.i)
+        if (index) internalLayoutMatrix.splice(index, 1)
+      }
+      for (const createdPosition of created.concat(updated)) {
+        const index = internalLayoutMapOfIndexes.value.get(createdPosition.i)
+
+        if (index) {
+          internalLayoutMatrix[index] = createdPosition
+        } else {
+          internalLayoutMatrix.push(createdPosition)
+        }
+      }
+    }
+
     watch(
       props.delegate.reactive,
       () => {
-        const positionsToUpdate = props.delegate.layoutMatrix.map((el) => ({
+        if (isInit.value) {
+          return
+        } else {
+          isInit.value = true
+        }
+        const newArr = props.delegate.layoutMatrix.map((el) => ({
           x: el.x,
           y: el.y,
           w: el.width,
           h: el.height,
           i: el.index,
         }))
-        changeIndexedMap({ positionsToUpdate })
+        console.log({ newArr, internalLayoutMatrix })
+        changeIndexedMap({ newArr })
       },
       { deep: true, immediate: true }
     )
+    const itemBuilder = ({ index }) => props.delegate.itemBuilder({ index })
+
     return {
       internalLayoutMatrix,
       handleResized,
