@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { getChangesFromOldAndNewArrays } from './getChangesFromOldAndNewArrays'
 
 describe('getChangesFromOldAndNewArrays', () => {
@@ -16,9 +15,9 @@ describe('getChangesFromOldAndNewArrays', () => {
       oldArr,
       idPropertyName: 'i',
     })
-    expect(result).to.equal({
+    expect(result).toEqual({
       created: [newArr[1]],
-      changed: [newArr[0]],
+      updated: [newArr[0]],
       removed: [oldArr[1]],
     })
   })
