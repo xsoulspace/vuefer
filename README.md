@@ -44,6 +44,12 @@ add styling to your main.ts
 import '@xsoulspace/vue_flutter_tailwind/dist/vft.css'
 ```
 
+add styling to app div (temporary and will be removed during Scaffold widget refactoring)
+
+```html
+<div id="app" class="absolute left-0 right-0 top-0 bottom-0"></div>
+```
+
 ### Usage
 
 ```typescript
