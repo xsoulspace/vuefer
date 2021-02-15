@@ -1,8 +1,17 @@
-import { Component, computed, defineComponent, h } from '@vue/runtime-core'
+import {
+  Component,
+  defineComponent,
+  h,
+  reactive,
+  watch,
+} from '@vue/runtime-core'
 import { ref } from 'vue'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
-import { NavigationController } from '../abstract/Navigation'
+import {
+  NavigationController,
+  NavigationControllerRoute,
+} from '../abstract/Navigation'
 import {
   OpacityDecoration,
   OpacityDecorationSteps,
@@ -44,20 +53,40 @@ export const Navigation = ({ child }: NavigationI) => {
       const routeController = MultiProvider.get<NavigationController>(
         NavigationController
       )
-      const currentRoute = computed(() => routeController.currentRoute)
-      const currentWidget = computed(() => currentRoute.value.widget)
-
-      const isRoutesExists = computed(() => routeController.routes.length > 0)
-
-      const isFullscreen = computed(() => {
-        const maybeFullscreen = currentRoute.value.fullscreen
-        return maybeFullscreen == null || maybeFullscreen == true
+      const currentRoute = reactive<NavigationControllerRoute>({
+        widget: null,
+        fullscreen: true,
+        routeName: '',
       })
-      const isNotFullscreen = computed(() => !isFullscreen.value)
+      const isRoutesExists = ref<boolean>(false)
+      const isFullscreen = ref<boolean>(false)
+      const isNotFullscreen = ref<boolean>(false)
+
+      watch(
+        routeController.routes,
+        (newRoutes) => {
+          const newRoute = newRoutes[0]
+          if (newRoute == null) {
+            isRoutesExists.value = false
+            currentRoute.widget = null
+            return
+          }
+          currentRoute.widget = newRoute.widget
+          currentRoute.routeName = newRoute.routeName
+          currentRoute.fullscreen = newRoute.fullscreen
+          isNotFullscreen.value = !newRoute.fullscreen
+          isFullscreen.value = newRoute.fullscreen
+          isRoutesExists.value = true
+        },
+        {
+          deep: true,
+          immediate: true,
+        }
+      )
 
       return {
         isFullscreen,
-        currentWidget,
+        currentRoute,
         isNotFullscreen,
         isRoutesExists,
         routeController,
@@ -114,7 +143,7 @@ export const Navigation = ({ child }: NavigationI) => {
                                           event.stopPropagation()
                                         }
                                       >
-                                        {h(this.currentWidget)}
+                                        {h(this.currentRoute.widget ?? <div />)}
                                       </div>
                                     ),
                                   })
@@ -134,7 +163,7 @@ export const Navigation = ({ child }: NavigationI) => {
                                   new SizedBoxHeight({}).css,
                                 ]}
                               >
-                                {h(this.currentWidget)}
+                                {h(this.currentRoute.widget ?? <div />)}
                               </div>
                             ),
                             visible: ref(this.isFullscreen),
