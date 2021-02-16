@@ -157,7 +157,7 @@ export default {
           oldPosition.h = updatedPosition.h
         }
       }
-      for (const createdPosition of created.concat(updated)) {
+      for (const createdPosition of created) {
         internalLayoutMatrix.push(createdPosition)
       }
     }
