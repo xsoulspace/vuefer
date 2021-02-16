@@ -173,7 +173,6 @@ export default {
           h: el.height,
           i: el.index,
         }))
-        console.log({ newArr, internalLayoutMatrix })
         changeIndexedMap({ newArr })
       },
       { deep: true, immediate: true }
