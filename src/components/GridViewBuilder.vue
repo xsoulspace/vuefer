@@ -132,7 +132,6 @@ export default {
       }
       return map
     })
-    const isInit = ref(false)
     const changeIndexedMap = ({
       newArr,
     }: {
@@ -161,11 +160,6 @@ export default {
     watch(
       props.delegate.reactive,
       () => {
-        if (isInit.value) {
-          return
-        } else {
-          isInit.value = true
-        }
         const newArr = props.delegate.layoutMatrix.map((el) => ({
           x: el.x,
           y: el.y,

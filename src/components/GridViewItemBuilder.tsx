@@ -16,6 +16,6 @@ export const GridViewItemBuilder = defineComponent({
   setup(props) {
     const fixedItemBuilder = props.itemBuilder as ItemBuilder
 
-    return () => h(fixedItemBuilder({ index: props.index }))
+    return () => h(fixedItemBuilder({ index: props.index }) ?? <div />)
   },
 })
