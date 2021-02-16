@@ -1,4 +1,4 @@
-import { Maybe } from '@/abstract/BasicTypes'
+import { Maybe } from '../abstract/BasicTypes'
 import { unifyValue } from './unifyValue'
 
 const getUnifiedValue = (val: any) => {

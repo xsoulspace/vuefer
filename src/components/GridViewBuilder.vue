@@ -34,7 +34,7 @@ import {
   PackageGridItemPosition,
 } from '../abstract/Grid'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
-import { getChangesFromOldAndNewArrays } from '@/functions'
+import { getChangesFromOldAndNewArrays } from '../functions'
 
 type PackageGridItemPositionIndex = number
 
@@ -146,14 +146,19 @@ export default {
         const index = internalLayoutMapOfIndexes.value.get(removedPosition.i)
         if (index) internalLayoutMatrix.splice(index, 1)
       }
-      for (const createdPosition of created.concat(updated)) {
-        const index = internalLayoutMapOfIndexes.value.get(createdPosition.i)
+      for (const updatedPosition of updated) {
+        const index = internalLayoutMapOfIndexes.value.get(updatedPosition.i)
 
         if (index) {
-          internalLayoutMatrix[index] = createdPosition
-        } else {
-          internalLayoutMatrix.push(createdPosition)
+          const oldPosition = internalLayoutMatrix[index]
+          oldPosition.x = updatedPosition.x
+          oldPosition.y = updatedPosition.y
+          oldPosition.w = updatedPosition.w
+          oldPosition.h = updatedPosition.h
         }
+      }
+      for (const createdPosition of created.concat(updated)) {
+        internalLayoutMatrix.push(createdPosition)
       }
     }
 
