@@ -1,4 +1,4 @@
-import { Component, h, isReactive, reactive } from 'vue'
+import { Component, h, reactive } from 'vue'
 import { Maybe } from './BasicTypes'
 import { ItemBuilderContext } from './ItemBuilder'
 
@@ -57,13 +57,6 @@ export class GridViewDelegate {
   }
   get reactive() {
     return this._reactVal
-  }
-  set reactive(values: GridViewItemPreBuidler[]) {
-    if (isReactive(values)) {
-      this._reactVal = values
-    } else {
-      this._reactVal = reactive(values)
-    }
   }
 }
 
