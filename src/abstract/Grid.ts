@@ -1,4 +1,4 @@
-import { Component, h, Ref, ref } from 'vue'
+import { Component, h, reactive } from 'vue'
 import { Maybe } from './BasicTypes'
 import { ItemBuilderContext } from './ItemBuilder'
 
@@ -29,27 +29,27 @@ export interface GridViewItemPreBuidler {
   position: GridViewItemPosition
 }
 export class GridViewDelegate {
-  private _reactVal: Ref<GridViewItemPreBuidler[]> = ref([])
+  private _reactVal: GridViewItemPreBuidler[] = reactive([])
   constructor({ gridViewItems }: { gridViewItems: GridViewItemPreBuidler[] }) {
-    this.value = gridViewItems
+    this.value.push(...gridViewItems)
   }
   static use(arg: { gridViewItems: GridViewItemPreBuidler[] }) {
     return new GridViewDelegate(arg)
   }
   itemBuilder({ index }: ItemBuilderContext): Maybe<Component> {
-    return this._reactVal.value.find((el) => el.position.index == index)?.widget
+    return this._reactVal.find((el) => el.position.index == index)?.widget
   }
   get widgets(): Maybe<Component>[] {
-    return this._reactVal.value.map((el) => h(el.widget)) ?? []
+    return this._reactVal.map((el) => h(el.widget)) ?? []
   }
   get layoutMatrix(): GridViewItemPosition[] {
-    return this._reactVal.value.map((el) => el.position) ?? []
+    return this._reactVal.map((el) => el.position) ?? []
   }
   set value(val: GridViewItemPreBuidler[]) {
-    this._reactVal.value = val
+    this._reactVal = val
   }
   get value() {
-    return this._reactVal.value
+    return this._reactVal
   }
 
   get css(): string {

@@ -79,7 +79,6 @@ export default {
      * with vue-grid. AllChanges must go on from it or be written to it.
      */
     const internalLayoutMatrix = reactive<PackageGridItemPosition[]>([])
-    console.log('init')
     /**
      * Sending changes up
      */
@@ -144,7 +143,6 @@ export default {
         oldArr: internalLayoutMatrix,
         idPropertyName: 'i',
       })
-      console.log({ created, updated, removed })
       for (const removedPosition of removed) {
         const index = internalLayoutMapOfIndexes.value.get(removedPosition.i)
         if (index) internalLayoutMatrix.splice(index, 1)

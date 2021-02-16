@@ -66,7 +66,6 @@ export class GridView {
         GridViewBuilder,
       },
       setup() {
-        console.log('init gridview')
         const resolvedIsDraggable = computed(() =>
           isDraggable?.value == false ? false : true
         )

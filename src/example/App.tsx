@@ -270,7 +270,7 @@ export const WrapperApp = () => {
                         const i = layoutMatrix.findIndex(
                           (el) => el.index == newPosition.index
                         )
-                        console.log({ i })
+                        // console.log({ i })
                         layoutMatrix.splice(i, 1, newPosition)
                       },
                       delegate: gridViewDelegate,
