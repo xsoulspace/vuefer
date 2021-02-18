@@ -1,5 +1,27 @@
-import { reactive, Ref, ref } from 'vue'
-import { Maybe } from './BasicTypes'
+import { Component, reactive, Ref, ref } from 'vue'
+import { Maybe, ValueChanged } from './BasicTypes'
+import { BoxShadow } from './BoxShadow'
+import { DropdownMenuItemConstructor } from './DropdownMenuItem'
+
+// ********* Button interfaces ***********
+
+interface DropdownButtonAbstractI<I> {
+  items: DropdownMenuItemConstructor<I>[]
+  minItemHeight?: Maybe<Ref<number>>
+  onChanged?: Maybe<ValueChanged<I>>
+  elevation?: Maybe<BoxShadow>
+  icon?: Maybe<Component>
+}
+
+export interface MultiDropdownButtonI<I> extends DropdownButtonAbstractI<I> {
+  controller: MutliDropdownFieldController<I>
+}
+
+export interface DropdownButtonI<I> extends DropdownButtonAbstractI<I> {
+  controller: DropdownFieldController<I>
+}
+
+// ********** Controller interfaces ************
 
 interface DropdownFieldControllerAbstractI {
   readOnly?: Maybe<boolean>
@@ -8,8 +30,14 @@ interface DropdownFieldControllerAbstractI {
   key?: Maybe<string>
 }
 
-interface DropdownFieldControllerI<I> extends DropdownFieldControllerAbstractI {
+export interface DropdownFieldControllerI<I>
+  extends DropdownFieldControllerAbstractI {
   value?: Maybe<I>
+}
+
+export interface MutliDropdownFieldControllerI<I>
+  extends DropdownFieldControllerAbstractI {
+  value?: Maybe<I>[]
 }
 
 class DropdownFieldControllerAbstract {
@@ -32,6 +60,8 @@ class DropdownFieldControllerAbstract {
     return ''
   }
 }
+
+// ********** Controllers **************
 
 //  TODO: add properties
 export class DropdownFieldController<
@@ -67,13 +97,8 @@ export class DropdownFieldController<
   }
 }
 
-interface MutliDropdownFieldControllerI<I>
-  extends DropdownFieldControllerAbstractI {
-  value?: Maybe<I>[]
-}
-
 //  TODO: add properties
-export class MultiDropdownFieldController<
+export class MutliDropdownFieldController<
   I
 > extends DropdownFieldControllerAbstract {
   private _reactVal: { val: Maybe<I>[] } = reactive({

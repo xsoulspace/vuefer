@@ -1,9 +1,8 @@
-import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
-import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { computed, defineComponent, h, ref } from 'vue'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
-import { DropdownFieldController } from '../abstract/DropdownFieldController'
+import { MultiDropdownButtonI } from '../abstract/DropdownFieldController'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { ItemBuilder } from '../abstract/ItemBuilder'
 import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
@@ -12,7 +11,6 @@ import { TextEditingController } from '../abstract/TextEditingController'
 import clickOutside from '../directives/VClickOutside'
 import { unifyValue } from '../functions'
 import { Container } from './Container'
-import { DropdownMenuItemConstructor } from './DropdownMenuItem'
 import { GestureDetector } from './GestureDetector'
 import { Icon, Icons } from './Icon'
 import ListViewBuilder from './ListViewBuilder.vue'
@@ -22,15 +20,6 @@ import { SizedBox } from './SizedBox'
 import { Stack } from './Stack'
 import { TextField } from './TextField'
 import { Visibility } from './Visibility'
-
-interface MultiDropdownButtonI<I> {
-  items: DropdownMenuItemConstructor<I>[]
-  minItemHeight?: Maybe<Ref<number>>
-  onChanged?: Maybe<ValueChanged<I>>
-  elevation?: Maybe<BoxShadow>
-  icon?: Maybe<Component>
-  controller: DropdownFieldController<I>
-}
 
 export const MultiDropdownButton = <
   I extends

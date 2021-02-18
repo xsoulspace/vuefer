@@ -1,6 +1,7 @@
 import { Component, defineComponent, h } from 'vue'
 import { Alignment } from '../abstract/Alignment'
 import { Maybe } from '../abstract/BasicTypes'
+import { DropdownMenuItemConstructor } from '../abstract/DropdownMenuItem'
 import { SystemMouseCursors } from '../abstract/MouseCursor'
 import { Container } from './Container'
 import { GestureDetector } from './GestureDetector'
@@ -10,14 +11,6 @@ interface DropdownMenuItemI<I> {
   key: string
   onTap?: Maybe<CallableFunction>
   value?: Maybe<I>
-  title: string
-}
-
-// The key must be assigned to let compare items automatically
-export type DropdownMenuItemConstructor<I> = {
-  widget: Component
-  value?: Maybe<I>
-  key: string
   title: string
 }
 
