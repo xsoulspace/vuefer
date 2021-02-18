@@ -38,13 +38,26 @@ export const MultiDropdownButton = <
 }: MultiDropdownButtonI<I>) => {
   const resolvedIcon =
     icon ?? Icon(Icons.arrow_drop_down, { size: EdgeInsetsStep.s12 })
+
   const textFieldController = new TextEditingController({})
-  const selectedItem = computed(() =>
-    items.find((el) => el.key == controller.key.value)
+  textFieldController.text.value = ''
+
+  const selectedItems = computed(() =>
+    // FIXME: check is key selected
+    items.filter((el) => el.key == controller.key.value)
   )
-  // init
-  textFieldController.text.value = selectedItem.value?.title ?? ''
+
   const isMenuOpened = ref(false)
+
+  /**
+   * `1. User click on textField -> open dropdown
+   *  2. User enter text in textfield -> dropdown filter items
+   *  3. When user click on item
+   * `3.1 we need to mark item as seleceted in checkbox
+   *  3.2 we need to render selected item in selected items
+   *  3.3 we need to change values in controller
+   *  4. onDropdown Close - clear TextField
+   */
 
   const itemsDropdown = defineComponent({
     name: 'items',
@@ -86,16 +99,16 @@ export const MultiDropdownButton = <
                     itemBuilder={itemBuilder}
                     minItemHeight={minItemHeight}
                     onItemClick={(index: number) => {
-                      const oldValue = controller.value
-                      const item = effectiveItems.value[index]
-                      if (item == null) return Container({})
-                      controller.value = item.value
-                      controller.key.value = item.key
-                      textFieldController.text.value = item.title
-                      isMenuOpened.value = false
-                      if (onChanged && item.value) {
-                        onChanged(item.value, oldValue)
-                      }
+                      // const oldValue = controller.value
+                      // const item = effectiveItems.value[index]
+                      // if (item == null) return Container({})
+                      // controller.value = item.value
+                      // controller.key.value = item.key
+                      // textFieldController.text.value = item.title
+                      // isMenuOpened.value = false
+                      // if (onChanged && item.value) {
+                      //   onChanged(item.value, oldValue)
+                      // }
                     }}
                   />
                 ),
