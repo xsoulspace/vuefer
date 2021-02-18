@@ -57,6 +57,8 @@ export const MultiDropdownButton = <
    *  3.2 we need to render selected item in selected items
    *  3.3 we need to change values in controller
    *  4. onDropdown Close - clear TextField
+   *  if we have onCreateNew callback, then we can push value to that callback
+   *
    */
 
   const itemsDropdown = defineComponent({

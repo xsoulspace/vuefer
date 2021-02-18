@@ -15,6 +15,9 @@ interface DropdownButtonAbstractI<I> {
 
 export interface MultiDropdownButtonI<I> extends DropdownButtonAbstractI<I> {
   controller: MutliDropdownFieldController<I>
+  onCreateNew?: Maybe<
+    ({ editingText }: { editingText: string }) => Promise<void>
+  >
 }
 
 export interface DropdownButtonI<I> extends DropdownButtonAbstractI<I> {
