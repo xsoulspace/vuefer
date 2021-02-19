@@ -1,33 +1,46 @@
+import { BorderRadius } from '@/abstract'
 import { computed, defineComponent, h, ref } from 'vue'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
-import { MultiDropdownButtonI } from '../abstract/DropdownFieldController'
+import {
+  MultiDropdownButtonI,
+  MutliDropdownSelectedItem,
+  MutliDropdownSelectedValueI,
+} from '../abstract/DropdownFieldController'
+import { DropdownMenuItemConstructor } from '../abstract/DropdownMenuItem'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { ItemBuilder } from '../abstract/ItemBuilder'
 import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
 import { MainAxisSize } from '../abstract/MainAxisSize'
 import { TextEditingController } from '../abstract/TextEditingController'
 import clickOutside from '../directives/VClickOutside'
-import { unifyValue } from '../functions'
+import { createKeyedMap, unifyValue } from '../functions'
+import { CheckboxListTile } from './CheckboxListTile'
+import { Column } from './Column'
 import { Container } from './Container'
+import { ElevatedButton } from './ElevatedButton'
 import { GestureDetector } from './GestureDetector'
 import { Icon, Icons } from './Icon'
 import ListViewBuilder from './ListViewBuilder.vue'
+import { Material } from './Material'
 import { Positioned } from './Positioned'
 import { Row } from './Row'
 import { SizedBox } from './SizedBox'
 import { Stack } from './Stack'
+import { Text } from './Text'
 import { TextField } from './TextField'
 import { Visibility } from './Visibility'
+import { Wrap } from './Wrap'
 
 export const MultiDropdownButton = <
-  I extends
+  TValue extends
     | string
     | number
     | boolean
     | { [prop: string]: any }
-    | { [prop: number]: any }
+    | { [prop: number]: any },
+  TKeyValue extends MutliDropdownSelectedItem<TValue>
 >({
   items,
   elevation,
@@ -35,7 +48,8 @@ export const MultiDropdownButton = <
   minItemHeight,
   controller,
   onChanged,
-}: MultiDropdownButtonI<I>) => {
+  onTapSelected,
+}: MultiDropdownButtonI<TValue, TKeyValue>) => {
   const resolvedIcon =
     icon ?? Icon(Icons.arrow_drop_down, { size: EdgeInsetsStep.s12 })
 
@@ -43,12 +57,25 @@ export const MultiDropdownButton = <
   textFieldController.text.value = ''
 
   const selectedItems = computed(() =>
-    // FIXME: check is key selected
-    items.filter((el) => el.key == controller.key.value)
+    items.filter((el) => controller.valueIndexesByKeyMap.has(el.key))
   )
-
+  const selectedItemsMap = computed(() =>
+    createKeyedMap<TKeyValue['key'], DropdownMenuItemConstructor<TValue>>({
+      arr: selectedItems.value,
+      key: 'key',
+      unifyValues: false,
+    })
+  )
   const isMenuOpened = ref(false)
-
+  const deleteSeletedItem = async ({ key }: { key: TKeyValue['key'] }) => {
+    const index = controller.valueIndexesByKeyMap.get(key)
+    if (index != null) {
+      const val = controller.value[index]
+      controller.value.splice(index, 1)
+      if (onChanged) await onChanged(null, val?.value)
+    }
+    if (onChanged) await onChanged(null, null)
+  }
   /**
    * `1. User click on textField -> open dropdown
    *  2. User enter text in textfield -> dropdown filter items
@@ -57,7 +84,7 @@ export const MultiDropdownButton = <
    *  3.2 we need to render selected item in selected items
    *  3.3 we need to change values in controller
    *  4. onDropdown Close - clear TextField
-   *  if we have onCreateNew callback, then we can push value to that callback
+   * // TODO: if we have onCreateNew callback, then we can push value to that callback
    *
    */
 
@@ -67,18 +94,53 @@ export const MultiDropdownButton = <
       ListViewBuilder,
     },
     setup() {
-      const effectiveItems = computed(() =>
-        items.filter((el) => {
-          const isFound = unifyValue({ str: el?.value }).includes(
-            unifyValue({ str: textFieldController.text.value })
-          )
-          return isFound
-        })
+      const effectiveItems = computed<
+        MutliDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>[]
+      >(() =>
+        items
+          .filter((el) => {
+            const isFound = unifyValue({ str: el?.value }).includes(
+              unifyValue({ str: textFieldController.text.value })
+            )
+            return isFound
+          })
+          .map((el) => ({
+            selected: selectedItemsMap.value.has(el.key),
+            value: el,
+          }))
       )
 
       const itemBuilder: ItemBuilder = ({ index }) => {
         const item = effectiveItems.value[index]
-        if (item) return item.widget
+        if (item)
+          return CheckboxListTile({
+            title: item.value.widget,
+            selected: ref(item.selected),
+            value: ref(item.selected),
+            onChanged: async (newValue, oldValue) => {
+              const key = item.value['key']
+              switch (newValue) {
+                case true:
+                  // unshift
+                  const val = item.value.value
+                  if (val != null) {
+                    const selectedItem = MutliDropdownSelectedItem.use({
+                      key,
+                      value: val,
+                    })
+                    controller.value.unshift(selectedItem)
+                    if (onChanged) await onChanged(val, null)
+                  }
+                  if (onChanged) await onChanged(null, null)
+                  break
+                case false:
+                default:
+                  // splice
+                  await deleteSeletedItem({ key })
+                  break
+              }
+            },
+          })
         return Container({})
       }
       return () =>
@@ -100,18 +162,6 @@ export const MultiDropdownButton = <
                     itemCount={effectiveItems.value.length}
                     itemBuilder={itemBuilder}
                     minItemHeight={minItemHeight}
-                    onItemClick={(index: number) => {
-                      // const oldValue = controller.value
-                      // const item = effectiveItems.value[index]
-                      // if (item == null) return Container({})
-                      // controller.value = item.value
-                      // controller.key.value = item.key
-                      // textFieldController.text.value = item.title
-                      // isMenuOpened.value = false
-                      // if (onChanged && item.value) {
-                      //   onChanged(item.value, oldValue)
-                      // }
-                    }}
                   />
                 ),
               }),
@@ -131,6 +181,7 @@ export const MultiDropdownButton = <
     setup() {
       const closeMenu = () => {
         isMenuOpened.value = false
+        textFieldController.text.value = ''
       }
       return () =>
         h(
@@ -139,21 +190,56 @@ export const MultiDropdownButton = <
               Stack({
                 children: [
                   GestureDetector({
-                    child: SizedBox({
-                      child: Container({
-                        decoration: new BoxDecoration({
-                          boxShadow: elevation,
-                        }),
-                        child: Row({
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextField({ controller: textFieldController }),
-                            resolvedIcon,
-                          ],
-                        }),
+                    child: Material({
+                      child: Column({
+                        children: [
+                          Row({
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField({ controller: textFieldController }),
+                              resolvedIcon,
+                            ],
+                          }),
+                          Material({
+                            child: Wrap({
+                              children: [
+                                selectedItems.value.map((item) =>
+                                  GestureDetector({
+                                    onTap: async () => {
+                                      if (onTapSelected)
+                                        await onTapSelected(item.value)
+                                    },
+                                    child: Container({
+                                      child: Row({
+                                        children: [
+                                          Text({
+                                            text: ref(item.title),
+                                          }),
+                                          ElevatedButton({
+                                            child: Text({ text: ref('x') }),
+                                            onTap: async () => {
+                                              await deleteSeletedItem({
+                                                key: item.key,
+                                              })
+                                            },
+                                          }),
+                                        ],
+                                      }),
+                                      decoration: new BoxDecoration({
+                                        borderRadius: BorderRadius.circular(),
+                                      }),
+                                      padding: EdgeInsets.all(
+                                        EdgeInsetsStep.s3
+                                      ),
+                                    }),
+                                  })
+                                ),
+                              ],
+                            }),
+                          }),
+                        ],
                       }),
-                      height: EdgeInsetsStep.s10,
                     }),
                     onTap: () => {
                       if (!isMenuOpened.value) {

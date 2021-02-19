@@ -1,5 +1,4 @@
 import { Component, reactive, Ref, ref } from 'vue'
-import { createKeyedMap } from '../functions/createMap'
 import { isNotNull } from '../functions/isNotNull'
 import { Maybe, ValueChanged } from './BasicTypes'
 import { BoxShadow } from './BoxShadow'
@@ -7,23 +6,28 @@ import { DropdownMenuItemConstructor } from './DropdownMenuItem'
 
 // ********* Button interfaces ***********
 
-interface DropdownButtonAbstractI<I> {
-  items: DropdownMenuItemConstructor<I>[]
+interface DropdownButtonAbstractI<TValue> {
+  items: DropdownMenuItemConstructor<TValue>[]
   minItemHeight?: Maybe<Ref<number>>
-  onChanged?: Maybe<ValueChanged<I>>
+  onChanged?: Maybe<ValueChanged<TValue>>
   elevation?: Maybe<BoxShadow>
   icon?: Maybe<Component>
 }
 
-export interface MultiDropdownButtonI<I> extends DropdownButtonAbstractI<I> {
-  controller: MutliDropdownFieldController<I>
+export interface MultiDropdownButtonI<
+  TValue,
+  TKeyValue extends MutliDropdownSelectedItem<TValue>
+> extends DropdownButtonAbstractI<TValue> {
+  controller: MutliDropdownFieldController<TValue, TKeyValue>
   onCreateNew?: Maybe<
     ({ editingText }: { editingText: string }) => Promise<void>
   >
+  onTapSelected?: Maybe<ValueChanged<TValue>>
 }
 
-export interface DropdownButtonI<I> extends DropdownButtonAbstractI<I> {
-  controller: DropdownFieldController<I>
+export interface DropdownButtonI<TValue>
+  extends DropdownButtonAbstractI<TValue> {
+  controller: DropdownFieldController<TValue>
 }
 
 // ********** Controller interfaces ************
@@ -42,7 +46,7 @@ export interface DropdownFieldControllerI<I>
 
 export interface MutliDropdownFieldControllerI<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItem<TValue>
 > extends DropdownFieldControllerAbstractI {
   value?: Maybe<TKeyValue>[]
 }
@@ -51,8 +55,18 @@ interface MutliDropdownSelectedItemI<TValue> {
   key: string
   value: TValue
 }
-
-export class MutliDropdownSelectedItem<TValue> {
+/**
+ * This class provides a way to create selected items from
+ * outside for`{MutliDropdownFieldController.value}`
+ */
+export class MutliDropdownSelectedItem<
+  TValue extends
+    | string
+    | number
+    | boolean
+    | { [prop: string]: any }
+    | { [prop: number]: any }
+> {
   key: string
   value: TValue
 
@@ -64,6 +78,14 @@ export class MutliDropdownSelectedItem<TValue> {
   static use<TValue>(arg: MutliDropdownSelectedItemI<TValue>) {
     return new MutliDropdownSelectedItem<TValue>(arg)
   }
+}
+/**
+ * This class provides a way to create selected items from
+ * `{ItemBuilder}` for``{MutliDropdown}``
+ */
+export interface MutliDropdownSelectedValueI<TValue> {
+  selected: boolean
+  value: TValue
 }
 
 class DropdownFieldControllerAbstract {
@@ -121,12 +143,16 @@ export class DropdownFieldController<
   }
 }
 
+type TKeyValueIndex = number
+
 //  TODO: add properties
 export class MutliDropdownFieldController<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItem<TValue>
 > extends DropdownFieldControllerAbstract {
-  private _reactVal: { val: Maybe<TKeyValue>[] } = reactive({
+  private _reactVal: {
+    val: Maybe<MutliDropdownSelectedItem<TValue>>[]
+  } = reactive({
     val: [],
   })
   constructor({
@@ -142,15 +168,17 @@ export class MutliDropdownFieldController<
     })
     this.value = value ?? []
   }
-  get keyedValuesMap() {
-    const map = createKeyedMap<TKeyValue['key'], TKeyValue>({
-      arr: this.value.filter(isNotNull),
-      key: 'key',
-      unifyValues: false,
-    })
+  get valueIndexesByKeyMap() {
+    const map = new Map<TKeyValue['key'], TKeyValueIndex>()
+
+    const filteredValues = this.value.filter(isNotNull)
+    for (let i = 0; i < filteredValues.length; i++) {
+      const val = filteredValues[i]
+      map.set(val.key, i)
+    }
     return map
   }
-  set value(val: Maybe<TKeyValue>[]) {
+  set value(val: Maybe<MutliDropdownSelectedItem<TValue>>[]) {
     this._reactVal.val = val
   }
   get value() {
