@@ -1,5 +1,5 @@
-import { BorderRadius } from '@/abstract'
 import { computed, defineComponent, h, ref } from 'vue'
+import { BorderRadius } from '../abstract'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
@@ -73,6 +73,31 @@ export const MultiDropdownButton = <
       const val = controller.value[index]
       controller.value.splice(index, 1)
       if (onChanged) await onChanged(null, val?.value)
+      return
+    }
+    if (onChanged) await onChanged(null, null)
+  }
+  const selectItem = async ({
+    item,
+    key,
+  }: {
+    item: MutliDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>
+    key: TKeyValue['key']
+  }) => {
+    const val = item.value.value
+    if (val != null) {
+      const selectedItem = MutliDropdownSelectedItem.use({
+        key,
+        value: val,
+      })
+      const selectedItemIndex = controller.valueIndexesByKeyMap.get(key)
+      if (selectedItemIndex != null && selectedItemIndex >= 0) {
+        controller.value.splice(selectedItemIndex, 1, selectedItem)
+      } else {
+        controller.value.unshift(selectedItem)
+      }
+      if (onChanged) await onChanged(val, null)
+      return
     }
     if (onChanged) await onChanged(null, null)
   }
@@ -117,27 +142,13 @@ export const MultiDropdownButton = <
             title: item.value.widget,
             selected: ref(item.selected),
             value: ref(item.selected),
-            onChanged: async (newValue, oldValue) => {
+            onTap: async () => {
               const key = item.value['key']
-              switch (newValue) {
-                case true:
-                  // unshift
-                  const val = item.value.value
-                  if (val != null) {
-                    const selectedItem = MutliDropdownSelectedItem.use({
-                      key,
-                      value: val,
-                    })
-                    controller.value.unshift(selectedItem)
-                    if (onChanged) await onChanged(val, null)
-                  }
-                  if (onChanged) await onChanged(null, null)
-                  break
-                case false:
-                default:
-                  // splice
-                  await deleteSeletedItem({ key })
-                  break
+              if (item.selected) {
+                // delete item
+                await deleteSeletedItem({ key })
+              } else {
+                await selectItem({ key, item })
               }
             },
           })

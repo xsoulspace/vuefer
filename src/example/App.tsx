@@ -2,6 +2,7 @@ import {
   Dialog,
   GridView,
   GridViewItem,
+  MultiDropdownButton,
   MultiProvider,
   showDialog,
 } from '@/components'
@@ -25,6 +26,7 @@ import {
   ListView,
   MainAxisAlignment,
   MouseRegion,
+  MutliDropdownFieldController,
   Padding,
   Row,
   Scaffold,
@@ -35,7 +37,7 @@ import {
   TextEditingController,
   TextField,
 } from '@/index'
-import { computed, defineComponent, h, reactive, ref } from 'vue'
+import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
 import { GridViewDelegate, NavigationController } from '../abstract'
 import { HeroButton } from './HeroButton'
 type IndexedText = {
@@ -85,19 +87,20 @@ export const WrapperApp = () => {
     value: { id: 1, text: 'Hola!' },
     key: '1',
   })
+  const dropdownItems = reactive([
+    { id: 1, text: 'Hola!' },
+    { id: 2, text: 'Hola 2!' },
+    { id: 3, text: 'Hola 3!' },
+    { id: 4, text: 'maybe 4!' },
+    {
+      id: 5,
+      text: 'trello 5!',
+    },
+    { id: 6, text: 'Hola 6!' },
+    { id: 7, text: 'home 7!' },
+  ])
   const dropdown = DropdownButton({
-    items: [
-      { id: 1, text: 'Hola!' },
-      { id: 2, text: 'Hola 2!' },
-      { id: 3, text: 'Hola 3!' },
-      { id: 4, text: 'maybe 4!' },
-      {
-        id: 5,
-        text: 'trello 5!',
-      },
-      { id: 6, text: 'Hola 6!' },
-      { id: 7, text: 'home 7!' },
-    ].map((el) =>
+    items: dropdownItems.map((el) =>
       DropdownMenuItem({
         child: TextButton({
           expand: true,
@@ -178,7 +181,19 @@ export const WrapperApp = () => {
           })
         ),
       })
-
+      const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+        {}
+      )
+      watch(
+        multiDropdownController.reactive,
+        (controllerValues) => {
+          console.log({ controllerValues })
+        },
+        {
+          deep: true,
+          immediate: true,
+        }
+      )
       return () =>
         h(
           Scaffold({
@@ -199,6 +214,23 @@ export const WrapperApp = () => {
                   children: [
                     Column({
                       children: [
+                        MultiDropdownButton({
+                          controller: multiDropdownController,
+                          items: dropdownItems.map((el) =>
+                            DropdownMenuItem({
+                              child: Text({
+                                text: ref(el.text),
+                              }),
+                              value: el,
+                              key: el.id.toString(),
+                              title: el.text,
+                            })
+                          ),
+                          onChanged: (newValue, oldValue) => {
+                            // console.log({ newValue, oldValue })
+                          },
+                        }),
+
                         ElevatedButton({
                           child: Text({
                             text: ref('Show dialog'),
@@ -268,10 +300,16 @@ export const WrapperApp = () => {
                       isResizable: ref(true),
                       onPositionUpdate: (newPosition) => {
                         const i = layoutMatrix.findIndex(
-                          (el) => el.index == newPosition.index
+                          (el) => el.index == newPosition?.index
                         )
                         // console.log({ i })
-                        layoutMatrix.splice(i, 1, newPosition)
+                        if (i) {
+                          if (newPosition) {
+                            layoutMatrix.splice(i, 1, newPosition)
+                            return
+                          }
+                          layoutMatrix.splice(i, 1)
+                        }
                       },
                       delegate: gridViewDelegate,
                     }),

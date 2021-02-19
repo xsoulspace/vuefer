@@ -148,7 +148,7 @@ type TKeyValueIndex = number
 //  TODO: add properties
 export class MutliDropdownFieldController<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
 > extends DropdownFieldControllerAbstract {
   private _reactVal: {
     val: Maybe<MutliDropdownSelectedItem<TValue>>[]
