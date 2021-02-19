@@ -1,5 +1,5 @@
-import { BorderRadius } from '@/abstract'
 import { computed, defineComponent, h, ref } from 'vue'
+import { BorderRadius } from '../abstract'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
