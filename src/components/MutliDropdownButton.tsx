@@ -1,5 +1,5 @@
+import { BorderRadius } from '@/abstract'
 import { computed, defineComponent, h, ref } from 'vue'
-import { BorderRadius } from '../abstract'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
@@ -17,7 +17,6 @@ import { TextEditingController } from '../abstract/TextEditingController'
 import clickOutside from '../directives/VClickOutside'
 import { createKeyedMap, unifyValue } from '../functions'
 import { CheckboxListTile } from './CheckboxListTile'
-import { Column } from './Column'
 import { Container } from './Container'
 import { ElevatedButton } from './ElevatedButton'
 import { GestureDetector } from './GestureDetector'
@@ -196,76 +195,73 @@ export const MultiDropdownButton = <
       }
       return () =>
         h(
-          <div v-click-outside={closeMenu}>
+          <>
+            <div v-click-outside={closeMenu}>
+              {h(
+                Stack({
+                  children: [
+                    GestureDetector({
+                      child: Material({
+                        child: Row({
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField({ controller: textFieldController }),
+                            resolvedIcon,
+                          ],
+                        }),
+                      }),
+                      onTap: () => {
+                        if (!isMenuOpened.value) {
+                          isMenuOpened.value = true
+                        }
+                      },
+                    }),
+                    Visibility({
+                      child: itemsDropdown,
+                      visible: isMenuOpened,
+                    }),
+                  ],
+                })
+              )}
+            </div>
             {h(
-              Stack({
-                children: [
-                  GestureDetector({
-                    child: Material({
-                      child: Column({
-                        children: [
-                          Row({
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
+              Material({
+                child: Wrap({
+                  children: [
+                    ...selectedItems.value.map((item) =>
+                      GestureDetector({
+                        onTap: async () => {
+                          if (onTapSelected) await onTapSelected(item.value)
+                        },
+                        child: Container({
+                          child: Row({
                             children: [
-                              TextField({ controller: textFieldController }),
-                              resolvedIcon,
+                              Text({
+                                text: ref(item.title),
+                              }),
+                              ElevatedButton({
+                                child: Text({ text: ref('x') }),
+                                onTap: async () => {
+                                  await deleteSeletedItem({
+                                    key: item.key,
+                                  })
+                                },
+                              }),
                             ],
                           }),
-                          Material({
-                            child: Wrap({
-                              children: [
-                                selectedItems.value.map((item) =>
-                                  GestureDetector({
-                                    onTap: async () => {
-                                      if (onTapSelected)
-                                        await onTapSelected(item.value)
-                                    },
-                                    child: Container({
-                                      child: Row({
-                                        children: [
-                                          Text({
-                                            text: ref(item.title),
-                                          }),
-                                          ElevatedButton({
-                                            child: Text({ text: ref('x') }),
-                                            onTap: async () => {
-                                              await deleteSeletedItem({
-                                                key: item.key,
-                                              })
-                                            },
-                                          }),
-                                        ],
-                                      }),
-                                      decoration: new BoxDecoration({
-                                        borderRadius: BorderRadius.circular(),
-                                      }),
-                                      padding: EdgeInsets.all(
-                                        EdgeInsetsStep.s3
-                                      ),
-                                    }),
-                                  })
-                                ),
-                              ],
-                            }),
+                          decoration: new BoxDecoration({
+                            borderRadius: BorderRadius.circular(),
                           }),
-                        ],
-                      }),
-                    }),
-                    onTap: () => {
-                      if (!isMenuOpened.value) {
-                        isMenuOpened.value = true
-                      }
-                    },
-                  }),
-                  Visibility({
-                    child: itemsDropdown,
-                    visible: isMenuOpened,
-                  }),
-                ],
+                          padding: EdgeInsets.all(EdgeInsetsStep.s3),
+                        }),
+                      })
+                    ),
+                  ],
+                }),
               })
             )}
-          </div>
+          </>
         )
     },
   })

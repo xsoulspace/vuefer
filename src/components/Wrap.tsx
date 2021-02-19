@@ -28,7 +28,7 @@ export const Wrap = ({
           children.map((child) => h(child))
         )
       } else {
-        return h('div')
+        return h(<div />)
       }
     },
   })
