@@ -1,4 +1,6 @@
 import { Component, reactive, Ref, ref } from 'vue'
+import { createKeyedMap } from '../functions/createMap'
+import { isNotNull } from '../functions/isNotNull'
 import { Maybe, ValueChanged } from './BasicTypes'
 import { BoxShadow } from './BoxShadow'
 import { DropdownMenuItemConstructor } from './DropdownMenuItem'
@@ -38,23 +40,41 @@ export interface DropdownFieldControllerI<I>
   value?: Maybe<I>
 }
 
-export interface MutliDropdownFieldControllerI<I>
-  extends DropdownFieldControllerAbstractI {
-  value?: Maybe<I>[]
+export interface MutliDropdownFieldControllerI<
+  TValue,
+  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
+> extends DropdownFieldControllerAbstractI {
+  value?: Maybe<TKeyValue>[]
+}
+
+interface MutliDropdownSelectedItemI<TValue> {
+  key: string
+  value: TValue
+}
+
+export class MutliDropdownSelectedItem<TValue> {
+  key: string
+  value: TValue
+
+  constructor({ key, value }: MutliDropdownSelectedItemI<TValue>) {
+    this.key = key
+    this.value = value
+  }
+
+  static use<TValue>(arg: MutliDropdownSelectedItemI<TValue>) {
+    return new MutliDropdownSelectedItem<TValue>(arg)
+  }
 }
 
 class DropdownFieldControllerAbstract {
-  key: Ref<Maybe<string>> = ref()
   readOnly: boolean
   maxLength?: Maybe<number>
   maxLines?: Maybe<number>
   constructor({
-    key,
     maxLength,
     maxLines,
     readOnly,
   }: DropdownFieldControllerAbstractI) {
-    this.key.value = key
     this.readOnly = readOnly ?? false
     this.maxLength = maxLength
     this.maxLines = maxLines ?? 1
@@ -73,6 +93,7 @@ export class DropdownFieldController<
   private _reactVal: { val: Maybe<I> | Record<string, unknown> } = reactive({
     val: {},
   })
+  key: Ref<Maybe<string>> = ref()
   constructor({
     value,
     readOnly,
@@ -81,11 +102,11 @@ export class DropdownFieldController<
     key,
   }: DropdownFieldControllerI<I>) {
     super({
-      key,
       readOnly,
       maxLines,
       maxLength,
     })
+    this.key.value = key
     this.value = value
   }
   set value(val: Maybe<I>) {
@@ -102,9 +123,10 @@ export class DropdownFieldController<
 
 //  TODO: add properties
 export class MutliDropdownFieldController<
-  I
+  TValue,
+  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
 > extends DropdownFieldControllerAbstract {
-  private _reactVal: { val: Maybe<I>[] } = reactive({
+  private _reactVal: { val: Maybe<TKeyValue>[] } = reactive({
     val: [],
   })
   constructor({
@@ -112,17 +134,23 @@ export class MutliDropdownFieldController<
     readOnly,
     maxLines,
     maxLength,
-    key,
-  }: MutliDropdownFieldControllerI<I>) {
+  }: MutliDropdownFieldControllerI<TValue, TKeyValue>) {
     super({
-      key,
       maxLength,
       maxLines,
       readOnly,
     })
     this.value = value ?? []
   }
-  set value(val: Maybe<I>[]) {
+  get keyedValuesMap() {
+    const map = createKeyedMap<TKeyValue['key'], TKeyValue>({
+      arr: this.value.filter(isNotNull),
+      key: 'key',
+      unifyValues: false,
+    })
+    return map
+  }
+  set value(val: Maybe<TKeyValue>[]) {
     this._reactVal.val = val
   }
   get value() {

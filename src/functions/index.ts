@@ -1,3 +1,4 @@
+export * from './createMap'
 export * from './deepCopyObj'
 export * from './findUnshiftSplice'
 export * from './getChangesFromOldAndNewArrays'
