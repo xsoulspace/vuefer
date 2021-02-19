@@ -182,7 +182,7 @@ export const WrapperApp = () => {
         ),
       })
       const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
-        {}
+        { keyofValue: 'id' }
       )
       watch(
         multiDropdownController.reactive,
@@ -226,9 +226,6 @@ export const WrapperApp = () => {
                               title: el.text,
                             })
                           ),
-                          onChanged: (newValue, oldValue) => {
-                            // console.log({ newValue, oldValue })
-                          },
                         }),
 
                         ElevatedButton({

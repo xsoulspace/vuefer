@@ -16,7 +16,7 @@ interface DropdownButtonAbstractI<TValue> {
 
 export interface MultiDropdownButtonI<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItemI<TValue>
 > extends DropdownButtonAbstractI<TValue> {
   controller: MutliDropdownFieldController<TValue, TKeyValue>
   onCreateNew?: Maybe<
@@ -44,40 +44,29 @@ export interface DropdownFieldControllerI<I>
   value?: Maybe<I>
 }
 
-export interface MutliDropdownFieldControllerI<
-  TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue>
-> extends DropdownFieldControllerAbstractI {
-  value?: Maybe<TKeyValue>[]
-}
-
-interface MutliDropdownSelectedItemI<TValue> {
-  key: string
-  value: TValue
+export interface MutliDropdownFieldControllerI<TValue>
+  extends DropdownFieldControllerAbstractI {
+  value?: Maybe<TValue>[]
+  keyofValue: keyof TValue
 }
 /**
  * This class provides a way to create selected items from
  * outside for`{MutliDropdownFieldController.value}`
  */
-export class MutliDropdownSelectedItem<
-  TValue extends
-    | string
-    | number
-    | boolean
-    | { [prop: string]: any }
-    | { [prop: number]: any }
-> {
-  key: string
+export type MutliDropdownSelectedItemI<TValue> = {
+  key: TValue[keyof TValue] | string
   value: TValue
-
-  constructor({ key, value }: MutliDropdownSelectedItemI<TValue>) {
-    this.key = key
-    this.value = value
-  }
-
-  static use<TValue>(arg: MutliDropdownSelectedItemI<TValue>) {
-    return new MutliDropdownSelectedItem<TValue>(arg)
-  }
+}
+/**
+ * This is typeguard for MutliDropdownSelectedItemI interface
+ */
+export const isMutliDropdownSelectedItem = <
+  TValue,
+  TKeyValue extends MutliDropdownSelectedItemI<TValue>
+>(
+  arg: Record<string, unknown>
+): arg is TKeyValue => {
+  return 'key' in arg && 'value' in arg
 }
 /**
  * This class provides a way to create selected items from
@@ -148,41 +137,72 @@ type TKeyValueIndex = number
 //  TODO: add properties
 export class MutliDropdownFieldController<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItem<TValue> = MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItemI<TValue> = MutliDropdownSelectedItemI<TValue>
 > extends DropdownFieldControllerAbstract {
   private _reactVal: {
-    val: Maybe<MutliDropdownSelectedItem<TValue>>[]
+    val: Maybe<TKeyValue>[]
   } = reactive({
     val: [],
   })
+  keyofValue: keyof TValue
   constructor({
     value,
     readOnly,
     maxLines,
     maxLength,
-  }: MutliDropdownFieldControllerI<TValue, TKeyValue>) {
+    keyofValue,
+  }: MutliDropdownFieldControllerI<TValue>) {
     super({
       maxLength,
       maxLines,
       readOnly,
     })
-    this.value = value ?? []
+    this.keyofValue = keyofValue
+    const keyValues = this.toKeyValues({ values: value ?? [] })
+    this.keyValue = keyValues
   }
-  get valueIndexesByKeyMap() {
-    const map = new Map<TKeyValue['key'], TKeyValueIndex>()
+  toRawValues({ values }: { values: Maybe<TKeyValue>[] }): Maybe<TValue>[] {
+    return values.map((el) => el?.value)
+  }
+  toKeyValues({ values }: { values: Maybe<TValue>[] }): Maybe<TKeyValue>[] {
+    return values.filter(isNotNull).map((value) => {
+      const key = value[this.keyofValue]
+      const keyValue: MutliDropdownSelectedItemI<TValue> = {
+        key,
+        value,
+      }
+      if (isMutliDropdownSelectedItem<TValue, TKeyValue>(keyValue)) {
+        return keyValue
+      }
+      return
+    })
+  }
 
-    const filteredValues = this.value.filter(isNotNull)
+  get valueIndexesByKeyMap() {
+    const map = new Map<TKeyValue['key'] | string, TKeyValueIndex>()
+
+    const filteredValues = this.keyValue.filter(isNotNull)
     for (let i = 0; i < filteredValues.length; i++) {
       const val = filteredValues[i]
       map.set(val.key, i)
     }
     return map
   }
-  set value(val: Maybe<MutliDropdownSelectedItem<TValue>>[]) {
+  set keyValue(val: Maybe<TKeyValue>[]) {
     this._reactVal.val = val
   }
-  get value() {
+  get keyValue() {
     return this._reactVal.val
+  }
+  set value(val: Maybe<TValue>[]) {
+    this.keyValue = this.toKeyValues({
+      values: val,
+    })
+  }
+  get value() {
+    return this.toRawValues({
+      values: this.keyValue,
+    })
   }
   get reactive() {
     return this._reactVal

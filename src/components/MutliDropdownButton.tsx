@@ -4,8 +4,9 @@ import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
 import {
+  isMutliDropdownSelectedItem,
   MultiDropdownButtonI,
-  MutliDropdownSelectedItem,
+  MutliDropdownSelectedItemI,
   MutliDropdownSelectedValueI,
 } from '../abstract/DropdownFieldController'
 import { DropdownMenuItemConstructor } from '../abstract/DropdownMenuItem'
@@ -32,6 +33,47 @@ import { TextField } from './TextField'
 import { Visibility } from './Visibility'
 import { Wrap } from './Wrap'
 
+/**
+ * Usage:
+ *
+ * Create controller in setup or anywehere and
+ * give generic type to use
+ *
+ * ```typescript
+ * const IndexedText {
+ *   id: string
+ *   text: string
+ * }
+ *
+ *
+ * const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+ *   { keyofValue: 'id' }
+ * )
+ * ```
+ *
+ * Then use MultiDropdownButton with DropdownMenuItem in items
+ * to make it work
+ *
+ * ```typescript
+ * MultiDropdownButton({
+ *   controller: multiDropdownController,
+ *   items: dropdownItems.map((el) =>
+ *     DropdownMenuItem({
+ *       child: Text({
+ *         text: ref(el.text),
+ *       }),
+ *       value: el,
+ *       key: el.id,
+ *       title: el.text,
+ *     })
+ *   ),
+ * }),
+ * ```
+ *
+ * To get or change selected values use:
+ * `controller.value`
+ *
+ */
 export const MultiDropdownButton = <
   TValue extends
     | string
@@ -39,7 +81,7 @@ export const MultiDropdownButton = <
     | boolean
     | { [prop: string]: any }
     | { [prop: number]: any },
-  TKeyValue extends MutliDropdownSelectedItem<TValue>
+  TKeyValue extends MutliDropdownSelectedItemI<TValue>
 >({
   items,
   elevation,
@@ -59,18 +101,25 @@ export const MultiDropdownButton = <
     items.filter((el) => controller.valueIndexesByKeyMap.has(el.key))
   )
   const selectedItemsMap = computed(() =>
-    createKeyedMap<TKeyValue['key'], DropdownMenuItemConstructor<TValue>>({
+    createKeyedMap<
+      TKeyValue['key'] | string,
+      DropdownMenuItemConstructor<TValue>
+    >({
       arr: selectedItems.value,
       key: 'key',
       unifyValues: false,
     })
   )
   const isMenuOpened = ref(false)
-  const deleteSeletedItem = async ({ key }: { key: TKeyValue['key'] }) => {
+  const deleteSeletedItem = async ({
+    key,
+  }: {
+    key: TKeyValue['key'] | string
+  }) => {
     const index = controller.valueIndexesByKeyMap.get(key)
     if (index != null) {
-      const val = controller.value[index]
-      controller.value.splice(index, 1)
+      const val = controller.keyValue[index]
+      controller.keyValue.splice(index, 1)
       if (onChanged) await onChanged(null, val?.value)
       return
     }
@@ -81,24 +130,26 @@ export const MultiDropdownButton = <
     key,
   }: {
     item: MutliDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>
-    key: TKeyValue['key']
+    key: TKeyValue['key'] | string
   }) => {
     const val = item.value.value
     if (val != null) {
-      const selectedItem = MutliDropdownSelectedItem.use({
+      const selectedItem: MutliDropdownSelectedItemI<TValue> = {
         key,
         value: val,
-      })
-      const selectedItemIndex = controller.valueIndexesByKeyMap.get(key)
-      if (selectedItemIndex != null && selectedItemIndex >= 0) {
-        controller.value.splice(selectedItemIndex, 1, selectedItem)
-      } else {
-        controller.value.unshift(selectedItem)
       }
-      if (onChanged) await onChanged(val, null)
-      return
+
+      const selectedItemIndex = controller.valueIndexesByKeyMap.get(key)
+      if (isMutliDropdownSelectedItem<TValue, TKeyValue>(selectedItem)) {
+        if (selectedItemIndex != null && selectedItemIndex >= 0) {
+          controller.keyValue.splice(selectedItemIndex, 1, selectedItem)
+        } else {
+          controller.keyValue.unshift(selectedItem)
+        }
+        if (onChanged) await onChanged(val, null)
+        return
+      }
     }
-    if (onChanged) await onChanged(null, null)
   }
   /**
    * `1. User click on textField -> open dropdown

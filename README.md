@@ -200,8 +200,50 @@ ElevatedButton({
 To close, just use `navigationController.pop()`
 
 - [x] Navigation & NavigationController
+
   - [x] Popup (with background) functionality
   - [x] Fullscreen functionality
+
+- [x] MultiDropdown Button
+
+Usage:
+
+Create controller in setup or anywehere and
+give generic type to use
+
+```typescript
+const IndexedText {
+  id: string
+  text: string
+}
+
+
+const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+  { keyofValue: 'id' }
+)
+```
+
+Then use MultiDropdownButton with DropdownMenuItem in items
+to make it work
+
+```typescript
+MultiDropdownButton({
+  controller: multiDropdownController,
+  items: dropdownItems.map((el) =>
+    DropdownMenuItem({
+      child: Text({
+        text: ref(el.text),
+      }),
+      value: el,
+      key: el.id,
+      title: el.text,
+    })
+  ),
+}),
+```
+
+To get or change selected values use:
+`controller.value`
 
 ### Usage:
 
@@ -216,11 +258,9 @@ MultiProvider.create({
 })
 ```
 
-## WIP
-
-- [] DropdownButton, DropdownButtonItem
-  [x] functionality
-  [] decoration
+- [x] DropdownButton, DropdownButtonItem
+      [x] functionality
+      [] decoration
 
 - [] Visibility
   [x] functionality
@@ -235,6 +275,8 @@ MultiProvider.create({
 - [x] Checkbox
       [x] Basic
       [] Style
+
+## WIP
 
 - [] GestureDetecture
   [x] click

@@ -1,3 +1,46 @@
+## 0.7.0
+
+### feat: MutliDropdownButton
+
+Usage:
+
+Create controller in setup or anywehere and
+give generic type to use
+
+```typescript
+const IndexedText {
+  id: string
+  text: string
+}
+
+
+const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+  { keyofValue: 'id' }
+)
+```
+
+Then use MultiDropdownButton with DropdownMenuItem in items
+to make it work
+
+```typescript
+MultiDropdownButton({
+  controller: multiDropdownController,
+  items: dropdownItems.map((el) =>
+    DropdownMenuItem({
+      child: Text({
+        text: ref(el.text),
+      }),
+      value: el,
+      key: el.id,
+      title: el.text,
+    })
+  ),
+}),
+```
+
+To get or change selected values use:
+`controller.value`
+
 ## 0.6.0
 
 ### feat: Provider

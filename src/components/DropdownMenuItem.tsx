@@ -10,7 +10,7 @@ interface DropdownMenuItemI<I> {
   child: Component
   key: string
   onTap?: Maybe<CallableFunction>
-  value?: Maybe<I>
+  value: Maybe<I>
   title: string
 }
 
