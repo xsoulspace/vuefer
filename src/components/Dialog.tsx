@@ -34,11 +34,13 @@ interface DialogI {
 export const showDialog = ({
   navigationController,
   dialog,
+  fullscreen,
 }: {
   dialog: Component
   navigationController: NavigationController
+  fullscreen?: Maybe<boolean>
 }) => {
-  navigationController.push({ widget: dialog, fullscreen: false })
+  navigationController.push({ widget: dialog, fullscreen: fullscreen ?? false })
 }
 
 /**
