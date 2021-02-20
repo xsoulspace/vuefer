@@ -1,4 +1,4 @@
-import { Component, defineComponent, h } from 'vue'
+import { Component, defineComponent, h, Ref } from 'vue'
 import { Alignment } from '../abstract/Alignment'
 import { Maybe } from '../abstract/BasicTypes'
 import { DropdownMenuItemConstructor } from '../abstract/DropdownMenuItem'
@@ -11,7 +11,7 @@ interface DropdownMenuItemI<I> {
   key: string
   onTap?: Maybe<CallableFunction>
   value: Maybe<I>
-  title: string
+  title: Ref<string>
 }
 
 export const DropdownMenuItem = <I extends unknown>({

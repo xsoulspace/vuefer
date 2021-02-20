@@ -1,6 +1,6 @@
 ## 0.7.0
 
-### feat: MutliDropdownButton
+### feat: MultiDropdownButton
 
 Usage:
 
@@ -14,7 +14,7 @@ const IndexedText {
 }
 
 
-const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
   { keyofValue: 'id' }
 )
 ```

@@ -43,7 +43,7 @@ export const DropdownButton = <
     items.find((el) => el.key == controller.key.value)
   )
   // init
-  textFieldController.text.value = selectedItem.value?.title ?? ''
+  textFieldController.text.value = selectedItem.value?.title.value ?? ''
   const isMenuOpened = ref(false)
 
   const itemsDropdown = defineComponent({
@@ -91,7 +91,7 @@ export const DropdownButton = <
                       if (item == null) return Container({})
                       controller.value = item.value
                       controller.key.value = item.key
-                      textFieldController.text.value = item.title
+                      textFieldController.text.value = item.title.value
                       isMenuOpened.value = false
                       if (onChanged && item.value) {
                         onChanged(item.value, oldValue)

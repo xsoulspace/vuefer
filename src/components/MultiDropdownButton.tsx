@@ -4,10 +4,10 @@ import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
 import {
-  isMutliDropdownSelectedItem,
+  isMultiDropdownSelectedItem,
   MultiDropdownButtonI,
-  MutliDropdownSelectedItemI,
-  MutliDropdownSelectedValueI,
+  MultiDropdownSelectedItemI,
+  MultiDropdownSelectedValueI,
 } from '../abstract/DropdownFieldController'
 import { DropdownMenuItemConstructor } from '../abstract/DropdownMenuItem'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
@@ -46,7 +46,7 @@ import { Wrap } from './Wrap'
  * }
  *
  *
- * const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+ * const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
  *   { keyofValue: 'id' }
  * )
  * ```
@@ -81,7 +81,7 @@ export const MultiDropdownButton = <
     | boolean
     | { [prop: string]: any }
     | { [prop: number]: any },
-  TKeyValue extends MutliDropdownSelectedItemI<TValue>
+  TKeyValue extends MultiDropdownSelectedItemI<TValue>
 >({
   items,
   elevation,
@@ -129,18 +129,18 @@ export const MultiDropdownButton = <
     item,
     key,
   }: {
-    item: MutliDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>
+    item: MultiDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>
     key: TKeyValue['key'] | string
   }) => {
     const val = item.value.value
     if (val != null) {
-      const selectedItem: MutliDropdownSelectedItemI<TValue> = {
+      const selectedItem: MultiDropdownSelectedItemI<TValue> = {
         key,
         value: val,
       }
 
       const selectedItemIndex = controller.valueIndexesByKeyMap.get(key)
-      if (isMutliDropdownSelectedItem<TValue, TKeyValue>(selectedItem)) {
+      if (isMultiDropdownSelectedItem<TValue, TKeyValue>(selectedItem)) {
         if (selectedItemIndex != null && selectedItemIndex >= 0) {
           controller.keyValue.splice(selectedItemIndex, 1, selectedItem)
         } else {
@@ -170,7 +170,7 @@ export const MultiDropdownButton = <
     },
     setup() {
       const effectiveItems = computed<
-        MutliDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>[]
+        MultiDropdownSelectedValueI<DropdownMenuItemConstructor<TValue>>[]
       >(() =>
         items
           .filter((el) => {

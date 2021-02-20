@@ -218,7 +218,7 @@ const IndexedText {
 }
 
 
-const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
   { keyofValue: 'id' }
 )
 ```

@@ -26,7 +26,7 @@ import {
   ListView,
   MainAxisAlignment,
   MouseRegion,
-  MutliDropdownFieldController,
+  MultiDropdownFieldController,
   Padding,
   Row,
   Scaffold,
@@ -111,7 +111,7 @@ export const WrapperApp = () => {
         }),
         value: el,
         key: el.id.toString(),
-        title: el.text,
+        title: ref(el.text),
       })
     ),
     controller: dropdownFieldController,
@@ -181,7 +181,7 @@ export const WrapperApp = () => {
           })
         ),
       })
-      const multiDropdownController = new MutliDropdownFieldController<IndexedText>(
+      const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
         { keyofValue: 'id' }
       )
       watch(
@@ -223,7 +223,7 @@ export const WrapperApp = () => {
                               }),
                               value: el,
                               key: el.id.toString(),
-                              title: el.text,
+                              title: ref(el.text),
                             })
                           ),
                         }),

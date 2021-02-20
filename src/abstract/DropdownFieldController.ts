@@ -16,9 +16,9 @@ interface DropdownButtonAbstractI<TValue> {
 
 export interface MultiDropdownButtonI<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItemI<TValue>
+  TKeyValue extends MultiDropdownSelectedItemI<TValue>
 > extends DropdownButtonAbstractI<TValue> {
-  controller: MutliDropdownFieldController<TValue, TKeyValue>
+  controller: MultiDropdownFieldController<TValue, TKeyValue>
   onCreateNew?: Maybe<
     ({ editingText }: { editingText: string }) => Promise<void>
   >
@@ -44,25 +44,25 @@ export interface DropdownFieldControllerI<I>
   value?: Maybe<I>
 }
 
-export interface MutliDropdownFieldControllerI<TValue>
+export interface MultiDropdownFieldControllerI<TValue>
   extends DropdownFieldControllerAbstractI {
   value?: Maybe<TValue>[]
   keyofValue: keyof TValue
 }
 /**
  * This class provides a way to create selected items from
- * outside for`{MutliDropdownFieldController.value}`
+ * outside for`{MultiDropdownFieldController.value}`
  */
-export type MutliDropdownSelectedItemI<TValue> = {
+export type MultiDropdownSelectedItemI<TValue> = {
   key: TValue[keyof TValue] | string
   value: TValue
 }
 /**
- * This is typeguard for MutliDropdownSelectedItemI interface
+ * This is typeguard for MultiDropdownSelectedItemI interface
  */
-export const isMutliDropdownSelectedItem = <
+export const isMultiDropdownSelectedItem = <
   TValue,
-  TKeyValue extends MutliDropdownSelectedItemI<TValue>
+  TKeyValue extends MultiDropdownSelectedItemI<TValue>
 >(
   arg: Record<string, unknown>
 ): arg is TKeyValue => {
@@ -70,9 +70,9 @@ export const isMutliDropdownSelectedItem = <
 }
 /**
  * This class provides a way to create selected items from
- * `{ItemBuilder}` for``{MutliDropdown}``
+ * `{ItemBuilder}` for``{MultiDropdown}``
  */
-export interface MutliDropdownSelectedValueI<TValue> {
+export interface MultiDropdownSelectedValueI<TValue> {
   selected: boolean
   value: TValue
 }
@@ -135,9 +135,9 @@ export class DropdownFieldController<
 type TKeyValueIndex = number
 
 //  TODO: add properties
-export class MutliDropdownFieldController<
+export class MultiDropdownFieldController<
   TValue,
-  TKeyValue extends MutliDropdownSelectedItemI<TValue> = MutliDropdownSelectedItemI<TValue>
+  TKeyValue extends MultiDropdownSelectedItemI<TValue> = MultiDropdownSelectedItemI<TValue>
 > extends DropdownFieldControllerAbstract {
   private _reactVal: {
     val: Maybe<TKeyValue>[]
@@ -151,7 +151,7 @@ export class MutliDropdownFieldController<
     maxLines,
     maxLength,
     keyofValue,
-  }: MutliDropdownFieldControllerI<TValue>) {
+  }: MultiDropdownFieldControllerI<TValue>) {
     super({
       maxLength,
       maxLines,
@@ -167,11 +167,11 @@ export class MutliDropdownFieldController<
   toKeyValues({ values }: { values: Maybe<TValue>[] }): Maybe<TKeyValue>[] {
     return values.filter(isNotNull).map((value) => {
       const key = value[this.keyofValue]
-      const keyValue: MutliDropdownSelectedItemI<TValue> = {
+      const keyValue: MultiDropdownSelectedItemI<TValue> = {
         key,
         value,
       }
-      if (isMutliDropdownSelectedItem<TValue, TKeyValue>(keyValue)) {
+      if (isMultiDropdownSelectedItem<TValue, TKeyValue>(keyValue)) {
         return keyValue
       }
       return
