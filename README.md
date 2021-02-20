@@ -199,11 +199,6 @@ ElevatedButton({
 
 To close, just use `navigationController.pop()`
 
-- [x] Navigation & NavigationController
-
-  - [x] Popup (with background) functionality
-  - [x] Fullscreen functionality
-
 - [x] MultiDropdown Button
 
 Usage:
@@ -244,6 +239,11 @@ MultiDropdownButton({
 
 To get or change selected values use:
 `controller.value`
+
+- [x] Navigation & NavigationController
+
+  - [x] Popup (with background) functionality
+  - [x] Fullscreen functionality
 
 ### Usage:
 
