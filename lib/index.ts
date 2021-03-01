@@ -1,4 +1,3 @@
-/// <reference path="./types.d.ts" />
 export * from './abstract'
 export * from './components'
 // thanks to How to build:
@@ -7,3 +6,4 @@ export * from './components'
 import 'vue3-virtual-scroller/dist/vue3-virtual-scroller.css'
 import './components/index.scss'
 import './tailwind.css'
+import './types'
