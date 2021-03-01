@@ -1,5 +1,6 @@
 <template>
   <grid-layout
+    v-model:layout="internalLayoutMatrix"
     style="width: 100%; height: 100%"
     :col-num="crossAxisCount"
     :row-height="itemHeight"
@@ -7,7 +8,6 @@
     :is-resizable="isResizable"
     :vertical-compact="!placeAnywhere"
     :use-css-transforms="true"
-    v-model:layout="internalLayoutMatrix"
   >
     <grid-item
       v-for="item in internalLayoutMatrix"
@@ -20,12 +20,12 @@
       @resized="(i, h, w) => handleResized(i, h, w, item)"
       @moved="(i, x, y) => handleMoved(i, x, y, item)"
     >
-      <grid-view-item-builder :index="item.i" :itemBuilder="itemBuilder" />
+      <grid-view-item-builder :index="item.i" :item-builder="itemBuilder" />
     </grid-item>
   </grid-layout>
 </template>
 <script lang="ts">
-  import { computed, reactive, ref, watch } from 'vue'
+  import { computed, reactive, watch } from 'vue'
 
   import { GridViewItemBuilder } from './GridViewItemBuilder'
   import {
@@ -40,6 +40,9 @@
 
   export default {
     name: 'GridViewBuilder',
+    components: {
+      GridViewItemBuilder,
+    },
     props: {
       isDraggable: {
         type: Boolean,
@@ -68,10 +71,8 @@
       onPositionUpdate: {
         type: Function,
         required: false,
+        default: null,
       },
-    },
-    components: {
-      GridViewItemBuilder,
     },
     setup(props) {
       /**
@@ -86,7 +87,7 @@
         ValueChanged<GridViewItemPosition>
       >
       const handleResized = async (
-        index: GridViewItemPosition['index'],
+        _index: GridViewItemPosition['index'],
         newHeight: GridViewItemPosition['height'],
         newWidth: GridViewItemPosition['width'],
         position: PackageGridItemPosition
@@ -100,7 +101,7 @@
           await fixedTypeOnPositionUpdate(newPosition)
       }
       const handleMoved = async (
-        index: GridViewItemPosition['index'],
+        _index: GridViewItemPosition['index'],
         newX: GridViewItemPosition['x'],
         newY: GridViewItemPosition['y'],
         position: PackageGridItemPosition

@@ -5,12 +5,12 @@
     :min-item-size="minItemHeight"
     class="scroller"
   >
-    <template v-slot="{ item, index, active }">
+    <template #default="{ item, index, active }">
       <DynamicScrollerItem :item="item" :active="active" :data-index="index">
         <ListViewItem
-          @click="() => $emit('item-click', index)"
           :index="index"
-          :itemBuilder="itemBuilder"
+          :item-builder="itemBuilder"
+          @click="() => $emit('item-click', index)"
         />
       </DynamicScrollerItem>
     </template>
@@ -22,8 +22,13 @@
   import { DynamicScroller, DynamicScrollerItem } from 'vue3-virtual-scroller'
   // import { ItemBuilder } from "./ListView";
   import { ListViewItem } from './ListViewItem'
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   export default {
+    components: {
+      DynamicScroller: DynamicScroller,
+      DynamicScrollerItem: DynamicScrollerItem,
+      ListViewItem,
+    },
     props: {
       itemCount: {
         type: Number,
@@ -40,11 +45,7 @@
         default: 45,
       },
     },
-    components: {
-      DynamicScroller: DynamicScroller,
-      DynamicScrollerItem: DynamicScrollerItem,
-      ListViewItem,
-    },
+    emits: ['item-click'],
     setup(props) {
       const isItemsExists = computed(() => props.itemCount > 0)
       const items = computed(() => {

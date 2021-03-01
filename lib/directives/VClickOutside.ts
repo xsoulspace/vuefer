@@ -10,6 +10,7 @@ const IS_TOUCH =
 const EVENTS = IS_TOUCH ? ['touchstart'] : ['click']
 
 interface ClickOutsideElement extends HTMLElement {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   [HANDLERS_PROPERTY]: any
 }
 
@@ -81,6 +82,7 @@ const onEvent = ({ el, event, handler, middleware }: EventObject) => {
   //       In the meanwhile, we are using el.contains for those browsers, not
   //       the ideal solution, but using IE or EDGE is not ideal either.
   const path =
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     (event as any).path || (event.composedPath && event.composedPath())
   const isClickOutside = path
     ? path.indexOf(el) < 0

@@ -15,6 +15,7 @@ export const checkId = <T>(e: T) => {
       return e
     case 'object':
       if ('id' in e) {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (e as any)['id']
       }
       // try to search for key with id
@@ -27,7 +28,10 @@ export const checkId = <T>(e: T) => {
       switch (ids.length) {
         case 1:
           const idKey = ids[0]
-          return (e as any)[idKey]
+          if (idKey in e) {
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return (e as any)[idKey]
+          }
       }
     default:
       throw Error(

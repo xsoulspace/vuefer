@@ -40,12 +40,18 @@ export const getChangesFromOldAndNewArrays = <T>({
   const compareMap = new Map<string /** typeof T[idPropertyName]**/, T>()
   const newValues: T[] = []
   // find all old values and make changes
-  const getValue = (el: T, valueKey: Maybe<keyof T>) => {
+  const getValue = (el: T, valueKey: Maybe<keyof T>): Maybe<unknown> => {
     if (valueKey == null) return el
-    return (el as any)[valueKey]
+    if (valueKey in el) {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (el as any)[valueKey]
+    }
+    return null
   }
   const getKey = (el: T) => {
     const key = getValue(el, idPropertyName)
+    if (typeof key !== 'string')
+      throw Error(`Key must have string type but it has type: ${typeof key}`)
     return key
   }
 
@@ -133,6 +139,7 @@ export const getIsEntityChanged = <T>({
     value: V
   }) => {
     if (key in changed) {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
       const changedValue = (changed as any)[key]
 
       const isNotEqual = getUnifiedValue(changedValue) != getUnifiedValue(value)
