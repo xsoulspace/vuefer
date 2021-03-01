@@ -10,7 +10,7 @@ import {
   OpacityDecorationSteps,
 } from '../abstract/OpacityDecoration'
 import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
-import { Center } from './Center'
+import { Align } from './Align'
 import { Positioned } from './Positioned'
 import { MultiProvider } from './Provider'
 import { Visibility } from './Visibility'
@@ -106,6 +106,9 @@ export const Navigation = ({ child }: NavigationI) => {
                           Visibility({
                             child: h(
                               <div
+                                onClick={() => {
+                                  this.routeController.pop()
+                                }}
                                 class={[
                                   Colors.black.backgroundCss,
                                   OpacityDecoration.use({
@@ -129,7 +132,9 @@ export const Navigation = ({ child }: NavigationI) => {
                                 }}
                               >
                                 {h(
-                                  Center({
+                                  Align({
+                                    alignment: this.routeController._alignment,
+                                    toOverlay: true,
                                     child: h(
                                       <div
                                         onClick={(event) =>

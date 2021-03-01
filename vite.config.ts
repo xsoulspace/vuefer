@@ -36,7 +36,7 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    include: ['@ant-design/icons-vue'],
+    // include: ['@ant-design/icons-vue'],
   },
   build: {
     lib: {

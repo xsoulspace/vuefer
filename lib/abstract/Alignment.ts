@@ -1,4 +1,4 @@
-enum AlignmentEdge {
+export enum AlignmentEdge {
   top,
   topLeft,
   topCenter,

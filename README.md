@@ -1,4 +1,4 @@
-# vuefer = Vue3 styled like Flutter with Tailwind CSS and AndDesign
+# vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vuefer)
 
@@ -29,7 +29,6 @@ Please notice:
 - Typescript
 - Vue3
 - Tailwind
-- AntDesign
 - [vue3-virtual-scroller](https://www.npmjs.com/package/vue3-virtual-scroller)
 - [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 

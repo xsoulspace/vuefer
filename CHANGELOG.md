@@ -1,6 +1,6 @@
 ## 0.8.0
 
-BREAKING CHANGE: Now package name vuefer
+BREAKING CHANGE: Now package name is Vuefer
 BREAKING CHANGE: Webpack replaced with Vite
 
 ## 0.7.0
