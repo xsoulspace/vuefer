@@ -2,6 +2,9 @@
 
 BREAKING CHANGE: Now package name is Vuefer
 BREAKING CHANGE: Webpack replaced with Vite
+feat: Navigation push now can align Dialog(route) window
+feat: Drawer
+feat: AppBar
 
 ## 0.7.0
 

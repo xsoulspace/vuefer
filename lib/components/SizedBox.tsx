@@ -15,19 +15,21 @@ interface SizedBoxI {
   width?: Maybe<EdgeInsetsStep | SizeBoxStep>
 }
 
-export const SizedBox = ({ child, key, width, height }: SizedBoxI) => {
-  const heightBox = new SizedBoxHeight({ height })
-  const widthBox = new SizedBoxWidth({ width })
+export const SizedBox = ({ child, width, height }: SizedBoxI) => {
   return defineComponent({
     name: 'SizedBox',
-    render() {
-      return h(
-        'div',
-        {
-          class: [widthBox?.css ?? '', heightBox?.css ?? ''].join(' '),
-        },
-        [h(child ?? <div />)]
-      )
+    setup() {
+      const heightBox = new SizedBoxHeight({ height })
+      const widthBox = new SizedBoxWidth({ width })
+
+      return () =>
+        h(
+          'div',
+          {
+            class: [widthBox?.css ?? '', heightBox?.css ?? ''],
+          },
+          [h(child ?? <div />)]
+        )
     },
   })
 }

@@ -39,7 +39,7 @@ export class FlexHelper {
     direction,
     verticalDirection,
     dividerDecoration,
-  }: GetFlexClassNames): string {
+  }: GetFlexClassNames): string[] {
     const finalDirection = direction ?? Axis.horizontal
     const finalAxisSize = mainAxisSize ?? MainAxisSize.min
     const finalMainAxisAlignment = mainAxisAlignment ?? MainAxisAlignment.start
@@ -55,7 +55,7 @@ export class FlexHelper {
       finalMainAxisAlignment.css,
       finalCrossAxisAlignment.css,
       dividerDecoration?.css ?? '',
-    ].join(' ')
+    ]
   }
 }
 export const Flex = (arg: FlexI) =>

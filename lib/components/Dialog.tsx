@@ -81,7 +81,6 @@ export const showDialog = ({
  */
 export const Dialog = ({
   child,
-  key,
   backgroundColor,
   decoration,
   elevation,
