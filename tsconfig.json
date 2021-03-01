@@ -2,33 +2,36 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "importHelpers": true,
     "noImplicitAny": false,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "declaration": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "jest", "./src"],
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["example/src/*"]
     },
     "outDir": "dist",
+    "typeRoots": ["./lib"],
     "declarationDir": "dist",
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "types": ["vite/client", "./lib"]
   },
+  "exclude": ["node_modules", "dist"],
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
-    // "tests/**/*.ts",
-    // "tests/**/*.tsx"
-  ],
-  "exclude": ["node_modules", "dist"]
+    "lib/**/*.ts",
+    "lib/**/*.d.ts",
+    "lib/**/*.tsx",
+    "lib/**/*.vue",
+    "example/**/*.ts",
+    "example/**/*.d.ts",
+    "example/**/*.tsx",
+    "example/**/*.vue"
+  ]
 }

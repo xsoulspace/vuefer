@@ -1,3 +1,8 @@
+## 0.8.0
+
+BREAKING CHANGE: Now package name vuefer
+BREAKING CHANGE: Webpack replaced with Vite
+
 ## 0.7.0
 
 ### feat: MultiDropdownButton
