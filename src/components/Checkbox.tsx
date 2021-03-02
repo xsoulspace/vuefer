@@ -1,16 +1,14 @@
-import {
-  Color,
-  Colors,
-  SystemMouseCursor,
-  SystemMouseCursors,
-} from '@/abstract'
-import { Key } from '@/abstract/Key'
 import { defineComponent, h, Ref, watch } from 'vue'
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { Color } from '../abstract/Color'
+import { Colors } from '../abstract/Colors'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursor, SystemMouseCursors } from '../abstract/MouseCursor'
 
 interface CheckboxI {
   key?: Maybe<Key>
   value: Ref<boolean>
-  onChanged: ValueChanged<boolean>
+  onChanged?: Maybe<ValueChanged<boolean>>
   mouseCursor?: Maybe<SystemMouseCursor>
   // activeColor?: Maybe<Color>;
   // fillColor?: Maybe<Color>;
@@ -37,10 +35,9 @@ export const Checkbox = ({
   return defineComponent({
     name: 'Checkbox',
     setup() {
-      watch(
-        value,
-        async (newValue, oldValue) => await onChanged(newValue, oldValue)
-      )
+      watch(value, async (newValue, oldValue) => {
+        if (onChanged) await onChanged(newValue, oldValue)
+      })
     },
     render() {
       return h(
@@ -48,7 +45,7 @@ export const Checkbox = ({
           class={[
             mouseCursor?.css ?? SystemMouseCursors.click,
             hoverColor?.hoverBackgroundCss ?? Colors.indigo.hoverBackgroundCss,
-          ].join(' ')}
+          ]}
           type="checkbox"
           v-model={value.value}
         />

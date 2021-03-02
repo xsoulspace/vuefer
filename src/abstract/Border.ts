@@ -1,6 +1,5 @@
 import { BorderSide, BorderSideI } from './BorderSide'
 import { BoxBorder, BoxBorderI } from './BoxBorder'
-
 export class Border extends BoxBorder {
   constructor(arg: BoxBorderI) {
     super(arg)

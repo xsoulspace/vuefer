@@ -1,15 +1,15 @@
+import { Component, defineComponent, h, Ref } from 'vue'
+import { Alignment } from '../abstract/Alignment'
+import { Maybe } from '../abstract/BasicTypes'
+import { Color } from '../abstract/Color'
+import { Colors } from '../abstract/Colors'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import {
-  Alignment,
-  Color,
-  Colors,
-  EdgeInsets,
-  EdgeInsetsStep,
   OpacityDecoration,
   OpacityDecorationSteps,
-  SystemMouseCursors,
-} from '@/abstract'
-import { Key } from '@/abstract/Key'
-import { Component, defineComponent, h, Ref } from 'vue'
+} from '../abstract/OpacityDecoration'
 import { Align } from './Align'
 import { Column } from './Column'
 import { Container } from './Container'
@@ -30,7 +30,7 @@ interface ListTileI {
   // shape,
   contentPadding?: Maybe<EdgeInsets>
   enabled?: Maybe<Ref<boolean>>
-  onTap?: Maybe<GestureTapCallback>
+  onTap?: Maybe<CallableFunction>
   // onLongPress,
   mouseCursor?: Maybe<SystemMouseCursors>
   selected?: Maybe<Ref<boolean>>
@@ -130,8 +130,10 @@ export const ListTile = ({
       }
     },
     render() {
+      const isEnabled = enabled?.value == true || enabled == null
+      const isNotEnabled = enabled?.value == false
       const resolvedMouseCursor = (() => {
-        if ((enabled?.value == true || enabled == null) && onTap != null) {
+        if (isEnabled || onTap != null) {
           return mouseCursor ?? SystemMouseCursors.click
         } else {
           return SystemMouseCursors.basic
@@ -139,13 +141,12 @@ export const ListTile = ({
       })()
       const result = InkWell({
         mouseCursor: resolvedMouseCursor,
-        onTap: enabled == null || enabled?.value == true ? onTap : null,
+        onTap: isEnabled ? onTap : null,
         focusColor,
-        hoverColor:
-          enabled?.value == false ? Colors.transparent : resolvedHoverColor,
+        hoverColor: isNotEnabled ? Colors.transparent : resolvedHoverColor,
         child: Container({
           padding: contentPadding ?? EdgeInsets.all(EdgeInsetsStep.s4),
-          color: enabled?.value == false ? Colors.grey : tileBackgroundColor,
+          color: isNotEnabled ? Colors.grey : tileBackgroundColor,
           height: resolvedHeight,
           child: Row({
             children: [
@@ -157,7 +158,7 @@ export const ListTile = ({
         }),
       })
       return h(
-        enabled?.value == false
+        isNotEnabled
           ? Opacity({
               child: result,
               opacity: OpacityDecoration.use({

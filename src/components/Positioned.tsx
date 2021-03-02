@@ -1,6 +1,7 @@
-import { EdgeInsets, EdgeInsetsStep } from '@/abstract'
-import { Key } from '@/abstract/Key'
 import { Component, defineComponent, h } from 'vue'
+import { Maybe } from '../abstract/BasicTypes'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
 
 interface PositionedI {
   child: Component
@@ -11,6 +12,7 @@ interface PositionedI {
   bottom?: Maybe<EdgeInsetsStep>
   // width?:
   // height?:
+  _zIndex?: Maybe<number>
 }
 
 export const Positioned = ({
@@ -20,6 +22,7 @@ export const Positioned = ({
   left,
   right,
   top,
+  _zIndex,
 }: PositionedI) => {
   const edgeInsets = new EdgeInsets({ bottom, left, right, top })
   return defineComponent({
@@ -28,7 +31,8 @@ export const Positioned = ({
       return h(
         'div',
         {
-          class: `absolute z-10 ${edgeInsets.positionedCss}`,
+          style: `z-index: ${_zIndex ?? 50};`,
+          class: `absolute ${edgeInsets.positionedCss}`,
         },
         [h(child)]
       )

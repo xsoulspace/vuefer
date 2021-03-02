@@ -1,8 +1,9 @@
-import { BorderRadius } from '@/abstract/BorderRadius'
-import { Color } from '@/abstract/Color'
-import { Key } from '@/abstract/Key'
-import { SystemMouseCursors } from '@/abstract/MouseCursor'
 import { Component, defineComponent, h } from 'vue'
+import { Maybe } from '../abstract/BasicTypes'
+import { BorderRadius } from '../abstract/BorderRadius'
+import { Color } from '../abstract/Color'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import { GestureDetector, GestureDetectorI } from './GestureDetector'
 import { MouseRegion } from './MouseRegion'
 export interface InkWellI extends GestureDetectorI {

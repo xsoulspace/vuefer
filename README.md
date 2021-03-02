@@ -1,6 +1,8 @@
 # Vue3 styled like Flutter with Tailwind CSS
 
-**Please notice: this project is a work in progress!**
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vft)
+
+**Please notice: this project is a work in progress and completely experimental!**
 
 The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript & Tailwind awesome too!
 
@@ -24,6 +26,7 @@ Please notice:
 - Vue3
 - Tailwind
 - [vue3-virtual-scroller](https://www.npmjs.com/package/vue3-virtual-scroller)
+- [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
 
 ### Installation
 
@@ -38,31 +41,37 @@ Add this package to your package.json file:
 add styling to your main.ts
 
 ```typescript
-import "@xsoulspace/vue_flutter_tailwind/dist/vft.css";
+import '@xsoulspace/vue_flutter_tailwind/dist/vft.css'
+```
+
+add styling to app div (temporary and will be removed during Scaffold widget refactoring)
+
+```html
+<div id="app" class="absolute left-0 right-0 top-0 bottom-0"></div>
 ```
 
 ### Usage
 
 ```typescript
 export const wrapperApp = () => {
-  const text = ref("Hello world!");
-  const text2 = ref(2);
-  const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+  const text = ref('Hello world!')
+  const text2 = ref(2)
+  const padding = EdgeInsets.all(EdgeInsetsStep.s3)
 
   const textCard = Padding({
     child: Text({
       text,
     }),
     padding,
-  });
+  })
 
   const btn = ElevatedButton({
-    child: Text({ text: ref("Hello Button") }),
+    child: Text({ text: ref('Hello Button') }),
     onPressed: () => {
-      text2.value++;
-      text.value = `Hello Wolrd! Counter: ${text2.value}`;
+      text2.value++
+      text.value = `Hello Wolrd! Counter: ${text2.value}`
     },
-  });
+  })
 
   return Scaffold({
     body: Align({
@@ -89,13 +98,49 @@ export const wrapperApp = () => {
         }),
       }),
     }),
-  });
-};
+  })
+}
 ```
 
 # Roadmap
 
 ## Ready to test and possible to use
+
+- [] Provider
+
+### Usage:
+
+Let's suppose we have a model:
+
+```typescript
+export class Hero {
+  constructor(public name: string) {}
+}
+export class HeroesModel {
+  heroes = reactive<Maybe<Hero>[]>([])
+  add(hero: Hero) {
+    this.heroes.push(hero)
+  }
+  get count() {
+    return this.heroes.length
+  }
+}
+```
+
+Create Provider on top of tree
+
+```typescript
+MultiProvider.create({
+  models: [HeroesModel],
+  child: wrapperApp(),
+})
+```
+
+And somewhere in tree just call
+
+```typescript
+const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+```
 
 - [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
 - [x] Alignment, Align, Center
@@ -118,8 +163,108 @@ export const wrapperApp = () => {
 - [x] ColoredBox
 - [x] CheckboxListTile
 - [x] ListTile
+- [x] Grid, GridTile with awesome [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout/v/3.0.0-beta1)
+- [x] Wrap (Flex - flex-wrap)
+- [x] Dialog
 
-## WIP
+### Usage
+
+First - get NavigationController in setup
+
+Be sure that you have Navigation widget on top of tree
+
+```typescript
+const navigationController = MultiProvider.get<NavigationController>(
+  NavigationController
+)
+```
+
+Second call a function from for example Button.onTap:
+
+```typescript
+ElevatedButton({
+  child: Text({
+    text: ref('Show dialog'),
+  }),
+  onTap: () => {
+    showDialog({
+      builder: Dialog({
+        child: Text({ text: ref('Hello World') }),
+      }),
+      navigationController,
+    })
+  },
+}),
+```
+
+To close, just use `navigationController.pop()`
+
+- [x] MultiDropdown Button
+
+Usage:
+
+Create controller in setup or anywehere and
+give generic type to use
+
+```typescript
+const IndexedText {
+  id: string
+  text: string
+}
+
+
+const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
+  { keyofValue: 'id' }
+)
+```
+
+Then use MultiDropdownButton with DropdownMenuItem in items
+to make it work
+
+```typescript
+MultiDropdownButton({
+  controller: multiDropdownController,
+  items: dropdownItems.map((el) =>
+    DropdownMenuItem({
+      child: Text({
+        text: ref(el.text),
+      }),
+      value: el,
+      key: el.id,
+      title: el.text,
+    })
+  ),
+}),
+```
+
+To get or change selected values use:
+`controller.value`
+
+- [x] Navigation & NavigationController
+
+  - [x] Popup (with background) functionality
+  - [x] Fullscreen functionality
+
+### Usage:
+
+Add controller into MultiPorvider and Navigation widget below:
+
+```typescript
+MultiProvider.create({
+  models: [NavigationController, ...],
+  child: Navigation({
+    child: ...,
+  }),
+})
+```
+
+- [x] DropdownButton, DropdownButtonItem
+      [x] functionality
+      [] decoration
+
+- [] Visibility
+  [x] functionality
+  [] animation
 
 - [] TextField
   [x] Basic properties
@@ -130,6 +275,8 @@ export const wrapperApp = () => {
 - [x] Checkbox
       [x] Basic
       [] Style
+
+## WIP
 
 - [] GestureDetecture
   [x] click
@@ -164,14 +311,11 @@ export const wrapperApp = () => {
 
 - [] Flexible
 - [] OutlinedButton
-- [] Provider, MultiProvider
 - [] Ripple
 - [] Drawer
-- [] AutoSelect - DropdownButton, DropdownButtonItem
 - [] Progress
 - [] Card
 - [] AppBar
-- [] Dialog(?)
 - [] Icon
 - [] IconButton
 - [] Bar
@@ -186,4 +330,4 @@ export const wrapperApp = () => {
 
 # Changelog
 
-Changelog can be found in [CHANGELOG.md](https://github.com/xsoulspace/vue_flutter_tailwind/blob/master/CHANGELOG.md)
+Changelog can be found in [Releases](https://github.com/xsoulspace/vue_flutter_tailwind/releases)

@@ -1,9 +1,12 @@
-import { Alignment, SizedBoxHeight, SizedBoxWidth } from '@/abstract'
-import { BoxConstraints } from '@/abstract/BoxConstraints'
-import { BoxDecoration } from '@/abstract/BoxDecoration'
-import { Color } from '@/abstract/Color'
-import { EdgeInsets, EdgeInsetsStep } from '@/abstract/EdgeInsets'
 import { Component, defineComponent, h } from 'vue'
+import { Alignment } from '../abstract/Alignment'
+import { Maybe } from '../abstract/BasicTypes'
+import { BoxConstraints } from '../abstract/BoxConstraints'
+import { BoxDecoration } from '../abstract/BoxDecoration'
+import { Color } from '../abstract/Color'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
+
 interface ContainerI {
   child?: Component
   padding?: Maybe<EdgeInsets>

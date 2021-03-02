@@ -1,10 +1,11 @@
-import { TextStyle } from '@/abstract'
-import { TextAlign } from '@/abstract/TextAlign'
-import { TextOverflow } from '@/abstract/TextOverflow'
 import { defineComponent, h, Ref } from 'vue'
+import { Maybe } from '../abstract/BasicTypes'
+import { TextAlign } from '../abstract/TextAlign'
+import { TextOverflow } from '../abstract/TextOverflow'
+import { TextStyle } from '../abstract/TextStyle'
 
 interface TextI {
-  text: Ref<string | boolean | number>
+  text: Ref<Maybe<string | boolean | number>>
   style?: Maybe<TextStyle>
   // strutStyle,
   textAlign?: Maybe<TextAlign>
@@ -20,6 +21,9 @@ interface TextI {
 export const Text = ({ text, style, overflow, textAlign }: TextI) =>
   defineComponent({
     name: 'Text',
+    setup() {
+      return { text }
+    },
     render() {
       return h(
         'div',
@@ -30,7 +34,7 @@ export const Text = ({ text, style, overflow, textAlign }: TextI) =>
             textAlign?.css ?? '',
           ].join(' '),
         },
-        `${text.value}`
+        `${this.text}`
       )
     },
   })

@@ -14,6 +14,8 @@ module.exports = {
     ecmaVersion: 2021,
   },
   rules: {
+    'no-case-declarations': 'off',
+    'no-fallthrough': 'off',
     quotes: ['error', 'single'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

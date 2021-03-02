@@ -1,11 +1,13 @@
-import { BoxShadow, ButtonStyle } from '@/abstract'
 import { defineComponent, h } from 'vue'
+import { BoxShadow } from '../abstract/BoxShadow'
+import { ButtonStyle } from '../abstract/ButtonStyle'
 import { ButtonStyleButton, ButtonStyleButtonI } from './ButtonStyleButton'
 export const TextButton = ({
   child,
   onTap,
   style,
   key,
+  expand,
 }: ButtonStyleButtonI) => {
   const defaultStyle = new ButtonStyle({
     elevation: BoxShadow.none,
@@ -20,6 +22,7 @@ export const TextButton = ({
       return h(
         ButtonStyleButton({
           child,
+          expand,
           onTap,
           style: finalStyle,
         })

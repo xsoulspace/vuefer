@@ -1,15 +1,18 @@
-import { Color, EdgeInsets, SystemMouseCursors } from '@/abstract'
-import { Key } from '@/abstract/Key'
-import { ListTileControlAffinity } from '@/abstract/ListTile'
 import { Component, defineComponent, h, ref, Ref } from 'vue'
+import { Maybe, ValueChanged } from '../abstract/BasicTypes'
+import { Color } from '../abstract/Color'
+import { EdgeInsets } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
+import { ListTileControlAffinity } from '../abstract/ListTile'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import { Checkbox } from './Checkbox'
 import { ListTile } from './ListTile'
-
 interface CheckboxListTileI {
   title: Component
   key?: Maybe<Key>
   controlAffinity?: Maybe<ListTileControlAffinity>
-  onChanged: ValueChanged<boolean>
+  onChanged?: Maybe<ValueChanged<boolean>>
+  onTap?: Maybe<CallableFunction>
   value: Ref<boolean>
   contentPadding?: Maybe<EdgeInsets>
   focusColor?: Maybe<Color>
@@ -19,6 +22,7 @@ interface CheckboxListTileI {
   tileColor?: Maybe<Color>
   selectedTileColor?: Maybe<Color>
   subtitle?: Maybe<Component>
+  enabled?: Maybe<Ref<boolean>>
 }
 
 export const CheckboxListTile = ({
@@ -35,16 +39,12 @@ export const CheckboxListTile = ({
   mouseCursor,
   hoverColor,
   focusColor,
+  onTap,
+  enabled,
 }: CheckboxListTileI) => {
-  const handleValueChange = async () => {
-    const oldValue = value.value
-    const newValue = !oldValue
-    value.value = newValue
-    await onChanged(newValue, oldValue)
-  }
   const control = Checkbox({
-    onChanged: onChanged,
-    value: value,
+    onChanged,
+    value,
   })
   let leading: Maybe<Component>, trailing: Maybe<Component>
 
@@ -56,7 +56,7 @@ export const CheckboxListTile = ({
     default:
       trailing = control
   }
-  const enabled = ref(onChanged != null)
+  const resolvedEnabled = enabled ?? ref(true)
   return defineComponent({
     name: 'CheckboxListTile',
     render() {
@@ -66,11 +66,11 @@ export const CheckboxListTile = ({
           trailing,
           leading,
           contentPadding,
-          enabled,
+          enabled: resolvedEnabled,
           focusColor,
           hoverColor,
           mouseCursor,
-          onTap: handleValueChange,
+          onTap,
           selected,
           selectedTileColor,
           subtitle,

@@ -1,30 +1,34 @@
 // ABSTRACT WIDGET! DO NOT USE IT
 
-import { SystemMouseCursors } from '@/abstract'
-import { BoxConstraints } from '@/abstract/BoxConstraints'
-import { ButtonStyle } from '@/abstract/ButtonStyle'
-import { Key } from '@/abstract/Key'
+import { Component, defineComponent, h } from 'vue'
+import { Maybe } from '../abstract/BasicTypes'
+import { BoxConstraints } from '../abstract/BoxConstraints'
+import { ButtonStyle } from '../abstract/ButtonStyle'
+import { Key } from '../abstract/Key'
+import { SystemMouseCursors } from '../abstract/MouseCursor'
 import {
   OpacityDecoration,
   OpacityDecorationSteps,
-} from '@/abstract/OpacityDecoration'
-import { Component, defineComponent, h } from 'vue'
+} from '../abstract/OpacityDecoration'
 import { ConstrainedBox } from './ConstrainedBox'
 import { InkWell } from './InkWell'
 import { Material } from './Material'
 import { Opacity } from './Opacity'
 import { Padding } from './Padding'
+
 export interface ButtonStyleButtonI {
   child: Component
   key?: Maybe<Key>
   style?: Maybe<ButtonStyle>
-  onTap?: Maybe<GestureTapCallback>
+  onTap?: Maybe<CallableFunction>
+  expand?: boolean
 }
 export const ButtonStyleButton = ({
   child,
   key,
   onTap,
   style,
+  expand,
 }: ButtonStyleButtonI) => {
   const isDisabled = onTap == null
   const constraints = new BoxConstraints({})
@@ -75,7 +79,11 @@ export const ButtonStyleButton = ({
   return defineComponent({
     name: 'ButtonStyleButton',
     render() {
-      return h('div', { class: 'relative select-none w-full' }, [h(result)])
+      return h(
+        'div',
+        { class: ['relative select-none', expand ? 'w-full' : ''].join(' ') },
+        [h(result)]
+      )
     },
   })
 }

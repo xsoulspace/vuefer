@@ -1,5 +1,5 @@
-import { Axis } from '@/abstract/Axis'
 import { defineComponent, h } from 'vue'
+import { Axis } from '../abstract/Axis'
 import { ColumnI, FlexHelper } from './Flex'
 
 export const Column = ({

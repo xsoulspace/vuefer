@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue_flutter_tailwind",
   "description": "Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.4.0",
+  "version": "0.7.2",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -30,37 +30,46 @@
   ],
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "core-js": "^3.6.5",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue": "^3.0.0",
+    "vue": "^3.0.5",
     "vue3-virtual-scroller": "^0.2.1",
-    "@vueuse/core": "^4.0.8"
+    "vue-grid-layout": "3.0.0-beta1"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^8.2.0",
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.13.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-e2e-cypress": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-mocha": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@types/jest": "^26.0.20",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "@vue/cli-plugin-babel": "^4.5.11",
+    "@vue/cli-plugin-e2e-cypress": "^4.5.11",
+    "@vue/cli-plugin-eslint": "^4.5.11",
+    "@vue/cli-plugin-typescript": "^4.5.11",
+    "@vue/cli-plugin-unit-jest": "^4.5.11",
+    "@vue/cli-service": "^4.5.11",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
+    "eslint": "^7.20.0",
     "autoprefixer": "^9",
-    "chai": "^4.1.2",
-    "core-js": "^3.6.5",
-    "eslint": "^7.18.0",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^7.0.0-0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^10.1.1",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.5",
+    "vue-jest": "^5.0.0-0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

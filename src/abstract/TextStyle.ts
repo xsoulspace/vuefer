@@ -4,6 +4,7 @@ import { FontSize } from './FontSize'
 import { FontWeight } from './FontWeight'
 import { TextDecoration } from './TextDecoration'
 import { TextDecorationStyle } from './TextDecorationStyle'
+
 interface TextStyleI {
   color?: Color
   backgroundColor?: Color

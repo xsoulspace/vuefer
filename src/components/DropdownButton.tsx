@@ -1,22 +1,18 @@
-import {
-  BoxDecoration,
-  BoxShadow,
-  Colors,
-  EdgeInsets,
-  EdgeInsetsStep,
-  MainAxisAlignment,
-  MainAxisSize,
-  TextEditingController,
-} from '@/abstract'
-import { DropdownFieldController } from '@/abstract/DropdownFieldController'
-import { unifyValue } from '@/functions/unifyValue'
-import { onClickOutside } from '@vueuse/core'
-import { Component, computed, defineComponent, h, ref, Ref } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
+import { BoxDecoration } from '../abstract/BoxDecoration'
+import { BoxShadow } from '../abstract/BoxShadow'
+import { Colors } from '../abstract/Colors'
+import { DropdownButtonI } from '../abstract/DropdownFieldController'
+import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { ItemBuilder } from '../abstract/ItemBuilder'
+import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
+import { MainAxisSize } from '../abstract/MainAxisSize'
+import { TextEditingController } from '../abstract/TextEditingController'
+import clickOutside from '../directives/VClickOutside'
+import { unifyValue } from '../functions'
 import { Container } from './Container'
-import { DropdownMenuItemConstructor } from './DropdownMenuItem'
 import { GestureDetector } from './GestureDetector'
 import { Icon, Icons } from './Icon'
-import { ListItemBuilder } from './ListView'
 import ListViewBuilder from './ListViewBuilder.vue'
 import { Positioned } from './Positioned'
 import { Row } from './Row'
@@ -24,15 +20,6 @@ import { SizedBox } from './SizedBox'
 import { Stack } from './Stack'
 import { TextField } from './TextField'
 import { Visibility } from './Visibility'
-
-interface DropdownButtonI<I> {
-  items: DropdownMenuItemConstructor<I>[]
-  minItemHeight?: Maybe<Ref<number>>
-  onChanged?: Maybe<ValueChanged<I>>
-  elevation?: Maybe<BoxShadow>
-  icon?: Maybe<Component>
-  controller: DropdownFieldController<I>
-}
 
 export const DropdownButton = <
   I extends
@@ -56,8 +43,9 @@ export const DropdownButton = <
     items.find((el) => el.key == controller.key.value)
   )
   // init
-  textFieldController.text.value = selectedItem.value?.title ?? ''
+  textFieldController.text.value = selectedItem.value?.title.value ?? ''
   const isMenuOpened = ref(false)
+
   const itemsDropdown = defineComponent({
     name: 'items',
     components: {
@@ -73,7 +61,7 @@ export const DropdownButton = <
         })
       )
 
-      const listItemBuilder: ListItemBuilder = ({ index }) => {
+      const itemBuilder: ItemBuilder = ({ index }) => {
         const item = effectiveItems.value[index]
         if (item) return item.widget
         return Container({})
@@ -95,15 +83,15 @@ export const DropdownButton = <
                 child: h(
                   <list-view-builder
                     itemCount={effectiveItems.value.length}
-                    itemBuilder={listItemBuilder}
+                    itemBuilder={itemBuilder}
                     minItemHeight={minItemHeight}
                     onItemClick={(index: number) => {
-                      const oldValue = controller.value.value
+                      const oldValue = controller.value
                       const item = effectiveItems.value[index]
                       if (item == null) return Container({})
-                      controller.value.value = item.value
+                      controller.value = item.value
                       controller.key.value = item.key
-                      textFieldController.text.value = item.title
+                      textFieldController.text.value = item.title.value
                       isMenuOpened.value = false
                       if (onChanged && item.value) {
                         onChanged(item.value, oldValue)
@@ -120,48 +108,49 @@ export const DropdownButton = <
     },
   })
 
-  const result = Stack({
-    children: [
-      GestureDetector({
-        child: SizedBox({
-          child: Container({
-            decoration: new BoxDecoration({ boxShadow: elevation }),
-            child: Row({
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField({ controller: textFieldController }),
-
-                resolvedIcon,
-              ],
-            }),
-          }),
-          height: EdgeInsetsStep.s10,
-        }),
-        onTap: () => {
-          if (!isMenuOpened.value) {
-            isMenuOpened.value = true
-          }
-        },
-      }),
-      Visibility({
-        child: itemsDropdown,
-        visible: isMenuOpened,
-      }),
-    ],
-  })
-
   return defineComponent({
     name: 'DropdownButton',
+    directives: {
+      clickOutside,
+    },
     setup() {
-      const target = ref(null)
-      onClickOutside(target, (event) => (isMenuOpened.value = false))
+      const closeMenu = () => {
+        isMenuOpened.value = false
+      }
       return () =>
         h(
-          <div ref={target}>
+          <div v-click-outside={closeMenu}>
             {h(
-              GestureDetector({
-                child: result,
+              Stack({
+                children: [
+                  GestureDetector({
+                    child: SizedBox({
+                      child: Container({
+                        decoration: new BoxDecoration({
+                          boxShadow: elevation,
+                        }),
+                        child: Row({
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField({ controller: textFieldController }),
+                            resolvedIcon,
+                          ],
+                        }),
+                      }),
+                      height: EdgeInsetsStep.s10,
+                    }),
+                    onTap: () => {
+                      if (!isMenuOpened.value) {
+                        isMenuOpened.value = true
+                      }
+                    },
+                  }),
+                  Visibility({
+                    child: itemsDropdown,
+                    visible: isMenuOpened,
+                  }),
+                ],
               })
             )}
           </div>

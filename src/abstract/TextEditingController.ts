@@ -1,4 +1,5 @@
 import { ref, Ref } from 'vue'
+import { Maybe } from './BasicTypes'
 
 interface TextEditingControllerI {
   text?: Maybe<string>
