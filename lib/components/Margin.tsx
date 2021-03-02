@@ -5,7 +5,6 @@ import { Key } from '../abstract/Key'
 export const Margin = ({
   child,
   margin,
-  key,
 }: {
   child: Component
   margin: EdgeInsets

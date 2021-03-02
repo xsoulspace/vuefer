@@ -10,7 +10,7 @@ interface ColoredBoxI {
   color: Color
 }
 
-export const ColoredBox = ({ child, key, color }: ColoredBoxI) => {
+export const ColoredBox = ({ child, color }: ColoredBoxI) => {
   return defineComponent({
     name: 'ColoredBox',
     render() {

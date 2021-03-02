@@ -27,7 +27,6 @@ export const InkWell = ({
   child,
   mouseCursor,
   onTap,
-  key,
   borderRadius,
   focusColor,
   highlightColor,

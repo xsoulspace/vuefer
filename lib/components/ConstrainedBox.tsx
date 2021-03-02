@@ -4,7 +4,6 @@ import { BoxConstraints } from '../abstract/BoxConstraints'
 import { Key } from '../abstract/Key'
 export const ConstrainedBox = ({
   child,
-  key,
   constraints,
 }: {
   child: Component

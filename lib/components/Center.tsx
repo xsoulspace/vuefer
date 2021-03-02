@@ -9,7 +9,7 @@ export interface CenterI {
   key?: Maybe<Key>
 }
 
-export const Center = ({ child, key }: CenterI) => {
+export const Center = ({ child }: CenterI) => {
   return defineComponent({
     name: 'Center',
     render() {

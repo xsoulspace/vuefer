@@ -7,7 +7,7 @@ export interface GestureDetectorI {
   onTap?: Maybe<CallableFunction>
 }
 
-export const GestureDetector = ({ child, onTap, key }: GestureDetectorI) => {
+export const GestureDetector = ({ child, onTap }: GestureDetectorI) => {
   return defineComponent({
     name: 'GestureDetector',
     setup() {

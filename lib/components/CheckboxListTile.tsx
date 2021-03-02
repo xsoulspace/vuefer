@@ -27,7 +27,6 @@ interface CheckboxListTileI {
 
 export const CheckboxListTile = ({
   title,
-  key,
   controlAffinity,
   contentPadding,
   onChanged,

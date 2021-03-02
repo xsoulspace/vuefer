@@ -10,7 +10,7 @@ interface MouseRegionI {
 }
 
 // Defines cursor image
-export const MouseRegion = ({ child, key, cursor }: MouseRegionI) => {
+export const MouseRegion = ({ child, cursor }: MouseRegionI) => {
   const resolvedCursor = SystemMouseCursor.use({ cursor })
   return defineComponent({
     name: 'InkWell',

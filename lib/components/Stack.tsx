@@ -7,7 +7,7 @@ interface StackI {
   key?: Maybe<Key>
 }
 
-export const Stack = ({ children, key }: StackI) => {
+export const Stack = ({ children }: StackI) => {
   return defineComponent({
     name: 'Stack',
     render() {

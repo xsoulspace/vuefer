@@ -3,7 +3,6 @@ import vueGridLayout from 'vue-grid-layout'
 import { MultiProvider, Navigation, NavigationController } from '../../lib'
 import '../../lib/index.scss'
 import { HeroesModel } from './models/HeroesModel'
-// import '../../lib/tailwind.css'
 import { ScaffoldApp } from './pages/ScaffoldApp'
 
 const app = MultiProvider.build({

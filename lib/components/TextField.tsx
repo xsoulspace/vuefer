@@ -15,7 +15,6 @@ interface TextFieldI {
 }
 
 export const TextField = ({
-  key,
   controller,
   maxLength,
   keyboardType,

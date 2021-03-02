@@ -6,10 +6,7 @@ import { Colors } from '../abstract/Colors'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { Key } from '../abstract/Key'
 import { SystemMouseCursors } from '../abstract/MouseCursor'
-import {
-  OpacityDecoration,
-  OpacityDecorationSteps,
-} from '../abstract/OpacityDecoration'
+import { OpacityDecorationSteps } from '../abstract/OpacityDecoration'
 import { Align } from './Align'
 import { Column } from './Column'
 import { Container } from './Container'
@@ -47,7 +44,6 @@ interface ListTileI {
 }
 
 export const ListTile = ({
-  key,
   mouseCursor,
   hoverColor,
   focusColor,
@@ -161,9 +157,7 @@ export const ListTile = ({
         isNotEnabled
           ? Opacity({
               child: result,
-              opacity: OpacityDecoration.use({
-                opacity: OpacityDecorationSteps.s50,
-              }),
+              opacity: OpacityDecorationSteps.s50,
             })
           : result
       )

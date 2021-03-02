@@ -8,6 +8,7 @@ import {
   watch,
 } from 'vue'
 import { AlignmentEdge } from '../abstract/Alignment'
+import { Maybe } from '../abstract/BasicTypes'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import {
@@ -71,7 +72,9 @@ export const Navigation = ({ child }: NavigationI) => {
       watch(
         routeController.routes,
         (newRoutes) => {
-          const newRoute = newRoutes[0]
+          // FIXME: compiller via `tsc --emitDeclarationOnly` thinks that is a problem
+          // needs to be investigated why it can be
+          const newRoute = newRoutes[0] as Maybe<NavigationControllerRoute>
           if (newRoute == null) {
             isRoutesExists.value = false
             currentRoute.widget = null

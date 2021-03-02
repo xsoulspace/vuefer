@@ -13,8 +13,8 @@ interface IconI {
   color?: Maybe<Color>
   key?: Maybe<Key>
 }
-export const Icon = (icon: Icons, config?: IconI) => {
-  const { size, key, color } = config ?? {}
+export const Icon = (_icon: Icons, _config?: IconI) => {
+  // const { size, key, color } = config ?? {}
   return defineComponent({
     name: 'Icon',
     render() {

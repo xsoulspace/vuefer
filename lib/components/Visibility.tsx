@@ -8,7 +8,7 @@ interface VisibilityI {
   visible?: Maybe<Ref<Maybe<boolean>>>
 }
 
-export const Visibility = ({ child, key, visible }: VisibilityI) => {
+export const Visibility = ({ child, visible }: VisibilityI) => {
   return defineComponent({
     name: 'Visibility',
     render() {

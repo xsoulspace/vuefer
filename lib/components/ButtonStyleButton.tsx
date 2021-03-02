@@ -6,10 +6,7 @@ import { BoxConstraints } from '../abstract/BoxConstraints'
 import { ButtonStyle } from '../abstract/ButtonStyle'
 import { Key } from '../abstract/Key'
 import { SystemMouseCursors } from '../abstract/MouseCursor'
-import {
-  OpacityDecoration,
-  OpacityDecorationSteps,
-} from '../abstract/OpacityDecoration'
+import { OpacityDecorationSteps } from '../abstract/OpacityDecoration'
 import { ConstrainedBox } from './ConstrainedBox'
 import { InkWell } from './InkWell'
 import { Material } from './Material'
@@ -25,7 +22,6 @@ export interface ButtonStyleButtonI {
 }
 export const ButtonStyleButton = ({
   child,
-  key,
   onTap,
   style,
   expand,
@@ -70,9 +66,7 @@ export const ButtonStyleButton = ({
     child: isDisabled
       ? Opacity({
           child: materialWidget,
-          opacity: OpacityDecoration.use({
-            opacity: OpacityDecorationSteps.s50,
-          }),
+          opacity: OpacityDecorationSteps.s50,
         })
       : materialWidget,
   })

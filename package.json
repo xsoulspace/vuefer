@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vuefer",
   "description": "vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -22,7 +22,8 @@
     ".": {
       "import": "./dist/vuefer.es.js",
       "require": "./dist/vuefer.umd.js"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "files": [
     "dist"
@@ -30,7 +31,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build & tsc --emitDeclarationOnly",
     "serve": "vite preview",
     "upgrade": "yarn yarn-upgrade-all add vue@next",
     "lint": "eslint --ext .ts,vue --ignore-path .gitignore ."

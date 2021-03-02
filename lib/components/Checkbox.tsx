@@ -22,7 +22,6 @@ interface CheckboxI {
 }
 
 export const Checkbox = ({
-  key,
   onChanged,
   value,
   // activeColor,

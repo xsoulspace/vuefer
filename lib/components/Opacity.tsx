@@ -12,7 +12,7 @@ interface OpacityI {
   opacity: OpacityDecorationSteps
 }
 
-export const Opacity = ({ child, key, opacity }: OpacityI) => {
+export const Opacity = ({ child, opacity }: OpacityI) => {
   return defineComponent({
     name: 'Opacity',
     setup() {

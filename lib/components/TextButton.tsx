@@ -6,7 +6,6 @@ export const TextButton = ({
   child,
   onTap,
   style,
-  key,
   expand,
 }: ButtonStyleButtonI) => {
   const defaultStyle = new ButtonStyle({

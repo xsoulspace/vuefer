@@ -6,7 +6,6 @@ import { Key } from '../abstract/Key'
 export const Padding = ({
   child,
   padding,
-  key,
 }: {
   child: Component
   padding: EdgeInsets

@@ -17,7 +17,6 @@ interface PositionedI {
 
 export const Positioned = ({
   child,
-  key,
   bottom,
   left,
   right,
