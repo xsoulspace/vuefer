@@ -2,7 +2,6 @@ import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
 import {
   Align,
   Alignment,
-  AppBar,
   BorderRadius,
   BorderRadiusStep,
   BoxDecoration,
@@ -30,7 +29,6 @@ import {
   NavigationController,
   Padding,
   Row,
-  Scaffold,
   showDialog,
   SizedBox,
   SystemMouseCursors,
@@ -39,13 +37,13 @@ import {
   TextEditingController,
   TextField,
 } from '../../../lib'
-import { HeroButton } from './../components/HeroButton'
+import { HeroButton } from '../components/HeroButton'
 type IndexedText = {
   id: number
   text: string
 }
 
-export const WrapperApp = () => {
+export const Home = () => {
   const text = ref('Hello world!')
   const padding = EdgeInsets.all(EdgeInsetsStep.s3)
   const rawText = Text({
@@ -196,123 +194,120 @@ export const WrapperApp = () => {
       )
       return () =>
         h(
-          Scaffold({
-            appBar: AppBar({}),
-            body: Align({
-              toOverlay: true,
-              alignment: Alignment.center,
-              child: Container({
-                padding,
-                decoration: new BoxDecoration({
-                  boxShadow: BoxShadow.xl,
-                  borderRadius: BorderRadius.vertical({
-                    bottom: BorderRadiusStep.xxl,
-                  }),
+          Align({
+            toOverlay: true,
+            alignment: Alignment.center,
+            child: Container({
+              padding,
+              decoration: new BoxDecoration({
+                boxShadow: BoxShadow.xl,
+                borderRadius: BorderRadius.vertical({
+                  bottom: BorderRadiusStep.xxl,
                 }),
-                child: Row({
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column({
-                      children: [
-                        MultiDropdownButton({
-                          controller: multiDropdownController,
-                          items: dropdownItems.map((el) =>
-                            DropdownMenuItem({
-                              child: Text({
-                                text: ref(el.text),
-                              }),
-                              value: el,
-                              key: el.id.toString(),
-                              title: ref(el.text),
-                            })
-                          ),
-                        }),
+              }),
+              child: Row({
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column({
+                    children: [
+                      MultiDropdownButton({
+                        controller: multiDropdownController,
+                        items: dropdownItems.map((el) =>
+                          DropdownMenuItem({
+                            child: Text({
+                              text: ref(el.text),
+                            }),
+                            value: el,
+                            key: el.id.toString(),
+                            title: ref(el.text),
+                          })
+                        ),
+                      }),
 
-                        ElevatedButton({
-                          child: Text({
-                            text: ref('Show dialog'),
-                          }),
-                          onTap: () => {
-                            showDialog({
-                              dialog: Dialog({
-                                child: ElevatedButton({
-                                  child: Text({
-                                    text: ref('Open dialog'),
-                                  }),
-                                  onTap: () => {
-                                    showDialog({
-                                      dialog: Dialog({
-                                        child: Column({
-                                          children: [
-                                            Text({
-                                              text: ref('Second Dialog'),
-                                            }),
-                                            ElevatedButton({
-                                              child: Text({
-                                                text: ref('close 2 dialogs'),
-                                              }),
-                                              onTap: () => {
-                                                navigationController.pop(2)
-                                              },
-                                            }),
-                                          ],
-                                        }),
-                                      }),
-                                      navigationController,
-                                    })
-                                  },
+                      ElevatedButton({
+                        child: Text({
+                          text: ref('Show dialog'),
+                        }),
+                        onTap: () => {
+                          showDialog({
+                            dialog: Dialog({
+                              child: ElevatedButton({
+                                child: Text({
+                                  text: ref('Open dialog'),
                                 }),
+                                onTap: () => {
+                                  showDialog({
+                                    dialog: Dialog({
+                                      child: Column({
+                                        children: [
+                                          Text({
+                                            text: ref('Second Dialog'),
+                                          }),
+                                          ElevatedButton({
+                                            child: Text({
+                                              text: ref('close 2 dialogs'),
+                                            }),
+                                            onTap: () => {
+                                              navigationController.pop(2)
+                                            },
+                                          }),
+                                        ],
+                                      }),
+                                    }),
+                                    navigationController,
+                                  })
+                                },
                               }),
-                              navigationController,
-                            })
-                          },
-                        }),
-                        HeroButton(),
-                        MouseRegion({
-                          child: textCard,
-                          cursor: SystemMouseCursors.progress,
-                        }),
-                        ElevatedButton({
-                          child: Text({ text: ref('') }),
-                          onTap: () => {
-                            console.log({ dropdownFieldController })
-                          },
-                        }),
-                        TextField({
-                          controller: controller,
-                        }),
-                        dropdown,
-                        CheckboxListTile({
-                          onChanged: () => {
-                            // isEnabled.value = !isEnabled.value;
-                          },
-                          value: isEnabled,
-                          title: rawText,
-                        }),
-                        dynamicItems,
-                      ],
-                    }),
-                    GridView.count({
-                      isDraggable: ref(true),
-                      isResizable: ref(true),
-                      onPositionUpdate: (newPosition) => {
-                        const i = layoutMatrix.findIndex(
-                          (el) => el.index == newPosition?.index
-                        )
-                        // console.log({ i })
-                        if (i) {
-                          if (newPosition) {
-                            layoutMatrix.splice(i, 1, newPosition)
-                            return
-                          }
-                          layoutMatrix.splice(i, 1)
+                            }),
+                            navigationController,
+                          })
+                        },
+                      }),
+                      HeroButton(),
+                      MouseRegion({
+                        child: textCard,
+                        cursor: SystemMouseCursors.progress,
+                      }),
+                      ElevatedButton({
+                        child: Text({ text: ref('') }),
+                        onTap: () => {
+                          console.log({ dropdownFieldController })
+                        },
+                      }),
+                      TextField({
+                        controller: controller,
+                      }),
+                      dropdown,
+                      CheckboxListTile({
+                        onChanged: () => {
+                          // isEnabled.value = !isEnabled.value;
+                        },
+                        value: isEnabled,
+                        title: rawText,
+                      }),
+                      dynamicItems,
+                    ],
+                  }),
+                  GridView.count({
+                    isDraggable: ref(true),
+                    isResizable: ref(true),
+                    onPositionUpdate: (newPosition) => {
+                      const i = layoutMatrix.findIndex(
+                        (el) => el.index == newPosition?.index
+                      )
+                      // console.log({ i })
+                      if (i) {
+                        if (newPosition) {
+                          layoutMatrix.splice(i, 1, newPosition)
+                          return
                         }
-                      },
-                      delegate: gridViewDelegate,
-                    }),
-                  ],
-                }),
+                        layoutMatrix.splice(i, 1)
+                      }
+                    },
+                    delegate: gridViewDelegate,
+                  }),
+                ],
               }),
             }),
           })

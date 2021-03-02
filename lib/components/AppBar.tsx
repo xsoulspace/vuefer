@@ -1,19 +1,19 @@
 import { Component, computed, defineComponent, h } from 'vue'
-import { Alignment } from '../abstract/Alignment'
 import { Maybe } from '../abstract/BasicTypes'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Color } from '../abstract/Color'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
 import { Key } from '../abstract/Key'
+import { MainAxisAlignment } from '../abstract/MainAxisAlignment'
 import {
   SizeBoxStep,
   SizedBoxHeight,
   SizedBoxWidth,
 } from '../abstract/SizedBox'
-import { Align } from './Align'
 import { Column } from './Column'
 import { Row } from './Row'
+import { SizedBox } from './SizedBox'
 interface AppBarI {
   key?: Maybe<Key>
   leading?: Maybe<Component>
@@ -31,7 +31,7 @@ interface AppBarI {
   // toolbarOpacity?: OpacityDecorationSteps
   // bottomOpacity
   toolbarHeight?: Maybe<EdgeInsetsStep>
-  // leadingWidth?: Maybe<EdgeInsetsStep>
+  leadingWidth?: Maybe<EdgeInsetsStep>
   // toolbarTextStyle
   // titleTextStyle
 }
@@ -45,24 +45,25 @@ export const AppBar = ({
   // toolbarOpacity,
   // bottomOpacity,
   toolbarHeight,
-  // leadingWidth,
+  leadingWidth,
   // toolbarTextStyle,
   // titleTextStyle,
   automaticallyImplyLeading,
   leading,
   hideOnScroll,
 }: AppBarI) => {
+  const resolvedAutomaticallyImplyLeading = automaticallyImplyLeading ?? true
+  const resolvedLeading =
+    leading ?? (resolvedAutomaticallyImplyLeading ? <div /> : <div />)
+  const resolvedLeadingWidth = leadingWidth ?? EdgeInsetsStep.s10
+
   return defineComponent({
     name: 'AppBar',
     setup() {
-      const resolvedAutomaticallyImplyLeading =
-        automaticallyImplyLeading ?? true
       // const resolvedBackgroundOpacity = new OpacityDecoration({
       //   opacity: toolbarOpacity ?? OpacityDecorationSteps.s100,
       // })
       // const resolvedBottomOpacity = bottomOpacity ?? OpacityDecorationSteps.s100
-      const resolvedLeading =
-        leading ?? resolvedAutomaticallyImplyLeading ? <div /> : ''
       const classes = computed((): string[] => {
         return [
           hideOnScroll ? '' : 'fixed',
@@ -90,19 +91,17 @@ export const AppBar = ({
                 children: [
                   Row({
                     children: [
-                      resolvedLeading,
-                      title ? h(title) : h(''),
-                      Align({
-                        alignment: Alignment.right,
-                        child: Row({
-                          children: [
-                            h(
-                              'ul',
-                              {},
-                              actions?.map((el) => h('li', {}, [h(el)]))
-                            ),
-                          ],
-                        }),
+                      SizedBox({
+                        child: h(resolvedLeading),
+                        width: resolvedLeadingWidth,
+                      }),
+                      Row({
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [title ? h(title) : h(<div />)],
+                      }),
+                      Row({
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: actions?.map((el) => h(el)) ?? [],
                       }),
                     ],
                   }),
@@ -110,7 +109,7 @@ export const AppBar = ({
                     ? Row({
                         children: [...bottom],
                       })
-                    : h(''),
+                    : h(<div />),
                 ],
               })
             ),

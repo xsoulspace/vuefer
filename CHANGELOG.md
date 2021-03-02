@@ -1,10 +1,26 @@
 ## 0.8.0
 
-BREAKING CHANGE: Now package name is Vuefer
+BREAKING CHANGE: Now package name is Vuefer. vue_flutter_tailwind will be deprecated as it will reach stable version.
 BREAKING CHANGE: Webpack replaced with Vite
+BREAKING CHANGE: MultiProvider.create replaced to build
+BREAKING CHANGE: Scaffold now builds as Scaffold.build
+
 feat: Navigation push now can align Dialog(route) window
 feat: Drawer
 feat: AppBar
+
+feat: Simplified provider call
+Old:
+
+```typescript
+
+```
+
+New:
+
+```typescript
+
+```
 
 ## 0.7.0
 

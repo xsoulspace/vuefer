@@ -12,7 +12,7 @@ export interface AlignI {
   key?: Maybe<Key>
 }
 
-export const Align = ({ child, toOverlay, alignment, key }: AlignI) => {
+export const Align = ({ child, toOverlay, alignment }: AlignI) => {
   const finalAlignment = alignment
   finalAlignment.toOverlay = toOverlay ?? false
   return defineComponent({

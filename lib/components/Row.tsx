@@ -11,7 +11,7 @@ export const Row = ({
   dividerDecoration,
 }: RowI) => {
   return defineComponent({
-    name: 'Column',
+    name: 'Row',
     render() {
       const classNames = FlexHelper.getClassNames({
         crossAxisAlignment,
