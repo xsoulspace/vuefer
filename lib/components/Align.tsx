@@ -8,13 +8,13 @@ export interface AlignI {
   alignment: Alignment
   // widthFactor?: EdgeInsetsStep;
   // heightFactor?: EdgeInsetsStep;
-  toOverlay?: Maybe<boolean>
+  overlay?: Maybe<boolean>
   key?: Maybe<Key>
 }
 
-export const Align = ({ child, toOverlay, alignment }: AlignI) => {
+export const Align = ({ child, overlay, alignment }: AlignI) => {
   const finalAlignment = alignment
-  finalAlignment.toOverlay = toOverlay ?? false
+  finalAlignment.overlay = overlay ?? false
   return defineComponent({
     name: 'Align',
     render() {

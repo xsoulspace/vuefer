@@ -15,7 +15,7 @@ export const Center = ({ child, key }: CenterI) => {
     render() {
       return h(
         Align({
-          toOverlay: true,
+          overlay: true,
           alignment: Alignment.center,
           child,
         })

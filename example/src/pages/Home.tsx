@@ -140,7 +140,7 @@ export const Home = () => {
   return defineComponent({
     name: 'App',
     setup() {
-      const layoutMatrix = reactive([
+      const layoutMatrix = ref([
         { x: 0, y: 0, width: 2, height: 2, index: 0 },
         { x: 2, y: 0, width: 2, height: 4, index: 1 },
         { x: 4, y: 0, width: 6, height: 8, index: 2 },
@@ -166,7 +166,7 @@ export const Home = () => {
         NavigationController
       )
       const gridViewDelegate = GridViewDelegate.use({
-        gridViewItems: layoutMatrix.map((el) =>
+        gridViewItems: layoutMatrix.value.map((el) =>
           GridViewItem({
             child: TextButton({
               child: Text({
@@ -195,7 +195,7 @@ export const Home = () => {
       return () =>
         h(
           Align({
-            toOverlay: true,
+            overlay: true,
             alignment: Alignment.center,
             child: Container({
               padding,
@@ -293,16 +293,16 @@ export const Home = () => {
                     isDraggable: ref(true),
                     isResizable: ref(true),
                     onPositionUpdate: (newPosition) => {
-                      const i = layoutMatrix.findIndex(
+                      const i = layoutMatrix.value.findIndex(
                         (el) => el.index == newPosition?.index
                       )
                       // console.log({ i })
                       if (i) {
                         if (newPosition) {
-                          layoutMatrix.splice(i, 1, newPosition)
+                          layoutMatrix.value.splice(i, 1, newPosition)
                           return
                         }
-                        layoutMatrix.splice(i, 1)
+                        layoutMatrix.value.splice(i, 1)
                       }
                     },
                     delegate: gridViewDelegate,

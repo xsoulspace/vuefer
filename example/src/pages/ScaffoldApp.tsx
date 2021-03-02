@@ -9,7 +9,7 @@ import {
 } from '../../../lib'
 import { Home } from './Home'
 
-export const ScaffoldApp = Scaffold({
+export const ScaffoldApp = Scaffold.build({
   drawer: Drawer({
     child: Column({
       children: [
@@ -24,7 +24,9 @@ export const ScaffoldApp = Scaffold({
       child: Text({
         text: ref('='),
       }),
-      onTap: () => {},
+      onTap: () => {
+        Scaffold.openDrawer()
+      },
     }),
     title: Text({
       text: ref('Title'),

@@ -53,29 +53,29 @@ export const showDialog = ({
  *
  *  Be sure that you have Navigation widget on top of tree
  *
- *  ```typescript
- *  const navigationController = MultiProvider.get<NavigationController>(
- *    NavigationController
- *  )
- *  ```
+    ```typescript
+    const navigationController = MultiProvider.get<NavigationController>(
+      NavigationController
+    )
+    ```
  *
  *  Second - call a function inside for example Button.onTap:
  *
- *  ```typescript
- *  ElevatedButton({
- *    child: Text({
- *      text: ref('Show dialog'),
- *    }),
- *    onTap: () => {
- *      showDialog({
- *        builder: Dialog({
- *          child: Text({ text: ref('Hello World') }),
- *        }),
- *        navigationController,
- *      })
- *    },
- *  }),
- *  ```
+    ```typescript
+    ElevatedButton({
+      child: Text({
+        text: ref('Show dialog'),
+      }),
+      onTap: () => {
+        showDialog({
+          builder: Dialog({
+            child: Text({ text: ref('Hello World') }),
+          }),
+          navigationController,
+        })
+      },
+    }),
+    ```
  *
  * To close Dialog, just use `navigationController.pop()`
  */

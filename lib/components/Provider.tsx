@@ -21,35 +21,35 @@ enum InstanceTypes {
  *
  * Let's suppose we have a model:
  *
- *  ```typescript
- *  export class Hero {
- *    constructor(public name: string) {}
- *  }
- *  export class HeroesModel {
- *    heroes = reactive<Maybe<Hero>[]>([])
- *    add(hero: Hero) {
- *      this.heroes.push(hero)
- *    }
- *    get count() {
- *      return this.heroes.length
- *    }
- *  }
- *  ```
+   ```typescript
+    export class Hero {
+      constructor(public name: string) {}
+    }
+    export class HeroesModel {
+      heroes = reactive<Maybe<Hero>[]>([])
+      add(hero: Hero) {
+        this.heroes.push(hero)
+      }
+      get count() {
+        return this.heroes.length
+      }
+    }
+    ```
  *
  *  Create Provider on top of tree
  *
- *  ```typescript
- *  MultiProvider.create({
- *    models: [HeroesModel],
- *    child: wrapperApp(),
- *  })
- *  ```
+    ```typescript
+    MultiProvider.create({
+      models: [HeroesModel],
+      child: wrapperApp(),
+    })
+    ```
  *
  *  And somewhere in tree just call
  *
- *  ```typescript
- *  const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
- *  ```
+    ```typescript
+    const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+    ```
  *
  */
 export class MultiProvider {
@@ -104,13 +104,11 @@ export class MultiProvider {
   static get<T, P extends CallableFunction | Constructor<T> = Constructor<T>>(
     modelName: P
   ) {
-    const guardType = (_model: unknown): _model is P => true
-
     const symbol = this._allProvidersSymbols.get(modelName.name)
     if (symbol == null) throw Error(`${modelName} doesn't have a provider!`)
     const model: Maybe<T> = inject(symbol)
     if (model == null)
       throw new Error(`${modelName} have a provider but return null:(!`)
-    return guardType(model)
+    return model
   }
 }

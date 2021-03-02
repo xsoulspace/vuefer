@@ -79,7 +79,7 @@ export const wrapperApp = () => {
 
   return Scaffold({
     body: Align({
-      toOverlay: true,
+      overlay: true,
       alignment: Alignment.bottom,
       child: Container({
         padding,
@@ -310,16 +310,23 @@ MultiProvider.create({
   [] Color palette
 
 - [] Scaffold
+  [x] Drawer
+  [x] AppBar
+
+- [] Drawer
+  [x] basic
+  [] animation
+
+- [] AppBar
+  [x] basic
 
 ## Next
 
 - [] Flexible
 - [] OutlinedButton
 - [] Ripple
-- [] Drawer
 - [] Progress
 - [] Card
-- [] AppBar
 - [] Icon
 - [] IconButton
 - [] Bar

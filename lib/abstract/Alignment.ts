@@ -15,7 +15,7 @@ export enum AlignmentEdge {
 }
 interface AlignmentI {
   alignment?: AlignmentEdge
-  toOverlay?: boolean
+  overlay?: boolean
 }
 // export class AlignmentHelper {
 //   static getClassNames({ alignment, heightFactor, widthFactor }: AlignI) {
@@ -25,10 +25,10 @@ interface AlignmentI {
 
 export class Alignment {
   alignment: AlignmentEdge
-  toOverlay: boolean
-  constructor({ alignment, toOverlay }: AlignmentI) {
+  overlay: boolean
+  constructor({ alignment, overlay }: AlignmentI) {
     this.alignment = alignment ?? AlignmentEdge.topLeft
-    this.toOverlay = toOverlay ?? false
+    this.overlay = overlay ?? false
   }
   static _factory(alignment: AlignmentEdge) {
     return new Alignment({ alignment })
@@ -129,8 +129,6 @@ export class Alignment {
           return 'left-0 top-0'
       }
     })()
-    return [this.toOverlay ? 'absolute ' + edge : '', relativeAlignment].join(
-      ' '
-    )
+    return [this.overlay ? 'absolute ' + edge : '', relativeAlignment].join(' ')
   }
 }

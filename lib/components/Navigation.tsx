@@ -1,4 +1,13 @@
-import { Component, defineComponent, h, reactive, ref, watch } from 'vue'
+import {
+  Component,
+  computed,
+  defineComponent,
+  h,
+  reactive,
+  ref,
+  watch,
+} from 'vue'
+import { AlignmentEdge } from '../abstract/Alignment'
 import { Colors } from '../abstract/Colors'
 import { EdgeInsetsStep } from '../abstract/EdgeInsets'
 import {
@@ -10,7 +19,7 @@ import {
   OpacityDecorationSteps,
 } from '../abstract/OpacityDecoration'
 import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
-import { Align } from './Align'
+import { Center } from './Center'
 import { Positioned } from './Positioned'
 import { MultiProvider } from './Provider'
 import { Visibility } from './Visibility'
@@ -27,14 +36,14 @@ interface NavigationI {
  *
  * Add controller into MultiPorvider and Navigation widget below:
  *
- *  ```typescript
- *  MultiProvider.create({
- *    models: [NavigationController, ...],
- *    child: Navigation({
- *      child: ...,
- *    }),
- *  })
- *  ```
+    ```typescript
+    MultiProvider.create({
+      models: [NavigationController, ...],
+      child: Navigation({
+        child: ...,
+      }),
+    })
+    ```
  */
 export const Navigation = ({ child }: NavigationI) => {
   return defineComponent({
@@ -54,7 +63,11 @@ export const Navigation = ({ child }: NavigationI) => {
       const isRoutesExists = ref<boolean>(false)
       const isFullscreen = ref<boolean>(false)
       const isNotFullscreen = ref<boolean>(false)
-
+      const alignment = computed(() => {
+        const finalAlignment = routeController._alignment
+        finalAlignment.overlay = true
+        return finalAlignment
+      })
       watch(
         routeController.routes,
         (newRoutes) => {
@@ -83,6 +96,7 @@ export const Navigation = ({ child }: NavigationI) => {
         isNotFullscreen,
         isRoutesExists,
         routeController,
+        alignment,
       }
     },
     render() {
@@ -132,19 +146,42 @@ export const Navigation = ({ child }: NavigationI) => {
                                 }}
                               >
                                 {h(
-                                  Align({
-                                    alignment: this.routeController._alignment,
-                                    toOverlay: true,
-                                    child: h(
-                                      <div
-                                        onClick={(event) =>
-                                          event.stopPropagation()
-                                        }
-                                      >
-                                        {h(this.currentRoute.widget ?? <div />)}
-                                      </div>
-                                    ),
-                                  })
+                                  (() => {
+                                    switch (this.alignment.alignment) {
+                                      case AlignmentEdge.center:
+                                        return Center({
+                                          child: (
+                                            <div
+                                              onClick={(event) =>
+                                                event.stopPropagation()
+                                              }
+                                            >
+                                              {h(
+                                                this.currentRoute.widget ?? (
+                                                  <div />
+                                                )
+                                              )}
+                                            </div>
+                                          ),
+                                        })
+
+                                      default:
+                                        return (
+                                          <div
+                                            class={this.alignment.css}
+                                            onClick={(event) =>
+                                              event.stopPropagation()
+                                            }
+                                          >
+                                            {h(
+                                              this.currentRoute.widget ?? (
+                                                <div />
+                                              )
+                                            )}
+                                          </div>
+                                        )
+                                    }
+                                  })()
                                 )}
                               </div>
                             ),
