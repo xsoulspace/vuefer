@@ -20,7 +20,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/*": ["example/src/*"]
+      "#*": ["example/src/*"]
     },
     "outDir": "dist",
     "typeRoots": ["./lib"],

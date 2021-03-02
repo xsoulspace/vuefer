@@ -1,9 +1,9 @@
+import { HeroesModel } from '#/models/HeroesModel'
+import { ScaffoldApp } from '#/pages/ScaffoldApp'
 import { createApp } from 'vue'
 import vueGridLayout from 'vue-grid-layout'
 import { MultiProvider, Navigation, NavigationController } from '../../lib'
 import '../../lib/index.scss'
-import { HeroesModel } from './models/HeroesModel'
-import { ScaffoldApp } from './pages/ScaffoldApp'
 
 const app = MultiProvider.build({
   models: [NavigationController, HeroesModel],
