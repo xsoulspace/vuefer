@@ -3,6 +3,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 // import ts from 'rollup-plugin-typescript2'
 import { defineConfig } from 'vite'
+
 // const copyPlugin = copy({
 //   targets: [{ src: 'example/**/*', dest: 'dist/example' }],
 // })
@@ -40,11 +41,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/index.ts'),
-      name: 'vuefer',
+      name: '@xsoulspace/vuefer',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
+      input: 'index.ts',
       external: ['vue'],
       plugins: [],
       output: {
@@ -52,7 +54,7 @@ export default defineConfig({
         // // Provide global variables to use in the UMD build
         // // for externalized deps
         globals: {
-          vue: 'Vue',
+          vue: 'vue',
         },
       },
     },
