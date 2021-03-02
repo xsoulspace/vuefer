@@ -1,12 +1,11 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
-import copy from 'rollup-plugin-copy'
 import ts from 'rollup-plugin-typescript2'
 import { defineConfig } from 'vite'
-const copyPlugin = copy({
-  targets: [{ src: 'example/**/*', dest: 'dist/example' }],
-})
+// const copyPlugin = copy({
+//   targets: [{ src: 'example/**/*', dest: 'dist/example' }],
+// })
 const tsPlugin = ts({
   tsconfig: path.resolve(__dirname, 'tsconfig.json'),
   tsconfigOverride: {
@@ -47,7 +46,7 @@ export default defineConfig({
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: ['vue'],
-      plugins: [tsPlugin, copyPlugin],
+      plugins: [tsPlugin],
       output: {
         dir: './dist',
         // Provide global variables to use in the UMD build
