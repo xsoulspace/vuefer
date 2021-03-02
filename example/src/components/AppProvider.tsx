@@ -1,7 +1,7 @@
 import { h } from 'vue'
-import { MultiProvider, Navigation, NavigationController } from '../../lib'
-import { WrapperApp } from './App'
-import { HeroesModel } from './HeroesModel'
+import { MultiProvider, Navigation, NavigationController } from '../../../lib'
+import { HeroesModel } from '../models/HeroesModel'
+import { WrapperApp } from '../pages/App'
 export const AppProvider = {
   setup() {
     return () =>

@@ -1,4 +1,5 @@
 export * from './Align'
+export * from './AppBar'
 export * from './ButtonStyleButton'
 export * from './Center'
 export * from './Checkbox'

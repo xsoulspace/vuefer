@@ -7,8 +7,8 @@ import {
   Row,
   SizedBox,
   Text,
-} from '../../lib'
-import { HeroesModel } from './HeroesModel'
+} from '../../../lib'
+import { HeroesModel } from '../models/HeroesModel'
 
 export const HeroButton = () => {
   return defineComponent({

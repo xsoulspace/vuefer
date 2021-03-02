@@ -91,16 +91,17 @@ export const Dialog = ({
     setup() {
       const classes = computed(() => {
         return [
-          backgroundColor?.backgroundCss ?? Colors.white.backgroundCss,
-          decoration?.css ??
+          (backgroundColor ?? Colors.white).backgroundCss,
+          (
+            decoration ??
             new BoxDecoration({
               borderRadius: BorderRadius.all({
                 radius: BorderRadiusStep.md,
               }),
-            }).css,
-          elevation?.css ?? BoxShadow.lg.css,
-          insetPadding?.paddingCss ??
-            EdgeInsets.all(EdgeInsetsStep.s10).paddingCss,
+            })
+          ).css,
+          (elevation ?? BoxShadow.lg).css,
+          (insetPadding ?? EdgeInsets.all(EdgeInsetsStep.s10)).paddingCss,
         ]
       })
       return () => h(<div class={classes.value}>{h(child)}</div>)

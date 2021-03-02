@@ -1,25 +1,32 @@
 import { Component, defineComponent, h } from 'vue'
 import { Maybe } from '../abstract/BasicTypes'
 import { Key } from '../abstract/Key'
-import { OpacityDecoration } from '../abstract/OpacityDecoration'
+import {
+  OpacityDecoration,
+  OpacityDecorationSteps,
+} from '../abstract/OpacityDecoration'
 
 interface OpacityI {
   child: Component
   key?: Maybe<Key>
-  opacity: OpacityDecoration
+  opacity: OpacityDecorationSteps
 }
 
 export const Opacity = ({ child, key, opacity }: OpacityI) => {
   return defineComponent({
     name: 'Opacity',
-    render() {
-      return h(
-        'div',
-        {
-          class: opacity.css,
-        },
-        [h(child)]
-      )
+    setup() {
+      const resolvedOpacity = new OpacityDecoration({
+        opacity,
+      })
+      return () =>
+        h(
+          'div',
+          {
+            class: resolvedOpacity.css,
+          },
+          [h(child)]
+        )
     },
   })
 }

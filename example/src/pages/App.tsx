@@ -2,6 +2,7 @@ import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
 import {
   Align,
   Alignment,
+  AppBar,
   BorderRadius,
   BorderRadiusStep,
   BoxDecoration,
@@ -37,8 +38,8 @@ import {
   TextButton,
   TextEditingController,
   TextField,
-} from '../../lib'
-import { HeroButton } from './HeroButton'
+} from '../../../lib'
+import { HeroButton } from './../components/HeroButton'
 type IndexedText = {
   id: number
   text: string
@@ -196,6 +197,7 @@ export const WrapperApp = () => {
       return () =>
         h(
           Scaffold({
+            appBar: AppBar({}),
             body: Align({
               toOverlay: true,
               alignment: Alignment.center,
