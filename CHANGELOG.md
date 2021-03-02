@@ -1,3 +1,77 @@
+## 0.8.0
+
+BREAKING CHANGE: Now package name is `Vuefer`. `vue_flutter_tailwind` will be deprecated as it will reach stable version.
+BREAKING CHANGE: Webpack replaced with Vite
+BREAKING CHANGE: `MultiProvider.create` replaced to `MultiProvider.build`
+BREAKING CHANGE: `Scaffold({})` now builds as `Scaffold.build({})`
+BREAKING CHANGE: `Alignment.toOverlay` no is `Alignment.overlay`
+
+feat: Navigation push now can align Dialog(route) window
+feat: Drawer
+feat: AppBar
+feat: Scaffold now has drawer and appBar
+
+To use Drawer you must first initialize somewhere above `Navigation` with `NavigationContorller` as below:
+
+```typescript
+MultiProvider.build({
+  models: [NavigationController],
+  child: Navigation({
+    child: ...,
+  }),
+})
+```
+
+To open Drawer use
+`Scaffold.openDrawer()`
+To close Drawer use
+`Scaffold.closeDrawer()`
+
+```typescript
+Scaffold.build({
+  drawer: Drawer({
+    child: Column({
+      children: [
+        Text({
+          text: ref('Drawer header'),
+        }),
+      ],
+    }),
+  }),
+  appBar: AppBar({
+    leading: ElevatedButton({
+      child: Text({
+        text: ref('='),
+      }),
+      onTap: () => {
+        Scaffold.openDrawer()
+      },
+    }),
+    title: Text({
+      text: ref('Title'),
+    }),
+    actions: [
+      ElevatedButton({
+        child: Text({
+          text: ref('a'),
+        }),
+      }),
+      ElevatedButton({
+        child: Text({
+          text: ref('b'),
+        }),
+      }),
+      ElevatedButton({
+        child: Text({
+          text: ref('c'),
+        }),
+      }),
+    ],
+  }),
+  body: Home(),
+})
+```
+
 ## 0.7.0
 
 ### feat: MultiDropdownButton

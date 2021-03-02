@@ -1,16 +1,20 @@
-# Vue3 styled like Flutter with Tailwind CSS
+# vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS
 
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vft)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vuefer)
+
+**Please notice: this project was renamed from vuefer to independent name: vuefer**
 
 **Please notice: this project is a work in progress and completely experimental!**
 
-The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript & Tailwind awesome too!
+The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript awesome too!
 
 But...
 
 Flutter is not working inside Excel:( and its kind of complicated to work with web libraries.
 
 So, what if we will write Vue3 TS in style of Flutter, because it's just simplier and faster?
+
+Purpose: fast prototyping and fast MVP development
 
 Please notice:
 
@@ -34,14 +38,14 @@ Add this package to your package.json file:
 
 ```json
 "dependencies": {
-  "@xsoulspace/vue_flutter_tailwind": "next"
+  "@xsoulspace/vuefer": "next"
 }
 ```
 
 add styling to your main.ts
 
 ```typescript
-import '@xsoulspace/vue_flutter_tailwind/dist/vft.css'
+import '@xsoulspace/vuefer/dist/vft.css'
 ```
 
 add styling to app div (temporary and will be removed during Scaffold widget refactoring)
@@ -75,7 +79,7 @@ export const wrapperApp = () => {
 
   return Scaffold({
     body: Align({
-      toOverlay: true,
+      overlay: true,
       alignment: Alignment.bottom,
       child: Container({
         padding,
@@ -306,16 +310,23 @@ MultiProvider.create({
   [] Color palette
 
 - [] Scaffold
+  [x] Drawer
+  [x] AppBar
+
+- [] Drawer
+  [x] basic
+  [] animation
+
+- [] AppBar
+  [x] basic
 
 ## Next
 
 - [] Flexible
 - [] OutlinedButton
 - [] Ripple
-- [] Drawer
 - [] Progress
 - [] Card
-- [] AppBar
 - [] Icon
 - [] IconButton
 - [] Bar
@@ -330,4 +341,29 @@ MultiProvider.create({
 
 # Changelog
 
-Changelog can be found in [Releases](https://github.com/xsoulspace/vue_flutter_tailwind/releases)
+Changelog can be found in [Releases](https://github.com/xsoulspace/vuefer/releases)
+
+# Setup with Vue 3 + Typescript + Vite
+
+## Recommended IDE Setup
+
+[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+
+### If Using `<script setup>`
+
+[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+
+## Type Support For `.vue` Imports in TS
+
+Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+
+### If Using Volar
+
+Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+
+### If Using Vetur
+
+1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
+2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
+3. Open `src/main.ts` in VSCode
+4. Open the VSCode command palette 5. Search and run "Select TypeScript version" -> "Use workspace version"
