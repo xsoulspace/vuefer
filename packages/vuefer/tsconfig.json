@@ -22,15 +22,9 @@
     "outDir": "dist",
     "typeRoots": ["./lib"],
     "declarationDir": "dist",
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client", "./lib", "vue"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "types": ["vite/client", "./lib"]
   },
-  "exclude": ["node_modules", "dist", "example"],
-  "include": [
-    "index.ts",
-    "lib/**/*.ts",
-    "lib/**/*.d.ts",
-    "lib/**/*.tsx",
-    "lib/**/*.vue"
-  ]
+  "exclude": ["node_modules", "dist"],
+  "include": ["lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx", "lib/**/*.vue"]
 }

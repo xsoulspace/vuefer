@@ -28,11 +28,7 @@ export const Text = ({ text, style, overflow, textAlign }: TextI) =>
       return h(
         'div',
         {
-          class: [
-            style?.css ?? '',
-            overflow?.css ?? '',
-            textAlign?.css ?? '',
-          ].join(' '),
+          class: [style?.css ?? '', overflow?.css ?? '', textAlign?.css ?? ''],
         },
         `${this.text}`
       )

@@ -7,10 +7,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@xsoulspace/vuefer": "../../",
+    "@xsoulspace/vuefer": "../../vuefer",
     "vue": "^3.0.6"
   },
   "devDependencies": {
+    "@types/node": "^14.14.31",
     "@vitejs/plugin-vue": "^1.1.5",
     "@vitejs/plugin-vue-jsx": "^1.1.2",
     "@vue/compiler-sfc": "^3.0.5",

@@ -17,10 +17,9 @@
   },
   "homepage": "https://github.com/xsoulspace/vuefer#readme",
   "main": "dist/vuefer.umd.js",
-  "module": "dist/vuefer.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vuefer.es.js",
+      "import": "./dist/vuefer.umd.js",
       "require": "./dist/vuefer.umd.js"
     },
     "./style.css": "./dist/style.css"

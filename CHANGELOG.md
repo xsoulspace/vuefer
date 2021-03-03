@@ -33,7 +33,7 @@ Scaffold.build({
     child: Column({
       children: [
         Text({
-          text: ref('Drawer header'),
+          text: ref("Drawer header"),
         }),
       ],
     }),
@@ -41,35 +41,35 @@ Scaffold.build({
   appBar: AppBar({
     leading: ElevatedButton({
       child: Text({
-        text: ref('='),
+        text: ref("="),
       }),
       onTap: () => {
-        Scaffold.openDrawer()
+        Scaffold.openDrawer();
       },
     }),
     title: Text({
-      text: ref('Title'),
+      text: ref("Title"),
     }),
     actions: [
       ElevatedButton({
         child: Text({
-          text: ref('a'),
+          text: ref("a"),
         }),
       }),
       ElevatedButton({
         child: Text({
-          text: ref('b'),
+          text: ref("b"),
         }),
       }),
       ElevatedButton({
         child: Text({
-          text: ref('c'),
+          text: ref("c"),
         }),
       }),
     ],
   }),
   body: Home(),
-})
+});
 ```
 
 ## 0.7.0
@@ -130,12 +130,12 @@ export class Hero {
   constructor(public name: string) {}
 }
 export class HeroesModel {
-  heroes = reactive<Maybe<Hero>[]>([])
+  heroes = reactive<Maybe<Hero>[]>([]);
   add(hero: Hero) {
-    this.heroes.push(hero)
+    this.heroes.push(hero);
   }
   get count() {
-    return this.heroes.length
+    return this.heroes.length;
   }
 }
 ```
@@ -146,13 +146,13 @@ Create Provider on top of tree
 MultiProvider.create({
   models: [HeroesModel],
   child: wrapperApp(),
-})
+});
 ```
 
 And somewhere in tree just call
 
 ```typescript
-const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
+const heroModel = MultiProvider.get<HeroesModel>(HeroesModel);
 ```
 
 ### feat: Dialog
@@ -168,7 +168,7 @@ Be sure that you have Navigation widget on top of tree
 ```typescript
 const navigationController = MultiProvider.get<NavigationController>(
   NavigationController
-)
+);
 ```
 
 Second call a function from for example Button.onTap:
@@ -230,7 +230,7 @@ ListView must be used inside SizedBox, as in example below
 SizedBox({
   child: ListView.builder({
     itemBuilder: ({ index }) => {
-      const value = obj.value[index]
+      const value = obj.value[index];
       return ElevatedButton({
         style: new ButtonStyle({
           backgroundColor: Colors.grey,
@@ -245,7 +245,7 @@ SizedBox({
           text: ref(value),
         }),
         onTap: () => alert(`hello tap with index ${index} and value ${value}!`),
-      })
+      });
     },
     itemCount: itemCount,
   }),
@@ -255,7 +255,7 @@ SizedBox({
   width: new SizedBoxWidth({
     width: EdgeInsetsStep.s96,
   }),
-})
+});
 ```
 
 ## 0.2.1
