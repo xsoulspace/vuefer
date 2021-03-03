@@ -1,5 +1,6 @@
 <template>
-  <grid-layout
+  <div></div>
+  <!-- <grid-layout
     v-model:layout="internalLayoutMatrix"
     style="width: 100%; height: 100%"
     :col-num="crossAxisCount"
@@ -22,7 +23,7 @@
     >
       <grid-view-item-builder :index="item.i" :item-builder="itemBuilder" />
     </grid-item>
-  </grid-layout>
+  </grid-layout> -->
 </template>
 <script lang="ts">
   import { computed, reactive, watch } from 'vue'

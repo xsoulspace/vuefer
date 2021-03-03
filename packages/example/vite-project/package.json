@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@xsoulspace/vuefer": "../../vuefer",
+    "@xsoulspace/vuefer": "0.8.6",
     "vue": "^3.0.6"
   },
   "devDependencies": {

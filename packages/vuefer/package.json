@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vuefer",
   "description": "vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -50,7 +50,6 @@
   "dependencies": {
     "tailwindcss": "^2.0.3",
     "vue": "^3.0.6",
-    "vue-grid-layout": "^3.0.0-beta1",
     "vue3-virtual-scroller": "^0.2.1"
   },
   "devDependencies": {
