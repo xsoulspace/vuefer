@@ -17,10 +17,12 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: cd packages/vuefer
       - run: yarn
+        working-directory: packages/vuefer
       - run: yarn build
+        working-directory: packages/vuefer
       - run: npm publish
+        working-directory: packages/vuefer
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_PACKAGE}}
   # build:
