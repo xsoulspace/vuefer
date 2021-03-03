@@ -1,4 +1,3 @@
-import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
 import {
   Align,
   Alignment,
@@ -36,7 +35,8 @@ import {
   TextButton,
   TextEditingController,
   TextField,
-} from '../../../lib'
+} from '@xsoulspace/vuefer'
+import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
 import { HeroButton } from '../components/HeroButton'
 type IndexedText = {
   id: number

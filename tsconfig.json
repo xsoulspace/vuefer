@@ -19,25 +19,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
-    "paths": {
-      "#*": ["example/src/*"]
-    },
     "outDir": "dist",
     "typeRoots": ["./lib"],
     "declarationDir": "dist",
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "types": ["vite/client", "./lib"]
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "./lib", "vue"]
   },
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist", "example"],
   "include": [
     "index.ts",
     "lib/**/*.ts",
     "lib/**/*.d.ts",
     "lib/**/*.tsx",
-    "lib/**/*.vue",
-    "example/**/*.ts",
-    "example/**/*.d.ts",
-    "example/**/*.tsx",
-    "example/**/*.vue"
+    "lib/**/*.vue"
   ]
 }

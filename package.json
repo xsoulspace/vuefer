@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vuefer",
   "description": "vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
@@ -73,7 +73,6 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "sass": "^1.32.8",
-    "tsc-prog": "^2.2.1",
     "typescript": "^4.2.2",
     "vite": "^2.0.4",
     "yarn-upgrade-all": "^0.5.4"

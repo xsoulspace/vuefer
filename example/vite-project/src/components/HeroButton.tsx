@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, ref } from 'vue'
+import { HeroesModel } from '#/models/HeroesModel'
 import {
   CrossAxisAlignment,
   EdgeInsetsStep,
@@ -7,8 +7,8 @@ import {
   Row,
   SizedBox,
   Text,
-} from '../../../lib'
-import { HeroesModel } from '../models/HeroesModel'
+} from '@xsoulspace/vuefer'
+import { computed, defineComponent, h, ref } from 'vue'
 
 export const HeroButton = () => {
   return defineComponent({
