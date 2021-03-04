@@ -1,5 +1,4 @@
 import { computed, defineComponent, h, ref } from 'vue'
-import { Maybe } from '../abstract/BasicTypes'
 import { BorderRadius } from '../abstract/BorderRadius'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
@@ -76,12 +75,7 @@ import { Wrap } from './Wrap'
  *
  */
 export const MultiDropdownButton = <
-  TValue extends
-    | string
-    | number
-    | boolean
-    | { [prop: string]: Maybe<unknown> }
-    | { [prop: number]: Maybe<unknown> },
+  TValue extends any,
   TKeyValue extends MultiDropdownSelectedItemI<TValue>
 >({
   items,

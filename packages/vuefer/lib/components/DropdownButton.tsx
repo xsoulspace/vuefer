@@ -1,5 +1,4 @@
 import { computed, defineComponent, h, ref } from 'vue'
-import { Maybe } from '../abstract/BasicTypes'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { BoxShadow } from '../abstract/BoxShadow'
 import { Colors } from '../abstract/Colors'
@@ -22,14 +21,7 @@ import { Stack } from './Stack'
 import { TextField } from './TextField'
 import { Visibility } from './Visibility'
 
-export const DropdownButton = <
-  I extends
-    | string
-    | number
-    | boolean
-    | { [prop: string]: Maybe<unknown> }
-    | { [prop: number]: Maybe<unknown> }
->({
+export const DropdownButton = <I extends any>({
   items,
   elevation,
   icon,
