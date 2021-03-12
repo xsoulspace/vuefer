@@ -16,10 +16,10 @@
     "url": "https://github.com/xsoulspace/vuefer/issues"
   },
   "homepage": "https://github.com/xsoulspace/vuefer#readme",
-  "main": "dist/vuefer.umd.js",
+  "main": "dist/vuefer.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vuefer.umd.js",
+      "import": "./dist/vuefer.es.js",
       "require": "./dist/vuefer.umd.js"
     },
     "./style.css": "./dist/style.css"
