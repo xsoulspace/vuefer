@@ -36,7 +36,7 @@ import {
   TextButton,
   TextEditingController,
   TextField,
-} from "../../../../vuefer/dist";
+} from "../../../../vuefer";
 import { HeroButton } from "../components/HeroButton";
 type IndexedText = {
   id: number;

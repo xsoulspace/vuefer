@@ -6,7 +6,7 @@ import {
   MultiProvider,
   Navigation,
   NavigationController,
-} from "../../../vuefer/dist";
+} from "../../../vuefer";
 // import vueGridLayout from 'vue-grid-layout'
 
 const app = MultiProvider.build({

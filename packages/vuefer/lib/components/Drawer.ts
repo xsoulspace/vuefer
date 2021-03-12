@@ -16,6 +16,7 @@ interface DrawerI {
   backgroundColor?: Maybe<Color>
   elevation?: Maybe<BoxShadow>
   alignment?: Maybe<Alignment>
+  padding?: Maybe<EdgeInsets>
 }
 
 export interface DrawerBuilder {
@@ -28,6 +29,7 @@ export const Drawer = ({
   child,
   elevation,
   alignment,
+  padding,
 }: DrawerI): DrawerBuilder => {
   return {
     alignment,
@@ -39,7 +41,7 @@ export const Drawer = ({
         const classes = computed((): string[] => {
           return [
             (elevation ?? BoxShadow.lg).css,
-            EdgeInsets.all(EdgeInsetsStep.s10).paddingCss,
+            (padding ?? EdgeInsets.all(EdgeInsetsStep.s1)).paddingCss,
             heightBox.css,
             widthBox.css,
             (backgroundColor ?? Colors.white).backgroundCss,
