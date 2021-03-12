@@ -23,11 +23,13 @@ export interface MultiDropdownButtonI<
     ({ editingText }: { editingText: string }) => Promise<void>
   >
   onTapSelected?: Maybe<ValueChanged<TValue>>
+  _debugClasses?: Maybe<string>
 }
 
 export interface DropdownButtonI<TValue>
   extends DropdownButtonAbstractI<TValue> {
   controller: DropdownFieldController<TValue>
+  _debugClasses?: Maybe<string>
 }
 
 // ********** Controller interfaces ************

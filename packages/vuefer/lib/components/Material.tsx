@@ -12,6 +12,7 @@ export interface MaterialI {
   borderRadius?: Maybe<BorderRadius>
   color?: Maybe<Color>
   boxBorder?: Maybe<BoxBorder>
+  _debugClasses?: Maybe<string>
   // shadowColor?: Color;
   // animationDuration?: Duration
 }
@@ -24,6 +25,7 @@ export const Material = ({
   boxBorder,
   // shadowColor,
   textStyle,
+  _debugClasses,
 }: MaterialI) => {
   const resolvedElevation = elevation ?? BoxShadow.m
   return defineComponent({
@@ -38,7 +40,8 @@ export const Material = ({
             textStyle?.css ?? '',
             borderRadius?.css ?? '',
             color?.backgroundCss ?? '',
-          ].join(' '),
+            _debugClasses,
+          ],
         },
         [h(child)]
       )

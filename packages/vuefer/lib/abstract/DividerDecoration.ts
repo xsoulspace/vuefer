@@ -1,4 +1,5 @@
 import { Axis } from './Axis'
+import { Maybe } from './BasicTypes'
 import { Color } from './Color'
 import { DividerThickness } from './DividerThickness'
 import { Key } from './Key'
@@ -13,6 +14,7 @@ export interface DividerI {
   // width: ,
   thickness?: DividerThickness
   key?: Key
+  _debugClasses?: Maybe<string>
 }
 interface GetClassNames extends DividerI {
   direction: Axis

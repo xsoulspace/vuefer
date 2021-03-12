@@ -9,6 +9,7 @@ export const Column = ({
   verticalDirection,
   crossAxisAlignment,
   dividerDecoration,
+  _debugClasses,
 }: ColumnI) => {
   return defineComponent({
     name: 'Column',
@@ -24,7 +25,7 @@ export const Column = ({
       if (children.length) {
         return h(
           'div',
-          { class: classNames },
+          { class: [classNames, _debugClasses] },
           children.map((child) => h(child))
         )
       } else {

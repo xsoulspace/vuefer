@@ -1,4 +1,12 @@
-import { computed, defineComponent, h, reactive, ref, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  h,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import {
   Align,
   Alignment,
@@ -17,7 +25,6 @@ import {
   EdgeInsets,
   EdgeInsetsStep,
   ElevatedButton,
-  GridView,
   GridViewDelegate,
   GridViewItem,
   ListView,
@@ -28,6 +35,8 @@ import {
   MultiProvider,
   NavigationController,
   Padding,
+  ReordableListView,
+  ReordableListViewDelegate,
   Row,
   showDialog,
   SizedBox,
@@ -36,7 +45,7 @@ import {
   TextButton,
   TextEditingController,
   TextField,
-} from "../../../../vuefer";
+} from "../../../../vuefer/lib";
 import { HeroButton } from "../components/HeroButton";
 type IndexedText = {
   id: number;
@@ -192,10 +201,30 @@ export const Home = () => {
           immediate: true,
         }
       );
+      const reordableDelegate = ReordableListViewDelegate.use({
+        gridViewItems: [],
+      });
+      onMounted(() => {
+        for (const el of layoutMatrix.value) {
+          reordableDelegate.addUpdate(
+            GridViewItem({
+              child: TextButton({
+                child: Text({
+                  text: ref(`text key  ljsdl f:${el.index}`),
+                }),
+                expand: true,
+                onTap: () => alert(`Hola ${el.index}!`),
+              }),
+              position: el,
+            })
+          );
+        }
+      });
+      const isDraggable = ref<boolean>(true);
       return () =>
         h(
           Align({
-            overlay: true,
+            // overlay: true,
             alignment: Alignment.center,
             child: Container({
               padding,
@@ -224,7 +253,6 @@ export const Home = () => {
                           })
                         ),
                       }),
-
                       ElevatedButton({
                         child: Text({
                           text: ref("Show dialog"),
@@ -289,24 +317,55 @@ export const Home = () => {
                       dynamicItems,
                     ],
                   }),
-                  GridView.count({
-                    isDraggable: ref(true),
-                    isResizable: ref(true),
-                    onPositionUpdate: (newPosition) => {
-                      const i = layoutMatrix.value.findIndex(
-                        (el) => el.index == newPosition?.index
-                      );
-                      // console.log({ i })
-                      if (i) {
-                        if (newPosition) {
-                          layoutMatrix.value.splice(i, 1, newPosition);
-                          return;
-                        }
-                        layoutMatrix.value.splice(i, 1);
-                      }
-                    },
-                    delegate: gridViewDelegate,
+                  Column({
+                    children: [
+                      CheckboxListTile({
+                        title: Text({ text: ref("is draggable") }),
+                        value: isDraggable,
+                      }),
+                      ReordableListView({
+                        delegate: reordableDelegate,
+                        isDraggable,
+                        onReorder: ({ newIndex, position }) => {
+                          console.log({ newIndex, position });
+                          const newPosition = position;
+                          newPosition.position.y = newIndex;
+                          const i = layoutMatrix.value.findIndex(
+                            (el) => el.index == newPosition?.position.index
+                          );
+                          if (i && newIndex != null) {
+                            if (newPosition) {
+                              layoutMatrix.value.splice(
+                                i,
+                                1,
+                                newPosition.position
+                              );
+                              return;
+                            }
+                          }
+                          layoutMatrix.value.splice(i, 1);
+                        },
+                      }),
+                    ],
                   }),
+                  // GridView.count({
+                  //   isDraggable: ref(true),
+                  //   isResizable: ref(true),
+                  //   onPositionUpdate: (newPosition) => {
+                  //     const i = layoutMatrix.value.findIndex(
+                  //       (el) => el.index == newPosition?.index
+                  //     );
+                  //     // console.log({ i })
+                  //     if (i) {
+                  //       if (newPosition) {
+                  //         layoutMatrix.value.splice(i, 1, newPosition);
+                  //         return;
+                  //       }
+                  //       layoutMatrix.value.splice(i, 1);
+                  //     }
+                  //   },
+                  //   delegate: gridViewDelegate,
+                  // }),
                 ],
               }),
             }),

@@ -15,6 +15,7 @@ export interface FlexBaseI {
   dividerDecoration?: Maybe<DividerDecoration>
 }
 export interface ColumnI extends FlexBaseI {
+  _debugClasses?: Maybe<string>
   children: Component[]
 }
 export interface RowI extends FlexBaseI {
@@ -23,6 +24,7 @@ export interface RowI extends FlexBaseI {
 export interface FlexI extends FlexBaseI {
   children: Component[]
   direction?: Axis
+  _debugClasses?: Maybe<string>
 }
 export interface WrapI extends FlexBaseI {
   children: Component[]
@@ -66,7 +68,7 @@ export const Flex = (arg: FlexI) =>
       if (arg.children.length) {
         return h(
           'div',
-          { class: classNames },
+          { class: [classNames, arg._debugClasses] },
           arg.children.map((child) => h(child))
         )
       } else {

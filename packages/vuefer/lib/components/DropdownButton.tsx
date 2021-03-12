@@ -28,6 +28,7 @@ export const DropdownButton = <I extends any>({
   minItemHeight,
   controller,
   onChanged,
+  _debugClasses,
 }: DropdownButtonI<I>) => {
   const resolvedIcon =
     icon ?? Icon(Icons.arrow_drop_down, { size: EdgeInsetsStep.s12 })
@@ -119,6 +120,7 @@ export const DropdownButton = <I extends any>({
                   GestureDetector({
                     child: SizedBox({
                       child: Container({
+                        _debugClasses,
                         decoration: new BoxDecoration({
                           boxShadow: elevation,
                         }),

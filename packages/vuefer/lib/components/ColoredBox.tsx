@@ -8,16 +8,17 @@ interface ColoredBoxI {
   child: Component
   key?: Maybe<Key>
   color: Color
+  _debugClasses?: Maybe<string>
 }
 
-export const ColoredBox = ({ child, color }: ColoredBoxI) => {
+export const ColoredBox = ({ child, color, _debugClasses }: ColoredBoxI) => {
   return defineComponent({
     name: 'ColoredBox',
     render() {
       return h(
         'div',
         {
-          class: (color ?? Colors.transparent).backgroundCss,
+          class: [(color ?? Colors.transparent).backgroundCss, _debugClasses],
         },
         [h(child)]
       )

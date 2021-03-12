@@ -1,12 +1,12 @@
 import { HeroesModel } from "#/models/HeroesModel";
 import { ScaffoldApp } from "#/pages/ScaffoldApp";
-import "@xsoulspace/vuefer/style.css";
 import { createApp } from "vue";
+import "../../../vuefer/dist/style.css";
 import {
   MultiProvider,
   Navigation,
   NavigationController,
-} from "../../../vuefer";
+} from "../../../vuefer/lib";
 // import vueGridLayout from 'vue-grid-layout'
 
 const app = MultiProvider.build({

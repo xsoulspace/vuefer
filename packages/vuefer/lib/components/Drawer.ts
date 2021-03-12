@@ -17,6 +17,7 @@ interface DrawerI {
   elevation?: Maybe<BoxShadow>
   alignment?: Maybe<Alignment>
   padding?: Maybe<EdgeInsets>
+  _debugClasses?: Maybe<string>
 }
 
 export interface DrawerBuilder {
@@ -30,6 +31,7 @@ export const Drawer = ({
   elevation,
   alignment,
   padding,
+  _debugClasses,
 }: DrawerI): DrawerBuilder => {
   return {
     alignment,
@@ -38,13 +40,15 @@ export const Drawer = ({
       setup() {
         const heightBox = new SizedBoxHeight({ height: SizeBoxStep.max })
         const widthBox = new SizedBoxWidth({ width: EdgeInsetsStep.s56 })
-        const classes = computed((): string[] => {
+        const classes = computed((): Maybe<string>[] => {
           return [
             (elevation ?? BoxShadow.lg).css,
             (padding ?? EdgeInsets.all(EdgeInsetsStep.s1)).paddingCss,
             heightBox.css,
             widthBox.css,
             (backgroundColor ?? Colors.white).backgroundCss,
+            _debugClasses,
+            'overflow-y-auto',
           ]
         })
         return () =>

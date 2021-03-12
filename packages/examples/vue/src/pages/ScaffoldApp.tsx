@@ -3,16 +3,29 @@ import {
   AppBar,
   Column,
   Drawer,
+  EdgeInsets,
+  EdgeInsetsStep,
   ElevatedButton,
+  Padding,
   Scaffold,
   Text,
-} from "../../../../vuefer";
+} from "../../../../vuefer/lib";
 import { Home } from "./Home";
 
 export const ScaffoldApp = Scaffold.build({
   drawer: Drawer({
     child: Column({
       children: [
+        ...(() => {
+          const arr: any[] = [];
+          arr.length = 100;
+          arr.fill(1);
+          return arr.map((el) =>
+            Text({
+              text: ref(el),
+            })
+          );
+        })(),
         Text({
           text: ref("Drawer header"),
         }),
@@ -49,5 +62,8 @@ export const ScaffoldApp = Scaffold.build({
       }),
     ],
   }),
-  body: Home(),
+  body: Padding({
+    padding: EdgeInsets.only({ top: EdgeInsetsStep.s24 }),
+    child: Home(),
+  }),
 });

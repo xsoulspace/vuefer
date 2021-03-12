@@ -1,15 +1,15 @@
-import { Maybe } from '@xsoulspace/vuefer'
-import { reactive } from 'vue'
+import { reactive } from "vue";
+import { Maybe } from "../../../../vuefer/lib";
 export class Hero {
   constructor(public name: string) {}
 }
 
 export class HeroesModel {
-  heroes = reactive<Maybe<Hero>[]>([])
+  heroes = reactive<Maybe<Hero>[]>([]);
   add(hero: Hero) {
-    this.heroes.push(hero)
+    this.heroes.push(hero);
   }
   get count() {
-    return this.heroes.length
+    return this.heroes.length;
   }
 }

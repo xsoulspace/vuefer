@@ -94,6 +94,7 @@ export class Scaffold {
           return [
             isAppBarExists.value ? 'relative' : '',
             new SizedBoxHeight({ height: SizeBoxStep.screen }).css,
+            'overflow-y-auto',
           ]
         })
         const navigationController = MultiProvider.get<NavigationController>(
@@ -113,7 +114,7 @@ export class Scaffold {
         Scaffold.openDrawer = openDrawer
         Scaffold.closeDrawer = () => navigationController.pop()
         return () =>
-          h('div', {}, [
+          h('div', { class: 'overflow-hidden' }, [
             h(appBar ?? <div />),
             h('div', { class: classes.value }, [h(body)]),
           ])

@@ -12,6 +12,7 @@ interface TextFieldI {
   maxLength?: Maybe<number>
   onChanged?: Maybe<ValueChanged<string>>
   decoration?: Maybe<InputDecoration>
+  _debugClasses?: Maybe<string>
 }
 
 export const TextField = ({
@@ -20,14 +21,18 @@ export const TextField = ({
   keyboardType,
   decoration,
   onChanged,
+  _debugClasses,
 }: TextFieldI) => {
   const effectiveController = controller ?? TextEditingController.default
   const effectiveKeyboardType = keyboardType ?? TextInputType.default
   const effectiveMaxLength = maxLength ?? undefined
   const effectiveDecoration = decoration ?? InputDecoration.default
-  const classStyles = [effectiveDecoration.css, 'outline-none', 'w-full'].join(
-    ' '
-  )
+  const classStyles = [
+    effectiveDecoration.css,
+    'outline-none',
+    'w-full',
+    _debugClasses,
+  ]
   return defineComponent({
     name: 'TextField',
     setup() {

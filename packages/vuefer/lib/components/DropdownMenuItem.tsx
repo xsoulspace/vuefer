@@ -12,6 +12,7 @@ interface DropdownMenuItemI<I> {
   onTap?: Maybe<CallableFunction>
   value: Maybe<I>
   title: Ref<string>
+  _debugClasses?: Maybe<string>
 }
 
 export const DropdownMenuItem = <I extends unknown>({
@@ -20,6 +21,7 @@ export const DropdownMenuItem = <I extends unknown>({
   value,
   onTap,
   title,
+  _debugClasses,
 }: DropdownMenuItemI<I>): DropdownMenuItemConstructor<I> => {
   return {
     widget: defineComponent({
@@ -29,7 +31,11 @@ export const DropdownMenuItem = <I extends unknown>({
           MouseRegion({
             child: GestureDetector({
               onTap: () => (onTap ? onTap() : ''),
-              child: Container({ alignment: Alignment.left, child }),
+              child: Container({
+                _debugClasses,
+                alignment: Alignment.left,
+                child,
+              }),
             }),
             cursor: SystemMouseCursors.click,
           })

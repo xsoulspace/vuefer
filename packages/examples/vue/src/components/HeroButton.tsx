@@ -8,7 +8,7 @@ import {
   Row,
   SizedBox,
   Text,
-} from "../../../../vuefer";
+} from "../../../../vuefer/lib";
 
 export const HeroButton = () => {
   return defineComponent({

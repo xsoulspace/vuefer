@@ -16,9 +16,16 @@ interface TextI {
   overflow?: Maybe<TextOverflow>
   // maxLines;
   // textWidthBasis;
+  _debugClasses?: Maybe<string>
 }
 
-export const Text = ({ text, style, overflow, textAlign }: TextI) =>
+export const Text = ({
+  text,
+  style,
+  overflow,
+  textAlign,
+  _debugClasses,
+}: TextI) =>
   defineComponent({
     name: 'Text',
     setup() {
@@ -28,7 +35,12 @@ export const Text = ({ text, style, overflow, textAlign }: TextI) =>
       return h(
         'div',
         {
-          class: [style?.css ?? '', overflow?.css ?? '', textAlign?.css ?? ''],
+          class: [
+            style?.css ?? '',
+            overflow?.css ?? '',
+            textAlign?.css ?? '',
+            _debugClasses,
+          ],
         },
         `${this.text}`
       )

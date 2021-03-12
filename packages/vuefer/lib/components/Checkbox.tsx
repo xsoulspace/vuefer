@@ -19,6 +19,7 @@ interface CheckboxI {
   // splashRadius,
   // materialTapTargetSize,
   // autofocus
+  _debugClasses?: Maybe<string>
 }
 
 export const Checkbox = ({
@@ -30,6 +31,7 @@ export const Checkbox = ({
   // focusColor,
   hoverColor,
   mouseCursor,
+  _debugClasses,
 }: CheckboxI) => {
   return defineComponent({
     name: 'Checkbox',
@@ -44,6 +46,7 @@ export const Checkbox = ({
           class={[
             mouseCursor?.css ?? SystemMouseCursors.click,
             hoverColor?.hoverBackgroundCss ?? Colors.indigo.hoverBackgroundCss,
+            _debugClasses,
           ]}
           type="checkbox"
           v-model={value.value}

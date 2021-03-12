@@ -6,11 +6,14 @@ export const ElevatedButton = ({
   onTap,
   style,
   expand,
+  _debugClasses,
 }: ButtonStyleButtonI) => {
   return defineComponent({
     name: 'ElevatedButton',
     render() {
-      return h(ButtonStyleButton({ expand, child, onTap, style }))
+      return h(
+        ButtonStyleButton({ expand, child, onTap, style, _debugClasses })
+      )
     },
   })
 }

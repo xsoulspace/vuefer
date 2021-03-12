@@ -18,6 +18,7 @@ interface DialogI {
   insetPadding?: Maybe<EdgeInsets>
   decoration?: Maybe<BoxDecoration>
   child: Component
+  _debugClasses?: Maybe<string>
 }
 /**
  * First, be sure that you've placed Navigation widget above
@@ -85,6 +86,7 @@ export const Dialog = ({
   decoration,
   elevation,
   insetPadding,
+  _debugClasses,
 }: DialogI) => {
   return defineComponent({
     name: 'Dialog',
@@ -102,6 +104,8 @@ export const Dialog = ({
           ).css,
           (elevation ?? BoxShadow.lg).css,
           (insetPadding ?? EdgeInsets.all(EdgeInsetsStep.s10)).paddingCss,
+          _debugClasses,
+          'overflow-y-auto',
         ]
       })
       return () => h(<div class={classes.value}>{h(child)}</div>)

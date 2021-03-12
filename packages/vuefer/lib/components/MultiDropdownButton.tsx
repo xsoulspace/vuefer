@@ -85,6 +85,7 @@ export const MultiDropdownButton = <
   controller,
   onChanged,
   onTapSelected,
+  _debugClasses,
 }: MultiDropdownButtonI<TValue, TKeyValue>) => {
   const resolvedIcon =
     icon ?? Icon(Icons.arrow_drop_down, { size: EdgeInsetsStep.s12 })
@@ -248,6 +249,7 @@ export const MultiDropdownButton = <
                   children: [
                     GestureDetector({
                       child: Material({
+                        _debugClasses,
                         child: Row({
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.min,

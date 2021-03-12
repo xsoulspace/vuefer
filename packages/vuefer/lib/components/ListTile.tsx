@@ -37,6 +37,7 @@ interface ListTileI {
   // autofocus = false,
   tileColor?: Maybe<Color>
   selectedTileColor?: Maybe<Color>
+  _debugClasses?: Maybe<string>
   // enableFeedback,
   // horizontalTitleGap,
   // minVerticalPadding,
@@ -57,6 +58,7 @@ export const ListTile = ({
   title,
   selectedTileColor,
   trailing,
+  _debugClasses,
 }: ListTileI) => {
   const resolvedSelectedTileColor = selectedTileColor ?? Colors.indigo
   // const resolvedTileColor = tileColor ?? Colors.white;
@@ -141,6 +143,7 @@ export const ListTile = ({
         focusColor,
         hoverColor: isNotEnabled ? Colors.transparent : resolvedHoverColor,
         child: Container({
+          _debugClasses,
           padding: contentPadding ?? EdgeInsets.all(EdgeInsetsStep.s4),
           color: isNotEnabled ? Colors.grey : tileBackgroundColor,
           height: resolvedHeight,

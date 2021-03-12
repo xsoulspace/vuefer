@@ -23,6 +23,7 @@ interface CheckboxListTileI {
   selectedTileColor?: Maybe<Color>
   subtitle?: Maybe<Component>
   enabled?: Maybe<Ref<boolean>>
+  _debugClasses?: Maybe<string>
 }
 
 export const CheckboxListTile = ({
@@ -40,6 +41,7 @@ export const CheckboxListTile = ({
   focusColor,
   onTap,
   enabled,
+  _debugClasses,
 }: CheckboxListTileI) => {
   const control = Checkbox({
     onChanged,
@@ -74,6 +76,7 @@ export const CheckboxListTile = ({
           selectedTileColor,
           subtitle,
           tileColor,
+          _debugClasses,
         })
       )
     },

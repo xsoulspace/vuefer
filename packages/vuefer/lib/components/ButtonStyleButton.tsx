@@ -19,12 +19,14 @@ export interface ButtonStyleButtonI {
   style?: Maybe<ButtonStyle>
   onTap?: Maybe<CallableFunction>
   expand?: boolean
+  _debugClasses?: Maybe<string>
 }
 export const ButtonStyleButton = ({
   child,
   onTap,
   style,
   expand,
+  _debugClasses,
 }: ButtonStyleButtonI) => {
   const isDisabled = onTap == null
   const constraints = new BoxConstraints({})
@@ -75,7 +77,13 @@ export const ButtonStyleButton = ({
     render() {
       return h(
         'div',
-        { class: ['relative select-none', expand ? 'w-full' : ''].join(' ') },
+        {
+          class: [
+            'relative select-none',
+            expand ? 'w-full' : '',
+            _debugClasses,
+          ],
+        },
         [h(result)]
       )
     },

@@ -10,15 +10,18 @@ export interface AlignI {
   // heightFactor?: EdgeInsetsStep;
   overlay?: Maybe<boolean>
   key?: Maybe<Key>
+  _debugClasses?: Maybe<string>
 }
 
-export const Align = ({ child, overlay, alignment }: AlignI) => {
+export const Align = ({ child, overlay, alignment, _debugClasses }: AlignI) => {
   const finalAlignment = alignment
   finalAlignment.overlay = overlay ?? false
   return defineComponent({
     name: 'Align',
     render() {
-      return h('div', { class: finalAlignment.css }, [h(child)])
+      return h('div', { class: [finalAlignment.css, _debugClasses] }, [
+        h(child),
+      ])
     },
   })
 }

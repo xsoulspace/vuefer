@@ -8,7 +8,7 @@ export const Divider = (arg: DividerI) =>
     name: 'Divider',
     render() {
       return h('div', {
-        class: DividerDecoration.horizontal(arg),
+        class: [DividerDecoration.horizontal(arg), arg._debugClasses],
       })
     },
   })

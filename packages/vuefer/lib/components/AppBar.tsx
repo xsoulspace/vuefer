@@ -35,6 +35,7 @@ interface AppBarI {
   leadingWidth?: Maybe<EdgeInsetsStep>
   // toolbarTextStyle
   // titleTextStyle
+  _debugClasses?: Maybe<string>
 }
 export const AppBar = ({
   title,
@@ -52,6 +53,7 @@ export const AppBar = ({
   automaticallyImplyLeading,
   leading,
   hideOnScroll,
+  _debugClasses,
 }: AppBarI) => {
   const resolvedAutomaticallyImplyLeading = automaticallyImplyLeading ?? true
   const resolvedLeading =
@@ -65,7 +67,7 @@ export const AppBar = ({
       //   opacity: toolbarOpacity ?? OpacityDecorationSteps.s100,
       // })
       // const resolvedBottomOpacity = bottomOpacity ?? OpacityDecorationSteps.s100
-      const classes = computed((): string[] => {
+      const classes = computed((): Maybe<string>[] => {
         return [
           hideOnScroll ? '' : 'fixed',
           (elevation ?? BoxShadow.lg).css,
@@ -77,6 +79,7 @@ export const AppBar = ({
             height: toolbarHeight ?? EdgeInsetsStep.s14,
           }).css,
           EdgeInsets.only({ bottom: EdgeInsetsStep.s2 }).marginCss,
+          _debugClasses,
         ]
       })
       return () =>

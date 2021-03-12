@@ -19,6 +19,7 @@ interface ContainerI {
   constraints?: Maybe<BoxConstraints>
   // TODO: add Align
   alignment?: Maybe<Alignment>
+  _debugClasses?: Maybe<string>
 }
 export const Container = ({
   child,
@@ -30,6 +31,7 @@ export const Container = ({
   decoration,
   constraints,
   alignment,
+  _debugClasses,
 }: ContainerI) => {
   const finalConstraints = constraints ?? new BoxConstraints({})
   const finalAlignment = alignment ?? Alignment.left
@@ -56,7 +58,8 @@ export const Container = ({
         decoration?.css ?? '',
         sizedBoxHeight.css,
         sizedBoxWidth.css,
-      ].join(' ')
+        _debugClasses,
+      ]
       const params = { class: containerClass }
       return h('div', params, [h(innerWidget)])
     },
