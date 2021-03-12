@@ -6,7 +6,7 @@ import {
   ElevatedButton,
   Scaffold,
   Text,
-} from "../../../../vuefer/lib";
+} from "../../../../vuefer/dist";
 import { Home } from "./Home";
 
 export const ScaffoldApp = Scaffold.build({
