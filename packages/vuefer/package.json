@@ -29,6 +29,7 @@
   ],
   "typings": "dist/index.d.ts",
   "scripts": {
+    "patch": "yarn version --patch && git push && git push origin --tags",
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly",
     "serve": "vite preview",
