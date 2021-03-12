@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import {
   AppBar,
   Column,
@@ -5,8 +6,7 @@ import {
   ElevatedButton,
   Scaffold,
   Text,
-} from "@xsoulspace/vuefer";
-import { ref } from "vue";
+} from "../../../../vuefer/lib";
 import { Home } from "./Home";
 
 export const ScaffoldApp = Scaffold.build({
