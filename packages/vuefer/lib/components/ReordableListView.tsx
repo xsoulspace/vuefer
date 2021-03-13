@@ -3,14 +3,18 @@ import { VueDraggableNext } from 'vue-draggable-next'
 import { Maybe } from '../abstract/BasicTypes'
 import { GridViewItemPreBuidler } from '../abstract/Grid'
 import { ReordableListViewDelegate } from '../abstract/ReordableListViewDelegate'
-type ReorderCallback = (reorder: {
+type ReorderCallback<
+  TPosition extends GridViewItemPreBuidler['position']
+> = (reorder: {
   oldIndex: number
   newIndex: number
-  position: GridViewItemPreBuidler
+  position: TPosition
 }) => void
 
-interface ReordableListViewI {
-  onReorder?: ReorderCallback
+interface ReordableListViewI<
+  TPosition extends GridViewItemPreBuidler['position']
+> {
+  onReorder?: Maybe<ReorderCallback<TPosition>>
   delegate: ReordableListViewDelegate
   isDraggable?: Ref<boolean>
   _debugClasses?: Maybe<string>
@@ -21,6 +25,16 @@ interface ReordableListViewI {
  *  First add ReordableListViewDelegate with items
 
     ```typescript
+
+    type GenericGridViewItemPosition = {
+      id: number;
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      index: number;
+    };
+
     const reordableDelegate = ReordableListViewDelegate.use({
       gridViewItems: [],
     });
@@ -45,19 +59,18 @@ interface ReordableListViewI {
   * Then use it in tree
 
     ```typescript
-    ReordableListView({
+    ReordableListView<GenericGridViewItemPosition>({
       delegate: reordableDelegate,
       isDraggable,
       onReorder: ({ newIndex, position }) => {
         console.log({ newIndex, position });
         const newPosition = position;
-        newPosition.position.y = newIndex;
         const i = layoutMatrix.value.findIndex(
-          (el) => el.index == newPosition?.position.index
+          (el) => el.index == newPosition?.index
         );
         if (i && newIndex != null) {
           if (newPosition) {
-            layoutMatrix.value.splice(i, 1, newPosition.position);
+            layoutMatrix.value.splice(i, 1, position);
             return;
           }
         }
@@ -71,12 +84,14 @@ interface ReordableListViewI {
  * @param param0
  * @returns
  */
-export const ReordableListView = ({
+export const ReordableListView = <
+  TPosition extends GridViewItemPreBuidler['position']
+>({
   onReorder,
   delegate,
   isDraggable,
   _debugClasses,
-}: ReordableListViewI) => {
+}: ReordableListViewI<TPosition>) => {
   return defineComponent({
     components: {
       VueDraggableNext,
@@ -92,11 +107,10 @@ export const ReordableListView = ({
         resolvedIsDraggable.value
           ? h(
               <vue-draggable-next
-                list={delegate.reactVal}
+                list={delegate.sortedReactVal}
                 animation="200"
-                sort="true"
                 ghost-class="ghost-card"
-                onChange={({
+                onChange={async ({
                   moved: { oldIndex, element, newIndex },
                 }: {
                   moved: {
@@ -106,18 +120,22 @@ export const ReordableListView = ({
                   }
                 }) =>
                   onReorder
-                    ? onReorder({ oldIndex, position: element, newIndex })
+                    ? await onReorder({
+                        oldIndex,
+                        position: element.position as TPosition,
+                        newIndex,
+                      })
                     : ''
                 }
               >
-                {...delegate.reactVal.map((el) =>
+                {...delegate.sortedReactVal.map((el) =>
                   h('div', { key: el.position.index }, h(el.widget))
                 )}
               </vue-draggable-next>
             )
           : h(
               <div class={[_debugClasses, 'flex flex-col']}>
-                {...delegate.reactVal.map((el) =>
+                {...delegate.sortedReactVal.map((el) =>
                   h(
                     'div',
                     {

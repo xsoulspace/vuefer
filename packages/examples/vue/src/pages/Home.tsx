@@ -52,6 +52,15 @@ type IndexedText = {
   text: string;
 };
 
+type GenericGridViewItemPosition = {
+  id: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  index: number;
+};
+
 export const Home = () => {
   const text = ref("Hello world!");
   const padding = EdgeInsets.all(EdgeInsetsStep.s3);
@@ -323,23 +332,18 @@ export const Home = () => {
                         title: Text({ text: ref("is draggable") }),
                         value: isDraggable,
                       }),
-                      ReordableListView({
+                      ReordableListView<GenericGridViewItemPosition>({
                         delegate: reordableDelegate,
                         isDraggable,
                         onReorder: ({ newIndex, position }) => {
                           console.log({ newIndex, position });
                           const newPosition = position;
-                          newPosition.position.y = newIndex;
                           const i = layoutMatrix.value.findIndex(
-                            (el) => el.index == newPosition?.position.index
+                            (el) => el.index == newPosition?.index
                           );
                           if (i && newIndex != null) {
                             if (newPosition) {
-                              layoutMatrix.value.splice(
-                                i,
-                                1,
-                                newPosition.position
-                              );
+                              layoutMatrix.value.splice(i, 1, position);
                               return;
                             }
                           }

@@ -2,6 +2,9 @@ import { reactive } from 'vue'
 import { GridViewItemPosition, GridViewItemPreBuidler } from './Grid'
 export class ReordableListViewDelegate {
   reactVal: GridViewItemPreBuidler[] = reactive([])
+  get sortedReactVal() {
+    return this.reactVal.sort((a, b) => a.position.y - b.position.y)
+  }
   constructor({ gridViewItems }: { gridViewItems: GridViewItemPreBuidler[] }) {
     this.reactVal.push(...gridViewItems)
   }
