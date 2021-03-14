@@ -6,7 +6,10 @@
     "typeRoots": ["./lib"],
     "declarationDir": "dist",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "types": ["vite/client", "./lib"]
+    "types": ["vite/client", "./lib"],
+    "paths": {
+      "#*": ["./src*"]
+    }
   },
   "exclude": ["node_modules", "dist"],
   "include": ["lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx", "lib/**/*.vue"]

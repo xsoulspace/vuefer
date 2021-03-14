@@ -7,5 +7,5 @@
     "rootDir": "lib"
   },
   "include": ["lib/**/*"],
-  "exclude": ["node_modules", "dist", "lib/src/templates"]
+  "exclude": ["node_modules", "dist"]
 }

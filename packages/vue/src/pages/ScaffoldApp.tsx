@@ -8,8 +8,8 @@ import {
   ElevatedButton,
   Padding,
   Scaffold,
-  Text,
-} from "../../../../vuefer/lib";
+  Text
+} from "../../../vuefer/lib";
 import { Home } from "./Home";
 
 export const ScaffoldApp = Scaffold.build({

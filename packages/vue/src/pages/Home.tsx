@@ -5,7 +5,7 @@ import {
   onMounted,
   reactive,
   ref,
-  watch,
+  watch
 } from "vue";
 import {
   Align,
@@ -45,8 +45,8 @@ import {
   Text,
   TextButton,
   TextEditingController,
-  TextField,
-} from "../../../../vuefer/lib";
+  TextField
+} from "../../../vuefer/lib";
 import { HeroButton } from "../components/HeroButton";
 type IndexedText = {
   id: number;

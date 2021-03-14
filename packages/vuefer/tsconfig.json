@@ -2,8 +2,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "typeRoots": ["./lib"],
     "declarationDir": "dist",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "types": ["vite/client", "./lib"]

@@ -7,8 +7,8 @@ import {
   MultiProvider,
   Row,
   SizedBox,
-  Text,
-} from "../../../../vuefer/lib";
+  Text
+} from "../../../vuefer/lib";
 
 export const HeroButton = () => {
   return defineComponent({

@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { Maybe } from "../../../../vuefer/lib";
+import { Maybe } from "../../../vuefer/lib";
 export class Hero {
   constructor(public name: string) {}
 }
