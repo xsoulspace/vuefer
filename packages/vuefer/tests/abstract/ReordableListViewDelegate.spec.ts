@@ -4,6 +4,7 @@ describe('ReordableListViewDelegate', () => {
     const items = [
       { x: 0, y: 5, width: 2, height: 2, index: 1 },
       { x: 0, y: 4, width: 2, height: 2, index: 2 },
+      { x: 0, y: 4, width: 2, height: 2, index: 0 },
       { x: 0, y: 1, width: 2, height: 2, index: 3 },
       { x: 0, y: 2, width: 2, height: 2, index: 4 },
     ]
@@ -18,8 +19,9 @@ describe('ReordableListViewDelegate', () => {
     expect(delegate.reactVal.map((el) => el.position)).toEqual([
       { x: 0, y: 1, width: 2, height: 2, index: 3 },
       { x: 0, y: 2, width: 2, height: 2, index: 4 },
-      { x: 0, y: 5, width: 2, height: 2, index: 1 },
+      { x: 0, y: 4, width: 2, height: 2, index: 0 },
       { x: 0, y: 4, width: 2, height: 2, index: 2 },
+      { x: 0, y: 5, width: 2, height: 2, index: 1 },
     ])
   })
 })

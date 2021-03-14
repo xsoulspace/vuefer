@@ -23,10 +23,13 @@ export class ReordableListViewDelegate {
     const index = this.valuesIndexes.get(id)
     if (index == null) {
       if (this.reactVal.length != 0) {
-        const maybeItem = this.reactVal
-          .filter((el) => el.position.y <= item.position.y)
-          .sort((a, b) => a.position.y - b.position.y)[0]
-
+        const filteredItems = this.reactVal.filter(
+          (el) => item.position.y > el.position.y
+        )
+        const sortedItems = filteredItems.sort(
+          (a, b) => a.position.y - b.position.y
+        )
+        const maybeItem = sortedItems[0]
         if (maybeItem) {
           const yIndex = this.valuesIndexes.get(maybeItem.position.index)
           if (yIndex != null && yIndex >= 0) {
@@ -35,7 +38,7 @@ export class ReordableListViewDelegate {
           }
         }
       }
-      this.reactVal.push(item)
+      this.reactVal.unshift(item)
     } else {
       this.reactVal.splice(index, 1, item)
     }
