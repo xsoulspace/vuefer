@@ -2,14 +2,14 @@ import { computed, defineComponent, h, Ref } from 'vue'
 import { Maybe, ValueChanged } from '../abstract/BasicTypes'
 import { GridViewDelegate, GridViewItemPosition } from '../abstract/Grid'
 import GridViewBuilder from './GridViewBuilder.vue'
-interface GridViewBuilderI {
+interface GridViewBuilderI<TPosition extends GridViewItemPosition> {
   crossAxisCount?: Ref<number>
   itemHeight?: Ref<Maybe<number>>
   isDraggable?: Ref<boolean>
   isResizable?: Ref<boolean>
   placeAnywhere?: Ref<boolean>
-  delegate: GridViewDelegate
-  onPositionUpdate?: Maybe<ValueChanged<GridViewItemPosition>>
+  delegate: GridViewDelegate<TPosition>
+  onPositionUpdate?: Maybe<ValueChanged<TPosition>>
 }
 /**
  * GridView provide a way to manage resized and draggable items
@@ -51,7 +51,7 @@ interface GridViewBuilderI {
  * ```
  */
 export class GridView {
-  static count({
+  static count<TPosition extends GridViewItemPosition>({
     crossAxisCount,
     isDraggable,
     isResizable,
@@ -59,7 +59,7 @@ export class GridView {
     delegate,
     onPositionUpdate,
     placeAnywhere,
-  }: GridViewBuilderI) {
+  }: GridViewBuilderI<TPosition>) {
     return defineComponent({
       name: 'GridView',
       components: {

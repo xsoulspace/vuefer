@@ -1,5 +1,5 @@
-import { DrawerBuilder } from 'lib/components'
 import { Component, markRaw, reactive, ref } from 'vue'
+import { DrawerBuilder } from '../components/Drawer'
 import { Alignment } from './Alignment'
 import { Maybe } from './BasicTypes'
 
