@@ -29,12 +29,13 @@
   ],
   "typings": "dist/index.d.ts",
   "scripts": {
-    "patch": "yarn version --patch && git push && git push origin --tags",
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly",
     "serve": "vite preview",
     "upgrade": "yarn yarn-upgrade-all add vue@next",
-    "lint": "eslint --ext .ts,vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .ts,vue --ignore-path .gitignore .",
+    "patch": "yarn version --patch && git push && git push origin --tags",
+    "minor": "yarn version --minor && git push && git push origin --tags"
   },
   "browserslist": {
     "production": [
