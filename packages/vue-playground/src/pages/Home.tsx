@@ -19,6 +19,7 @@ import {
   Container,
   CrossAxisAlignment,
   Dialog,
+  Drawer,
   DropdownButton,
   DropdownFieldController,
   DropdownMenuItem,
@@ -155,7 +156,12 @@ export const Home = () => {
     width: EdgeInsetsStep.s96,
   })
   const isEnabled = ref(true)
-
+  const customDrawer = Drawer({
+    child: Column({
+      children: [Text({ text: ref('Custom Drawer') })],
+    }),
+    alignment: Alignment.right,
+  })
   return defineComponent({
     name: 'App',
     setup() {
@@ -249,6 +255,16 @@ export const Home = () => {
                             title: ref(el.text),
                           })
                         ),
+                      }),
+                      ElevatedButton({
+                        child: Text({
+                          text: ref('Show custom right drawer'),
+                        }),
+                        onTap: () => {
+                          navigationController.pushDrawer({
+                            drawer: customDrawer,
+                          })
+                        },
                       }),
                       ElevatedButton({
                         child: Text({

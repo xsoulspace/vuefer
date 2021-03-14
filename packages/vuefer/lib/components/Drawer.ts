@@ -18,6 +18,7 @@ interface DrawerI {
   alignment?: Maybe<Alignment>
   padding?: Maybe<EdgeInsets>
   _debugClasses?: Maybe<string>
+  width?: Maybe<EdgeInsetsStep>
 }
 
 export interface DrawerBuilder {
@@ -32,6 +33,7 @@ export const Drawer = ({
   alignment,
   padding,
   _debugClasses,
+  width,
 }: DrawerI): DrawerBuilder => {
   return {
     alignment,
@@ -39,7 +41,9 @@ export const Drawer = ({
       name: 'Drawer',
       setup() {
         const heightBox = new SizedBoxHeight({ height: SizeBoxStep.max })
-        const widthBox = new SizedBoxWidth({ width: EdgeInsetsStep.s56 })
+        const widthBox = new SizedBoxWidth({
+          width: width ?? EdgeInsetsStep.s56,
+        })
         const classes = computed((): Maybe<string>[] => {
           return [
             (elevation ?? BoxShadow.lg).css,

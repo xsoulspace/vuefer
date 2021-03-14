@@ -1,3 +1,4 @@
+import { DrawerBuilder } from 'lib/components'
 import { Component, markRaw, reactive, ref } from 'vue'
 import { Alignment } from './Alignment'
 import { Maybe } from './BasicTypes'
@@ -37,6 +38,15 @@ export class NavigationController {
       widget: markRaw(widget),
       fullscreen: fullscreen ?? true,
       alignment,
+    })
+  }
+
+  pushDrawer<T extends DrawerBuilder>({ drawer }: { drawer: T }) {
+    this.routes.unshift({
+      routeName: '',
+      widget: markRaw(drawer.widget),
+      fullscreen: false,
+      alignment: drawer.alignment,
     })
   }
 }
