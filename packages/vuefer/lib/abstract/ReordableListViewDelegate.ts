@@ -2,9 +2,7 @@ import { reactive } from 'vue'
 import { GridViewItemPosition, GridViewItemPreBuidler } from './Grid'
 export class ReordableListViewDelegate<TPosition extends GridViewItemPosition> {
   reactVal: GridViewItemPreBuidler<TPosition>[] = reactive([])
-  get sortedReactVal() {
-    return this.reactVal.sort((a, b) => a.position.y - b.position.y)
-  }
+
   constructor({
     gridViewItems,
   }: {

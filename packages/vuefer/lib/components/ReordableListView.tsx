@@ -127,7 +127,7 @@ export const ReordableListView = <TPosition extends GridViewItemPosition>({
             )
           : h(
               <div class={[_debugClasses, 'flex flex-col']}>
-                {...delegate.sortedReactVal.map((el) => h(el.widget))}
+                {...delegate.reactVal.map((el) => h(el.widget))}
               </div>
             )
     },
