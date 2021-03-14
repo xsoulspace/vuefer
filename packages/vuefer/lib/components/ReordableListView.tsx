@@ -1,21 +1,17 @@
 import { computed, defineComponent, h, Ref } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import { Maybe } from '../abstract/BasicTypes'
-import { GridViewItemPreBuidler } from '../abstract/Grid'
+import { GridViewItemPosition } from '../abstract/Grid'
 import { ReordableListViewDelegate } from '../abstract/ReordableListViewDelegate'
-type ReorderCallback<
-  TPosition extends GridViewItemPreBuidler['position']
-> = (reorder: {
+type ReorderCallback<TPosition extends GridViewItemPosition> = (reorder: {
   oldIndex: number
   newIndex: number
   position: TPosition
 }) => void
 
-interface ReordableListViewI<
-  TPosition extends GridViewItemPreBuidler['position']
-> {
+interface ReordableListViewI<TPosition extends GridViewItemPosition> {
   onReorder?: Maybe<ReorderCallback<TPosition>>
-  delegate: ReordableListViewDelegate
+  delegate: ReordableListViewDelegate<TPosition>
   isDraggable?: Ref<boolean>
   _debugClasses?: Maybe<string>
 }
@@ -84,9 +80,7 @@ interface ReordableListViewI<
  * @param param0
  * @returns
  */
-export const ReordableListView = <
-  TPosition extends GridViewItemPreBuidler['position']
->({
+export const ReordableListView = <TPosition extends GridViewItemPosition>({
   onReorder,
   delegate,
   isDraggable,
@@ -114,7 +108,7 @@ export const ReordableListView = <
                   moved: { oldIndex, element, newIndex },
                 }: {
                   moved: {
-                    element: GridViewItemPreBuidler
+                    element: TPosition
                     oldIndex: number
                     newIndex: number
                   }
@@ -122,7 +116,7 @@ export const ReordableListView = <
                   onReorder
                     ? await onReorder({
                         oldIndex,
-                        position: element.position as TPosition,
+                        position: element,
                         newIndex,
                       })
                     : ''

@@ -5,8 +5,8 @@ import {
   onMounted,
   reactive,
   ref,
-  watch
-} from "vue";
+  watch,
+} from 'vue'
 import {
   Align,
   Alignment,
@@ -45,77 +45,77 @@ import {
   Text,
   TextButton,
   TextEditingController,
-  TextField
-} from "../../../vuefer/lib";
-import { HeroButton } from "../components/HeroButton";
+  TextField,
+} from '../../../vuefer/lib'
+import { HeroButton } from '../components/HeroButton'
 type IndexedText = {
-  id: number;
-  text: string;
-};
+  id: number
+  text: string
+}
 
 type GenericGridViewItemPosition = {
-  id: number;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  index: number;
-};
+  id: number
+  x: number
+  y: number
+  width: number
+  height: number
+  index: number
+}
 
 export const Home = () => {
-  const text = ref("Hello world!");
-  const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+  const text = ref('Hello world!')
+  const padding = EdgeInsets.all(EdgeInsetsStep.s3)
   const rawText = Text({
     text,
-  });
+  })
   const textCard = Padding({
     child: rawText,
     padding,
-  });
+  })
 
-  const controller = TextEditingController.default;
-  controller.text = text;
+  const controller = TextEditingController.default
+  controller.text = text
 
-  const obj = reactive<Map<number, string>>(new Map());
-  obj.set(0, "test");
-  obj.set(1, "test1");
-  obj.set(2, "test1");
-  obj.set(3, "test1");
-  obj.set(4, "test1");
-  obj.set(5, "test1");
-  obj.set(6, "test1");
-  obj.set(7, "test1");
-  obj.set(8, "test1");
-  obj.set(9, "test1");
-  obj.set(10, "test1");
-  obj.set(11, "test1");
-  obj.set(12, "test1");
-  obj.set(13, "test1");
-  obj.set(14, "test1");
-  obj.set(15, "test1");
-  obj.set(16, "test1");
-  obj.set(17, "test1");
-  obj.set(18, "test1");
-  obj.set(19, "test1");
-  obj.set(20, "test1");
-  const items = computed<string[]>(() => Array.from(obj.values()));
-  const itemCount = computed(() => obj.size);
+  const obj = reactive<Map<number, string>>(new Map())
+  obj.set(0, 'test')
+  obj.set(1, 'test1')
+  obj.set(2, 'test1')
+  obj.set(3, 'test1')
+  obj.set(4, 'test1')
+  obj.set(5, 'test1')
+  obj.set(6, 'test1')
+  obj.set(7, 'test1')
+  obj.set(8, 'test1')
+  obj.set(9, 'test1')
+  obj.set(10, 'test1')
+  obj.set(11, 'test1')
+  obj.set(12, 'test1')
+  obj.set(13, 'test1')
+  obj.set(14, 'test1')
+  obj.set(15, 'test1')
+  obj.set(16, 'test1')
+  obj.set(17, 'test1')
+  obj.set(18, 'test1')
+  obj.set(19, 'test1')
+  obj.set(20, 'test1')
+  const items = computed<string[]>(() => Array.from(obj.values()))
+  const itemCount = computed(() => obj.size)
   const dropdownFieldController = new DropdownFieldController<IndexedText>({
-    value: { id: 1, text: "Hola!" },
-    key: "1",
-  });
+    value: { id: 1, text: 'Hola!' },
+    key: '1',
+  })
   const dropdownItems = reactive([
-    { id: 1, text: "Hola!" },
-    { id: 2, text: "Hola 2!" },
-    { id: 3, text: "Hola 3!" },
-    { id: 4, text: "maybe 4!" },
+    { id: 1, text: 'Hola!' },
+    { id: 2, text: 'Hola 2!' },
+    { id: 3, text: 'Hola 3!' },
+    { id: 4, text: 'maybe 4!' },
     {
       id: 5,
-      text: "trello 5!",
+      text: 'trello 5!',
     },
-    { id: 6, text: "Hola 6!" },
-    { id: 7, text: "home 7!" },
-  ]);
+    { id: 6, text: 'Hola 6!' },
+    { id: 7, text: 'home 7!' },
+  ])
   const dropdown = DropdownButton({
     items: dropdownItems.map((el) =>
       DropdownMenuItem({
@@ -124,7 +124,7 @@ export const Home = () => {
           child: Text({
             text: ref(el.text),
           }),
-          onTap: () => "",
+          onTap: () => '',
         }),
         value: el,
         key: el.id.toString(),
@@ -132,42 +132,42 @@ export const Home = () => {
       })
     ),
     controller: dropdownFieldController,
-  });
+  })
   const dynamicItems = SizedBox({
     child: ListView.builder({
       itemBuilder: ({ index }) => {
-        const value = items.value[index];
+        const value = items.value[index]
         return TextButton({
           expand: true,
           child: Text({ text: ref(value) }),
           onTap: async () => {
             // obj.clear()
-            alert(`hello tap with index ${index} and value ${value}!`);
-            const newItemId = itemCount.value;
-            obj.set(newItemId, `new value ${newItemId}`);
-            alert(`new value with id ${newItemId} add in the end of list!`);
+            alert(`hello tap with index ${index} and value ${value}!`)
+            const newItemId = itemCount.value
+            obj.set(newItemId, `new value ${newItemId}`)
+            alert(`new value with id ${newItemId} add in the end of list!`)
           },
-        });
+        })
       },
       itemCount: itemCount,
     }),
     height: EdgeInsetsStep.s60,
     width: EdgeInsetsStep.s96,
-  });
-  const isEnabled = ref(true);
+  })
+  const isEnabled = ref(true)
 
   return defineComponent({
-    name: "App",
+    name: 'App',
     setup() {
       const layoutMatrix = ref([
-        { x: 0, y: 5, width: 2, height: 2, index: 1 },
-        { x: 0, y: 4, width: 2, height: 2, index: 2 },
-        { x: 0, y: 1, width: 2, height: 2, index: 3 },
-        { x: 0, y: 2, width: 2, height: 2, index: 4 },
-      ]);
+        { x: 0, y: 5, width: 2, height: 2, index: 1, id: 0 },
+        { x: 0, y: 4, width: 2, height: 2, index: 2, id: 1 },
+        { x: 0, y: 1, width: 2, height: 2, index: 3, id: 2 },
+        { x: 0, y: 2, width: 2, height: 2, index: 4, id: 3 },
+      ])
       const navigationController = MultiProvider.get<NavigationController>(
         NavigationController
-      );
+      )
       const gridViewDelegate = GridViewDelegate.use({
         gridViewItems: layoutMatrix.value.map((el) =>
           GridViewItem({
@@ -181,23 +181,25 @@ export const Home = () => {
             position: el,
           })
         ),
-      });
+      })
       const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
-        { keyofValue: "id" }
-      );
+        { keyofValue: 'id' }
+      )
       watch(
         multiDropdownController.reactive,
         (controllerValues) => {
-          console.log({ controllerValues });
+          console.log({ controllerValues })
         },
         {
           deep: true,
           immediate: true,
         }
-      );
-      const reordableDelegate = ReordableListViewDelegate.use({
-        gridViewItems: [],
-      });
+      )
+      const reordableDelegate = ReordableListViewDelegate.use<GenericGridViewItemPosition>(
+        {
+          gridViewItems: [],
+        }
+      )
       onMounted(() => {
         for (const el of layoutMatrix.value) {
           reordableDelegate.addUpdate(
@@ -212,10 +214,10 @@ export const Home = () => {
               }),
               position: el,
             })
-          );
+          )
         }
-      });
-      const isDraggable = ref<boolean>(true);
+      })
+      const isDraggable = ref<boolean>(true)
       return () =>
         h(
           Align({
@@ -250,14 +252,14 @@ export const Home = () => {
                       }),
                       ElevatedButton({
                         child: Text({
-                          text: ref("Show dialog"),
+                          text: ref('Show dialog'),
                         }),
                         onTap: () => {
                           showDialog({
                             dialog: Dialog({
                               child: ElevatedButton({
                                 child: Text({
-                                  text: ref("Open dialog"),
+                                  text: ref('Open dialog'),
                                 }),
                                 onTap: () => {
                                   showDialog({
@@ -265,26 +267,26 @@ export const Home = () => {
                                       child: Column({
                                         children: [
                                           Text({
-                                            text: ref("Second Dialog"),
+                                            text: ref('Second Dialog'),
                                           }),
                                           ElevatedButton({
                                             child: Text({
-                                              text: ref("close 2 dialogs"),
+                                              text: ref('close 2 dialogs'),
                                             }),
                                             onTap: () => {
-                                              navigationController.pop(2);
+                                              navigationController.pop(2)
                                             },
                                           }),
                                         ],
                                       }),
                                     }),
                                     navigationController,
-                                  });
+                                  })
                                 },
                               }),
                             }),
                             navigationController,
-                          });
+                          })
                         },
                       }),
                       HeroButton(),
@@ -293,9 +295,9 @@ export const Home = () => {
                         cursor: SystemMouseCursors.progress,
                       }),
                       ElevatedButton({
-                        child: Text({ text: ref("") }),
+                        child: Text({ text: ref('') }),
                         onTap: () => {
-                          console.log({ dropdownFieldController });
+                          console.log({ dropdownFieldController })
                         },
                       }),
                       TextField({
@@ -315,25 +317,25 @@ export const Home = () => {
                   Column({
                     children: [
                       CheckboxListTile({
-                        title: Text({ text: ref("is draggable") }),
+                        title: Text({ text: ref('is draggable') }),
                         value: isDraggable,
                       }),
                       ReordableListView<GenericGridViewItemPosition>({
                         delegate: reordableDelegate,
                         isDraggable,
                         onReorder: ({ newIndex, position }) => {
-                          console.log({ newIndex, position });
-                          const newPosition = position;
+                          console.log({ newIndex, position })
+                          const newPosition = position
                           const i = layoutMatrix.value.findIndex(
                             (el) => el.index == newPosition?.index
-                          );
+                          )
                           if (i && newIndex != null) {
                             if (newPosition) {
-                              layoutMatrix.value.splice(i, 1, position);
-                              return;
+                              layoutMatrix.value.splice(i, 1, position)
+                              return
                             }
                           }
-                          layoutMatrix.value.splice(i, 1);
+                          layoutMatrix.value.splice(i, 1)
                         },
                       }),
                     ],
@@ -360,7 +362,7 @@ export const Home = () => {
               }),
             }),
           })
-        );
+        )
     },
-  });
-};
+  })
+}

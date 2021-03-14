@@ -1,14 +1,20 @@
 import { reactive } from 'vue'
 import { GridViewItemPosition, GridViewItemPreBuidler } from './Grid'
-export class ReordableListViewDelegate {
-  reactVal: GridViewItemPreBuidler[] = reactive([])
+export class ReordableListViewDelegate<TPosition extends GridViewItemPosition> {
+  reactVal: GridViewItemPreBuidler<TPosition>[] = reactive([])
   get sortedReactVal() {
     return this.reactVal.sort((a, b) => a.position.y - b.position.y)
   }
-  constructor({ gridViewItems }: { gridViewItems: GridViewItemPreBuidler[] }) {
+  constructor({
+    gridViewItems,
+  }: {
+    gridViewItems: GridViewItemPreBuidler<TPosition>[]
+  }) {
     this.reactVal.push(...gridViewItems)
   }
-  static use(arg: { gridViewItems: GridViewItemPreBuidler[] }) {
+  static use<TPosition extends GridViewItemPosition>(arg: {
+    gridViewItems: GridViewItemPreBuidler<TPosition>[]
+  }) {
     return new ReordableListViewDelegate(arg)
   }
   /** Returns indexes in array of reactive values */
@@ -18,7 +24,7 @@ export class ReordableListViewDelegate {
     )
     return map
   }
-  addUpdate(item: GridViewItemPreBuidler) {
+  addUpdate(item: GridViewItemPreBuidler<TPosition>) {
     const id = item.position.index
     const index = this.valuesIndexes.get(id)
     if (index == null) {

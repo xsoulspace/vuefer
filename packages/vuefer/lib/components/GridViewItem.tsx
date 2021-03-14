@@ -1,14 +1,14 @@
 import { Component, defineComponent, h, markRaw } from 'vue'
 import { GridViewItemPosition, GridViewItemPreBuidler } from '../abstract/Grid'
 
-interface GridViewItemI {
+interface GridViewItemI<TPosition extends GridViewItemPosition> {
   child: Component
-  position: GridViewItemPosition
+  position: TPosition
 }
-export const GridViewItem = ({
+export const GridViewItem = <TPosition extends GridViewItemPosition>({
   position,
   child,
-}: GridViewItemI): GridViewItemPreBuidler => {
+}: GridViewItemI<TPosition>): GridViewItemPreBuidler<TPosition> => {
   return {
     widget: markRaw(
       defineComponent({

@@ -30,6 +30,7 @@
 
   import { GridViewItemBuilder } from './GridViewItemBuilder'
   import {
+    getGridViewItemPositionFromPackageGridItemPosition,
     GridViewDelegate,
     GridViewItemPosition,
     PackageGridItemPosition,
@@ -93,7 +94,7 @@
         newWidth: GridViewItemPosition['width'],
         position: PackageGridItemPosition
       ) => {
-        const newPosition = GridViewItemPosition.fromPackageGridItemPosition({
+        const newPosition = getGridViewItemPositionFromPackageGridItemPosition({
           position,
         })
         newPosition.height = newHeight
@@ -107,7 +108,7 @@
         newY: GridViewItemPosition['y'],
         position: PackageGridItemPosition
       ) => {
-        const newPosition = GridViewItemPosition.fromPackageGridItemPosition({
+        const newPosition = getGridViewItemPositionFromPackageGridItemPosition({
           position,
         })
         newPosition.x = newX
