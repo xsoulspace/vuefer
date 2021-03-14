@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vuefer",
   "description": "vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
