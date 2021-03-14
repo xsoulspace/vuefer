@@ -88,29 +88,45 @@ export const ListTile = ({
     }
   })()
   const resolvedSubtitle = subtitle ?? <div />
-  const resolvedTitleWidget = (() => {
-    if (hasSubtitle) {
-      return Column({
+  const resolvedTitleWidget = hasSubtitle
+    ? Column({
         children: [title, resolvedSubtitle],
       })
-    } else {
-      return title
-    }
-  })()
+    : title
 
-  const resolvedContentWidget = (() => {
-    if (hasLeading) {
-      return Padding({
+  const resolvedContentWidget = hasLeading
+    ? Padding({
         padding: EdgeInsets.only({ left: EdgeInsetsStep.s2 }),
         child: resolvedTitleWidget,
       })
-    } else {
-      return resolvedTitleWidget
-    }
-  })()
+    : resolvedTitleWidget
 
   const resolvedHoverColor = hoverColor ?? Colors.indigo
 
+  const isEnabled = enabled?.value == true || enabled == null
+  const isNotEnabled = enabled?.value == false
+  const resolvedMouseCursor = (() => {
+    if (isEnabled || onTap != null) {
+      return mouseCursor ?? SystemMouseCursors.click
+    } else {
+      return SystemMouseCursors.basic
+    }
+  })()
+  const result = InkWell({
+    mouseCursor: resolvedMouseCursor,
+    onTap: isEnabled ? onTap : null,
+    focusColor,
+    hoverColor: isNotEnabled ? Colors.transparent : resolvedHoverColor,
+    child: Container({
+      _debugClasses,
+      padding: contentPadding ?? EdgeInsets.all(EdgeInsetsStep.s4),
+      color: isNotEnabled ? Colors.grey : tileBackgroundColor,
+      height: resolvedHeight,
+      child: Row({
+        children: [resolvedLeading, resolvedContentWidget, resolvedTrailing],
+      }),
+    }),
+  })
   return defineComponent({
     name: 'ListTile',
     setup() {
@@ -128,34 +144,6 @@ export const ListTile = ({
       }
     },
     render() {
-      const isEnabled = enabled?.value == true || enabled == null
-      const isNotEnabled = enabled?.value == false
-      const resolvedMouseCursor = (() => {
-        if (isEnabled || onTap != null) {
-          return mouseCursor ?? SystemMouseCursors.click
-        } else {
-          return SystemMouseCursors.basic
-        }
-      })()
-      const result = InkWell({
-        mouseCursor: resolvedMouseCursor,
-        onTap: isEnabled ? onTap : null,
-        focusColor,
-        hoverColor: isNotEnabled ? Colors.transparent : resolvedHoverColor,
-        child: Container({
-          _debugClasses,
-          padding: contentPadding ?? EdgeInsets.all(EdgeInsetsStep.s4),
-          color: isNotEnabled ? Colors.grey : tileBackgroundColor,
-          height: resolvedHeight,
-          child: Row({
-            children: [
-              resolvedLeading,
-              resolvedContentWidget,
-              resolvedTrailing,
-            ],
-          }),
-        }),
-      })
       return h(
         isNotEnabled
           ? Opacity({

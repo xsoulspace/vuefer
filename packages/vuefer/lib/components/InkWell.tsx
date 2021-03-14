@@ -50,7 +50,7 @@ export const InkWell = ({
             borderRadius?.css ?? '',
             hoverColor?.hoverBackgroundCss ?? '',
             highlightColor?.highlightCss ?? '',
-          ].join(' '),
+          ],
         },
         [h(result)]
       )
