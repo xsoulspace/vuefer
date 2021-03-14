@@ -36,14 +36,14 @@ export const Container = ({
   _debugClasses,
   key,
 }: ContainerI) => {
-  const finalConstraints = constraints ?? new BoxConstraints({})
-  const finalAlignment = alignment ?? Alignment.left
-  const sizedBoxHeight = new SizedBoxHeight({ height: height ?? undefined })
-  const sizedBoxWidth = new SizedBoxWidth({ width: width ?? undefined })
-  const innerWidget = child ?? <div />
   const component = defineComponent({
     name: 'Container',
-    render() {
+    setup() {
+      const finalConstraints = constraints ?? new BoxConstraints({})
+      const finalAlignment = alignment ?? Alignment.left
+      const sizedBoxHeight = new SizedBoxHeight({ height: height ?? undefined })
+      const sizedBoxWidth = new SizedBoxWidth({ width: width ?? undefined })
+      const innerWidget = child ?? <div />
       const decorationColor = decoration?.color
       if (decorationColor && color)
         throw Error(
@@ -64,7 +64,7 @@ export const Container = ({
         _debugClasses,
       ]
       const params = { class: containerClass, key: key?.value }
-      return h('div', params, [h(innerWidget)])
+      return () => h('div', params, [h(innerWidget)])
     },
   })
   return component
