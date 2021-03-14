@@ -1,11 +1,4 @@
-import { ref } from 'vue'
-import {
-  GridViewItem,
-  Key,
-  ReordableListViewDelegate,
-  Text,
-  TextButton,
-} from '../../lib'
+import { ReordableListViewDelegate } from '../../lib/abstract/ReordableListViewDelegate'
 describe('ReordableListViewDelegate', () => {
   test('can add new positions in y order', () => {
     const items = [
@@ -17,19 +10,10 @@ describe('ReordableListViewDelegate', () => {
     const delegate = new ReordableListViewDelegate({ gridViewItems: [] })
     // filling delegate
     for (const el of items) {
-      delegate.addUpdate(
-        GridViewItem({
-          child: TextButton({
-            key: Key.fromNumber(el.index),
-            child: Text({
-              text: ref(`index:${el.index} y:${el.y}`),
-            }),
-            expand: true,
-            onTap: () => alert(`Hola ${el.index}!`),
-          }),
-          position: el,
-        })
-      )
+      delegate.addUpdate({
+        widget: {},
+        position: el,
+      })
     }
     expect(delegate.reactVal.map((el) => el.position)).toEqual([
       { x: 0, y: 1, width: 2, height: 2, index: 3 },
