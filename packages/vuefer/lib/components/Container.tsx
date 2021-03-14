@@ -5,6 +5,7 @@ import { BoxConstraints } from '../abstract/BoxConstraints'
 import { BoxDecoration } from '../abstract/BoxDecoration'
 import { Color } from '../abstract/Color'
 import { EdgeInsets, EdgeInsetsStep } from '../abstract/EdgeInsets'
+import { Key } from '../abstract/Key'
 import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
 
 interface ContainerI {
@@ -20,6 +21,7 @@ interface ContainerI {
   // TODO: add Align
   alignment?: Maybe<Alignment>
   _debugClasses?: Maybe<string>
+  key?: Maybe<Key>
 }
 export const Container = ({
   child,
@@ -32,6 +34,7 @@ export const Container = ({
   constraints,
   alignment,
   _debugClasses,
+  key,
 }: ContainerI) => {
   const finalConstraints = constraints ?? new BoxConstraints({})
   const finalAlignment = alignment ?? Alignment.left
@@ -60,7 +63,7 @@ export const Container = ({
         sizedBoxWidth.css,
         _debugClasses,
       ]
-      const params = { class: containerClass }
+      const params = { class: containerClass, key: key?.value }
       return h('div', params, [h(innerWidget)])
     },
   })

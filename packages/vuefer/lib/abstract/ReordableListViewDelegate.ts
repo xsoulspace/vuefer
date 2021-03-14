@@ -19,8 +19,22 @@ export class ReordableListViewDelegate {
     return map
   }
   addUpdate(item: GridViewItemPreBuidler) {
-    const index = this.valuesIndexes.get(item.position.index)
+    const id = item.position.index
+    const index = this.valuesIndexes.get(id)
     if (index == null) {
+      if (this.reactVal.length != 0) {
+        const maybeItem = this.reactVal
+          .filter((el) => el.position.y <= item.position.y)
+          .sort((a, b) => a.position.y - b.position.y)[0]
+
+        if (maybeItem) {
+          const yIndex = this.valuesIndexes.get(maybeItem.position.index)
+          if (yIndex != null && yIndex >= 0) {
+            this.reactVal.splice(yIndex, 1, maybeItem, item)
+            return
+          }
+        }
+      }
       this.reactVal.push(item)
     } else {
       this.reactVal.splice(index, 1, item)

@@ -31,6 +31,7 @@ export const InkWell = ({
   focusColor,
   highlightColor,
   hoverColor,
+  key,
 }: InkWellI) => {
   const result = MouseRegion({
     child: GestureDetector({
@@ -51,6 +52,7 @@ export const InkWell = ({
             hoverColor?.hoverBackgroundCss ?? '',
             highlightColor?.highlightCss ?? '',
           ],
+          key: key?.value,
         },
         [h(result)]
       )

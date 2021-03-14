@@ -8,6 +8,7 @@ export const TextButton = ({
   style,
   expand,
   _debugClasses,
+  key,
 }: ButtonStyleButtonI) => {
   const defaultStyle = new ButtonStyle({
     elevation: BoxShadow.none,
@@ -21,6 +22,7 @@ export const TextButton = ({
     render() {
       return h(
         ButtonStyleButton({
+          key,
           child,
           _debugClasses,
           expand,

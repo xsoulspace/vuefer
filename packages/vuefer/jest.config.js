@@ -1,10 +1,12 @@
+const base = require('../../jest.config.base.js')
+const pack = require('./package')
+
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
-  transform: {
-    '^.+\\.vue$': 'vue-jest',
-  },
-  testMatch: [
-    '<rootDir>/tests/unit/**/*.spec.(js|jsx|ts|tsx)',
-    '<rootDir>/src/**/*.spec.(js|jsx|ts|tsx)',
-  ],
+  ...base,
+  displayName: pack.name,
+  name: pack.name,
+  // rootDir: '../..',
+  // testMatch: [
+  //   `<rootDir>/packages/${pack.name}/**/*.(test|spec).(jsx?|tsx?|ts|js)`,
+  // ],
 }

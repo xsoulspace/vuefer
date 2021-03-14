@@ -107,7 +107,7 @@ export const ReordableListView = <
         resolvedIsDraggable.value
           ? h(
               <vue-draggable-next
-                list={delegate.sortedReactVal}
+                list={delegate.reactVal}
                 animation="200"
                 ghost-class="ghost-card"
                 onChange={async ({
@@ -128,22 +128,12 @@ export const ReordableListView = <
                     : ''
                 }
               >
-                {...delegate.sortedReactVal.map((el) =>
-                  h('div', { key: el.position.index }, h(el.widget))
-                )}
+                {...delegate.reactVal.map((el) => h(el.widget))}
               </vue-draggable-next>
             )
           : h(
               <div class={[_debugClasses, 'flex flex-col']}>
-                {...delegate.sortedReactVal.map((el) =>
-                  h(
-                    'div',
-                    {
-                      key: el.position.index,
-                    },
-                    h(el.widget)
-                  )
-                )}
+                {...delegate.sortedReactVal.map((el) => h(el.widget))}
               </div>
             )
     },

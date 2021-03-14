@@ -59,6 +59,7 @@ export const ListTile = ({
   selectedTileColor,
   trailing,
   _debugClasses,
+  key,
 }: ListTileI) => {
   const resolvedSelectedTileColor = selectedTileColor ?? Colors.indigo
   // const resolvedTileColor = tileColor ?? Colors.white;
@@ -113,6 +114,7 @@ export const ListTile = ({
     }
   })()
   const result = InkWell({
+    key,
     mouseCursor: resolvedMouseCursor,
     onTap: isEnabled ? onTap : null,
     focusColor,

@@ -27,6 +27,7 @@ export const ButtonStyleButton = ({
   style,
   expand,
   _debugClasses,
+  key,
 }: ButtonStyleButtonI) => {
   const isDisabled = onTap == null
   const constraints = new BoxConstraints({})
@@ -83,6 +84,7 @@ export const ButtonStyleButton = ({
             expand ? 'w-full' : '',
             _debugClasses,
           ],
+          key: key?.value,
         },
         [h(result)]
       )

@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "baseUrl": "./packages",
+    "paths": {
+      "@xsoulspace/cactus-sync-client": ["cactus-sync-client/lib"],
+      "@xsoulspace/cactus-sync-server": ["cactus-sync-server/lib"]
+    }
+  }
+}
