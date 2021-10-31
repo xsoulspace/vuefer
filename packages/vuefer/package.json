@@ -71,7 +71,7 @@
     "autoprefixer": "^10.2.5",
     "eslint": "^8.0.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^7.9.0",
+    "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.3",
     "prettier": "^2.3.0",
     "rollup-plugin-copy": "^3.4.0",
