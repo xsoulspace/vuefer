@@ -5,8 +5,7 @@ const HAS_WINDOWS = typeof window !== 'undefined'
 const HAS_NAVIGATOR = typeof navigator !== 'undefined'
 const IS_TOUCH =
   HAS_WINDOWS &&
-  ('ontouchstart' in window ||
-    (HAS_NAVIGATOR && navigator.msMaxTouchPoints > 0))
+  ('ontouchstart' in window || (HAS_NAVIGATOR && navigator.maxTouchPoints > 0))
 const EVENTS = IS_TOUCH ? ['touchstart'] : ['click']
 
 interface ClickOutsideElement extends HTMLElement {
@@ -96,14 +95,8 @@ const onEvent = ({ el, event, handler, middleware }: EventObject) => {
 }
 
 const beforeMount = (el: ClickOutsideElement, { value }: DirectiveBinding) => {
-  const {
-    events,
-    handler,
-    middleware,
-    isActive,
-    detectIframe,
-    capture,
-  } = processDirectiveArguments(value)
+  const { events, handler, middleware, isActive, detectIframe, capture } =
+    processDirectiveArguments(value)
   if (!isActive) {
     return
   }
