@@ -18,42 +18,76 @@ enum InstanceTypes {
   class = 'class',
   function = 'function',
 }
-/**
- *
- * Let's suppose we have a Hero model and a Provider with own state:
- *
-   ```typescript
-    export class HeroModel {
-      constructor(public name: string) {}
+/** 
+  ## How to use:
+
+  Let's suppose we have a Hero model and a Provider with own state:
+
+  ```typescript
+  export class HeroModel {
+    constructor(public name: string) {}
+  }
+
+  export class HeroesProvider {
+    heroes = reactive<Maybe<Hero>[]>([])
+    add(hero: Hero) {
+      this.heroes.push(hero)
     }
-    
-    export class HeroesProvider {
-      heroes = reactive<Maybe<Hero>[]>([])
-      add(hero: Hero) {
-        this.heroes.push(hero)
-      }
-      get count() {
-        return this.heroes.length
-      }
+    get count() {
+      return this.heroes.length
     }
-    ```
- *
- *  Create Provider on top of tree
- *
-    ```typescript
-    MultiProvider.create({
-      models: [HeroesProvider],
-      child: wrapperApp(),
-    })
-    ```
- *
- *  And somewhere in tree just call
- *
-    ```typescript
-    const heroProvider = MultiProvider.get<HeroesProvider>(HeroesProvider)
-    ```
- *
- */
+  }
+  ```
+
+  Create Provider on top of tree
+
+  For JSX use:
+
+  ```typescript
+  MultiProvider.create({
+    models: [HeroesProvider],
+    child: wrapperApp(),
+  })
+  ```
+
+  For Template use:
+
+  ```html
+  <html>
+    <multi-provider :providers="providers" />
+  </html>
+  ```
+
+  ```typescript
+  <script>
+  import { multiProvider } from "@xsoulspace/vue-provider"
+  defineComponent({
+    components: { multiProvider },
+    setup(){
+      const providers = [HeroesProvider]
+      return {providers}
+    }
+  })
+
+  </script>
+  ```
+
+  And somewhere in tree below just call in setup method and use/update its reactive state
+
+  ```typescript
+  <script>
+  import { MultiProvider } from "@xsoulspace/vue-provider"
+  defineComponent({
+    setup(){
+      const heroProvider = MultiProvider.get<HeroesProvider>(HeroesProvider)
+
+      return {}
+    }
+  })
+
+  </script>
+  ```
+**/
 export class MultiProvider {
   static _allProvidersSymbols = new Map<
     CallableFunction['name'] | Constructor<unknown>['name'],

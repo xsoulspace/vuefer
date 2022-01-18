@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/xsoulspace/vuefer/issues"
   },
-  "homepage": "https://github.com/xsoulspace/vuefer/packages/vue-provider/#readme",
+  "homepage": "https://github.com/xsoulspace/vuefer/#readme",
   "main": "dist/vue-provider.es.js",
   "exports": {
     ".": {

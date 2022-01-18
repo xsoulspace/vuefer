@@ -44,7 +44,9 @@ For Template use:
 
 ```typescript
 <script>
+import { multiProvider } from "@xsoulspace/vue-provider"
 defineComponent({
+  components: { multiProvider },
   setup(){
     const providers = [HeroesProvider]
     return {providers}
@@ -54,8 +56,18 @@ defineComponent({
 </script>
 ```
 
-And somewhere in tree just call in setup method
+And somewhere in tree below just call in setup method and use/update its reactive state
 
 ```typescript
-const heroProvider = MultiProvider.get<HeroesProvider>(HeroesProvider)
+<script>
+import { MultiProvider } from "@xsoulspace/vue-provider"
+defineComponent({
+  setup(){
+    const heroProvider = MultiProvider.get<HeroesProvider>(HeroesProvider)
+
+    return {}
+  }
+})
+
+</script>
 ```
