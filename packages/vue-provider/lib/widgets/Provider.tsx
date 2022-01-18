@@ -1,4 +1,5 @@
 import {
+  App,
   Component,
   defineComponent,
   h,
@@ -10,8 +11,12 @@ import {
 } from 'vue'
 import { Constructor, Maybe } from '../abstract/BasicTypes'
 interface MultiProviderI {
-  models: Maybe<CallableFunction | Constructor<unknown>>[]
+  providers: Maybe<CallableFunction | Constructor<unknown>>[]
   child: Component
+}
+interface MultiProviderProvideI<TApp = any> {
+  providers: Maybe<CallableFunction | Constructor<unknown>>[]
+  app: App<TApp>
 }
 
 enum InstanceTypes {
@@ -114,7 +119,18 @@ export class MultiProvider {
       }
     }
   }
-  static build({ models: providers, child }: MultiProviderI) {
+  /// Use this method to create global scope
+  static provide({ providers, app }: MultiProviderProvideI) {
+    for (const provider of providers) {
+      if (provider == null) throw Error(`${provider} cannot be null!`)
+      const newProviderSymbol = Symbol()
+      const { instance } = MultiProvider._checkIsFunctionOrClass(provider)
+      app.provide(newProviderSymbol, instance)
+      MultiProvider._allProvidersSymbols.set(provider.name, newProviderSymbol)
+    }
+  }
+
+  static build({ providers, child }: MultiProviderI) {
     return defineComponent({
       name: 'MultiProvider',
       setup() {
