@@ -67,7 +67,7 @@
     "@vitejs/plugin-vue-jsx": "^1.1.4",
     "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/eslint-config-typescript": "^9.0.0",
+    "@vue/eslint-config-typescript": "^10.0.0",
     "autoprefixer": "^10.2.5",
     "eslint": "^8.0.0",
     "eslint-plugin-prettier": "^4.0.0",
