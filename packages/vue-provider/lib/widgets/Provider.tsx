@@ -167,26 +167,28 @@ export const multiProvider = defineComponent({
       type: Array,
     },
   },
+  render() {
+    return h('div', {}, this.$slots.default?.call(this))
+  },
   setup(props) {
     const initProviders = reactive({})
 
-    onBeforeMount(() => {
-      for (const provider of props.providers) {
-        if (provider == null) throw Error(`${provider} cannot be null!`)
+    for (const provider of props.providers) {
+      if (provider == null) throw Error(`${provider} cannot be null!`)
 
-        const newProviderSymbol = Symbol()
-        const effectiveProvider = provider as any
+      const newProviderSymbol = Symbol()
+      const effectiveProvider = provider as any
 
-        const { instance } =
-          MultiProvider._checkIsFunctionOrClass(effectiveProvider)
+      const { instance } =
+        MultiProvider._checkIsFunctionOrClass(effectiveProvider)
 
-        provide(newProviderSymbol, instance)
+      provide(newProviderSymbol, instance)
 
-        const providerName = effectiveProvider.name
-        MultiProvider._allProvidersSymbols.set(providerName, newProviderSymbol)
-        initProviders[providerName] = instance
-      }
-    })
+      const providerName = effectiveProvider.name
+      MultiProvider._allProvidersSymbols.set(providerName, newProviderSymbol)
+
+      initProviders[providerName] = instance
+    }
 
     onBeforeUnmount(() => {
       for (const providerName of Object.keys(initProviders)) {
