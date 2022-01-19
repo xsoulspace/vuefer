@@ -1,181 +1,109 @@
 import {
-  App,
-  Component,
   defineComponent,
   h,
   inject,
   onBeforeMount,
   onBeforeUnmount,
   provide,
-  reactive,
 } from 'vue'
-import { Constructor, Maybe } from '../abstract/BasicTypes'
-interface MultiProviderI {
-  providers: Maybe<CallableFunction | Constructor<unknown>>[]
-  child: Component
-}
-interface MultiProviderProvideI<TApp = any> {
-  providers: Maybe<CallableFunction | Constructor<unknown>>[]
-  app: App<TApp>
-}
+import {
+  ComponentProviders,
+  Constructor,
+  Maybe,
+  MultiProviderI as MultiProviderBuilder,
+  Provider,
+  RecordedProviders,
+} from '../abstract/BasicTypes'
 
-enum InstanceTypes {
-  class = 'class',
-  function = 'function',
-}
-/** 
-  ## How to use:
-
-  Let's suppose we have a Hero model and a Provider with own state:
-
-  ```typescript
-  export class HeroModel {
-    constructor(public name: string) {}
-  }
-
-  export class HeroesProvider {
-    heroes = reactive<Maybe<Hero>[]>([])
-    add(hero: Hero) {
-      this.heroes.push(hero)
-    }
-    get count() {
-      return this.heroes.length
-    }
-  }
-  ```
-
-  Create Provider on top of tree
-
-  For JSX use:
-
-  ```typescript
-  MultiProvider.create({
-    models: [HeroesProvider],
-    child: wrapperApp(),
-  })
-  ```
-
-  For Template use:
-
-  ```html
-  <html>
-    <multi-provider :providers="providers" />
-  </html>
-  ```
-
-  ```typescript
-  <script>
-  import { multiProvider } from "@xsoulspace/vue-provider"
-  defineComponent({
-    components: { multiProvider },
-    setup(){
-      const providers = [HeroesProvider]
-      return {providers}
-    }
-  })
-
-  </script>
-  ```
-
-  And somewhere in tree below just call in setup method and use/update its reactive state
-
-  ```typescript
-  <script>
-  import { MultiProvider } from "@xsoulspace/vue-provider"
-  defineComponent({
-    setup(){
-      const heroProvider = MultiProvider.get<HeroesProvider>(HeroesProvider)
-
-      return {}
-    }
-  })
-
-  </script>
-  ```
-**/
 export class MultiProvider {
-  static _allProvidersSymbols = new Map<
-    CallableFunction['name'] | Constructor<unknown>['name'],
-    symbol
-  >()
-  static _checkIsFunctionOrClass<T>(
-    provider: CallableFunction | Constructor<unknown>
-  ): {
-    instance: T
-    type: InstanceTypes
-  } {
-    try {
-      // lets suppose model is newable function
-      const newableProvider = provider as Constructor<unknown>
-      const newProvider = new newableProvider()
-      return { instance: newProvider as T, type: InstanceTypes.class }
-    } catch (error) {
-      // try as callable
-      const callableProvider = provider as CallableFunction
-      const newFunctionProvider = callableProvider()
-      return {
-        instance: newFunctionProvider as T,
-        type: InstanceTypes.function,
-      }
+  static _getSymbol({
+    modelName,
+  }: {
+    modelName: Constructor<unknown>['name']
+  }): symbol {
+    return this._allProvidersSymbols.get(modelName)!
+  }
+  static _setSymbol({
+    modelName,
+  }: {
+    modelName: Constructor<unknown>['name']
+  }): symbol {
+    const newProviderSymbol = Symbol()
+    this._allProvidersSymbols.set(modelName, newProviderSymbol)!
+    return newProviderSymbol
+  }
+  static _allProvidersSymbols = new Map<Constructor<unknown>['name'], symbol>()
+
+  static _cleanUpProviders({
+    recordedProviders,
+  }: {
+    recordedProviders: RecordedProviders
+  }) {
+    for (const providerSymbol of Object.keys(recordedProviders)) {
+      this._allProvidersSymbols.delete(providerSymbol)
     }
   }
-  /// Use this method to create global scope
-  static provide({ providers, app }: MultiProviderProvideI) {
+
+  static _provide({ recordedProviders, providers }: ComponentProviders) {
+    function getByProvider<TModel>({ provider }) {
+      const recordedProvider =
+        recordedProviders[
+          MultiProvider._getSymbol({ modelName: provider.name })
+        ]
+      return recordedProvider ?? MultiProvider.get<TModel>(provider)
+    }
+
     for (const provider of providers) {
       if (provider == null) throw Error(`${provider} cannot be null!`)
-      const newProviderSymbol = Symbol()
-      const { instance } = MultiProvider._checkIsFunctionOrClass(provider)
-      app.provide(newProviderSymbol, instance)
-      MultiProvider._allProvidersSymbols.set(provider.name, newProviderSymbol)
+
+      const providerSymbol = this._setSymbol({
+        modelName: provider.abstract.name,
+      })
+
+      const instance = provider.builder({
+        getByProvider,
+      })
+
+      provide(providerSymbol, instance)
+      recordedProviders[providerSymbol] = instance
     }
   }
 
-  static build({ providers, child }: MultiProviderI) {
+  static render({ providers, child }: MultiProviderBuilder) {
     return defineComponent({
       name: 'MultiProvider',
       setup() {
-        const initProviders = reactive({})
+        const recordedProviders: RecordedProviders = {}
 
         onBeforeMount(() => {
-          for (const provider of providers) {
-            if (provider == null) throw Error(`${provider} cannot be null!`)
-            const newProviderSymbol = Symbol()
-            const { instance } = MultiProvider._checkIsFunctionOrClass(provider)
-            provide(newProviderSymbol, instance)
-            MultiProvider._allProvidersSymbols.set(
-              provider.name,
-              newProviderSymbol
-            )
-            initProviders[provider.name] = instance
-          }
+          MultiProvider._provide({
+            recordedProviders,
+            providers,
+          })
         })
         onBeforeUnmount(() => {
-          for (const providerName of Object.keys(initProviders)) {
-            MultiProvider._allProvidersSymbols.delete(providerName)
-          }
+          MultiProvider._cleanUpProviders({ recordedProviders })
         })
-        return { initProviders }
+        return {}
       },
       render() {
         return h(child)
       },
     })
   }
-  static get<T, P extends CallableFunction | Constructor<T> = Constructor<T>>(
-    providerName: P
-  ) {
-    const symbol = this._allProvidersSymbols.get(providerName.name)
-    if (symbol == null) throw Error(`${providerName} doesn't have a provider!`)
+  static get<T, P extends Constructor<T> = Constructor<T>>(providerModel: P) {
+    const symbol = this._allProvidersSymbols.get(providerModel.name)
+    if (symbol == null) throw Error(`${providerModel} doesn't have a provider!`)
 
     const provider: Maybe<T> = inject(symbol)
 
     if (provider == null)
-      throw new Error(`${providerName} have a provider but return null:(!`)
+      throw new Error(`${providerModel} have a provider but return null:(!`)
     return provider
   }
 }
 
-export const multiProvider = defineComponent({
+export const multiProviderComponent = defineComponent({
   name: 'MultiProvider',
   props: {
     providers: {
@@ -187,31 +115,18 @@ export const multiProvider = defineComponent({
     return h('div', {}, this.$slots.default?.call(this))
   },
   setup(props) {
-    const initProviders = reactive({})
+    const recordedProviders: RecordedProviders = {}
 
-    for (const provider of props.providers) {
-      if (provider == null) throw Error(`${provider} cannot be null!`)
-
-      const newProviderSymbol = Symbol()
-      const effectiveProvider = provider as any
-
-      const { instance } =
-        MultiProvider._checkIsFunctionOrClass(effectiveProvider)
-
-      provide(newProviderSymbol, instance)
-
-      const providerName = effectiveProvider.name
-      MultiProvider._allProvidersSymbols.set(providerName, newProviderSymbol)
-
-      initProviders[providerName] = instance
-    }
-
+    onBeforeMount(() => {
+      MultiProvider._provide({
+        recordedProviders,
+        providers: props.providers as Provider<unknown>[],
+      })
+    })
     onBeforeUnmount(() => {
-      for (const providerName of Object.keys(initProviders)) {
-        MultiProvider._allProvidersSymbols.delete(providerName)
-      }
+      MultiProvider._cleanUpProviders({ recordedProviders })
     })
 
-    return { initProviders }
+    return {}
   },
 })

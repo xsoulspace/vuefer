@@ -1,7 +1,7 @@
 {
   "name": "@xsoulspace/vue-provider",
   "description": "Dependecy injection provider heavily inspired by Flutter Provider",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": false,
   "author": {
     "name": "Anton Malofeev",
