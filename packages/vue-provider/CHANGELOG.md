@@ -1,3 +1,7 @@
+# 1.2.0
+
+README updated. Also provider API symplified
+
 # 1.1.0
 
 MultiProvider rewritten. Now it should be possible to use absract types, and provide proper dependecy injection. README will be updated next
