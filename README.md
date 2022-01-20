@@ -1,17 +1,24 @@
 # Vuefer just a way to write Vue3 styled like Flutter with Tailwind CSS
 
-sdsfd
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/xsoulspace/vuefer)
+<p align="center">
+  <a title="License" href="https://github.com/xsoulspace/vuefer/blob/master/LICENSE" ><img src="https://img.shields.io/github/license/xsoulspace/vuefer.svg" /></a>
+  <a title="Discord" href="https://discord.com/invite/y54DpJwmAn" ><img src="https://img.shields.io/discord/696688204476055592.svg" /></a>
+  <a title="Contributor Covenant" href="https://github.com/xsoulspace/vuefer/blob/master/CODE_OF_CONDUCT.md" ><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" /></a>
+  <a title="Contributors" href="https://github.com/xsoulspace/vuefer/graphs/contributors" ><img src="https://img.shields.io/github/contributors/xsoulspace/vuefer.svg" /></a>
+  <a href="https://patreon.com/arenukvern"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Darenukvern%26type%3Dpatrons&style=flat" alt="Support me on Patreon" /></a>
+</p>
 
-**Please notice: this project was renamed from vuefer to independent name: vuefer**
+**Please notice:** this project was renamed from vuefer to independent name: vuefer
 
-**Please notice: this project is a work in progress and completely experimental!**
+**Please notice:** this project is a work in progress and completely experimental!
+
+**Please notice:** `vue-provider` now is maintained as standalone package. Please see it in [packages/vue-provider](https://github.com/xsoulspace/vuefer/tree/next/packages/vue-provider)
 
 The reason & motivation why this project have been started is a question: Flutter & Dart awesome! Vue3 & Typescript awesome too!
 
 But...
 
-Flutter is not working inside Excel:( and its kind of complicated to work with web libraries.
+html+css or jsx are not providing a strong enough typing way to write widgets/components.
 
 So, what if we will write Vue3 TS in style of Flutter, because it's just simplier and faster?
 
@@ -47,7 +54,7 @@ Add this package to your package.json file:
 add styling to your main.ts
 
 ```typescript
-import "@xsoulspace/vuefer/dist/vft.css";
+import '@xsoulspace/vuefer/dist/vft.css'
 ```
 
 add styling to app div (temporary and will be removed during Scaffold widget refactoring)
@@ -60,24 +67,24 @@ add styling to app div (temporary and will be removed during Scaffold widget ref
 
 ```typescript
 export const wrapperApp = () => {
-  const text = ref("Hello world!");
-  const text2 = ref(2);
-  const padding = EdgeInsets.all(EdgeInsetsStep.s3);
+  const text = ref('Hello world!')
+  const text2 = ref(2)
+  const padding = EdgeInsets.all(EdgeInsetsStep.s3)
 
   const textCard = Padding({
     child: Text({
       text,
     }),
     padding,
-  });
+  })
 
   const btn = ElevatedButton({
-    child: Text({ text: ref("Hello Button") }),
+    child: Text({ text: ref('Hello Button') }),
     onPressed: () => {
-      text2.value++;
-      text.value = `Hello Wolrd! Counter: ${text2.value}`;
+      text2.value++
+      text.value = `Hello Wolrd! Counter: ${text2.value}`
     },
-  });
+  })
 
   return Scaffold({
     body: Align({
@@ -104,8 +111,8 @@ export const wrapperApp = () => {
         }),
       }),
     }),
-  });
-};
+  })
+}
 ```
 
 # Roadmap
@@ -123,12 +130,12 @@ export class Hero {
   constructor(public name: string) {}
 }
 export class HeroesModel {
-  heroes = reactive<Maybe<Hero>[]>([]);
+  heroes = reactive<Maybe<Hero>[]>([])
   add(hero: Hero) {
-    this.heroes.push(hero);
+    this.heroes.push(hero)
   }
   get count() {
-    return this.heroes.length;
+    return this.heroes.length
   }
 }
 ```
@@ -139,13 +146,13 @@ Create Provider on top of tree
 MultiProvider.create({
   models: [HeroesModel],
   child: wrapperApp(),
-});
+})
 ```
 
 And somewhere in tree just call
 
 ```typescript
-const heroModel = MultiProvider.get<HeroesModel>(HeroesModel);
+const heroModel = MultiProvider.get<HeroesModel>(HeroesModel)
 ```
 
 - [x] Text Widget, FontWeight, TextDecoration, TextStyle, TextAlign, TextOverflow
@@ -180,9 +187,8 @@ First - get NavigationController in setup
 Be sure that you have Navigation widget on top of tree
 
 ```typescript
-const navigationController = MultiProvider.get<NavigationController>(
-  NavigationController
-);
+const navigationController =
+  MultiProvider.get<NavigationController>(NavigationController)
 ```
 
 Second call a function from for example Button.onTap:
