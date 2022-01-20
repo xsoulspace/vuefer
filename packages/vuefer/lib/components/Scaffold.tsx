@@ -1,3 +1,4 @@
+import { MultiProvider } from '@xsoulspace/vue-provider'
 import { Component, computed, defineComponent, h } from 'vue'
 import {
   Alignment,
@@ -7,7 +8,6 @@ import {
   SizedBoxHeight,
 } from '../abstract'
 import { DrawerBuilder } from './Drawer'
-import { MultiProvider } from './Provider'
 interface ScaffoldI {
   body: Component
   appBar?: Maybe<Component>
@@ -97,9 +97,8 @@ export class Scaffold {
             'overflow-y-auto',
           ]
         })
-        const navigationController = MultiProvider.get<NavigationController>(
-          NavigationController
-        )
+        const navigationController =
+          MultiProvider.get<NavigationController>(NavigationController)
         const openDrawer = () => {
           if (Scaffold._drawer == null) {
             console.warn('You forgot to supply Drawer to Scaffold.')

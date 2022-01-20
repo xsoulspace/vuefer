@@ -1,3 +1,4 @@
+import { MultiProvider } from '@xsoulspace/vue-provider'
 import {
   computed,
   defineComponent,
@@ -34,7 +35,6 @@ import {
   MouseRegion,
   MultiDropdownButton,
   MultiDropdownFieldController,
-  MultiProvider,
   NavigationController,
   Padding,
   ReordableListView,
@@ -48,7 +48,7 @@ import {
   TextEditingController,
   TextField,
 } from '../../../vuefer/lib'
-import { HeroButton } from '../components/HeroButton'
+import { HeroButton } from '../widgets/HeroButton'
 type IndexedText = {
   id: number
   text: string
@@ -171,9 +171,8 @@ export const Home = () => {
         { x: 0, y: 1, width: 2, height: 2, index: 3, id: 2 },
         { x: 0, y: 2, width: 2, height: 2, index: 4, id: 3 },
       ])
-      const navigationController = MultiProvider.get<NavigationController>(
-        NavigationController
-      )
+      const navigationController =
+        MultiProvider.get<NavigationController>(NavigationController)
       const gridViewDelegate = GridViewDelegate.use({
         gridViewItems: layoutMatrix.value.map((el) =>
           GridViewItem({
@@ -188,9 +187,8 @@ export const Home = () => {
           })
         ),
       })
-      const multiDropdownController = new MultiDropdownFieldController<IndexedText>(
-        { keyofValue: 'id' }
-      )
+      const multiDropdownController =
+        new MultiDropdownFieldController<IndexedText>({ keyofValue: 'id' })
       watch(
         multiDropdownController.reactive,
         (controllerValues) => {
@@ -201,11 +199,10 @@ export const Home = () => {
           immediate: true,
         }
       )
-      const reordableDelegate = ReordableListViewDelegate.use<GenericGridViewItemPosition>(
-        {
+      const reordableDelegate =
+        ReordableListViewDelegate.use<GenericGridViewItemPosition>({
           gridViewItems: [],
-        }
-      )
+        })
       onMounted(() => {
         for (const el of layoutMatrix.value) {
           reordableDelegate.addUpdate(

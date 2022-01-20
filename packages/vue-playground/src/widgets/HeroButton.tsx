@@ -1,21 +1,21 @@
-import { HeroesModel } from "#/models/HeroesModel";
-import { computed, defineComponent, h, ref } from "vue";
+import { MultiProvider } from '@xsoulspace/vue-provider'
+import { computed, defineComponent, h, ref } from 'vue'
 import {
   CrossAxisAlignment,
   EdgeInsetsStep,
   ElevatedButton,
-  MultiProvider,
   Row,
   SizedBox,
-  Text
-} from "../../../vuefer/lib";
+  Text,
+} from '../../../vuefer/lib'
+import { HeroesProvider } from '../providers/HeroesProvider'
 
 export const HeroButton = () => {
   return defineComponent({
-    name: "HeroButton",
+    name: 'HeroButton',
     setup() {
-      const heroModel = MultiProvider.get<HeroesModel>(HeroesModel);
-      const heroCount = computed(() => heroModel.count);
+      const heroModel = MultiProvider.get<HeroesProvider>(HeroesProvider)
+      const heroCount = computed(() => heroModel.count)
       return () =>
         h(
           Row({
@@ -23,10 +23,10 @@ export const HeroButton = () => {
             children: [
               ElevatedButton({
                 child: Text({
-                  text: ref("Add hero"),
+                  text: ref('Add hero'),
                 }),
                 onTap: () => {
-                  heroModel.add({ name: "New Hero" });
+                  heroModel.add({ name: 'New Hero' })
                 },
               }),
               SizedBox({ width: EdgeInsetsStep.s10 }),
@@ -35,7 +35,7 @@ export const HeroButton = () => {
               }),
             ],
           })
-        );
+        )
     },
-  });
-};
+  })
+}

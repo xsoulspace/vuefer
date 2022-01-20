@@ -1,19 +1,22 @@
-import { HeroesModel } from '#/models/HeroesModel'
 import { ScaffoldApp } from '#/pages/ScaffoldApp'
+// import vueGridLayout from 'vue-grid-layout'
+import { MultiProvider, Provider } from '@xsoulspace/vue-provider'
 import { createApp } from 'vue'
 import '../../vuefer/dist/style.css'
-import {
-  MultiProvider,
-  Navigation,
-  NavigationController,
-} from '../../vuefer/lib'
-// import vueGridLayout from 'vue-grid-layout'
-
-const app = MultiProvider.build({
-  models: [NavigationController, HeroesModel],
-  child: Navigation({
-    child: ScaffoldApp,
-  }),
+import { NavigationController } from '../../vuefer/lib'
+import { HeroesProvider } from './providers/HeroesProvider'
+const wrappedApp = MultiProvider.render({
+  child: ScaffoldApp,
+  providers: [
+    new Provider({
+      abstract: NavigationController,
+      builder: () => new NavigationController(),
+    }),
+    new Provider({
+      abstract: HeroesProvider,
+      builder: () => new HeroesProvider(),
+    }),
+  ],
 })
 
-createApp(app).mount('#app')
+createApp(wrappedApp).mount('#app')

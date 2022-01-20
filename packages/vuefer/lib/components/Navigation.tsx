@@ -1,3 +1,4 @@
+import { MultiProvider } from '@xsoulspace/vue-provider'
 import {
   Component,
   computed,
@@ -22,7 +23,6 @@ import {
 import { SizedBoxHeight, SizedBoxWidth } from '../abstract/SizedBox'
 import { Center } from './Center'
 import { Positioned } from './Positioned'
-import { MultiProvider } from './Provider'
 import { Visibility } from './Visibility'
 import VueTeleport from './VueTeleport.vue'
 interface NavigationI {
@@ -53,9 +53,8 @@ export const Navigation = ({ child }: NavigationI) => {
       VueTeleport,
     },
     setup() {
-      const routeController = MultiProvider.get<NavigationController>(
-        NavigationController
-      )
+      const routeController =
+        MultiProvider.get<NavigationController>(NavigationController)
       const currentRoute = reactive<NavigationControllerRoute>({
         widget: null,
         fullscreen: true,
