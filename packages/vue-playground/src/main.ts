@@ -1,12 +1,13 @@
-import { ScaffoldApp } from '#/pages/ScaffoldApp'
+import { LandingScreen } from '#/screens/index'
 // import vueGridLayout from 'vue-grid-layout'
 import { MultiProvider, Provider } from '@xsoulspace/vue-provider'
 import { createApp } from 'vue'
 import '../../vuefer/dist/style.css'
 import { NavigationController } from '../../vuefer/lib'
 import { HeroesProvider } from './providers/HeroesProvider'
+
 const wrappedApp = MultiProvider.render({
-  child: ScaffoldApp,
+  child: LandingScreen,
   providers: [
     new Provider({
       abstract: NavigationController,

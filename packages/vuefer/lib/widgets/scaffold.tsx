@@ -85,10 +85,10 @@ export class Scaffold {
   static openDrawer: CallableFunction = () => ''
   static closeDrawer: CallableFunction = () => ''
   static build({ body, appBar, drawer }: ScaffoldI) {
-    Scaffold._drawer = drawer
     return defineComponent({
       name: 'Scaffold',
       setup() {
+        Scaffold._drawer = drawer
         const isAppBarExists = computed(() => appBar != null)
         const classes = computed((): string[] => {
           return [
