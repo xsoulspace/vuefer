@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^5.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
