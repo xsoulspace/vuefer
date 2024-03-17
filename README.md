@@ -8,10 +8,12 @@
   <a href="https://patreon.com/arenukvern"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Darenukvern%26type%3Dpatrons&style=flat" alt="Support me on Patreon" /></a>
 </p>
 
-Archive reason:
+## Archive reason
+
 Since I moved to FLutter & Dart ecosystem, I found awesome package [Jaspr](https://docs.page/schultek/jaspr) which syntax and approach very similar to what I was trying to achieve in this package. So because of that it makes no sense to maintain or develop this project - and now it's archived:)
 Hope you find something useful or inspiration in this package:)
 
+## Old docs
 
 **Please notice:** this project was renamed from vuefer to independent name: vuefer
 
